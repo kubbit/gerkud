@@ -1,0 +1,15 @@
+view:
+  credentials: [[admins, gerkud]]
+
+list:
+  credentials: [[admins, gerkud]]
+
+create:
+  credentials: [[admins, gerkud]]
+
+edit:
+  credentials: [[admins, gerkud]]
+
+update:
+  credentials: [[admins, gerkud]]
+

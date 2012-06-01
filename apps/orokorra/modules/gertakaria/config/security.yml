@@ -1,0 +1,15 @@
+view:
+  credentials: arrunta
+
+list:
+  credentials: arrunta
+
+create:
+  credentials: arrunta
+
+edit:
+  credentials: arrunta
+
+update:
+  credentials: arrunta
+

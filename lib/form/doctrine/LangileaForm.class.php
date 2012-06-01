@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * Langilea form.
+ *
+ * @package    gerkud
+ * @subpackage form
+ * @author     Pasaiako Udala
+ * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ */
+class LangileaForm extends BaseLangileaForm
+{
+  /**
+   * @see sfGuardUserForm
+   */
+  public function configure()
+  {
+//    parent::configure();
+       $this->widgetSchema['ohartaraztea_id'] = new sfWidgetFormDoctrineChoice(array(
+                'model'     => 'Ohartaraztea',
+                ));
+    parent::configure();
+
+//    unset(
+//         $this['created_at'], $this['updated_at']
+//      );
+  }
+}

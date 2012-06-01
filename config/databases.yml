@@ -1,0 +1,7 @@
+all:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'mysql:host=mysql;dbname=gerkud'
+      username: erabiltzailea
+      password: pasahitza

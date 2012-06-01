@@ -1,0 +1,710 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td
+{
+	margin:0;padding:0;
+}
+img
+{
+	border:0;
+}
+#goiburua
+{
+	height: 110px;
+	/*background: #00CAFF;*/
+  	background: url(/images/bg-header.jpg) repeat-x top;
+
+}
+.logoa
+{
+        height: 110px;
+	float: left;
+        margin:0;padding:0;
+        padding: 0em 0em;
+}
+
+.eskuliburua
+{
+	top:0;
+	/*height: 100px;*/
+/*	background: #000;*/
+	float:right;
+	text-align: right;
+/*        padding: 0.4em 0.6em 0.4em;*/
+        padding: 0em 0.1em 0em;        
+/*        margin: 1.8em 3.6em 0em;*/
+        margin: 0.6em 0.6em 0em;
+	color: #FF4225;
+	display: block;
+	border: 2px outset #808080;
+}
+
+.eskuliburua a, .eskuliburua a:visited
+{
+        text-decoration: none;
+}
+.eskuliburua img
+{
+	border:0;
+}
+
+
+.post
+{
+	top:0;
+	/*height: 100px;*/
+	float:right;
+	text-align: right;
+        padding: 0.9em 0.6em 0em;
+	color: #333;
+	list-style:none;
+	
+/*	background: #FF00EC;*/
+}
+.post a, .post a:visited
+{
+        text-decoration: none;
+	color: #333;
+}
+.post h2
+{
+        font-size: 1em;
+}
+
+.sesioa
+{
+	float:right;
+	text-align: right;
+        padding: 0.2em 0.6em;
+	color: #333;
+	list-style:none;
+/*	background: #FF9BEC;*/ /*Arrosa*/
+}
+.sesioa ul
+{
+	position:relative;
+	display: block;
+
+/*	background: #72FF59; /*Berdea*/
+}
+.sesioa ul li
+{
+	list-style-type: none;
+  	display: inline;
+  	*display: inline;
+	margin: 0em 0.2em;
+        padding: 0.1em 0.3em;
+/*	background: #75CAFF; */ /*Urdina*/
+   	border: 2px outset #808080;	
+}
+.sesioa a, .sesioa a:visited
+{
+        text-decoration: none;
+	color: #333;
+}
+.sesioa h2
+{
+        font-size: 1em;
+}
+
+#menua
+{
+	text-align: right;
+}
+#menua ul
+{
+	position:relative;
+	display: block;
+}
+#menua ul li
+{
+/*
+  	margin-right: 5px;
+  	margin-left: 5px;  	
+*/  	
+	list-style-type: none;
+  	display: inline;
+  	*display: inline;
+}
+#menua A
+{
+	text-decoration: none;
+	color: #000;
+
+	background: #D4D0C8;
+	color: #000;
+   	border: 2px outset #808080;
+   	padding: .1em .5em;
+
+
+
+}
+#menua A:hover {
+   	background: #D4D0C8;
+}
+#menua A:active {
+   	border: 1px inset #000;
+}
+
+/* ERABILTZAILEEN FORMULARIOA */
+.erab_form
+{
+	background-color: #CCC;
+	border: 2px solid #000;
+	width: 70%;  
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
+}
+.erab_form table, .erab_form table tr td
+{
+        border-spacing:0;
+	border: 0px solid #CCC;
+        border-collapse:collapse;
+        empty-cells:show;
+	padding: 5px;
+}
+.erab_form table td.eskuin
+{
+	text-align: right;
+
+}
+.erab_form table td.ezker
+{
+	text-align: left;
+
+}
+.erab_form table td.erdi
+{
+	text-align: center;
+}
+
+/* LOGIN FORMULARIOA */
+.login_form
+{
+	background-color: #CCC;
+	/*border: 1px solid rgb(18%,31%,49%);*/
+/*	border: 0px solid #CCC;*/
+        border: 3px outset;
+	width: 40%;  
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
+
+}
+.login_form table, .login_form table tr td
+{
+        border-spacing:0;
+	border: 0px solid #CCC;
+        border-collapse:collapse;
+        empty-cells:show;
+	padding: 5px;
+}
+.login_form table
+{
+	width: 100%;        
+}
+.login_form table td.eskuin
+{
+	text-align: right;
+
+}
+.login_form table td.ezker
+{
+	text-align: left;
+
+}
+.login_form table td.erdi
+{
+	text-align: center;
+}
+
+
+/* BILAKETA FORMULARIOA */
+.bilaketa_form
+{
+	background-color: #F3F6F9;
+	/*border-top: 1px solid rgb(60%,50%,40%);*/
+	/*border: 1px solid rgb(18%,31%,49%);*/
+	border: 1px solid rgb(0%,0%,0%);	
+	width: 90%;  
+	/*padding: 0px;*/
+	/*  position: fixed;*/  
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px;
+}
+
+.bilaketa_form table, .bilaketa_form table tr td
+{
+        border-collapse:collapse;
+        border-spacing:0;
+        border: none;
+        empty-cells:show;
+	padding: 5px;
+}
+.bilaketa_form table td.eskuin
+{
+	text-align: right;
+
+}
+.bilaketa_form table td.ezker
+{
+	text-align: left;
+
+}
+ul.radio_list
+{
+	list-style-type: none;	
+
+}
+
+
+
+/*GERTAKARIEN ZERRENDA */
+.zerrenda
+{
+        border-collapse:collapse;
+        border-spacing:0;
+/*        border: 5px ridge #000;*/
+        empty-cells:show;
+	padding: 0px 5px;
+}
+
+.zerrenda tbody
+{
+        border: 5px ridge #000;
+}
+.zerrenda thead tr
+{
+        border: none;
+	text-align: left;
+}
+.zerrenda tfoot tr
+{
+        border: none;
+	text-align: right;
+}
+.zerrenda tfoot tr A.boton
+{
+	display: inline-block;
+}
+.zerrenda thead tr A.boton
+{
+	text-align: right;
+	display: inline-block;
+}
+
+.zerrenda th.ezker{
+        background: url(../images/bg-header2.jpg) repeat-x top;
+        text-align:left;
+        color: #CCC;	
+        background-color: #FFF;
+        empty-cells:show;
+        padding: 3px 5px;
+}
+.zerrenda td.ezker
+{
+	text-align: left;
+}
+.zerrenda A#berria,.zerrenda A#berria:HOVER, .zerrenda A#berria:VISITED
+{
+	text-decoration: none;
+	color: #000;
+	display: table-cell;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #3F647F;	
+
+}
+.zerrenda A, .zerrenda A:HOVER, .zerrenda A:VISITED
+{
+	display: block;
+	text-decoration: none;
+	color: #000;
+}
+
+.zerrenda td
+{
+/*	text-align: center;*/
+        padding: 1px 5px;
+        border: none;
+}
+.zerrenda tbody tr td
+{
+	border-bottom: 1px solid #444;
+	border-top: 1px solid #444;
+        padding: 0px 5px;
+}
+
+.zerrenda tr
+{
+/*        border: 2px solid rgb(80%,80%,80%);*/
+        border: 1px solid #444
+	border-bottom: 1px solid #444;
+	border-top: 1px solid #444;
+}
+
+
+#lehen1
+{
+        background-color: #FFF;
+	font-size: 1.0em;
+}
+
+#lehen2
+{
+        background-color: #FFFCDC;
+	font-size: 1.05em;
+}
+#lehen3
+{
+	font-size: 1.25em;
+        background-color: #FFFCBE;
+}
+
+
+tr#lehen1:hover td, tr#lehen2:hover td, tr#lehen3:hover td 
+{
+	background:#FFFC8C;
+	border-bottom: 1px solid #444;
+	border-top: 1px solid #444;
+/*	cursor: pointer;*/
+}
+
+
+/*GERTAKARIA */
+.gertakaria 
+{
+        border-collapse:collapse;
+        border-spacing:0;
+        border: 5px ridge #CCC;
+        background-color: #CCC;
+        empty-cells:show;
+	padding: 5px 5px;
+	align: middle;
+	margin-left: auto;
+	margin-right: auto;
+}
+.gertakaria th.panela{
+        text-align:middle;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 3px 5px;
+}
+
+.gertakaria th.ezker{
+        text-align:left;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 5px 5px;
+}
+/*Gertakaria erakustean kolore ezberdinak egoeraren arabera*/
+.gertakaria thead th.ezker{
+        text-align:left;
+        background-color: #CCC;
+        background: url(../images/Izenburu.png) repeat-x top;
+        empty-cells:show;
+        padding: 7px 5px;
+	border-bottom: 2px ridge #000;
+}
+.gertakaria thead th.ezker1{
+        text-align:left;
+        background-color: #CCC;
+        background: url(../images/Izenburu-FFFFFF.png) repeat-x top;
+        empty-cells:show;
+        padding: 7px 5px;
+	border-bottom: 2px ridge #000;
+}
+.gertakaria thead th.ezker2{
+        text-align:left;
+        background-color: #CCC;
+        background: url(../images/Izenburu-55ff00.png) repeat-x top;
+        empty-cells:show;
+        padding: 7px 5px;
+	border-bottom: 2px ridge #000;
+}
+.gertakaria thead th.ezker3{
+        text-align:left;
+        background-color: #CCC;
+        background: url(../images/Izenburu-A17FFF.png) repeat-x top;
+        empty-cells:show;
+        padding: 7px 5px;
+	border-bottom: 2px ridge #000;
+}
+.gertakaria thead th.ezker4{
+        text-align:left;
+        background-color: #CCC;
+        background: url(../images/Izenburu-FF8002.png) repeat-x top;
+        empty-cells:show;
+        padding: 7px 5px;
+	border-bottom: 2px ridge #000;
+}
+.gertakaria thead th.ezker5{
+        text-align:left;
+        background-color: #CCC;
+        background: url(../images/Izenburu-ff0000.png) repeat-x top;
+        empty-cells:show;
+        padding: 7px 5px;
+	border-bottom: 2px ridge #000;
+}
+.gertakaria thead th.ezker6{
+        text-align:left;
+        background-color: #CCC;
+        background: url(../images/Izenburu-00FFFF.png) repeat-x top;
+        empty-cells:show;
+        padding: 7px 5px;
+	border-bottom: 2px ridge #000;
+}
+.gertakaria thead th.ezker7{
+        text-align:left;
+        background-color: #CCC;
+        background: url(../images/Izenburu-A54200.png) repeat-x top;
+        empty-cells:show;
+        padding: 7px 5px;
+	border-bottom: 2px ridge #000;
+}
+/*END - Gertakaria erakustean kolore ezberdinak egoeraren arabera*/
+.gertakaria th.eskuin{
+        text-align:right;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 8px 5px;
+	border: none;
+   	font-weight: normal;
+   	font-size: .9em;
+}
+
+.gertakaria td
+{
+        padding: 0px 5px;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #444;	
+        background-color: #FFF;
+}
+
+.gertakaria td.azkena
+{
+        padding: 0px 5px;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #444;	
+	border-right: 1px solid #444;
+}
+
+.gertakaria tr
+{
+	border-right: 1px solid #444;
+
+}
+
+
+td.iruzk_zerrenda
+{
+	
+        padding: 0px 5px;
+	border-bottom: 1px solid #444;	
+	border-top: 1px solid #444;
+}
+
+td.fitx_zerrenda ul
+{
+	list-style-type: none;
+
+}
+
+td.fitx_zerrenda A, td.fitx_zerrenda A:visited
+{
+  	text-decoration: none;
+	color: #3F647F;
+	font-weight: bold;
+}
+
+/*PLANOA */
+.planoa 
+{
+        border-collapse:collapse;
+        border-spacing:0;
+        background-color: #CCC;
+        empty-cells:show;
+	padding: 0px 0px;
+	align: middle;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #CCC;
+}
+.planoa thead th{
+
+        background: url(../images/Izenburu.png) repeat-x top;
+}
+.planoa th.ezker{
+        text-align:left;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 5px 5px;
+}
+.planoa th.eskuin{
+        text-align:right;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 8px 5px;
+	border: none;
+   	font-weight: normal;
+   	font-size: .9em;
+}
+
+.planoa td
+{
+        padding: 0px 0px;
+        background-color: #FFF;
+}
+
+.planoa tr
+{
+	border-right: 1px solid #444;
+	border: 1px solid #444;
+
+}
+/*KOORD */
+.koord 
+{
+        border-collapse:collapse;
+        background-color: #CCC;
+        empty-cells:show;
+	padding: 0px 0px;
+	align: middle;
+	margin-left: auto;
+	margin-right: auto;
+	border-color: #CCC;
+}
+.koord th.ezker{
+        text-align:left;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 5px 5px;
+}
+.koord th.eskuin{
+        text-align:right;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 8px 5px;
+	border: none;
+   	font-weight: normal;
+   	font-size: .9em;
+}
+.koord tr
+{
+	border-right: 1px solid #444;
+	border: 1px solid #444;
+}
+.koord td
+{
+   	font-size: .8em;
+}
+
+A, A:HOVER, A:VISITED
+{
+	text-decoration: none;
+}
+
+a.boton {
+   font-weight: normal;
+   font-size: .84em;
+   font-family:sans-serif;
+   text-decoration: none;
+
+   background: #D4D0C8;
+   color: #000;
+   border: 2px outset #808080;
+   padding: .1em .5em;
+}
+a.boton:hover {
+   background: #D4D0C8;
+}
+a.boton:active {
+   border: 1px inset #000;
+}
+
+
+a.botonRojo {
+   font-weight: normal;
+   font-size: .84em;
+   font-family:sans-serif;
+   text-decoration: none;
+
+   background: #C60000;
+   color: #000;
+   border: 2px outset #808080;
+   padding: .1em .5em;
+}
+a.botonRojo:hover {
+   background: #C60000;
+}
+a.botonRojo:active {
+   border: 1px inset #000;
+   background: #870000;
+}
+
+
+
+/*GERTAKARIAREN FORMULARIOA */
+.formularioa
+{
+	border: 3px outset #808080;
+   	width: 80%;
+   	background: #CCC;
+	margin-left: auto;
+	margin-right: auto;
+
+	table-layout:fixed;
+}
+.formul
+{
+/*
+   	width: 90%;
+   	background: #CCC;
+*/   	
+
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.formularioa th
+{
+/*	border: 1px outset #000;  */
+	witdh: 14%;
+cellspacing: 15px 15px;
+}
+.formularioa td
+{
+/*	border: 1px outset #000; */
+	witdh: 14%;
+        padding: 3px 7px;
+}
+.formularioa th.panela{
+        text-align:middle;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 3px 7px;
+}
+.formularioa th.ezker{
+
+        text-align:left;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 7px 7px;
+}
+.formularioa th.eskuin{
+	witdh: 14%;
+        text-align:right;
+        background-color: #CCC;
+        empty-cells:show;
+        padding: 2px 7px;
+}
+
+
+.formularioa td.txuria
+{
+	witdh: 14%;
+	/*background: #FFF; */
+	background: #EAEAEA;
+   	border: 2px inset #CCC;
+        cellspacing: 15px 15px;
+}
