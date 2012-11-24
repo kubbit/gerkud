@@ -15,13 +15,11 @@ abstract class BaseJatorrizkoSailaForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'    => new sfWidgetFormInputHidden(),
-      'izena' => new sfWidgetFormInputText(),
+      'id' => new sfWidgetFormInputHidden(),
     ));
 
     $this->setValidators(array(
-      'id'    => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'izena' => new sfValidatorString(array('max_length' => 255)),
+      'id' => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('jatorrizko_saila[%s]');

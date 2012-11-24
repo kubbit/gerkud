@@ -50,6 +50,7 @@ class adLDAP {
 	// http://adldap.sourceforge.net/faq.php
 
 	// You can set your default variables here, or when you invoke the class
+	var $_account_prefix="";
 	var $_account_suffix="@mydomain.local";
 	var $_base_dn = "DC=mydomain,DC=local"; 
 	
@@ -87,6 +88,7 @@ class adLDAP {
 	function adLDAP($options=array()){
 		//you can specifically overide any of the default configuration options setup above
 		if (count($options)>0){
+			if (array_key_exists("account_prefix",$options)){ $this->_account_prefix=$options["account_prefix"]; }
 			if (array_key_exists("account_suffix",$options)){ $this->_account_suffix=$options["account_suffix"]; }
 			if (array_key_exists("base_dn",$options)){ $this->_base_dn=$options["base_dn"]; }
 			if (array_key_exists("domain_controllers",$options)){ $this->_domain_controllers=$options["domain_controllers"]; }
@@ -133,7 +135,7 @@ class adLDAP {
 		if ($username==NULL || $password==NULL){ return (false); } //prevent null binding
 		
 		//bind as the user		
-		$this->_bind = @ldap_bind($this->_conn,$username.$this->_account_suffix,$password);
+		$this->_bind = @ldap_bind($this->_conn,$this->_account_prefix.$username.$this->_account_suffix,$password);
 		if (!$this->_bind){ return (false); }
 		
 		//once we've checked their details, kick back into admin mode if we have it

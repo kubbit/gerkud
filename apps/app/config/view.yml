@@ -1,0 +1,24 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+    X-UA-Compatible: IE=edge
+
+  metas:
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  stylesheets:    [main.css]
+
+#  javascripts:    []
+#  stylesheets: [/sfEasyGMapPlugin/css/sfEasyGMapPlugin.css]
+#  javascripts: [/js/sfEasyGMapPlugin.js]
+  javascripts: [jquery-latest.js, jquery.tablesorter.js]
+
+  has_layout:     true
+  layout:         layout

@@ -13,11 +13,9 @@ abstract class BaseEkintzaFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'mota' => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
-      'mota' => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('ekintza_filters[%s]');
@@ -37,8 +35,7 @@ abstract class BaseEkintzaFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'   => 'Number',
-      'mota' => 'Text',
+      'id' => 'Number',
     );
   }
 }

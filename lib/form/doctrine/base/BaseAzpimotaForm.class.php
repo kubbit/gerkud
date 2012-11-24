@@ -17,13 +17,11 @@ abstract class BaseAzpimotaForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'      => new sfWidgetFormInputHidden(),
       'mota_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Mota'), 'add_empty' => false)),
-      'izena'   => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'      => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'mota_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Mota'))),
-      'izena'   => new sfValidatorString(array('max_length' => 255)),
     ));
 
     $this->widgetSchema->setNameFormat('azpimota[%s]');

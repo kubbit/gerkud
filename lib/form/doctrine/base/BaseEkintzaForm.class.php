@@ -15,13 +15,11 @@ abstract class BaseEkintzaForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'   => new sfWidgetFormInputHidden(),
-      'mota' => new sfWidgetFormInputText(),
+      'id' => new sfWidgetFormInputHidden(),
     ));
 
     $this->setValidators(array(
-      'id'   => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'mota' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'id' => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('ekintza[%s]');

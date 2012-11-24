@@ -13,11 +13,9 @@ abstract class BaseMotaFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'izena' => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
-      'izena' => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('mota_filters[%s]');
@@ -37,8 +35,7 @@ abstract class BaseMotaFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'    => 'Number',
-      'izena' => 'Text',
+      'id' => 'Number',
     );
   }
 }

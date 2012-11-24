@@ -45,5 +45,13 @@ abstract class BaseLehentasuna extends sfDoctrineRecord
         $this->hasMany('Gertakaria', array(
              'local' => 'id',
              'foreign' => 'lehentasuna_id'));
+
+        $i18n0 = new Doctrine_Template_I18n(array(
+             'fields' => 
+             array(
+              0 => 'izena',
+             ),
+             ));
+        $this->actAs($i18n0);
     }
 }

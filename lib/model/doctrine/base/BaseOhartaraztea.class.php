@@ -36,5 +36,13 @@ abstract class BaseOhartaraztea extends sfDoctrineRecord
         $this->hasMany('Langilea', array(
              'local' => 'id',
              'foreign' => 'ohartaraztea_id'));
+
+        $i18n0 = new Doctrine_Template_I18n(array(
+             'fields' => 
+             array(
+              0 => 'mota',
+             ),
+             ));
+        $this->actAs($i18n0);
     }
 }

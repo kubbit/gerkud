@@ -14,7 +14,7 @@
 	<table> 
 	<tr><td><br></td></tr>
 	<tr>
-	    <td class="eskuin"><label for="signin_username">Erabiltzaile izena:</label></td>
+	    <td class="eskuin"><label for="signin_username"><?php echo __('Erabiltzaile izena')?>:</label></td>
 	    <td class="ezker">
 		<?php echo $form['username']->renderError()  ?>
 		<?php echo $form['username']->render() ?>
@@ -22,14 +22,14 @@
 	    </td>
 	</tr>
 	<tr>
-            <td class="eskuin">Pasahitza:</td>
+            <td class="eskuin"><?php echo __('Pasahitza')?>:</td>
 	    <td class="ezker">
 		<?php //echo $form['password']->renderRow() ?>
             	<?php echo $form['password']->render() ?>
 	    </td>
 	</tr>
         <tr  style="display:none">
-            <td class="eskuin">Gogoratu</td>
+            <td class="eskuin"><?php echo __('Gogoratu')?></td>
             <td class="ezker">
 		<?php //echo $form['remember']->renderRow() ?>
                 <?php echo $form['remember']->render() ?>

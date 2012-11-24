@@ -16,19 +16,13 @@ abstract class BaseLehentasunaForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'      => new sfWidgetFormInputHidden(),
-      'izena'   => new sfWidgetFormInputText(),
       'kolorea' => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'      => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'izena'   => new sfValidatorString(array('max_length' => 255)),
       'kolorea' => new sfValidatorString(array('max_length' => 50, 'required' => false)),
     ));
-
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Lehentasuna', 'column' => array('izena')))
-    );
 
     $this->widgetSchema->setNameFormat('lehentasuna[%s]');
 

@@ -1,9 +1,11 @@
 sfGuardGroup:
-  actAs: [Timestampable]
+  actAs:
+    Timestampable:
+    I18n:
+      fields: [name]
   columns:
     name:
       type: string(255)
-      unique: true
     description: string(1000)
   relations:
     Users:

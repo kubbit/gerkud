@@ -51,7 +51,7 @@ class Iruzkina extends BaseIruzkina
 		{
 			$mailer = sfContext::getInstance()->getMailer();
                         $mezua = Swift_Message::newInstance();
-                        $mezua->setFrom('gerkud@kubbit.com');
+                        $mezua->setFrom(sfConfig::get('app_abisuak_nork'));
                         $mezua->setTo($erab->getEmailAddress());
 			$cid = $mezua->embed(Swift_Image::fromPath('./images/Gerkud-txiki.jpg'));
 

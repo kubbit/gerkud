@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2012-11-15T12:23:17Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Laburpena</source>
+        <target>Resumen</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Gertakaria editatu</source>
+        <target>Editar incidencia</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Gertakari berria</source>
+        <target>Nueva incidencia</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Kodea</source>
+        <target>Código</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Sortze Data</source>
+        <target>Fecha Creación</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Klasea</source>
+        <target>Clase</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Mota</source>
+        <target>Tipo</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Azpimota</source>
+        <target>Subtipo</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Helbidea</source>
+        <target>Dirección</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Eraikina</source>
+        <target>Edificio</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Jatorrizko Saila</source>
+        <target>Departamento de Origen</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>Lehentasuna</source>
+        <target>Prioridad</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Nork eman du abisua</source>
+        <target>Emitido por</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Harremanetarako</source>
+        <target>Contacto</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>Deskribapena</source>
+        <target>Descripción</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>Ezeztatu</source>
+        <target>Cancelar</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Gorde</source>
+        <target>Guardar</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>Sortu</source>
+        <target>Crear</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Kodea</source>
+        <target>Código</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Sartu bilatu nahi duzun testua</source>
+        <target>Introduzca el término de búsqueda</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>Gertakarien bilaketa</source>
+        <target>Búsqueda de incidencias</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Egoera</source>
+        <target>Estado</target>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>Saila</source>
+        <target>Departamento</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>Mota/Azpimota</source>
+        <target>Tipo/Subtipo</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Bilatu</source>
+        <target>Buscar</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>Bilaketa aurreratua</source>
+        <target>Búsqueda avanzada</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>Bilaketa arrunta</source>
+        <target>Búsqueda simple</target>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>%eskaerak% eskaera topatu dira</source>
+        <target>Se han encontrado %eskaerak% peticiones</target>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>Irekitze data</source>
+        <target>Fecha de apertura</target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>%gertakariak% gertakari topatu dira</source>
+        <target>Se han encontrado %gertakariak% incidencias</target>
+      </trans-unit>
+      <trans-unit id="31">
+        <source>Azkenekoz aldatua</source>
+        <target>Última modificación</target>
+      </trans-unit>
+      <trans-unit id="32">
+        <source>Gertakaria Sortu</source>
+        <target>Crear incidencia</target>
+      </trans-unit>
+      <trans-unit id="33">
+        <source>Irekiera data</source>
+        <target>Fecha apertura</target>
+      </trans-unit>
+      <trans-unit id="34">
+        <source>Baztertu</source>
+        <target>Descartar</target>
+      </trans-unit>
+      <trans-unit id="35">
+        <source>Editatu</source>
+        <target>Editar</target>
+      </trans-unit>
+      <trans-unit id="36">
+        <source>Gertakaria esleitu</source>
+        <target>Asignar incidencia</target>
+      </trans-unit>
+      <trans-unit id="37">
+        <source>Inprimatu</source>
+        <target>Imprimir</target>
+      </trans-unit>
+      <trans-unit id="38">
+        <source>Prozesuan jarri</source>
+        <target>Poner en proceso</target>
+      </trans-unit>
+      <trans-unit id="39">
+        <source>Itxi</source>
+        <target>Cerrar</target>
+      </trans-unit>
+      <trans-unit id="40">
+        <source>Gertakaria berrireki</source>
+        <target>Reabrir incidencia</target>
+      </trans-unit>
+      <trans-unit id="41">
+        <source>Kopiatu</source>
+        <target>Copiar</target>
+      </trans-unit>
+      <trans-unit id="42">
+        <source>Abisua / Harremanetarako</source>
+        <target>Contacto</target>
+      </trans-unit>
+      <trans-unit id="43">
+        <source>Aldaketen historikoa</source>
+        <target>Historial de cambios</target>
+      </trans-unit>
+      <trans-unit id="44">
+        <source>Data</source>
+        <target>Fecha</target>
+      </trans-unit>
+      <trans-unit id="45">
+        <source>Nork</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit id="46">
+        <source>Ekintza</source>
+        <target>Acción</target>
+      </trans-unit>
+      <trans-unit id="47">
+        <source>Iruzkina</source>
+        <target>Comentario</target>
+      </trans-unit>
+      <trans-unit id="48">
+        <source>Iruzkina gehitu</source>
+        <target>Añadir comentario</target>
+      </trans-unit>
+      <trans-unit id="49">
+        <source>Gehitu</source>
+        <target>Añadir</target>
+      </trans-unit>
+      <trans-unit id="50">
+        <source>Fitxategiak</source>
+        <target>Ficheros</target>
+      </trans-unit>
+      <trans-unit id="51">
+        <source>Fitxategia gehitu</source>
+        <target>Añadir fichero</target>
+      </trans-unit>
+      <trans-unit id="52">
+        <source>Fitxategia</source>
+        <target>Fichero</target>
+      </trans-unit>
+      <trans-unit id="53">
+        <source>Planoa</source>
+        <target>Plano</target>
+      </trans-unit>
+      <trans-unit id="54">
+        <source>ID</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="55">
+        <source>Latitudea</source>
+        <target>Latitud</target>
+      </trans-unit>
+      <trans-unit id="56">
+        <source>Longitudea</source>
+        <target>Longitud</target>
+      </trans-unit>
+      <trans-unit id="57">
+        <source>Gertakarien zerrenda</source>
+        <target>Listado de incidencias</target>
+      </trans-unit>
+      <trans-unit id="58">
+        <source>Kaleak</source>
+        <target>Calles</target>
+      </trans-unit>
+      <trans-unit id="59">
+        <source>Erabiltzaileak</source>
+        <target>Usuarios</target>
+      </trans-unit>
+      <trans-unit id="60">
+        <source>Indexatu</source>
+        <target>Indexar</target>
+      </trans-unit>
+      <trans-unit id="61">
+        <source>Saioa amaitu</source>
+        <target>Cerrar sesión</target>
+      </trans-unit>
+      <trans-unit id="62">
+        <source>Id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="63">
+        <source>Izena</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="64">
+        <source>Kolorea</source>
+        <target>Color</target>
+      </trans-unit>
+      <trans-unit id="65">
+        <source>Egoerak</source>
+        <target>Estados</target>
+      </trans-unit>
+      <trans-unit id="66">
+        <source>Sailak</source>
+        <target>Departamentos</target>
+      </trans-unit>
+      <trans-unit id="67">
+        <source>Barrutia</source>
+        <target>Distrito</target>
+      </trans-unit>
+      <trans-unit id="68">
+        <source>Username</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit id="69">
+        <source>Izen/Abizenak</source>
+        <target>Nombre/Apellidos</target>
+      </trans-unit>
+      <trans-unit id="70">
+        <source>Email helbidea</source>
+        <target>Correo electrónico</target>
+      </trans-unit>
+      <trans-unit id="71">
+        <source>Aktibo dago?</source>
+        <target>Activo?</target>
+      </trans-unit>
+      <trans-unit id="72">
+        <source>Azkenekoz sartua</source>
+        <target>Última conexión</target>
+      </trans-unit>
+      <trans-unit id="74">
+        <source>Zerrendara bueltatu</source>
+        <target>Volver al listado</target>
+      </trans-unit>
+      <trans-unit id="75">
+        <source>Erabiltzailea</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit id="76">
+        <source>Pasahitza</source>
+        <target>Contraseña</target>
+      </trans-unit>
+      <trans-unit id="78">
+        <source>Administratzailea da</source>
+        <target>Es Administrador</target>
+      </trans-unit>
+      <trans-unit id="79">
+        <source>Abizena(k)</source>
+        <target>Apellido(s)</target>
+      </trans-unit>
+      <trans-unit id="80">
+        <source>Ohartarazi</source>
+        <target>Avisar</target>
+      </trans-unit>
+      <trans-unit id="82">
+        <source>Ezabatu</source>
+        <target>Eliminar</target>
+      </trans-unit>
+      <trans-unit id="83">
+        <source>Bai</source>
+        <target>Si</target>
+      </trans-unit>
+      <trans-unit id="84">
+        <source>Ez</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="85">
+        <source>Ziur zaude?</source>
+        <target>¿Está seguro?</target>
+      </trans-unit>
+      <trans-unit id="86">
+        <source>Egoera aldaketa, 'prozesuan' egoeran jarri da</source>
+        <target>Cambio de estado, se ha puesto 'en proceso'</target>
+      </trans-unit>
+      <trans-unit id="87">
+        <source>Gertakaria amaitutzat ematen da</source>
+        <target>Se ha dado por cerrada la incidencia</target>
+      </trans-unit>
+      <trans-unit id="88">
+        <source>Gertakaria ez da onartzen, baztertu da</source>
+        <target>La incidencia no ha admitido, ha sido rechazada</target>
+      </trans-unit>
+      <trans-unit id="89">
+        <source>Gertakaria "%taldea%" (a)ri esleitu zaio. </source>
+        <target>La incidencia ha sido asignada a "%taldea%"</target>
+      </trans-unit>
+      <trans-unit id="90">
+        <source>'%fitxategia%' fitxategia gehitu da</source>
+        <target>Se ha añadido el fichero '%fitxategia%'</target>
+      </trans-unit>
+      <trans-unit id="91">
+        <source>Iruzkinak / Oharrak</source>
+        <target>Comentarios / Observaciones</target>
+      </trans-unit>
+      <trans-unit id="92">
+        <source>Zerbitzu, Sare eta Mantentze-lanak</source>
+        <target>Servicios, Infraestructuras y Trabajos de Mantenimiento</target>
+      </trans-unit>
+      <trans-unit id="93">
+        <source>Hasiera (adierazgarria)</source>
+        <target>Inicio previsto</target>
+      </trans-unit>
+      <trans-unit id="94">
+        <source>Amaiera (adierazgarria)</source>
+        <target>Fin previsto</target>
+      </trans-unit>
+      <trans-unit id="97">
+        <source>Nere datuak aldatu</source>
+        <target>Cambiar mis datos</target>
+      </trans-unit>
+      <trans-unit id="98">
+        <source>Itzuli gertakarien zerrendara</source>
+        <target>Volver al listado de incidencias</target>
+      </trans-unit>
+      <trans-unit id="99">
+        <source>Posta elektronikoa</source>
+        <target>Correo electrónico</target>
+      </trans-unit>
+      <trans-unit id="100">
+        <source>Nire datuak</source>
+        <target>Mis datos</target>
+      </trans-unit>
+      <trans-unit id="101">
+        <source>Gertakaria baztertu nahi duzu?</source>
+        <target>¿Desea descartar la incidencia?</target>
+      </trans-unit>
+      <trans-unit id="102">
+        <source>Dataren arabera</source>
+        <target>Por intervalos de fechas</target>
+      </trans-unit>
+      <trans-unit id="103">
+        <source>Data-tartea</source>
+        <target>Intervalo</target>
+      </trans-unit>
+      <trans-unit id="104">
+        <source>Berriak</source>
+        <target>Nuevas</target>
+      </trans-unit>
+      <trans-unit id="105">
+        <source>Irekiak</source>
+        <target>Abiertas</target>
+      </trans-unit>
+      <trans-unit id="106">
+        <source>Baztertuak</source>
+        <target>Descartadas</target>
+      </trans-unit>
+      <trans-unit id="107">
+        <source>Ebatziak</source>
+        <target>Resueltas</target>
+      </trans-unit>
+      <trans-unit id="108">
+        <source>Ebatzien egun batazbestekoa</source>
+        <target>Tiempo medio de resolución</target>
+      </trans-unit>
+      <trans-unit id="109">
+        <source>Sailaren arabera</source>
+        <target>Por departamento</target>
+      </trans-unit>
+      <trans-unit id="110">
+        <source>Egun desbiderapenaren arabera</source>
+        <target>Por desvío en previsiones</target>
+      </trans-unit>
+      <trans-unit id="111">
+        <source>Egunak</source>
+        <target>Días</target>
+      </trans-unit>
+      <trans-unit id="112">
+        <source>Iraupenekoa (zkia.)</source>
+        <target>En la duración (nº)</target>
+      </trans-unit>
+      <trans-unit id="113">
+        <source>Iraupenekoa (%)</source>
+        <target>En la duración (%)</target>
+      </trans-unit>
+      <trans-unit id="114">
+        <source>Hasierakoa (zkia.)</source>
+        <target>En el inicio (nº)</target>
+      </trans-unit>
+      <trans-unit id="115">
+        <source>Hasierakoa (%)</source>
+        <target>En el inicio (%)</target>
+      </trans-unit>
+      <trans-unit id="116">
+        <source>Ebazterakoa (zkia.)</source>
+        <target>En el cierre (nº)</target>
+      </trans-unit>
+      <trans-unit id="117">
+        <source>Ebazterakoa (%)</source>
+        <target>En el cierre (%)</target>
+      </trans-unit>
+      <trans-unit id="118">
+        <source>Totala</source>
+        <target>Total</target>
+      </trans-unit>
+      <trans-unit id="120">
+        <source>Hasiera</source>
+        <target>Inicio</target>
+      </trans-unit>
+      <trans-unit id="121">
+        <source>Amaiera</source>
+        <target>Fin</target>
+      </trans-unit>
+      <trans-unit id="122">
+        <source>Tartea</source>
+        <target>Intervalo</target>
+      </trans-unit>
+      <trans-unit id="123">
+        <source>Onartu</source>
+        <target>Mostrar</target>
+      </trans-unit>
+      <trans-unit id="124">
+        <source>Taula mota</source>
+        <target>Tipo de tabla</target>
+      </trans-unit>
+      <trans-unit id="126">
+        <source>Denbora tartean sortutako gertakari berriak</source>
+        <target>Incidencias dadas de alta en ese intervalo de tiempo</target>
+      </trans-unit>
+      <trans-unit id="127">
+        <source>Denbora tartean irekiak zeuden gertakariak</source>
+        <target>Incidencias que permanecían abiertas en esas fechas</target>
+      </trans-unit>
+      <trans-unit id="128">
+        <source>Denbora tartean baztertu ziren gertakariak</source>
+        <target>Incidencias descartadas en ese intervalo de tiempo</target>
+      </trans-unit>
+      <trans-unit id="129">
+        <source>Denbora tartean ebaztu ziren gertakariak</source>
+        <target>Incidencias resueltas en ese intervalo de tiempo</target>
+      </trans-unit>
+      <trans-unit id="130">
+        <source>Denbora tartean ebaztutako gertakarien batazbestekoa</source>
+        <target>Promedio de dias de resolución de incidencias en el intervalo de tiempo</target>
+      </trans-unit>
+      <trans-unit id="131">
+        <source>Sail bakoitzeko irekita dauden gertakariak</source>
+        <target>Incidencias abiertas por cada departamento</target>
+      </trans-unit>
+      <trans-unit id="132">
+        <source>Sail bakoitzeko ebatziak dauden gertakariak</source>
+        <target>Incidencias resueltas por cada departamento</target>
+      </trans-unit>
+      <trans-unit id="133">
+        <source>Sail bakoitzeko ebaztutako gertakarien egun batazbestekoa</source>
+        <target>Promedio de dias de resolución de incidencias por cada departamento</target>
+      </trans-unit>
+      <trans-unit id="134">
+        <source>Egun-tarte horretan desbideratzen diren gertakari kopurua (aurrez ikusitako iraupenarekiko)</source>
+        <target>Número de incidencias cuya duración se desvía de la prevista en esa cantidad de días</target>
+      </trans-unit>
+      <trans-unit id="135">
+        <source>Egun-tarte horretan desbideratzen diren gertakarien portzentaia (aurrez ikusitako iraupenarekiko)</source>
+        <target>Porcentaje de incidencias cuya duración se desvía de la prevista en esa cantidad de días</target>
+      </trans-unit>
+      <trans-unit id="136">
+        <source>Egun-tarte horretan desbideratzen diren gertakari kopurua (aurrez ikusitako hasiera datarekiko)</source>
+        <target>Número de incidencias cuyo inicio se desvía del previsto en esa cantidad de días</target>
+      </trans-unit>
+      <trans-unit id="137">
+        <source>Egun-tarte horretan desbideratzen diren gertakarien portzentaia (aurrez ikusitako hasiera datarekiko)</source>
+        <target>Porcentaje de incidencias cuyo inicio se desvía del previsto en esa cantidad de días</target>
+      </trans-unit>
+      <trans-unit id="138">
+        <source>Egun-tarte horretan desbideratzen diren gertakari kopurua (aurrez ikusitako ebazpen datarekiko)</source>
+        <target>Número de incidencias cuyo cierre se desvía del previsto en esa cantidad de días</target>
+      </trans-unit>
+      <trans-unit id="139">
+        <source>Egun-tarte horretan desbideratzen diren gertakarien portzentaia (aurrez ikusitako ebazpen datarekiko)</source>
+        <target>Porcentaje de incidencias cuyo cierre se desvía del previsto en esa cantidad de días</target>
+      </trans-unit>
+      <trans-unit id="140">
+        <source>Urteak</source>
+        <target>Años</target>
+      </trans-unit>
+      <trans-unit id="141">
+        <source>Hilabeteak</source>
+        <target>Meses</target>
+      </trans-unit>
+      <trans-unit id="142">
+        <source>Asteak</source>
+        <target>Semanas</target>
+      </trans-unit>
+      <trans-unit id="143">
+        <source>Erabilera datuak</source>
+        <target>Datos estadísticos</target>
+      </trans-unit>
+      <trans-unit id="144">
+        <source>Hasiera data ezin da sortzerakoa baino lehenagokoa izan</source>
+        <target>La fecha de inicio no puede ser anterior a la de creación</target>
+      </trans-unit>
+      <trans-unit id="145">
+        <source>Amaiera data ezin da hasierakoa baino lehenagokoa izan</source>
+        <target>La fecha de fin no puede ser anterior a la de inicio</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2012-07-19T11:17:16Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Erabiltzailea ala pasahitza ez da zuzena.</source>
+        <target>El usuario y/o la contraseña no son válidos</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

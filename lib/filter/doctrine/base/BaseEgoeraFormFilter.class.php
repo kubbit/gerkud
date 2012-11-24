@@ -13,12 +13,10 @@ abstract class BaseEgoeraFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'izena'   => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'kolorea' => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
-      'izena'   => new sfValidatorPass(array('required' => false)),
       'kolorea' => new sfValidatorPass(array('required' => false)),
     ));
 
@@ -40,7 +38,6 @@ abstract class BaseEgoeraFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'      => 'Number',
-      'izena'   => 'Text',
       'kolorea' => 'Text',
     );
   }

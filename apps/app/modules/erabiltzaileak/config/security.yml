@@ -1,0 +1,20 @@
+index:
+  credentials: admins
+
+show:
+  credentials: admins
+
+new:
+  credentials: admins
+
+create:
+  credentials: admins
+
+edit:
+  credentials: admins
+
+update:
+  credentials: admins
+
+delete:
+  credentials: admins

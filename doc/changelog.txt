@@ -1,0 +1,40 @@
+================================================================================
+  Version 1.2
+  2012-11-20  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Uso de URLs relativas
+* Paso de toda funcionalidad específica del Ayuntamiento de Pasaia a ficheros
+  de configuración, permitiendo que el mismo código fuente sea compartido por
+  cualquier Ayuntamiento
+* Multilingüe (euskera - castellano), detección automática del idioma del
+  usuario usando configuración del navegador
+* Autentificación tanto con LDAP como con Active Directory
+* Añadidos campos para previsión de inicio y fin de resolución de incidencias
+* Nuevo módulo para datos estadísticos
+* Obtención automática de información de usuario desde AD/LDAP (nombre,
+  apellidos, correo electrónico, etc.)
+* Unión de las cuatro aplicaciones (login, orokorra, zerbitzu y admin) en una
+  única (app), eliminando funcionalidades duplicadas y simplificando el código
+  fuente para mantenimiento posterior del código fuente
+* Actualización y traducción al castellano del manual de uso
+* Marcadores de edificios para el mapa
+* Cambios en funcionalidad:
+	* No permitir poner en proceso una incidencia que no ha sido previamente
+	  asignada
+	* No se permite cerrar una incidencia si no se encuentra en proceso (se
+	  permite descartar en cualquier otro caso)
+	* Número de incidencias por página es configurable a través de ficheros
+	  de configuración (se ha puesto en 30)
+	* Al reabrir una incidencia pasa un estado anterior a "en proceso"
+* Correcciones:
+	* Error al añadir un fichero vacío
+	* El cambio de estado indicado en los avisos por correo era incorrecto
+	* Funcionamiento con versiones nuevas de Internet Explorer
+	* Unificado el estilo de todos los botones de la aplicación
+	* Funcionamiento con la última versión estable de PHP (v5.4)
+
+================================================================================
+  Version 1.0
+  2012-06-01  Pasaiako Udala (http://www.pasaia.net)
+================================================================================ 
+* Primera versión liberada

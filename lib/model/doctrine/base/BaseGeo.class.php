@@ -42,13 +42,17 @@ abstract class BaseGeo extends sfDoctrineRecord
              'type' => 'integer',
              'notnull' => true,
              ));
-        $this->hasColumn('longitudea', 'double', null, array(
+        $this->hasColumn('longitudea', 'double', 18, array(
              'type' => 'double',
+             'scale' => 6,
              'notnull' => true,
+             'length' => 18,
              ));
-        $this->hasColumn('latitudea', 'double', null, array(
+        $this->hasColumn('latitudea', 'double', 18, array(
              'type' => 'double',
+             'scale' => 6,
              'notnull' => true,
+             'length' => 18,
              ));
         $this->hasColumn('testua', 'string', 50, array(
              'type' => 'string',

@@ -41,18 +41,18 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 
         $this->widgetSchema['barrutia_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Barrutia',
-                'add_empty' => 'Aukeratu barrutia',
+                'add_empty' => '--',
                 ));
 
         $this->widgetSchema['kalea_id'] = new sfWidgetFormDoctrineChoice(array(
                     'model'     => 'Kalea',
-//                    'depends'   => 'Barrutia', 
-                    'add_empty' => 'Aukeratu kalea',
+//                    'depends'   => 'Barrutia',
+                    'add_empty' => '--',
 		    'order_by' => array('izena','asc')
                 ));
 
         $this->widgetSchema['kale_zbkia'] = new sfWidgetFormFilterInput(array(
-		'with_empty' => false, 
+		'with_empty' => false,
 		));
         $this->validatorSchema['kale_zbkia'] = new sfValidatorPass(array(
                 'required' => false
@@ -61,44 +61,44 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 
         $this->widgetSchema['mota_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Mota',
-                'add_empty' => 'Aukeratu mota',
+                'add_empty' => '--',
                 ));
 
-//        $this->widgetSchema['azpimota_id'] = new sfWidgetFormDoctrineDependentSelect(array( 
+//        $this->widgetSchema['azpimota_id'] = new sfWidgetFormDoctrineDependentSelect(array(
         $this->widgetSchema['azpimota_id'] = new sfWidgetFormDoctrineChoice(array(
                     'model'     => 'Azpimota',
 //                    'depends'   => 'Mota',
-                    'add_empty' => 'Aukeratu azpi-mota',
+                    'add_empty' => '--',
                 ));
 
 
 
         $this->widgetSchema['klasea_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Klasea',
-                'add_empty' => 'Aukeratu klasea',
-		'order_by' => array('izena','asc')
+                'add_empty' => '--',
+                'query'     => Doctrine::getTable('Klasea')->createQuery('k')->leftJoin('k.Translation kt')->orderBy('kt.izena ASC')
                 ));
         $this->widgetSchema['egoera_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Egoera',
-                'add_empty' => 'Aukeratu egoera',
-                'order_by' => array('izena','asc')
+                'add_empty' => '--',
+                'query'     => Doctrine::getTable('Egoera')->createQuery('e')->leftJoin('e.Translation et')->orderBy('et.izena ASC')
                 ));
         $this->widgetSchema['saila_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Saila',
-                'add_empty' => 'Aukeratu saila',
-                'order_by' => array('name','asc')
+                'add_empty' => '--',
+                'query'     => Doctrine::getTable('Saila')->createQuery('s')->leftJoin('s.Translation st')->orderBy('st.name ASC')
                 ));
 
         $this->widgetSchema['eraikina_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Eraikina',
-                'add_empty' => 'Aukeratu eraikina',
+                'add_empty' => '--',
                 'order_by' => array('izena','asc')
                 ));
 
 /*
         $this->widgetSchema['jatorrizkosaila_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'JatorrizkoSaila',
-                'add_empty' => 'Aukeratu jatorrizko saila',
+                'add_empty' => '--',
                 'order_by' => array('izena','asc')
                 ));
 */

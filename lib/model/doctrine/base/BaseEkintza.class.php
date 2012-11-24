@@ -35,5 +35,13 @@ abstract class BaseEkintza extends sfDoctrineRecord
         $this->hasMany('Iruzkina', array(
              'local' => 'id',
              'foreign' => 'ekintza_id'));
+
+        $i18n0 = new Doctrine_Template_I18n(array(
+             'fields' => 
+             array(
+              0 => 'mota',
+             ),
+             ));
+        $this->actAs($i18n0);
     }
 }

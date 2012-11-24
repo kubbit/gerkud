@@ -13,11 +13,9 @@ abstract class BaseOhartarazteaFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'mota' => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
-      'mota' => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('ohartaraztea_filters[%s]');
@@ -37,8 +35,7 @@ abstract class BaseOhartarazteaFormFilter extends BaseFormFilterDoctrine
   public function getFields()
   {
     return array(
-      'id'   => 'Number',
-      'mota' => 'Text',
+      'id' => 'Number',
     );
   }
 }

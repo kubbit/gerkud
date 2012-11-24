@@ -43,5 +43,13 @@ abstract class BaseMota extends sfDoctrineRecord
         $this->hasMany('Azpimota', array(
              'local' => 'id',
              'foreign' => 'mota_id'));
+
+        $i18n0 = new Doctrine_Template_I18n(array(
+             'fields' => 
+             array(
+              0 => 'izena',
+             ),
+             ));
+        $this->actAs($i18n0);
     }
 }

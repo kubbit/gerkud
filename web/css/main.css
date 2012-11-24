@@ -29,7 +29,7 @@ img
 	float:right;
 	text-align: right;
 /*        padding: 0.4em 0.6em 0.4em;*/
-        padding: 0em 0.1em 0em;        
+        padding: 0em 0.1em 0em;
 /*        margin: 1.8em 3.6em 0em;*/
         margin: 0.6em 0.6em 0em;
 	color: #FF4225;
@@ -56,7 +56,7 @@ img
         padding: 0.9em 0.6em 0em;
 	color: #333;
 	list-style:none;
-	
+
 /*	background: #FF00EC;*/
 }
 .post a, .post a:visited
@@ -93,7 +93,7 @@ img
 	margin: 0em 0.2em;
         padding: 0.1em 0.3em;
 /*	background: #75CAFF; */ /*Urdina*/
-   	border: 2px outset #808080;	
+   	border: 2px outset #808080;
 }
 .sesioa a, .sesioa a:visited
 {
@@ -103,6 +103,11 @@ img
 .sesioa h2
 {
         font-size: 1em;
+}
+
+#edukia
+{
+	padding-top: 2em;
 }
 
 #menua
@@ -118,8 +123,8 @@ img
 {
 /*
   	margin-right: 5px;
-  	margin-left: 5px;  	
-*/  	
+  	margin-left: 5px;
+*/
 	list-style-type: none;
   	display: inline;
   	*display: inline;
@@ -149,7 +154,7 @@ img
 {
 	background-color: #CCC;
 	border: 2px solid #000;
-	width: 70%;  
+	width: 70%;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 5px;
@@ -184,7 +189,7 @@ img
 	/*border: 1px solid rgb(18%,31%,49%);*/
 /*	border: 0px solid #CCC;*/
         border: 3px outset;
-	width: 40%;  
+	width: 40%;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 5px;
@@ -200,7 +205,7 @@ img
 }
 .login_form table
 {
-	width: 100%;        
+	width: 100%;
 }
 .login_form table td.eskuin
 {
@@ -224,10 +229,10 @@ img
 	background-color: #F3F6F9;
 	/*border-top: 1px solid rgb(60%,50%,40%);*/
 	/*border: 1px solid rgb(18%,31%,49%);*/
-	border: 1px solid rgb(0%,0%,0%);	
-	width: 90%;  
+	border: 1px solid rgb(0%,0%,0%);
+	width: 90%;
 	/*padding: 0px;*/
-	/*  position: fixed;*/  
+	/*  position: fixed;*/
 	margin-left: auto;
 	margin-right: auto;
 	padding: 5px;
@@ -253,7 +258,7 @@ img
 }
 ul.radio_list
 {
-	list-style-type: none;	
+	list-style-type: none;
 
 }
 
@@ -296,7 +301,7 @@ ul.radio_list
 .zerrenda th.ezker{
         background: url(../images/bg-header2.jpg) repeat-x top;
         text-align:left;
-        color: #CCC;	
+        color: #CCC;
         background-color: #FFF;
         empty-cells:show;
         padding: 3px 5px;
@@ -312,7 +317,7 @@ ul.radio_list
 	display: table-cell;
 	font-size: 1.1em;
 	font-weight: bold;
-	color: #3F647F;	
+	color: #3F647F;
 
 }
 .zerrenda A, .zerrenda A:HOVER, .zerrenda A:VISITED
@@ -362,7 +367,7 @@ ul.radio_list
 }
 
 
-tr#lehen1:hover td, tr#lehen2:hover td, tr#lehen3:hover td 
+tr#lehen1:hover td, tr#lehen2:hover td, tr#lehen3:hover td
 {
 	background:#FFFC8C;
 	border-bottom: 1px solid #444;
@@ -372,7 +377,7 @@ tr#lehen1:hover td, tr#lehen2:hover td, tr#lehen3:hover td
 
 
 /*GERTAKARIA */
-.gertakaria 
+.gertakaria
 {
         border-collapse:collapse;
         border-spacing:0;
@@ -477,7 +482,7 @@ tr#lehen1:hover td, tr#lehen2:hover td, tr#lehen3:hover td
 {
         padding: 0px 5px;
 	border-top: 1px solid #444;
-	border-bottom: 1px solid #444;	
+	border-bottom: 1px solid #444;
         background-color: #FFF;
 }
 
@@ -485,7 +490,7 @@ tr#lehen1:hover td, tr#lehen2:hover td, tr#lehen3:hover td
 {
         padding: 0px 5px;
 	border-top: 1px solid #444;
-	border-bottom: 1px solid #444;	
+	border-bottom: 1px solid #444;
 	border-right: 1px solid #444;
 }
 
@@ -498,9 +503,9 @@ tr#lehen1:hover td, tr#lehen2:hover td, tr#lehen3:hover td
 
 td.iruzk_zerrenda
 {
-	
+
         padding: 0px 5px;
-	border-bottom: 1px solid #444;	
+	border-bottom: 1px solid #444;
 	border-top: 1px solid #444;
 }
 
@@ -518,7 +523,7 @@ td.fitx_zerrenda A, td.fitx_zerrenda A:visited
 }
 
 /*PLANOA */
-.planoa 
+.planoa
 {
         border-collapse:collapse;
         border-spacing:0;
@@ -563,7 +568,7 @@ td.fitx_zerrenda A, td.fitx_zerrenda A:visited
 
 }
 /*KOORD */
-.koord 
+.koord
 {
         border-collapse:collapse;
         background-color: #CCC;
@@ -604,7 +609,8 @@ A, A:HOVER, A:VISITED
 	text-decoration: none;
 }
 
-a.boton {
+a.boton, input[type='submit'] {
+   padding: 0.5em 1em;
    font-weight: normal;
    font-size: .84em;
    font-family:sans-serif;
@@ -660,7 +666,7 @@ a.botonRojo:active {
 /*
    	width: 90%;
    	background: #CCC;
-*/   	
+*/
 
 	margin-left: auto;
 	margin-right: auto;
@@ -707,4 +713,82 @@ cellspacing: 15px 15px;
 	background: #EAEAEA;
    	border: 2px inset #CCC;
         cellspacing: 15px 15px;
+}
+
+.hilarak
+{
+	padding: 1em;
+}
+.hilarak div
+{
+	display: table-row;
+}
+.hilarak label
+{
+	display: table-cell;
+	padding: 0 1em 0.5em 160px;
+	text-align: right;
+}
+
+.taula
+{
+	display: table;
+	margin: auto;
+}
+.taula p
+{
+	text-align: left;
+	font-size: 32px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+.taula table
+{
+	border: 5px ridge #000;
+	border-collapse: collapse;
+	margin: auto;
+}
+.taula thead
+{
+	background: url('../images/bg-header2.jpg') repeat-x top;
+	text-align: left;
+	color: #ccc;
+	background-color: #444;
+	padding: 3px 5px;
+}
+.taula tbody
+{
+	text-align: center;
+}
+.taula tfoot
+{
+	color: #444;
+	background-color: #ccc;
+	text-align: center;
+	font-weight: bold;
+}
+.taula tr
+{
+	border-bottom: 1px solid #444;
+}
+.taula th.header
+{
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+    margin-right: -1px;
+	padding: 3px 20px 3px 5px;
+}
+.taula th.headerSortUp
+{
+	background-image: url('../images/asc.gif');
+	color: #444;
+	background-color: #ccc;
+}
+.taula th.headerSortDown
+{
+	background-image: url('../images/desc.gif');
+	color: #444;
+	background-color: #ccc;
 }

@@ -1,0 +1,20 @@
+index:
+  credentials: [[admins, gerkud, zerbitzu, arrunta]]
+
+show:
+  credentials: [[admins, gerkud, zerbitzu, arrunta]]
+
+new:
+  credentials: [[admins, gerkud]]
+
+create:
+  credentials: [[admins, gerkud]]
+
+edit:
+  credentials: [[admins, gerkud]]
+
+update:
+  credentials: [[admins, gerkud]]
+
+delete:
+  credentials: [[admins, gerkud]]

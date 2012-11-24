@@ -6,7 +6,7 @@ class GertakariaTable extends Doctrine_Table
 	$q = Doctrine_Query::create()
         	->from('gertakaria g')
                 ->where('g.id = ?', $id);
-	return $q;	
+	return $q;
     }
 
     public static function getInstance()
@@ -62,15 +62,15 @@ class GertakariaTable extends Doctrine_Table
 		  {
 //			      return array();
 			$q = $this->createQuery('j')
-        	           ->where(0);    
-		  }else 
+        	           ->where(0);
+		  }else
 		  {
 		  $q = $this->createQuery('j')
 		      ->whereIn('j.id', $pks)
 		      ->orderBy('j.lehentasuna_id DESC, j.id DESC');
 	//	      ->limit(20);
 		  }
-	    }else 
+	    }else
 	    {
 		  $q = $this->createQuery('j');
 	    }
@@ -87,14 +87,14 @@ class GertakariaTable extends Doctrine_Table
             if ($query1['eraikina_id']) $q->andWhere('j.eraikina_id = ?', $query1['eraikina_id']);
             $q->orderBy('j.lehentasuna_id DESC, j.id DESC');
 	    return $q;
-  
+
    	  } else
    	  {
 		  $q = $this->createQuery('j')
 		  ->Where('j.id = ?', $kodea);
                   return $q;
 	  }
-	} else 
+	} else
 	{
 		$lang=sfContext::getInstance()->getUser()->getguardUser()->getId();
                 $taldeak=sfContext::getInstance()->getUser()->getguardUser()->getGroups();
@@ -108,17 +108,15 @@ class GertakariaTable extends Doctrine_Table
 	            ->where('g.egoera_id != ?', 5)
                     ->andWhere('g.egoera_id != ?', 1)
         	    ->andWhere('g.egoera_id != ?', 6);
-		if (sfContext::getInstance()->getConfiguration()->getApplication()=='orokorra') 
-		{
+		if (sfContext::getInstance()->getUser()->hasCredential(array('admins', 'gerkud'), false))
+				/* no añadir mas filtros */;
+		else if (sfContext::getInstance()->getUser()->hasCredential('zerbitzu') && !(empty($taldeakId)))
+		        $q->whereIn('g.saila_id', $taldeakId);
+		else if (sfContext::getInstance()->getUser()->hasCredential('zerbitzu') && (empty($taldeakId)))
+		        $q->andWhere(0);
+		else if (sfContext::getInstance()->getUser()->hasCredential('arrunta'))
 	            $q->andWhere('g.langilea_id = ?', $lang);
-		}
-                if ((sfContext::getInstance()->getConfiguration()->getApplication()=='zerbitzu') && !(empty($taldeakId)))
-		{
-		    $q->whereIn('g.saila_id', $taldeakId);
-		} else if ((sfContext::getInstance()->getConfiguration()->getApplication()=='zerbitzu') && (empty($taldeakId)))
-		{
-		    $q->andWhere(0);
-		}
+
 	        $q->orderBy('g.lehentasuna_id DESC, g.id DESC');
 		return $q;
 	}

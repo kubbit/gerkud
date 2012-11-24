@@ -19,6 +19,8 @@
  * @property string $kale_zbkia
  * @property string $deskribapena
  * @property datetime $ixte_data
+ * @property date $hasiera_adieraz
+ * @property date $amaiera_adieraz
  * @property integer $lehentasuna_id
  * @property integer $jatorrizkoSaila_id
  * @property integer $eraikina_id
@@ -52,6 +54,8 @@
  * @method string              getKaleZbkia()          Returns the current record's "kale_zbkia" value
  * @method string              getDeskribapena()       Returns the current record's "deskribapena" value
  * @method datetime            getIxteData()           Returns the current record's "ixte_data" value
+ * @method date                getHasieraAdieraz()     Returns the current record's "hasiera_adieraz" value
+ * @method date                getAmaieraAdieraz()     Returns the current record's "amaiera_adieraz" value
  * @method integer             getLehentasunaId()      Returns the current record's "lehentasuna_id" value
  * @method integer             getJatorrizkoSailaId()  Returns the current record's "jatorrizkoSaila_id" value
  * @method integer             getEraikinaId()         Returns the current record's "eraikina_id" value
@@ -84,6 +88,8 @@
  * @method Gertakaria          setKaleZbkia()          Sets the current record's "kale_zbkia" value
  * @method Gertakaria          setDeskribapena()       Sets the current record's "deskribapena" value
  * @method Gertakaria          setIxteData()           Sets the current record's "ixte_data" value
+ * @method Gertakaria          setHasieraAdieraz()     Sets the current record's "hasiera_adieraz" value
+ * @method Gertakaria          setAmaieraAdieraz()     Sets the current record's "amaiera_adieraz" value
  * @method Gertakaria          setLehentasunaId()      Sets the current record's "lehentasuna_id" value
  * @method Gertakaria          setJatorrizkoSailaId()  Sets the current record's "jatorrizkoSaila_id" value
  * @method Gertakaria          setEraikinaId()         Sets the current record's "eraikina_id" value
@@ -169,6 +175,14 @@ abstract class BaseGertakaria extends sfDoctrineRecord
              ));
         $this->hasColumn('ixte_data', 'datetime', null, array(
              'type' => 'datetime',
+             'notnull' => false,
+             ));
+        $this->hasColumn('hasiera_adieraz', 'date', null, array(
+             'type' => 'date',
+             'notnull' => false,
+             ));
+        $this->hasColumn('amaiera_adieraz', 'date', null, array(
+             'type' => 'date',
              'notnull' => false,
              ));
         $this->hasColumn('lehentasuna_id', 'integer', null, array(

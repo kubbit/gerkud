@@ -14,12 +14,10 @@ abstract class BaseAzpimotaFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'mota_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Mota'), 'add_empty' => true)),
-      'izena'   => new sfWidgetFormFilterInput(array('with_empty' => false)),
     ));
 
     $this->setValidators(array(
       'mota_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Mota'), 'column' => 'id')),
-      'izena'   => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('azpimota_filters[%s]');
@@ -41,7 +39,6 @@ abstract class BaseAzpimotaFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'      => 'Number',
       'mota_id' => 'ForeignKey',
-      'izena'   => 'Text',
     );
   }
 }

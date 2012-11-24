@@ -1,0 +1,23 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+#all:
+prod:
+  sf_guard_plugin:
+    success_signout_url: /app.php/
+dev:
+  sf_guard_plugin:
+    success_signout_url: /app_dev.php/
+
+all:
+  sf_guard_plugin:
+    check_password_callable:   [bhLDAPAuth, checkPassword]
+  google:
+    maps_api_keys:
+      default:
+  herria: " 20100 ERRENTERIA"
+  erakundea: "ERRENTERIAKO UDALA"
+  abisuak_nork: kubbit.gerkud@kubbit.com
+  gertakariak_orriko: 30
+  #proxy: 127.0.0.1:3128

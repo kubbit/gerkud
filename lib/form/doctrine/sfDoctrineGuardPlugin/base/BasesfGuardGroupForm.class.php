@@ -16,7 +16,6 @@ abstract class BasesfGuardGroupForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'               => new sfWidgetFormInputHidden(),
-      'name'             => new sfWidgetFormInputText(),
       'description'      => new sfWidgetFormTextarea(),
       'created_at'       => new sfWidgetFormDateTime(),
       'updated_at'       => new sfWidgetFormDateTime(),
@@ -26,17 +25,12 @@ abstract class BasesfGuardGroupForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'               => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'name'             => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'description'      => new sfValidatorString(array('max_length' => 1000, 'required' => false)),
       'created_at'       => new sfValidatorDateTime(),
       'updated_at'       => new sfValidatorDateTime(),
       'users_list'       => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardUser', 'required' => false)),
       'permissions_list' => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'sfGuardPermission', 'required' => false)),
     ));
-
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'sfGuardGroup', 'column' => array('name')))
-    );
 
     $this->widgetSchema->setNameFormat('sf_guard_group[%s]');
 
