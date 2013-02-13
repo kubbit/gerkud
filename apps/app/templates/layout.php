@@ -80,6 +80,7 @@
 						<h2><?php echo $sf_user->getGuardUser()->getFirstName() . " " . $sf_user->getGuardUser()->getLastName(); ?><br />
 							( <?php echo $sf_user->getUsername(); ?> )</h2>
 						<br />
+						[<a href="?sf_culture=eu">eu</a>] [<a href="?sf_culture=es">es</a>]
 					</div>
 					<div class="eskuliburua">
 						<a target="_blank" href="<?php echo sprintf('/doc/Eskuliburua_%s.pdf', $sf_user->getCulture()); ?>">
@@ -93,8 +94,9 @@
 					<h2>
 						<ul>
 <?php if ($sf_user->isAuthenticated()): ?>
-								<li><?php echo link_to(__('Gertakarien zerrenda'), 'gertakaria/index') ?></li>
+								<li><?php echo link_to(__('Gertakariak'), 'gertakaria/index') ?></li>
 	<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
+								<li><?php echo link_to(__('Zerrendatuak'), 'zerrendatu/index') ?></li>
 								<li><?php echo link_to(__('Erabilera datuak'), 'datuak/index') ?></li>
 								<li><?php echo link_to(__('Egoerak'), 'egoera/index') ?></li>
 								<li><?php echo link_to(__('Sailak'), 'saila/index') ?></li>

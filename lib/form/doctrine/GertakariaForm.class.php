@@ -12,29 +12,28 @@ class GertakariaForm extends BaseGertakariaForm
 {
   public function configure()
   {
-
+        $culture = sfContext::getInstance()->getUser()->getCulture();
 
         $this->widgetSchema['barrutia_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Barrutia',
                 'add_empty' => '--',
+	        'order_by'  => array('izena', 'asc')
                 ));
-/*default context does not exist arazoa gertatzen denerako komentatu */
+
         $this->widgetSchema['kalea_id'] = new sfWidgetFormDoctrineDependentSelect(array(
                     'model'     => 'Kalea',
                     'depends'   => 'Barrutia',
                     'add_empty' => '--',
 		    'order_by' => array('izena','asc')
                 ));
-/* */
-        $this->widgetSchema['klasea_id'] = new sfWidgetFormDoctrineChoice(array(
-                'model'     => 'Klasea',
-                'add_empty' => '--',
-                ));
-/* */
         $this->widgetSchema['mota_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Mota',
                 'add_empty' => '--',
-                'query'     => Doctrine::getTable('Mota')->createQuery('m')->leftJoin('m.Translation mt')->orderBy('mt.izena ASC')
+                'query'     => Doctrine::getTable('Mota')->createQuery('m')
+                                                         ->select('m.id, t.izena')
+                                                         ->leftJoin('m.Translation t WITH t.lang = ?', $culture)
+                                                         ->orderBy('t.izena ASC'),
+                'order_by' => array('izena', 'asc')
                 ));
 
         $this->widgetSchema['laburpena'] = new sfWidgetFormTextarea(array(
@@ -45,23 +44,28 @@ class GertakariaForm extends BaseGertakariaForm
 
 	$this->validatorSchema['deskribapena'] = new sfValidatorString(array('required' => true));
 
-
-/*default context does not exist arazoa gertatzen denerako komentatu */
         $this->widgetSchema['azpimota_id'] = new sfWidgetFormDoctrineDependentSelect(array(
                     'model'     => 'Azpimota',
-                    'depends'   => 'Mota',
+                    'depends'   => 'mota_id',
                     'add_empty' => '--',
-//                    'order_by' => array('izena','asc')
+                    'table_method' => 'getAzpimotaQuery',
+                    'order_by' => array('izena', 'asc')
                 ));
-/* */
-
 
         $this->widgetSchema['eraikina_id'] = new sfWidgetFormDoctrineDependentSelect(array(
                     'model'     => 'Eraikina',
                     'depends'   => 'Barrutia',
                     'add_empty' => '--',
+                    'order_by'  => array('izena', 'asc')
                 ));
 
+        $this->widgetSchema['jatorrizkoSaila_id'] = new sfWidgetFormDoctrineChoice(array(
+                'model'     => 'JatorrizkoSaila',
+                'add_empty' => '--',
+                'query'     => Doctrine::getTable('JatorrizkoSaila')->createQuery('j')
+                                                                    ->leftJoin('j.Translation t WITH t.lang = ?', $culture)
+                                                                    ->orderBy('t.izena ASC')
+                ));
 
 
 /*
@@ -90,26 +94,20 @@ class GertakariaForm extends BaseGertakariaForm
         $this->widgetSchema['klasea_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Klasea',
                 'add_empty' => '--',
-                'query'     => Doctrine::getTable('Klasea')->createQuery('k')->leftJoin('k.Translation kt')->orderBy('kt.izena ASC')
+                'query'     => Doctrine::getTable('Klasea')->createQuery('k')
+                               ->leftJoin('k.Translation t WITH t.lang = ?', $culture)
+                               ->orderBy('t.izena ASC')
                 ));
-/*
-        $this->widgetSchema['eraikina_id'] = new sfWidgetFormDoctrineChoice(array(
-                'model'     => 'Eraikina',
-                'add_empty' => 'Aukeratu eraikina',
-                'order_by' => array('izena','asc')
-                ));
-*/
 
-	$this->widgetSchema['hasiera_adieraz'] = new sfWidgetFormI18nDate(array
+	$this->widgetSchema['hasiera_aurreikusia'] = new sfWidgetFormI18nDate(array
 	(
-		'culture' => sfContext::getInstance()->getUser()->getCulture()
+		'culture' => $culture
 	));
-	$this->widgetSchema['amaiera_adieraz'] = new sfWidgetFormI18nDate(array
+	$this->widgetSchema['amaiera_aurreikusia'] = new sfWidgetFormI18nDate(array
 	(
-		'culture' => sfContext::getInstance()->getUser()->getCulture()
+		'culture' => $culture
 	));
 
-/*default context does not exist arazoa gertatzen denerako komentatu */
      $urteak = range(2000, date ("Y"));
      if (sfContext::getInstance()->getConfiguration()->getApplication()=='es')
      {
@@ -132,7 +130,7 @@ class GertakariaForm extends BaseGertakariaForm
         unset(
               $this['created_at'], $this['updated_at']
         );
-/* */
+
 	$this->validatorSchema->setPostValidator
 	(
 		new sfValidatorCallback(array('callback' => array($this, 'postValidate')))
@@ -146,16 +144,16 @@ public function postValidate($validator, $values)
 	else
 		$sortze_data = strftime("%Y-%m-%d", strtotime($this->getObject()->getCreatedAt()));
 
-	if ($values["hasiera_adieraz"] != null && strtotime($values["hasiera_adieraz"]) < strtotime($sortze_data))
+	if ($values["hasiera_aurreikusia"] != null && strtotime($values["hasiera_aurreikusia"]) < strtotime($sortze_data))
 	{
 		$error = new sfValidatorError($validator, "Hasiera data ezin da sortzerakoa baino lehenagokoa izan");
-		throw new sfValidatorErrorSchema($validator, array('hasiera_adieraz' => $error));
+		throw new sfValidatorErrorSchema($validator, array('hasiera_aurreikusia' => $error));
 	}
 
-	if ($values["amaiera_adieraz"] != null && strtotime($values["amaiera_adieraz"]) < strtotime($values["hasiera_adieraz"]))
+	if ($values["amaiera_aurreikusia"] != null && strtotime($values["amaiera_aurreikusia"]) < strtotime($values["hasiera_aurreikusia"]))
 	{
 		$error = new sfValidatorError($validator, "Amaiera data ezin da hasierakoa baino lehenagokoa izan");
-		throw new sfValidatorErrorSchema($validator, array('amaiera_adieraz' => $error));
+		throw new sfValidatorErrorSchema($validator, array('amaiera_aurreikusia' => $error));
 	}
 	return $values;
 }

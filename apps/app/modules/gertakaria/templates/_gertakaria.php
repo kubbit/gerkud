@@ -55,17 +55,13 @@
       </tr>
 <?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
 	  <tr>
-        <th class="eskuin" valign=top><?php echo __('Hasiera (adierazgarria)')?>:</th>
-	<th class="ezker" colspan=5><?php echo $form['hasiera_adieraz']->render();?><?php echo __($form['hasiera_adieraz']->getError()); ?></th>
+        <th class="eskuin" valign=top><?php echo __('Hasiera aurreikusia')?>:</th>
+	<th class="ezker" colspan=5><?php echo $form['hasiera_aurreikusia']->render();?><?php echo __($form['hasiera_aurreikusia']->getError()); ?></th>
       </tr><tr>
-        <th class="eskuin" valign=top><?php echo __('Amaiera (adierazgarria)')?>:</th>
-	<th class="ezker" colspan=5><?php echo $form['amaiera_adieraz']->render();?><?php echo __($form['amaiera_adieraz']->getError()); ?></th>
+        <th class="eskuin" valign=top><?php echo __('Amaiera aurreikusia')?>:</th>
+	<th class="ezker" colspan=5><?php echo $form['amaiera_aurreikusia']->render();?><?php echo __($form['amaiera_aurreikusia']->getError()); ?></th>
       </tr>
 <?php endif; ?>
-	  <tr>
-        <th class="eskuin" valign=top><?php echo __('Harremanetarako')?>:</th>
-	<th class="ezker" colspan="5"><?php echo $form['harremanetarako']->render(array('cols'=>32,'rows'=>1)); ?></th>
-      </tr>
 
       <tr>
         <th class="eskuin" valign="top"><?php echo __('Deskribapena')?>:*</th>

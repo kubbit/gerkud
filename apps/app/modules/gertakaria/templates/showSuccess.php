@@ -133,7 +133,7 @@ onclick="return confirm('<?php echo __('Gertakaria baztertu nahi duzu?')?>');"
     <tr>
       <th class="ezker"><?php echo __('Egoera')?>:</th>
       <th class="ezker"><?php echo __('Saila')?>:</th>
-      <th class="ezker"><?php echo __('Abisua / Harremanetarako')?>:</th>
+      <th class="ezker"><?php echo __('Abisua nork')?>:</th>
     </tr><tr>
       <td><?php echo $gertakaria->getEgoera() ?></td>
       <td>
@@ -141,16 +141,15 @@ onclick="return confirm('<?php echo __('Gertakaria baztertu nahi duzu?')?>');"
 	<?php echo $gertakaria->getSaila() ?>
 	<?php endif; ?>
       </td><td class="azkena">
-        <?php echo $gertakaria->getAbisuaNork() ?><br>
-        <?php echo $gertakaria->getHarremanetarako() ?>
+        <?php echo $gertakaria->getAbisuaNork() ?>
       </td>
     </tr>
     <tr>
-      <th class="ezker"><?php echo __('Hasiera (adierazgarria)')?>:</th>
-      <th class="ezker"><?php echo __('Amaiera (adierazgarria)')?>:</th>
+      <th class="ezker"><?php echo __('Hasiera aurreikusia')?>:</th>
+      <th class="ezker"><?php echo __('Amaiera aurreikusia')?>:</th>
     </tr><tr>
-      <td class="ezker"><?php echo $gertakaria->getHasieraAdieraz() ?></td>
-      <td class="ezker"><?php echo $gertakaria->getAmaieraAdieraz() ?></td>
+      <td class="ezker"><?php echo $gertakaria->getHasieraAurreikusia() ?></td>
+      <td class="ezker"><?php echo $gertakaria->getAmaieraAurreikusia() ?></td>
       <td class="azkena">&nbsp;</td>
     </tr>
     <tr>
@@ -188,8 +187,8 @@ onclick="return confirm('<?php echo __('Gertakaria baztertu nahi duzu?')?>');"
 </thead>
    <tr><th class="ezker"><?php echo __('Data')?></th><th class="ezker"><?php echo __('Nork')?></th><th class="ezker"><?php echo __('Ekintza')?></th><th class="ezker"><?php echo __('Iruzkina')?></th></tr>
    <?php foreach ($gertakaria->getIruzkinak() as $i => $iruzkina): ?>
-   <tr><td class="iruzk_zerrenda" width=15% NOWRAP>
-	<?php echo $iruzkina->getCreated_at();?>
+   <tr><td class="iruzk_zerrenda" width=10% NOWRAP>
+	<?php echo date("Y-m-d", strtotime($iruzkina->getCreated_at()));?>
    </td><td class="iruzk_zerrenda" width=10%>
 	<?php echo $iruzkina->getLangilea()->getFirstName();?>
    </td><td NOWRAP class="iruzk_zerrenda" width=10%>

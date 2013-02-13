@@ -9,16 +9,14 @@ homepage:
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
-  url:   /:module/:sf_culture/
+  url:   /:module/
   param: { action: index }
-  requirements:
-    sf_culture: (?:eu|es)
 
 default:
-  url:   /:module/:sf_culture/:action/*
+  url:   /:module/:action/*
 
 langilea:
-  url:  /nere_datuak/:sf_culture
+  url:  /nere_datuak
   param: { module: langilea, action: edit }
 
 gertakari_bilaketa:

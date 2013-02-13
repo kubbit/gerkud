@@ -8,16 +8,16 @@ INSERT INTO `egoera` (`id`, `kolorea`) VALUES
   (7, '#A54200');
 
 INSERT INTO `egoera_translation` (`id`, `izena`, `lang`) VALUES
-  (2, 'Aceptado y asignado', 'es'),
+  (2, 'Asignada', 'es'),
   (6, 'Baztertua', 'eu'),
-  (6, 'Descartado', 'es'),
+  (6, 'Descartada', 'es'),
   (5, 'Eginda', 'eu'),
   (7, 'En espera', 'es'),
   (4, 'En proceso', 'es'),
-  (5, 'Hecho', 'es'),
+  (5, 'Terminada', 'es'),
   (1, 'Onartu gabe', 'eu'),
-  (2, 'Onartua eta esleitua', 'eu'),
-  (3, 'Planificado', 'es'),
+  (2, 'Esleitua', 'eu'),
+  (3, 'Planificada', 'es'),
   (3, 'Planifikatua', 'eu'),
   (4, 'Prozesuan', 'eu'),
   (1, 'Sin aceptar', 'es'),

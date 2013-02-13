@@ -7,7 +7,6 @@ Gertakaria:
     mota_id: { type: integer, notnull: true }
     azpimota_id:  { type: integer, notnull: true }
     abisuaNork: { type: string(512) }
-    harremanetarako: { type: string(1024) }
     egoera_id: { type: integer, notnull: true, default: 1 }
     saila_id: { type: integer, notnull: false }
     langilea_id: { type: integer, notnull: false }
@@ -16,8 +15,8 @@ Gertakaria:
     kale_zbkia: { type: string(50) }
     deskribapena: { type: string(4000), notnull: false }
     ixte_data: { type: datetime, notnull: false }
-    hasiera_adieraz: { type: date, notnull: false }
-    amaiera_adieraz: { type: date, notnull: false }
+    hasiera_aurreikusia: { type: date, notnull: false }
+    amaiera_aurreikusia: { type: date, notnull: false }
     lehentasuna_id: { type: integer, notnull: true, default: 1 }
     jatorrizkoSaila_id: { type: integer, notnull: false }
     eraikina_id: { type: integer, notnull: false }

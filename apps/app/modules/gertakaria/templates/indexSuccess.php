@@ -31,7 +31,7 @@
   <tr><td valign=top class="eskuin" width=24%><?php echo __('Jatorrizko Saila')?>:</td><td class="ezker"><?php echo $filter['jatorrizkoSaila_id']->render(); ?></td></tr>
 	<?php $filter->setDefault ('mapa',0); ?>
 <!--
-  <tr><td valign=top class="eskuin" width=24%>Erakutsi emaitzak planoan </td><td class="ezker"><?php //echo $filter['mapa']->render(); 
+  <tr><td valign=top class="eskuin" width=24%>Erakutsi emaitzak planoan </td><td class="ezker"><?php //echo $filter['mapa']->render();
 ?></td></tr>
 -->
 
@@ -69,7 +69,7 @@
     <?php foreach ($eskaerak as $eskaera): ?>
     <tr <?php echo 'id="lehen1"';?> >
       <td><a href="<?php echo url_for('gertakaria/show?id='.$eskaera->getId()) ?>"><?php echo $eskaera->getId() ?></a></td>
-      <td><a href="<?php echo url_for('gertakaria/show?id='.$eskaera->getId()) ?>"><?php echo $eskaera->getCreatedAt() ?></a></td>
+      <td><a href="<?php echo url_for('gertakaria/show?id='.$eskaera->getId()) ?>"><?php echo date("Y-m-d", strtotime($eskaera->getCreatedAt())) ?></a></td>
       <td><a href="<?php echo url_for('gertakaria/show?id='.$eskaera->getId()) ?>"><?php echo $eskaera->getMota() ?></a></td>
       <td class="ezker"><a href="<?php echo url_for('gertakaria/show?id='.$eskaera->getId()) ?>"><?php echo $eskaera->getLaburpena() ?></a></td>
 <?php $kol=$eskaera->getEgoeraKolorea(); ?>
@@ -107,14 +107,14 @@
     <?php foreach ($pager->getResults() as $gertakaria): ?>
     <tr <?php echo 'id="lehen'.$gertakaria->getLehentasunaId().'"';?> >
       <td><a href="<?php echo url_for('gertakaria/show?id='.$gertakaria->getId()) ?>"><?php echo $gertakaria->getId() ?></a></td>
-      <td><a href="<?php echo url_for('gertakaria/show?id='.$gertakaria->getId()) ?>"><?php echo $gertakaria->getCreatedAt() ?></a></td>
+      <td><a href="<?php echo url_for('gertakaria/show?id='.$gertakaria->getId()) ?>"><?php echo date("Y-m-d", strtotime($gertakaria->getCreatedAt())) ?></a></td>
       <td><a href="<?php echo url_for('gertakaria/show?id='.$gertakaria->getId()) ?>"><?php echo $gertakaria->getMota() ?></a></td>
       <td class="ezker"><a href="<?php echo url_for('gertakaria/show?id='.$gertakaria->getId()) ?>"><?php echo $gertakaria->getLaburpena() ?></a></td>
 <?php $kol=$gertakaria->getEgoeraKolorea(); ?>
       <td <?php echo "bgcolor='".$kol[0]->getKolorea()."'"; ?>><a href="<?php echo url_for('gertakaria/show?id='.$gertakaria->getId()) ?>">
 <?php echo $gertakaria->getEgoera() ?></a></td>
 <!--      <td><?php //if ($gertakaria->getLangileaId()) {echo $gertakaria->getLangilea();} ?></td> -->
-      <td><a href="<?php echo url_for('gertakaria/show?id='.$gertakaria->getId()) ?>"><?php echo $gertakaria->getUpdatedAt() ?></a></td>
+      <td><a href="<?php echo url_for('gertakaria/show?id='.$gertakaria->getId()) ?>"><?php echo date("Y-m-d", strtotime($gertakaria->getUpdatedAt())) ?></a></td>
 
     </tr>
     <?php endforeach; ?>

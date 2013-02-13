@@ -251,39 +251,26 @@ class gertakariaActions extends sfActions
 	    <tr>
 		<th style="background-color: #CCC;font-weight: bold;">' . __('Egoera') . ':</th>
                 <th style="background-color: #CCC;font-weight: bold;">' . __('Saila') . ':</th>
-                <th style="background-color: #CCC;font-weight: bold;">' . __('Abisua / Harremanetarako') . ':</th>
+                <th style="background-color: #CCC;font-weight: bold;">' . __('Abisua nork') . ':</th>
                 </tr><tr><td>'.$gertakaria->getEgoera().'</td><td>';
 
         if (($gertakaria->getEgoeraId()!=1)&&($gertakaria->getSailaId()))
         {
                 $html=$html.$gertakaria->getSaila();
         }
-/*
-        $html=$html.'</td><td class="azkena">
-                        '.$gertakaria->getAbisuaNork().'<br>
-                        '.$gertakaria->getHarremanetarako().'
-                      </td></tr>
-                <tr><th style="background-color: #CCC;font-weight: bold;" colspan="3">Helbidea:</th></tr><tr>
-                	<td colspan="3" class="azkena">'.$gertakaria->getKalea().
-                        ', '.$gertakaria->getKaleZbkia().' ('.$gertakaria->getBarrutia().')</td></tr>
-                <tr><th style="background-color: #CCC;font-weight: bold;" colspan="3">Deskribapena:</th></tr>
-		<tr><td colspan="3">'.$gertakaria->getDeskribapena().'</td></tr>
-		</table><br /><br />';
-*/
 
         $html=$html.'</td><td class="azkena">
-                        '.$gertakaria->getAbisuaNork().'<br>
-                        '.$gertakaria->getHarremanetarako().'
+                        '.$gertakaria->getAbisuaNork().'
                       </td></tr>';
 	$html=$html.'
 	    <tr>
-		<th style="background-color: #CCC;font-weight: bold;">' . __('Hasiera (adierazgarria)') . ':</th>
-                <th style="background-color: #CCC;font-weight: bold;">' . __('Amaiera (adierazgarria)') . ':</th>
+		<th style="background-color: #CCC;font-weight: bold;">' . __('Hasiera aurreikusia') . ':</th>
+                <th style="background-color: #CCC;font-weight: bold;">' . __('Amaiera aurreikusia') . ':</th>
 		<th style="background-color: #CCC;font-weight: bold;"></th>
             </tr>
 	    <tr>
-	        <td>'.$gertakaria->getHasieraAdieraz().'</td>
-		<td>'.$gertakaria->getAmaieraAdieraz().'</td>
+	        <td>'.$gertakaria->getHasieraAurreikusia().'</td>
+		<td>'.$gertakaria->getAmaieraAurreikusia().'</td>
 		<td>&nbsp;</td>
 	    </tr>';
         $html=$html.'<tr><th style="background-color: #CCC;font-weight: bold;" colspan="3">' . __('Helbidea') . ':</th></tr><tr>
@@ -295,6 +282,10 @@ class gertakariaActions extends sfActions
 	if ($gertakaria->getBarrutiaId())
 	{
         	$html=$html.' ('.$gertakaria->getBarrutia().')';
+	}
+	if ($gertakaria->getEraikinaId())
+	{
+		$html .= ' -- ' . $gertakaria->getEraikina() . ' --';
 	}
 	$desk = str_replace("\r\n", "<br>", $gertakaria->getDeskribapena());
 //	$html=$html.'</td></tr><tr><th style="background-color: #CCC;font-weight: bold;" colspan="3">Deskribapena:</th></tr>

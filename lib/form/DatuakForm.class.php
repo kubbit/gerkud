@@ -15,6 +15,8 @@ class DatuakForm extends sfForm
 
 	public function configure()
 	{
+		$culture = sfContext::getInstance()->getUser()->getCulture();
+
 		$this->setWidgets(array
 		(
 			'taula' => new sfWidgetFormSelect(array
@@ -23,11 +25,11 @@ class DatuakForm extends sfForm
 			)),
 			'hasiera' => new sfWidgetFormI18nDate(array
 			(
-				'culture' => sfContext::getInstance()->getUser()->getCulture()
+				'culture' => $culture
 			)),
 			'amaiera' => new sfWidgetFormI18nDate(array
 			(
-				'culture' => sfContext::getInstance()->getUser()->getCulture()
+				'culture' => $culture
 			)),
 			'tartea' => new sfWidgetFormSelect(array
 			(
@@ -38,7 +40,9 @@ class DatuakForm extends sfForm
 			(
 				'model' => 'Saila',
 				'add_empty' => '--',
-				'query'     => Doctrine::getTable('Saila')->createQuery('s')->leftJoin('s.Translation st')->orderBy('st.name ASC')
+				'query' => Doctrine::getTable('Saila')->createQuery('s')
+					->leftJoin('s.Translation t WITH t.lang = ?', $culture)
+					->orderBy('t.name ASC')
 			))
 		));
 

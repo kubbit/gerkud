@@ -3,9 +3,9 @@ SELECT
   id,
   created_at,
   (SELECT created_at FROM iruzkina i WHERE g.id = i.gertakaria_id AND ekintza_id = 2 ORDER BY created_at LIMIT 1) AS esleitua,
-  hasiera_adieraz,
+  hasiera_aurreikusia,
   ixte_data,
-  amaiera_adieraz,
+  amaiera_aurreikusia,
   saila_id,
   egoera_id
  FROM gertakaria g;
@@ -239,10 +239,10 @@ BEGIN
 			  END AS egunak,
 			  sum(if(datediff(ixte_data, esleitua) BETWEEN r.minimoa AND r.maximoa, 1, 0)) AS 'iraupenekoa',
 			  100 * sum(if(datediff(ixte_data, esleitua) BETWEEN r.minimoa AND r.maximoa, 1, 0)) / count(datediff(ixte_data, esleitua)) AS 'iraupenekoa (%)',
-			  sum(if(datediff(hasiera_adieraz, esleitua) BETWEEN r.minimoa AND r.maximoa, 1, 0)) AS 'hasierakoa',
-			  100 * sum(if(datediff(hasiera_adieraz, esleitua) BETWEEN r.minimoa AND r.maximoa, 1, 0)) / count(datediff(hasiera_adieraz, esleitua)) AS 'hasierakoa (%)',
-			  sum(if(datediff(amaiera_adieraz, ixte_data) BETWEEN r.minimoa AND r.maximoa, 1, 0)) AS 'ebazterakoa',
-			  100 * sum(if(datediff(amaiera_adieraz, ixte_data) BETWEEN r.minimoa AND r.maximoa, 1, 0)) / count(datediff(amaiera_adieraz, ixte_data)) AS 'ebazterakoa (%)'
+			  sum(if(datediff(hasiera_aurreikusia, esleitua) BETWEEN r.minimoa AND r.maximoa, 1, 0)) AS 'hasierakoa',
+			  100 * sum(if(datediff(hasiera_aurreikusia, esleitua) BETWEEN r.minimoa AND r.maximoa, 1, 0)) / count(datediff(hasiera_aurreikusia, esleitua)) AS 'hasierakoa (%)',
+			  sum(if(datediff(amaiera_aurreikusia, ixte_data) BETWEEN r.minimoa AND r.maximoa, 1, 0)) AS 'ebazterakoa',
+			  100 * sum(if(datediff(amaiera_aurreikusia, ixte_data) BETWEEN r.minimoa AND r.maximoa, 1, 0)) / count(datediff(amaiera_aurreikusia, ixte_data)) AS 'ebazterakoa (%)'
 			 FROM denborak t,
 			  egun_tarteak r
 			 WHERE egoera_id = 5
@@ -255,10 +255,10 @@ BEGIN
 			  NULL,
 			  sum(if(datediff(ixte_data, esleitua) BETWEEN -99999 AND 99999, 1, 0)),
 			  100 * sum(if(datediff(ixte_data, esleitua) BETWEEN -99999 AND 99999, 1, 0)) / count(datediff(ixte_data, esleitua)),
-			  sum(if(datediff(hasiera_adieraz, esleitua) BETWEEN -99999 AND 99999, 1, 0)),
-			  100 * sum(if(datediff(hasiera_adieraz, esleitua) BETWEEN -99999 AND 99999, 1, 0)) / count(datediff(hasiera_adieraz, esleitua)),
-			  sum(if(datediff(amaiera_adieraz, ixte_data) BETWEEN -99999 AND 99999, 1, 0)),
-			  100 * sum(if(datediff(amaiera_adieraz, ixte_data) BETWEEN -99999 AND 99999, 1, 0)) / count(datediff(amaiera_adieraz, ixte_data))
+			  sum(if(datediff(hasiera_aurreikusia, esleitua) BETWEEN -99999 AND 99999, 1, 0)),
+			  100 * sum(if(datediff(hasiera_aurreikusia, esleitua) BETWEEN -99999 AND 99999, 1, 0)) / count(datediff(hasiera_aurreikusia, esleitua)),
+			  sum(if(datediff(amaiera_aurreikusia, ixte_data) BETWEEN -99999 AND 99999, 1, 0)),
+			  100 * sum(if(datediff(amaiera_aurreikusia, ixte_data) BETWEEN -99999 AND 99999, 1, 0)) / count(datediff(amaiera_aurreikusia, ixte_data))
 			 FROM denborak t
 			 WHERE egoera_id = 5
 			  AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila);

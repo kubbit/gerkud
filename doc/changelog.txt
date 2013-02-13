@@ -1,4 +1,15 @@
 ================================================================================
+  Version 1.4
+  2012-11-20  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Nuevo módulo para sacar listados de incidencias en formato PDF
+* Posibilidad de cambiar idioma de forma manual
+* Cambio de nombre de columnas de inicio y fin previsto
+* Correcciones generales
+* Traducciones que faltaban
+* Quitadas las horas de las fechas mostradas en las listas
+
+================================================================================
   Version 1.2
   2012-11-20  Kubbit Information Technology (http://kubbit.com)
 ================================================================================

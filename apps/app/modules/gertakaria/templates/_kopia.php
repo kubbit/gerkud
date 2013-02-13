@@ -18,13 +18,13 @@
       </tr>
     </tfoot>
     <thead>
-     <tr><th colspan="6" valign=top class="ezker">Gertakari berria<br><br></th></tr>
+     <tr><th colspan="6" valign=top class="ezker"><?php echo __('Gertakari berria')?><br><br></th></tr>
 
      <?php $form->setDefault ('laburpena', $formZ->getObject()->getLaburpena()); ?>
      <?php $form->setDefault ('klasea_id', $formZ->getObject()->getKlaseaId()); ?>
      <?php $form->setDefault ('mota_id', $formZ->getObject()->getMotaId()); ?>
      <?php $form->setDefault ('azpimota_id', $formZ->getObject()->getAzpimotaId()); ?>
-     <?php $form->setDefault ('barrutia_id', $formZ->getObject()->getBarrutiaId()); ?>     
+     <?php $form->setDefault ('barrutia_id', $formZ->getObject()->getBarrutiaId()); ?>
      <?php $form->setDefault ('kalea_id', $formZ->getObject()->getKaleaId()); ?>
      <?php $form->setDefault ('kale_zbkia', $formZ->getObject()->getKaleZbkia()); ?>
      <?php $form->setDefault ('deskribapena', $formZ->getObject()->getDeskribapena()); ?>
@@ -36,44 +36,41 @@
     <tbody>
       <?php //echo $form ?>
       <tr>
-	<th class="eskuin" valign=top>Laburpena:*</th>
+	<th class="eskuin" valign=top><?php echo __('Laburpena')?>:*</th>
 <!--	<td colspan="5"><?php //echo $form['laburpena']->render(array('size'=>58)); ?></td></tr>-->
         <td colspan="5"><?php echo $form['laburpena']->render(array('cols'=>50,'rows'=>1)); ?></td></tr>
 
-      <tr><th class="eskuin">Klasea:</th>
+      <tr><th class="eskuin"><?php echo __('Klasea')?>:</th>
           <td colspan="5"><?php echo $form['klasea_id']->render();?></td>
       </tr><tr>
-        <th class=eskuin>Mota:* </th><th class="ezker"> <?php echo $form['mota_id']->render();?></th>
-	<th class=eskuin>Azpimota:*</th><th class="ezker"><?php echo $form['azpimota_id']->render(); ?></th>
+        <th class=eskuin><?php echo __('Mota')?>:* </th><th class="ezker"> <?php echo $form['mota_id']->render();?></th>
+	<th class=eskuin><?php echo __('Azpimota')?>:*</th><th class="ezker"><?php echo $form['azpimota_id']->render(); ?></th>
       </tr>
-      <tr><th class="eskuin">Helbidea:</th>
+      <tr><th class="eskuin"><?php echo __('Helbidea')?>:</th>
           <td colspan=5><?php echo $form['barrutia_id']->render();echo $form['kalea_id']->render()."".$form['kale_zbkia']->render(array('size'=>3))?></th>
       </tr><tr>
-          <th class="eskuin" nowrap>Eraikina:</th>
+          <th class="eskuin" nowrap><?php echo __('Eraikina')?>:</th>
           <td colspan="5"><?php echo $form['eraikina_id']->render();?></td>
       </tr><tr>
-          <th class="eskuin" nowrap>Jatorrizko Saila:</th>
+          <th class="eskuin" nowrap><?php echo __('Jatorrizko Saila')?>:</th>
 	  <th class="ezker" colspan=5><?php echo $form['jatorrizkoSaila_id']->render();?></th>
       </tr>
       <tr>
-        <th class="eskuin">Lehentasuna:</th>
+        <th class="eskuin"><?php echo __('Lehentasuna')?>:</th>
         <td class="ezker" colspan=5><?php echo $form['lehentasuna_id']->render(); ?></td>
       </tr><tr>
-        <th class="eskuin" valign=top>Nork eman du abisua:</th>
+        <th class="eskuin" valign=top><?php echo __('Nork eman du abisua')?>:</th>
 	<th class="ezker" colspan=5><?php echo $form['abisuaNork']->render(array('cols'=>32,'rows'=>1)); ?></td>
-      </tr><tr>
-        <th class="eskuin" valign=top>Harremanetarako:</th>
-	<th class="ezker" colspan="5"><?php echo $form['harremanetarako']->render(array('cols'=>32,'rows'=>1)); ?></th>
       </tr>
 
       <tr>
-        <th class="eskuin" valign="top">Deskribapena:*</th>
+        <th class="eskuin" valign="top"><?php echo __('Deskribapena')?>:*</th>
         <td class="ezker" colspan=5><?php echo $form['deskribapena']->render(array('cols'=>50,'rows'=>4)); ?></td>
       </tr>
       <tr>
         <th class=panela colspan="6">
-            <a class="boton" href="<?php echo url_for('gertakaria/index') ?>">Ezeztatu</a>
-            <input type="submit" value="Sortu" />
+            <a class="boton" href="<?php echo url_for('gertakaria/index') ?>"><?php echo __('Ezeztatu')?></a>
+            <input type="submit" value="<?php echo __('Sortu')?>" />
         </th>
      </tr>
      <tr><th colspan=5>
