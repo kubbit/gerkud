@@ -1,3 +1,6 @@
+SET foreign_key_checks = 0;
+
+TRUNCATE TABLE eraikina;
 INSERT INTO `eraikina` (`id`, `izena`, `barrutia_id`, `longitudea`, `latitudea`) VALUES
   (1, 'Casa Consistorial', 5, -1.898714, 43.312602),
   (2, 'Casa Kapitanenea', 5, -1.898644, 43.312903),
@@ -16,3 +19,5 @@ INSERT INTO `eraikina` (`id`, `izena`, `barrutia_id`, `longitudea`, `latitudea`)
   (15, 'Servicio Médico', 5, -1.901841, 43.312345),
   (16, 'Torrekua', 5, -1.898097, 43.311818),
   (17, 'Servicios Sociales', 5, -1.896466, 43.31172);
+
+SET foreign_key_checks = 1;

@@ -12,13 +12,22 @@ class IruzkinaForm extends BaseIruzkinaForm
 {
   public function configure()
   {
-	$this->widgetSchema['saila_id'] = new sfWidgetFormDoctrineChoice(array('model' => 'Saila', 'add_empty' => false));
+	$culture = sfContext::getInstance()->getUser()->getCulture();
+
+	$this->widgetSchema['saila_id'] = new sfWidgetFormDoctrineChoice(array(
+		'model' => 'Saila',
+		'add_empty' => false,
+		'query'     => Doctrine::getTable('Saila')->createQuery('s')
+		                                         ->select('s.id, t.name')
+		                                         ->leftJoin('s.Translation t WITH t.lang = ?', $culture)
+		                                         ->orderBy('t.name ASC')
+	));
 
         $this->validatorSchema['saila_id'] = new sfValidatorString(array(
             'required'   => false
         ));
 
-        $this->widgetSchema['testua']= new sfWidgetFormTextarea();     
+        $this->widgetSchema['testua']= new sfWidgetFormTextarea();
 
 	unset(
               $this['created_at'], $this['updated_at']
@@ -35,9 +44,9 @@ class IruzkinaForm extends BaseIruzkinaForm
   {
 //haz lo que sea con $value
 //	$this['testua']=$value;
-//      $this->getWidget('testua')->setAttribute('value', $balioa); 
+//      $this->getWidget('testua')->setAttribute('value', $balioa);
       return $value;
-  } 
+  }
 
 
 }

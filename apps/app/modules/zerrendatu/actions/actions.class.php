@@ -33,7 +33,7 @@ class zerrendatuActions extends sfActions
 		$pdf->SetFont('FreeSerif', '', 8);
 		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 		$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__('GERTAKARI ZERRENDATUA')));
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
 		$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
@@ -48,14 +48,16 @@ class zerrendatuActions extends sfActions
 		$html = '<html><head></head><body>';
 
 		$sql = 'SELECT s.name AS saila, m.izena AS mota, g.id AS kodea, e.izena AS egoera, laburpena,'
-		 . ' b.izena AS barrutia, k.izena AS kalea, u.username AS erabiltzailea, abisuanork, date(g.created_at) AS irekiera_data, date(ixte_data) AS ixte_data'
+		 . ' b.izena AS barrutia, er.izena AS eraikina, k.izena AS kalea, g.kale_zbkia AS zenbakia,'
+		 . ' u.username AS erabiltzailea, abisuanork, date(g.created_at) AS irekiera_data, date(ixte_data) AS ixte_data'
 		 . ' FROM gertakaria g'
 		 . '  LEFT JOIN sf_guard_user u ON u.id = g.langilea_id'
 		 . '  LEFT JOIN sf_guard_group_translation s ON s.id = g.saila_id AND s.lang = :hizkuntza'
 		 . '  LEFT JOIN mota_translation m ON m.id = g.mota_id AND m.lang = :hizkuntza'
 		 . '  LEFT JOIN egoera_translation e ON e.id = g.egoera_id AND e.lang = :hizkuntza'
 		 . '  LEFT JOIN barrutia b ON b.id = g.barrutia_id'
-		 . '  LEFT JOIN kalea k ON k.id = g.kalea_id';
+		 . '  LEFT JOIN kalea k ON k.id = g.kalea_id'
+		 . '  LEFT JOIN eraikina er ON er.id = g.eraikina_id';
 
 		$parametroak = array
 		(
@@ -124,24 +126,12 @@ class zerrendatuActions extends sfActions
 			$strEraikina = Doctrine::getTable('Eraikina')->find(array($this->formularioa['eraikina']))->getIzena();
 		}
 		$strEgoera = '';
-		if ($this->formularioa['egoera'] >= 0)
+		if ($this->formularioa['egoera'])
 		{
-			switch ($this->formularioa['egoera'])
-			{
-				case 1:
-					array_push($condiciones, 'g.egoera_id = 1');
-					break;
-				case 2:
-					array_push($condiciones, '(g.egoera_id = 2 OR g.egoera_id = 3 OR g.egoera_id = 4 OR g.egoera_id = 7)');
-					break;
-				case 3:
-					array_push($condiciones, '(g.egoera_id = 5 OR g.egoera_id = 6)');
-					break;
-				case 4:
-					array_push($condiciones, 'g.egoera_id = 6');
-					break;
-			}
-			$strEgoera = ZerrendatuaForm::$egoera[$this->formularioa['egoera']];
+			array_push($condiciones, 'g.egoera_id = :egoera');
+			$parametroak[':egoera'] = $this->formularioa['egoera'];
+
+			$strEgoera = Doctrine::getTable('Egoera')->find(array($this->formularioa['egoera']))->getIzena();
 		}
 
 		$htmlIragazkiak = '<table>';
@@ -265,7 +255,7 @@ class zerrendatuActions extends sfActions
 				 . '<td width="50">' . __('Egoera') . '</td>'
 				 . '<td width="250">' . __('Laburpena') . '</td>'
 				 . '<td width="50">' . __('Auzoa') . '</td>'
-				 . '<td width="150">' . __('Kalea') . '</td>'
+				 . '<td width="150">' . __('Kalea') . ' / ' . __('Eraikina') . '</td>'
 				 . '<td width="80">' . __('Eskatzailea') . '</td>'
 				 . '<td width="50">' . __('Erabiltzailea') . '</td>'
 				 . '<td width="50">' . __('Irekiera data') . '</td>'
@@ -278,7 +268,10 @@ class zerrendatuActions extends sfActions
 			$html .= sprintf('<td width="50">%s</td>', $datuak['egoera']);
 			$html .= sprintf('<td width="250">%s</td>', $datuak['laburpena']);
 			$html .= sprintf('<td width="50">%s</td>', $datuak['barrutia']);
-			$html .= sprintf('<td width="150">%s</td>', $datuak['kalea']);
+			if ($datuak['eraikina'] != null)
+				$html .= sprintf('<td width="150">%s</td>', $datuak['eraikina']);
+			else
+				$html .= sprintf('<td width="150">%s, %s</td>', $datuak['kalea'], $datuak['zenbakia']);
 			$html .= sprintf('<td width="80">%s</td>', $datuak['abisuanork']);
 			$html .= sprintf('<td width="50">%s</td>', $datuak['erabiltzailea']);
 

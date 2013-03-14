@@ -2,6 +2,10 @@
 # http://www.symfony-project.org/reference/1_4/en/05-Factories
 
 prod:
+  user:
+    class: myUser
+    param:
+      timeout: 3600
   logger:
     class:   sfNoLogger
     param:
@@ -40,6 +44,10 @@ test:
       delivery_strategy: realtime
 
 dev:
+  user:
+    class: myUser
+    param:
+      timeout: 3600
 #  mailer:
 #    param:
 #      delivery_strategy: realtime

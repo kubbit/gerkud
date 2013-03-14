@@ -11,7 +11,6 @@
 class ZerrendatuaForm extends sfForm
 {
 	protected static $sailkapena = array(-1 => '--', 1 => 'Saila', 2 => 'Auzoa', 3 => 'Mota');
-	public static $egoera = array(-1 => '--', 1 => 'Onartu gabe', 2 => 'Egin gabe', 3 => 'Itxita', 4 => 'Baztertuta');
 
 	public function configure()
 	{
@@ -76,9 +75,13 @@ class ZerrendatuaForm extends sfForm
 				'query' => Doctrine::getTable('Eraikina')->createQuery('e')
 					->orderBy('e.izena ASC')
 			)),
-			'egoera' => new sfWidgetFormSelect(array
+			'egoera' => new sfWidgetFormDoctrineChoice(array
 			(
-				'choices' => self::$egoera
+				'model' => 'Egoera',
+				'add_empty' => '--',
+				'query' => Doctrine::getTable('Egoera')->createQuery('e')
+					->leftJoin('e.Translation t WITH t.lang = ?', $culture)
+					->orderBy('e.id ASC')
 			)),
 		));
 

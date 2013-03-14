@@ -1,3 +1,6 @@
+SET foreign_key_checks = 0;
+
+TRUNCATE TABLE kalea;
 INSERT INTO `kalea` (`id`, `barrutia_id`, `izena`, `google`) VALUES
   (1101, 5, 'Goiko Kalea / C. Arriba', 'Calle de Arriba'),
   (1103, 5, 'Herriko Plaza', 'Calle de la Magdalena, 1'),
@@ -146,3 +149,5 @@ INSERT INTO `kalea` (`id`, `barrutia_id`, `izena`, `google`) VALUES
   (71701, 7, 'Galtzaraborda Etorbidea (1 - 61)', 'Galtzaraborda Etorbidea'),
   (91208, 9, 'Nafarroa Hiribidea (26,28,30,32)', 'Nafarroa Etorbidea'),
   (101208, 10, 'Nafarroa Hiribidea (s/n, 14)', 'Nafarroa Etorbidea');
+
+SET foreign_key_checks = 1;

@@ -39,10 +39,12 @@ class GertakariaForm extends BaseGertakariaForm
         $this->widgetSchema['laburpena'] = new sfWidgetFormTextarea(array(
                 ));
 
+	    $this->validatorSchema['laburpena'] = new sfValidatorString(array('required' => true));
+
         $this->widgetSchema['deskribapena'] = new sfWidgetFormTextarea(array(
                 ));
 
-	$this->validatorSchema['deskribapena'] = new sfValidatorString(array('required' => true));
+	$this->validatorSchema['deskribapena'] = new sfValidatorString(array('required' => false));
 
         $this->widgetSchema['azpimota_id'] = new sfWidgetFormDoctrineDependentSelect(array(
                     'model'     => 'Azpimota',
@@ -127,8 +129,15 @@ class GertakariaForm extends BaseGertakariaForm
                 'label' => 'Ixte data',
         ));
      }
+
+	$this->widgetSchema['created_at'] = new sfWidgetFormI18nDateTime(array
+	(
+		'culture' => $culture
+	));
+	$this->setDefault('created_at', time());
+
         unset(
-              $this['created_at'], $this['updated_at']
+              $this['updated_at']
         );
 
 	$this->validatorSchema->setPostValidator
@@ -136,6 +145,15 @@ class GertakariaForm extends BaseGertakariaForm
 		new sfValidatorCallback(array('callback' => array($this, 'postValidate')))
 	);
   }
+
+protected function doUpdateObject($values)
+{
+	parent::doUpdateObject($values);
+
+	// establecer el resumen como descripcion si no ha sido rellenado
+	if (!isset($values['deskribapena']) || $values['deskribapena'] == '')
+		$this->getObject()->setDeskribapena($values['laburpena']);
+}
 
 public function postValidate($validator, $values)
 {

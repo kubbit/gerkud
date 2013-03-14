@@ -1,3 +1,6 @@
+SET foreign_key_checks = 0;
+
+TRUNCATE TABLE barrutia;
 INSERT INTO `barrutia` (`id`, `izena`) VALUES
   (1, 'Agustinak'),
   (2, 'Alaberga'),
@@ -12,3 +15,5 @@ INSERT INTO `barrutia` (`id`, `izena`) VALUES
   (10, 'Olibet - casas nuevas'),
   (12, 'Otros'),
   (11, 'Pontika');
+
+SET foreign_key_checks = 1;

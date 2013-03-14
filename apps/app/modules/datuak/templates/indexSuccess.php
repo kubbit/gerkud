@@ -1,84 +1,43 @@
 <div>
-	<script type="text/javascript"><!--
-onload = function()
-{
-	IzkutatuFiltroak();
-}
-$(document).ready(function()
-{
-	$("#taula").tablesorter({sortList: [[0,0]],
-	textExtraction: function(node)
-	{
-		if (node.hasAttribute('title'))
-			return node.getAttribute('title');
-		else
-			return node.innerHTML;
-	}});
-}
-);
-function IzkutatuFiltroak()
-{
-	var taula = document.getElementById("datuak_taula");
-	var tartea = document.getElementById("tartea");
-	var saila = document.getElementById("saila");
-
-	switch (Number(taula.value))
-	{
-		case 1:
-			saila.style.display = '';
-			tartea.style.display = '';
-			break;
-		case 2:
-			saila.style.display = 'none';
-			tartea.style.display = 'none';
-			break;
-		case 3:
-			saila.style.display = '';
-			tartea.style.display = 'none';
-			break;
-	}
-}
-	--></script>
 	<form action="<?php echo url_for('datuak/index'); ?>" method="post" class="bilaketa_form hilarak">
 		<div id="taula_mota">
-			<label for="datuak[taula]"><?php echo __('Taula mota'); ?></label>
+			<label for="datuak_taula"><?php echo __('Taula mota'); ?></label>
 			<?php echo $datuakForm['taula']->render(array('onchange' => 'IzkutatuFiltroak()')); ?>
 		</div>
 		<div id="hasiera">
-			<label for="datuak[hasiera]"><?php echo __('Hasiera'); ?></label>
+			<label for="datuak_hasiera_year"><?php echo __('Hasiera'); ?></label>
 			<?php echo $datuakForm['hasiera']->render(); ?>
 		</div>
 		<div id="amaiera">
-			<label for="datuak[amaiera]"><?php echo __('Amaiera'); ?></label>
+			<label for="datuak_amaiera_year"><?php echo __('Amaiera'); ?></label>
 			<?php echo $datuakForm['amaiera']->render(); ?>
 		</div>
 		<div id="tartea">
-			<label id="lb_datuak_tartea" for="datuak[Tartea]"><?php echo __('Tartea'); ?></label>
+			<label id="lb_datuak_tartea" for="datuak_tartea"><?php echo __('Tartea'); ?></label>
 			<?php echo $datuakForm['tartea']->render(); ?>
 		</div>
 		<div id="saila">
-			<label id="lb_datuak_saila" for="datuak[saila]"><?php echo __('Saila'); ?></label>
+			<label id="lb_datuak_saila" for="datuak_saila"><?php echo __('Saila'); ?></label>
 			<?php echo $datuakForm['saila']->render(); ?>
 		</div>
 		<div id="onartu">
-			<label for="datuak[onartu]"></label>
-			<input id="datuak[onartu]" type="submit" value="<?php echo __('Onartu')?>" />
+			<label for="datuak_onartu"></label>
+			<input id="datuak_onartu" type="submit" value="<?php echo __('Onartu')?>" />
 		</div>
 	</form>
 <?php if ($taula != null): ?>
-	<div class="taula">
-		<p><?php echo $titulua ?></p>
-		<table id="taula" class="tablesorter">
-			<thead>
-				<tr>
+	<table id="taula" class="taula tablesorter">
+		<caption><?php echo $titulua ?></caption>
+		<thead>
+			<tr>
 	<?php for ($i = 0; $i < count($goiburuak); $i++): ?>
-					<th title="<?php echo $argibideak[$i] ?>"><?php echo $goiburuak[$i] ?></th>
+				<th title="<?php echo $argibideak[$i] ?>"><?php echo $goiburuak[$i] ?></th>
 	<?php endfor; ?>
-				</tr>
-			</thead>
-			<tbody>
+			</tr>
+		</thead>
+		<tbody>
 	<?php for ($i = 0; $i < count($datuak); $i++): ?>
-				<tr>
+			<tr>
 		<?php foreach ($datuak[$i] as $datu): ?>
 			<?php
 				if(is_numeric($datu))
@@ -87,24 +46,23 @@ function IzkutatuFiltroak()
 					echo "<td title='" . $i . "'>" . $datu . "</td>";
 			?>
 		<?php endforeach; ?>
-				</tr>
+			</tr>
 	<?php endfor; ?>
-			</tbody>
-			<tfoot>
-				<tr>
+		</tbody>
+		<tfoot>
+			<tr>
 	<?php foreach ($oina AS $oin): ?>
-					<td>
+				<td>
 		<?php
 			if(is_numeric($oin))
 				echo round($oin, 2);
 			else
 				echo $oin;
 		?>
-					</td>
+				</td>
 	<?php endforeach; ?>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
+			</tr>
+		</tfoot>
+	</table>
 <?php endif; ?>
 </div>

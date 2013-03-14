@@ -220,7 +220,7 @@ class gertakariaActions extends sfActions
         $pdf->SetFont("FreeSerif", "", 12);
         $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
         $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')),utf8_encode(__('Zerbitzu, Sare eta Mantentze-lanak')));
+        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')),utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
         $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 	$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 	$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
@@ -240,7 +240,7 @@ class gertakariaActions extends sfActions
 		<th style="background-color: #CCC;font-weight: bold;">' . __('Irekiera data') . '</th></tr>
 	    <tr><td>'.$gertakaria->getId().'</td>
 	       	<td>'.$gertakaria->getMota().'/'.$gertakaria->getAzpimota().'</td>
-	        <td>'.$gertakaria->getCreatedAt();
+	        <td>'.date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getCreatedAt()));
 
 	if (($gertakaria->getEgoeraId()==5)||($gertakaria->getEgoeraId()==6))
         {

@@ -1,6 +1,43 @@
 ================================================================================
+  Version 1.6
+  2013-03-13  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Añadidos datos del Ayuntamiento de Pasaia
+* Adecuación de la aplicación al estándar XHTML 1.0 Transicional, simplificación
+  del código fuente y el estilo de todas las páginas
+* Añadido número de calle en listas de incidencias y el edificio en los listados
+* Aumento del tiempo de expiración de sesión a 1 hora 
+* Posibilidad de modificación de la fecha de creación de incidencias
+* Visualización de errores al crear o editar incidencias
+* La descripción de incidencias ahora es opcional (se rellena automáticamente
+  con el resumen si está vacío)
+* Posibilidad de indicar formato de fechas en fichero de configuración
+* Añadido indicador de cambio de páginas también en la parte superior de la
+  lista de incidencias
+* Cambio de ordenación de las incidencias a fecha de creación descendiente
+* Mejorada la visualización de incidencias urgentes usando colores más fuertes e
+  indicadores en el margen izquierdo
+* Ocultación del panel de búsqueda (se puede mostrar pulsando en el nuevo icono
+  de búsqueda)
+
+================================================================================
+  Version 1.4.4
+  2013-02-21  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Añadidos nuevos campos en pantalla inicial de incidencias
+
+================================================================================
+  Version 1.4.2
+  2013-02-20  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Uso de estados de Gerkud para filtros en listados
+* Correcciones varias
+* Eliminadas las horas de todas las fechas
+* Eliminación de estados no usados 
+
+================================================================================
   Version 1.4
-  2012-11-20  Kubbit Information Technology (http://kubbit.com)
+  2013-02-13  Kubbit Information Technology (http://kubbit.com)
 ================================================================================
 * Nuevo módulo para sacar listados de incidencias en formato PDF
 * Posibilidad de cambiar idioma de forma manual

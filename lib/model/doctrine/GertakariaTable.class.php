@@ -38,7 +38,8 @@ class GertakariaTable extends Doctrine_Table
     {
 	$q = $this->createQuery('j')
         	->from('gertakaria g')
-		->where('g.egoera_id = ?', 1);
+		->where('g.egoera_id = ?', 1)
+		->orderBy('created_at DESC');
 	return $q;
     }
     public function getForLuceneQuery($query1)
@@ -85,7 +86,7 @@ class GertakariaTable extends Doctrine_Table
 	    if ($query1['kale_zbkia']['text']) $q->andWhere('j.kale_zbkia = ?', $query1['kale_zbkia']['text']);
             if ($query1['jatorrizkoSaila_id']) $q->andWhere('j.jatorrizkosaila_id = ?', $query1['jatorrizkoSaila_id']);
             if ($query1['eraikina_id']) $q->andWhere('j.eraikina_id = ?', $query1['eraikina_id']);
-            $q->orderBy('j.lehentasuna_id DESC, j.id DESC');
+            $q->orderBy('j.created_at DESC');
 	    return $q;
 
    	  } else
@@ -117,7 +118,7 @@ class GertakariaTable extends Doctrine_Table
 		else if (sfContext::getInstance()->getUser()->hasCredential('arrunta'))
 	            $q->andWhere('g.langilea_id = ?', $lang);
 
-	        $q->orderBy('g.lehentasuna_id DESC, g.id DESC');
+	        $q->orderBy('g.created_at DESC');
 		return $q;
 	}
    }

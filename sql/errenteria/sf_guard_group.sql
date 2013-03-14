@@ -1,3 +1,6 @@
+SET foreign_key_checks = 0;
+
+TRUNCATE TABLE sf_guard_group;
 INSERT INTO `sf_guard_group` (`id`, `description`, `created_at`, `updated_at`) VALUES
   (1, NULL, NULL, NULL),
   (2, NULL, NULL, NULL),
@@ -10,8 +13,14 @@ INSERT INTO `sf_guard_group` (`id`, `description`, `created_at`, `updated_at`) V
   (9, NULL, NULL, NULL),
   (10, NULL, NULL, NULL),
   (11, NULL, NULL, NULL),
-  (12, NULL, NULL, NULL);
+  (12, NULL, NULL, NULL),
+  (13, NULL, NULL, NULL),
+  (14, NULL, NULL, NULL),
+  (15, NULL, NULL, NULL),
+  (16, NULL, NULL, NULL),
+  (17, NULL, NULL, NULL);
 
+TRUNCATE TABLE sf_guard_group_translation;
 INSERT INTO `sf_guard_group_translation` (`id`, `name`, `lang`) VALUES
   (1, 'Electricidad', 'es'),
   (1, 'Elektrizitatea', 'eu'),
@@ -36,4 +45,16 @@ INSERT INTO `sf_guard_group_translation` (`id`, `name`, `lang`) VALUES
   (11, 'Gremios varios', 'es'),
   (11, 'Gremio anitz', 'eu'),
   (12, 'Asfaltado', 'es'),
-  (12, 'Asfaltatzea', 'eu');
+  (12, 'Asfaltatzea', 'eu'),
+  (13, 'Tráfico y transportes', 'es'),
+  (13, 'Trafikoa eta garraioak', 'eu'),
+  (14, 'Informática', 'es'),
+  (14, 'Informatika', 'eu'),
+  (15, 'PL Coordinación Urbanística', 'es'),
+  (15, 'U. Hiri Koordinazioa', 'eu'),
+  (16, 'Señalización', 'es'),
+  (16, 'Seinalizazioa', 'eu'),
+  (17, 'Otros', 'es'),
+  (17, 'Besteak', 'eu');
+
+SET foreign_key_checks = 1;
