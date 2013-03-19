@@ -1,8 +1,6 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/11-App
 
-# default values
-#all:
 prod:
   sf_guard_plugin:
     success_signout_url: /app.php/
@@ -12,14 +10,15 @@ dev:
 
 all:
   sf_guard_plugin:
-    check_password_callable:   [bhLDAPAuth, checkPassword]
+    check_password_callable: [bhLDAPAuth, checkPassword]
   google:
     maps_api_keys:
       default:
-  herria: " 20100 ERRENTERIA"
-  erakundea: "ERRENTERIAKO UDALA"
+    helbidea: 20100, ERRENTERIA
+  erakundea: ERRENTERIAKO UDALA
   pdf_goiburua: Gertakari Zerrendatua
   abisuak_nork: kubbit.gerkud@kubbit.com
   gertakariak_orriko: 30
   #proxy: 127.0.0.1:3128
   data_formatoa: Y-m-d
+  sortze_data_automatikoa: true

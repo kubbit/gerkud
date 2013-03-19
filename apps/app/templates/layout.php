@@ -11,7 +11,7 @@
 
 	<body>
 		<div id="goiburua">
-			<img class="logoa" src="/images/logo2.jpg" alt="Logotipo" />
+			<img class="logoa" src="/images/logoa.jpg" alt="Logotipo" />
 <?php if ($sf_user->isAuthenticated()): ?>
 			<div class="post">
 				<div class="erabiltzailea">

@@ -77,24 +77,28 @@ class GMapGeocodedAddress
   public function geocodeXml($gmap_client)
   {
     $raw_data = utf8_encode($gmap_client->getGeocodingInfo($this->getRawAddress(),'xml'));
-
+/*
     $p = xml_parser_create('UTF-8');
     xml_parse_into_struct($p, $raw_data, $vals, $index);
     xml_parser_free($p);
-
-    if ($vals[$index['CODE'][0]]['value'] != 200)
+*/
+    $xml = new SimpleXMLElement($raw_data);
+    if ($xml->xpath('/GeocodeResponse/status')[0] != 'OK')
+    //if ($vals[$index['STATUS'][0]] != 'OK')
     {
 
       return false;
     }
 
-    $coordinates = $vals[$index['COORDINATES'][0]]['value'];
-    list($this->lng, $this->lat) = explode(',', $coordinates);
-
+    //$coordinates = $vals[$index['COORDINATES'][0]]['value'];
+    //list($this->lng, $this->lat) = explode(',', $coordinates);
+    $this->lng = $xml->xpath('/GeocodeResponse/result/geometry/location/lng')[0];
+    $this->lat = $xml->xpath('/GeocodeResponse/result/geometry/location/lat')[0];
+/*
     $this->accuracy = $vals[$index['ADDRESSDETAILS'][0]]['attributes']['ACCURACY'];
 
     // We voluntarily silence errors, the values will still be set to NULL if the array indexes are not defined
-    @$this->geocoded_address = $vals[$index['ADDRESS'][0]]['value'];
+    @$this->geocoded_address = $xml->xpath('/GeocodeResponse/result/formatted_address')[0];
     @$this->geocoded_street = $vals[$index['THOROUGHFARENAME'][0]]['value'];
     @$this->geocoded_postal_code = $vals[$index['POSTALCODENUMBER'][0]]['value'];
     @$this->geocoded_country = $vals[$index['COUNTRYNAME'][0]]['value'];
@@ -109,7 +113,7 @@ class GMapGeocodedAddress
     {
       @$this->geocoded_city = $vals[$index['ADMINISTRATIVEAREANAME'][0]]['value'];
     }
-
+*/
     return $this->accuracy;
   }
 

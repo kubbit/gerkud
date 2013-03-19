@@ -130,11 +130,18 @@ class GertakariaForm extends BaseGertakariaForm
         ));
      }
 
-	$this->widgetSchema['created_at'] = new sfWidgetFormI18nDateTime(array
-	(
-		'culture' => $culture
-	));
-	$this->setDefault('created_at', time());
+	if (sfConfig::get('app_sortze_data_automatikoa'))
+	{
+		unset($this['created_at']);
+	}
+	else
+	{
+		$this->widgetSchema['created_at'] = new sfWidgetFormI18nDateTime(array
+		(
+			'culture' => $culture
+		));
+		$this->setDefault('created_at', time());
+	}
 
         unset(
               $this['updated_at']

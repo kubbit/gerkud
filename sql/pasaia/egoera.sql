@@ -27,7 +27,7 @@ INSERT INTO `egoera_translation` (`id`, `izena`, `lang`) VALUES
   (4, 'Prozesuan', 'eu'),
   (1, 'Sin aceptar', 'es'),
   (7, 'Zain', 'eu'),
-  (8, 'Sin recursos', 'ez')
+  (8, 'Sin recursos', 'ez'),
   (8, 'Baliabiderik ez', 'eu');
 
 SET foreign_key_checks = 1;

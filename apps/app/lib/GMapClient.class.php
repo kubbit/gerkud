@@ -13,7 +13,7 @@ class GMapClient
    * @var sfCache
    */
   protected $cache = null;
-  
+
   /**
    * API key
    *
@@ -28,7 +28,8 @@ class GMapClient
    */
   protected $api_keys = null;
 
-  const API_URL = 'http://maps.google.com/maps/geo?';
+  //const API_URL = 'http://maps.google.com/maps/geo?';
+  const API_URL = 'http://maps.googleapis.com/maps/api/geocode/%s?key=%s&address=%s&sensor=false';
   const JS_URL  = 'http://maps.google.com/maps/api/js?sensor=false';
 
   /**
@@ -193,7 +194,8 @@ class GMapClient
       }
     }
 
-    $apiURL = self::API_URL.'&output='.$format.'&key='.$this->getAPIKey().'&q='.urlencode($address);
+    //$apiURL = self::API_URL.'&output='.$format./*'&key='.$this->getAPIKey().*/'&q='.urlencode($address);
+    $apiURL = sprintf(self::API_URL, $format, $this->getAPIKey(), urlencode($address));
 
     if (sfConfig::get('app_proxy'))
     {

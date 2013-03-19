@@ -1,0 +1,44 @@
+o Requisitos
+	- Servidor Web (Apache, Nginx, ...)
+	- PHP 5 (extensiones mínimas requeridas: GD, MCRYPT, MYSQL, MYSQLI, OPENSSL, ZLIB, LDAP)
+	- Base de datos MySQL
+	- Servicio de directorio LDAP (OpenLDAP, ActiveDirectory, ...)
+	- Servidor de correo (para notificaciones)
+
+o Instalación
+	- Crear base de datos y un usuario que tenga todos los permisos sobre la misma (ejemplos/crear_base_datos_mysql.txt)
+	- Configurar nuevo host virtual en el servidor web (ejemplos/apache.virtualhost o ejemplos/nginx.virtualhost)
+	- Crear logotipos en web/images/<municipio>/
+		- logoa.jpg
+		- logoa_mail.jpg
+		- logoa_pdf.png
+	- Modificar logotipos del manual y reemplazar los documentos PDF en web/doc:
+		- doc/Eskuliburua_es.odt
+		- doc/Eskuliburua_eu.odt
+	- Duplicar desde la información de otro municipio los ficheros de sql/<municipio>/ y adecuar la información (o dejarlo como está y modificar más tarde en la propia base de datos)
+	- Modificar parámetros de instalazioa.sh y ejecutar el script (se creará la estructura de datos necesaria en la base de datos)
+
+o Configuración
+	- config/databases.yml
+		- Datos de conexión con la base de datos
+	- config/LDAPAuth.yml
+		- Datos de conexión con servicio de directorio (LDAP)
+	- gerkud/apps/app/config/app.yml
+		- helbidea: Dirección principal para Google Maps
+		- proxy: Dirección del servidor proxy si es necesario para acceder a Internet
+		- erakundea: Nombre de la organización que aparecerá como título en documentos PDF
+		- pda_goiburua: Cabecera que aparecerá junto a la organización en los documentos PDF (si se modifica se debe actualizar el fichero apps/app/i18n/es/messages.xml con la traducción)
+		- abisua_nork: Remitente de los correos electrónicos enviados en notificaciones
+		- gertakariak_orriko: Nº de incidencias por página que aparecerán en el listado principal
+		- data_formatoa: Formato con el que se mostrarán las fechas en los diferentes módulos de Gerkud
+	- gerkud/apps/app/config/pdf_configs.yml
+		- Autor y otras propiedades de los documentos PDF
+	- gerkud/apps/app/config/factories.yml
+		- mailer: Configuración del servidor de correo electrónico
+		- user:
+			- timeout: Tiempo máximo para caducidad de sesión
+
+o Acceso a la aplicación
+	Una vez instalada la aplicación, se podrá acceder a ella usando un navegador y escribiendo la siguiente dirección URL: http://gerkud/app.php.
+
+	La plataforma con la que ha sido desarrollada la aplicación (Symfony v1.4) permite el acceso en modo depuración a través de la siguiente dirección URL: http://gerkud/app_dev.php. Este modo de acceso mostrará cualquier error que se produzca durante el uso de la aplicación forma detallada.

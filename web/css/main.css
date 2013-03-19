@@ -130,7 +130,7 @@ a.boton, input[type='submit']
 	min-width: 7em;
 }
 
-.erroreak
+.errorea
 {
 	color: red;
 }
@@ -228,6 +228,7 @@ table.taula
 .taula th
 {
 	padding: 0.25em 1em;
+	text-align: left;
 }
 .taula td
 {
@@ -533,6 +534,7 @@ table.taula
 {
 	padding: 0.25em;
 	border-bottom: 1px solid #444;
+	text-align: left;
 }
 .gertakaria td
 {

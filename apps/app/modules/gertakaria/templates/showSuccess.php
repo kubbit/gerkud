@@ -108,6 +108,10 @@
 			<span><?php echo $gertakaria->getId() ?></span>
 		</div>
 		<div>
+			<div><?php echo __('Lehentasuna') ?>:</div>
+			<span><?php echo $gertakaria->getLehentasuna() ?></span>
+		</div>
+		<div>
 			<div><?php echo __('Mota/Azpimota') ?>:</div>
 			<span><?php echo sprintf('%s/%s', $gertakaria->getMota(), $gertakaria->getAzpimota()); ?>&nbsp;</span>
 		</div>
@@ -131,6 +135,10 @@
 			<?php echo $gertakaria->getSaila() ?>
 <?php endif; ?>
 			&nbsp;</span>
+		</div>
+		<div>
+			<div><?php echo __('Erabiltzailea') ?>:</div>
+			<span><?php echo $gertakaria->getLangilea() ?>&nbsp;</span>
 		</div>
 		<div>
 			<div><?php echo __('Abisua nork') ?>:</div>
@@ -270,7 +278,7 @@
 			</a>
 		</div>
 <?php
-	$herria = sfConfig::get('app_herria');
+	$herria = sfConfig::get('app_google_helbidea');
 
 	$gMap = new GMap();
 	$gMap->setZoom(15);
@@ -293,7 +301,7 @@
 	{
 		$kale = Doctrine::getTable('Kalea')->find($gertakaria->getKaleaId());
 
-		$helbidea = $kale->getGoogle() . ", " . $gertakaria->getKale_zbkia() . $herria;
+		$helbidea = sprintf('%s, %s %s', $kale->getGoogle(), $gertakaria->getKale_zbkia(), $herria);
 
 		$puntua = $gMap->geocodeXml($helbidea);
 		$gMapMarker = new GMapMarker($puntua->getLat(), $puntua->getLng());

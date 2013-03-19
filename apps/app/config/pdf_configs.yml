@@ -30,7 +30,7 @@ default:
   # header description string
   PDF_HEADER_STRING: "Galdutako objetuen jasotze agiria\nAlabran de recepcion de objeto perdido\n"
   # image logo
-  PDF_HEADER_LOGO: "logoa.png"
+  PDF_HEADER_LOGO: "../../../../../web/images/logoa_pdf.png"
   # header logo image width [mm]
   PDF_HEADER_LOGO_WIDTH: 18
   # document unit of measure [pt=point, mm=millimeter, cm=centimeter, in=inch]

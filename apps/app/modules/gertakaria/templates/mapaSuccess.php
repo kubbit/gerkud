@@ -4,7 +4,7 @@
 <div id="geolokalizazioa">
 	<div class="planoOsoa">
 		<?php
-		$herria = sfConfig::get('app_herria');
+		$herria = sfConfig::get('app_google_helbidea');
 
 		$gMap = new GMap();
 		$gMap->setScroll('false');
@@ -20,7 +20,7 @@
 				$test = "'" . $gertakaria->getId() . "'";
 				$kale = Doctrine::getTable('Kalea')->find($gertakaria->getKaleaId());
 
-				$helbidea = $kale->getGoogle() . ", " . $gertakaria->getKale_zbkia() . $herria;
+				$helbidea = sprintf('%s, %s %s', $kale->getGoogle(), $gertakaria->getKale_zbkia(), $herria);
 
 				$puntua = $gMap->geocodeXml($helbidea);
 				if (($puntua->getLat() != '') || ($puntua->getLng() != ''))

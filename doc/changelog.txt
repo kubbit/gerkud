@@ -1,4 +1,16 @@
 ================================================================================
+  Version 1.8
+  2013-03-19  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Actualización del API de geolocalización a la versión 3
+* Correcciones menores de visualización en versiones viejas de Internet Explorer
+* Soporte para Chrome Frame
+* Posibilidad de dejar como automática la fecha de creación de incidencias
+* Indicador de prioridad también en las peticiones
+* Añadida guía de instalación
+* Correcciones menores
+
+================================================================================
   Version 1.6
   2013-03-13  Kubbit Information Technology (http://kubbit.com)
 ================================================================================

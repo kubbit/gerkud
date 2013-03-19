@@ -50,7 +50,7 @@ class Iruzkina extends BaseIruzkina
                         $mezua = Swift_Message::newInstance();
                         $mezua->setFrom(sfConfig::get('app_abisuak_nork'));
                         $mezua->setTo($erab->getEmailAddress());
-			$cid = $mezua->embed(Swift_Image::fromPath('./images/Gerkud-txiki.jpg'));
+			$cid = $mezua->embed(Swift_Image::fromPath('./images/logoa_mail.jpg'));
 
 			$mezua->setSubject(sprintf('%s %d: %s', $this->getEkintza(), $gertakariak[0]->getId(), $gertakariak[0]->getLaburpena()));
 

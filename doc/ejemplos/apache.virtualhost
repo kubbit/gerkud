@@ -1,0 +1,13 @@
+################################################################################
+# Ejemplo de servidor virtual para Apache
+################################################################################
+<VirtualHost *:80>
+   ServerName gerkud
+   DocumentRoot "/var/www/gerkud/web"
+   DirectoryIndex app.php
+   Alias /sf /var/www/gerkud/web/sf
+   <Directory "/var/www/gerkud/web/sf">
+	AllowOverride All
+        Allow from All
+   </Directory>
+</VirtualHost>

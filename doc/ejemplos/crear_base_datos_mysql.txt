@@ -1,0 +1,6 @@
+# mysql -u root -p 'contraseña'
+> CREATE DATABASE gerkud;
+> CREATE USER 'gerkud'@'%' IDENTIFIED BY 'some_pass';
+> GRANT ALL ON gerkud.* TO 'gerkud'@'%';
+> FLUSH PRIVILEGES;
+> exit;

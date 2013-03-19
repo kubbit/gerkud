@@ -4,7 +4,7 @@
 default:
   http_metas:
     content-type: text/html
-    X-UA-Compatible: IE=edge
+    X-UA-Compatible: IE=edge,chrome=IE8
 
   metas:
     title:        Gerkud - Gertakarien Kudeaketa
