@@ -83,8 +83,8 @@ class GMapGeocodedAddress
     xml_parser_free($p);
 */
     $xml = new SimpleXMLElement($raw_data);
-    if ($xml->xpath('/GeocodeResponse/status')[0] != 'OK')
-    //if ($vals[$index['STATUS'][0]] != 'OK')
+    $status = $xml->xpath('/GeocodeResponse/status');
+    if ($status == false || $status[0] != 'OK')
     {
 
       return false;
@@ -92,8 +92,14 @@ class GMapGeocodedAddress
 
     //$coordinates = $vals[$index['COORDINATES'][0]]['value'];
     //list($this->lng, $this->lat) = explode(',', $coordinates);
-    $this->lng = $xml->xpath('/GeocodeResponse/result/geometry/location/lng')[0];
-    $this->lat = $xml->xpath('/GeocodeResponse/result/geometry/location/lat')[0];
+    $longitud = $xml->xpath('/GeocodeResponse/result/geometry/location/lng');
+    if ($longitud == false)
+        return false;
+    $this->lng = $longitud[0];
+    $latitud = $xml->xpath('/GeocodeResponse/result/geometry/location/lat');
+    if ($latitud == false)
+        return false;
+    $this->lat = $latitud[0];
 /*
     $this->accuracy = $vals[$index['ADDRESSDETAILS'][0]]['attributes']['ACCURACY'];
 
