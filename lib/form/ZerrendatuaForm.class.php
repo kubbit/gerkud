@@ -10,7 +10,7 @@
  */
 class ZerrendatuaForm extends sfForm
 {
-	protected static $sailkapena = array(-1 => '--', 1 => 'Saila', 2 => 'Auzoa', 3 => 'Mota');
+	public static $sailkapena = array(-1 => '--', 1 => 'Saila', 2 => 'Auzoa', 3 => 'Mota');
 
 	public function configure()
 	{
@@ -46,13 +46,22 @@ class ZerrendatuaForm extends sfForm
 					->leftJoin('s.Translation t WITH t.lang = ?', $culture)
 					->orderBy('t.name ASC')
 			)),
-			'mota' => new sfWidgetFormDoctrineChoice(array
+			// el plugin sfDependentSelectPlugin requiere que los widgets tengan el como identificador <nombre_tabla>_id
+			'mota_id' => new sfWidgetFormDoctrineChoice(array
 			(
 				'model' => 'Mota',
 				'add_empty' => '--',
 				'query' => Doctrine::getTable('Mota')->createQuery('m')
 					->leftJoin('m.Translation t WITH t.lang = ?', $culture)
 					->orderBy('t.izena ASC')
+			)),
+			'azpimota_id' => new sfWidgetFormDoctrineDependentSelect(array
+			(
+				'model' => 'Azpimota',
+				'depends' => 'Mota',
+				'add_empty' => '--',
+				'table_method' => 'getAzpimotaQuery',
+				'order_by' => array('izena', 'ASC')
 			)),
 			'barrutia' => new sfWidgetFormDoctrineChoice(array
 			(

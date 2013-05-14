@@ -22,9 +22,6 @@ class gertakariaActions extends sfActions
 	$this->forwardUnless($query = $parametroak, 'gertakaria', 'index');
 //        $this->gertakarias = Doctrine_Core::getTable('Gertakaria') ->getForLuceneQuery($query);
         //
-        $e = Doctrine_Core::getTable('Gertakaria') ->getEskaerak();
-        $this->eskaerak = $e->execute();
-        //
 
 
         $q = Doctrine_Core::getTable('Gertakaria') ->getForLuceneQuery($query);
@@ -35,18 +32,12 @@ class gertakariaActions extends sfActions
     {
         //Orrikatzetik dator
         //
-        $e = Doctrine_Core::getTable('Gertakaria') ->getEskaerak();
-        $this->eskaerak = $e->execute();
-        //
         $parametroak = $this->getUser()->getAttribute('parametroak');
         $q = Doctrine_Core::getTable('Gertakaria') ->getForLuceneQuery($parametroak);
         $this->gertakarias = $q->execute();
         $this->getUser()->setAttribute('parametroak', $parametroak);
     }else
     {
-	//
-	$e = Doctrine_Core::getTable('Gertakaria') ->getEskaerak();
-	$this->eskaerak = $e->execute();
 	//
         $q = Doctrine_Core::getTable('Gertakaria') ->getForLuceneQuery(Array());
         $this->gertakarias = $q->execute();
@@ -57,6 +48,7 @@ class gertakariaActions extends sfActions
     $this->pager->setPage($request->getParameter('page',1));
     $this->pager->init();
 
+    $this->bilaketa = $request->getParameter('bilaketa');
   }
 
   public function executeIndexatu(sfWebRequest $request)
@@ -85,7 +77,7 @@ class gertakariaActions extends sfActions
 
 	// langilea gertakariaren saila berekoa den ala ez adierazi
 	$saila = $this->gertakaria->getSaila();
-	if ($this->getUser()->hasGroup($saila['name']))
+	if ($this->getUser()->hasCredential(array('admins', 'gerkud', 'zerbitzu'), false) && $this->getUser()->hasGroup($saila['name']))
 		$this->sailakoa = true;
 	else
 		$this->sailakoa = false;

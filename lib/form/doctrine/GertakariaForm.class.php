@@ -164,22 +164,26 @@ protected function doUpdateObject($values)
 
 public function postValidate($validator, $values)
 {
-	if ($this->getObject()->getCreatedAt() == null)
+	if (sfConfig::get('app_sortze_data_automatikoa') || $values["created_at"] == null)
 		$sortze_data = date("Y-m-d");
 	else
-		$sortze_data = strftime("%Y-%m-%d", strtotime($this->getObject()->getCreatedAt()));
+		$sortze_data = strftime("%Y-%m-%d", strtotime($values["created_at"]));
 
-	if ($values["hasiera_aurreikusia"] != null && strtotime($values["hasiera_aurreikusia"]) < strtotime($sortze_data))
+	if (sfConfig::get('app_balidatu_aurreikuspen_datak'))
 	{
-		$error = new sfValidatorError($validator, "Hasiera data ezin da sortzerakoa baino lehenagokoa izan");
-		throw new sfValidatorErrorSchema($validator, array('hasiera_aurreikusia' => $error));
+		if ($values["hasiera_aurreikusia"] != null && strtotime($values["hasiera_aurreikusia"]) < strtotime($sortze_data))
+		{
+			$error = new sfValidatorError($validator, "Hasiera data ezin da sortzerakoa baino lehenagokoa izan");
+			throw new sfValidatorErrorSchema($validator, array('hasiera_aurreikusia' => $error));
+		}
+
+		if ($values["amaiera_aurreikusia"] != null && strtotime($values["amaiera_aurreikusia"]) < strtotime($values["hasiera_aurreikusia"]))
+		{
+			$error = new sfValidatorError($validator, "Amaiera data ezin da hasierakoa baino lehenagokoa izan");
+			throw new sfValidatorErrorSchema($validator, array('amaiera_aurreikusia' => $error));
+		}
 	}
 
-	if ($values["amaiera_aurreikusia"] != null && strtotime($values["amaiera_aurreikusia"]) < strtotime($values["hasiera_aurreikusia"]))
-	{
-		$error = new sfValidatorError($validator, "Amaiera data ezin da hasierakoa baino lehenagokoa izan");
-		throw new sfValidatorErrorSchema($validator, array('amaiera_aurreikusia' => $error));
-	}
 	return $values;
 }
 }

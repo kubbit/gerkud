@@ -16,9 +16,11 @@ all:
       default:
     helbidea: 20100, ERRENTERIA
   erakundea: ERRENTERIAKO UDALA
-  pdf_goiburua: Gertakari Zerrendatua
+  pdf_goiburua: Gertakari Zerrenda
   abisuak_nork: kubbit.gerkud@kubbit.com
   gertakariak_orriko: 30
   #proxy: 127.0.0.1:3128
   data_formatoa: Y-m-d
   sortze_data_automatikoa: true
+  balidatu:
+    aurreikuspen_datak: true

@@ -1,3 +1,4 @@
+<?php use_javascripts_for_form($zerrendatuaForm) ?>
 <div>
 	<form action="<?php echo url_for('zerrendatu/index'); ?>" method="post" target="_blank" class="bilaketa_form hilarak">
 		<div id="sailkapena">
@@ -24,7 +25,11 @@
 		</div>
 		<div id="mota">
 			<label for="zerrendatu_mota"><?php echo __('Mota'); ?></label>
-			<?php echo $zerrendatuaForm['mota']->render(); ?>
+			<?php echo $zerrendatuaForm['mota_id']->render(); ?>
+		</div>
+		<div id="azpimota">
+			<label for="zerrendatu_azpimota"><?php echo __('Azpimota'); ?></label>
+			<?php echo $zerrendatuaForm['azpimota_id']->render(); ?>
 		</div>
 		<div id="barrutia">
 			<label for="zerrendatu_barrutia"><?php echo __('Auzoa'); ?></label>

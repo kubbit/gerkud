@@ -24,6 +24,13 @@ $form->setDefault('jatorrizkosaila_id', $formZ->getObject()->getJatorrizkosailaI
 $form->setDefault('eraikina_id', $formZ->getObject()->getEraikinaId());
 ?>
 
+<?php if (!sfConfig::get('app_sortze_data_automatikoa')): ?>
+		<div>
+			<label for="gertakaria_created_at_day"><?php echo __('Sortze Data') ?>:*</label>
+			<?php echo $form['created_at']->render(); ?>
+			<span class="errorea"><?php echo __($form['created_at']->getError()); ?></span>
+		</div>
+<?php endif; ?>
 		<div>
 			<label><?php echo __('Laburpena') ?>:*</label>
 			<?php echo $form['laburpena']->render(array('cols' => 50, 'rows' => 1)); ?>

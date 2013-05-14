@@ -26,36 +26,36 @@
 			<label><?php echo __('Sortze Data') ?>:</label>
 			<?php echo date(sfConfig::get('app_data_formatoa'), strtotime($form->getObject()->getCreatedAt())); ?>
 	<?php else: ?>
-			<label><?php echo __('Sortze Data') ?>:*</label>
+			<label for="gertakaria_created_at_day"><?php echo __('Sortze Data') ?>:*</label>
 			<?php echo $form['created_at']->render(); ?>
 			<span class="errorea"><?php echo __($form['created_at']->getError()); ?></span>
 	<?php endif; ?>
 <?php elseif (!sfConfig::get('app_sortze_data_automatikoa')): ?>
-			<label><?php echo __('Sortze Data') ?>:*</label>
+			<label for="gertakaria_created_at_day"><?php echo __('Sortze Data') ?>:*</label>
 			<?php echo $form['created_at']->render(); ?>
 			<span class="errorea"><?php echo __($form['created_at']->getError()); ?></span>
 <?php endif; ?>
 		</div>
 		<div>
-			<label><?php echo __('Laburpena') ?>:*</label>
+			<label for="gertakaria_laburpena"><?php echo __('Laburpena') ?>:*</label>
 			<?php echo $form['laburpena']->render(array('cols' => 50, 'rows' => 1)); ?>
 			<span class="errorea"><?php echo __($form['laburpena']->getError()); ?></span>
 		</div>
 		<div>
-			<label><?php echo __('Klasea') ?>:</label>
-			<?php echo $form['klasea_id']->render(); ?>
-			<span class="errorea"><?php echo __($form['klasea_id']->getError()); ?></span>
-		</div>
-		<div>
-			<label><?php echo __('Mota') ?>:*</label>
+			<label for="gertakaria_mota_id"><?php echo __('Mota') ?>:*</label>
 			<?php echo $form['mota_id']->render(); ?>
 			<span class="errorea"><?php echo __($form['mota_id']->getError()); ?></span>
-			<label><?php echo __('Azpimota') ?>:*</label>
+			<label for="gertakaria_azpimota_id"><?php echo __('Azpimota') ?>:*</label>
 			<?php echo $form['azpimota_id']->render(); ?>
 			<span class="errorea"><?php echo __($form['azpimota_id']->getError()); ?></span>
 		</div>
 		<div>
-			<label><?php echo __('Helbidea') ?>:</label>
+			<label for="gertakaria_klasea_id"><?php echo __('Klasea') ?>:</label>
+			<?php echo $form['klasea_id']->render(); ?>
+			<span class="errorea"><?php echo __($form['klasea_id']->getError()); ?></span>
+		</div>
+		<div>
+			<label for="gertakaria_barrutia_id"><?php echo __('Helbidea') ?>:</label>
 			<?php echo $form['barrutia_id']->render();
 			echo $form['kalea_id']->render() . "" . $form['kale_zbkia']->render(array('size' => 3)) ?>
 			<span class="errorea"><?php echo __($form['barrutia_id']->getError()); ?></span>
@@ -63,41 +63,41 @@
 			<span class="errorea"><?php echo __($form['kale_zbkia']->getError()); ?></span>
 		</div>
 		<div>
-			<label><?php echo __('Eraikina') ?>:</label>
+			<label for="gertakaria_eraikina_id"><?php echo __('Eraikina') ?>:</label>
 			<?php echo $form['eraikina_id']->render(); ?>
 			<span class="errorea"><?php echo __($form['eraikina_id']->getError()); ?></span>
 		</div>
 		<div>
-			<label><?php echo __('Jatorrizko Saila') ?>:</label>
+			<label for="gertakaria_jatorrizkoSaila_id"><?php echo __('Jatorrizko Saila') ?>:</label>
 			<?php echo $form['jatorrizkoSaila_id']->render(); ?>
 			<span class="errorea"><?php echo __($form['jatorrizkoSaila_id']->getError()); ?></span>
 		</div>
 		<div>
-			<label><?php echo __('Lehentasuna') ?>:</label>
+			<label for="gertakaria_lehentasuna_id"><?php echo __('Lehentasuna') ?>:</label>
 			<?php echo $form['lehentasuna_id']->render(); ?>
 			<span class="errorea"><?php echo __($form['lehentasuna_id']->getError()); ?></span>
 		</div>
 		<div>
-			<label><?php echo __('Nork eman du abisua') ?>:</label>
+			<label for="gertakaria_abisuaNork"><?php echo __('Nork eman du abisua') ?>:</label>
 			<?php echo $form['abisuaNork']->render(array('cols' => 32, 'rows' => 1)); ?>
 			<span class="errorea"><?php echo __($form['abisuaNork']->getError()); ?></span>
 		</div>
 
 <?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
 		<div>
-			<label><?php echo __('Hasiera aurreikusia') ?>:</label>
+			<label for="gertakaria_hasiera_aurreikusia_day"><?php echo __('Hasiera aurreikusia') ?>:</label>
 			<?php echo $form['hasiera_aurreikusia']->render(); ?>
 			<span class="errorea"><?php echo __($form['hasiera_aurreikusia']->getError()); ?></span>
 		</div>
 		<div>
-			<label><?php echo __('Amaiera aurreikusia') ?>:</label>
+			<label for="gertakaria_amaiera_aurreikusia_day"><?php echo __('Amaiera aurreikusia') ?>:</label>
 			<?php echo $form['amaiera_aurreikusia']->render(); ?>
 			<span class="errorea"><?php echo __($form['amaiera_aurreikusia']->getError()); ?></span>
 		</div>
 <?php endif; ?>
 
 		<div>
-			<label><?php echo __('Deskribapena') ?>:</label>
+			<label for="gertakaria_deskribapena"><?php echo __('Deskribapena') ?>:</label>
 			<?php echo $form['deskribapena']->render(array('cols' => 50, 'rows' => 4)); ?>
 			<span class="errorea"><?php echo __($form['deskribapena']->getError()); ?></span>
 		</div>

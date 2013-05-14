@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2013-02-25T13:01:24Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2013-05-03T11:30:18Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -18,7 +18,7 @@
       </trans-unit>
       <trans-unit id="4">
         <source>Kodea</source>
-        <target>Código</target>
+        <target>Id</target>
       </trans-unit>
       <trans-unit id="5">
         <source>Sortze Data</source>
@@ -46,7 +46,7 @@
       </trans-unit>
       <trans-unit id="11">
         <source>Jatorrizko Saila</source>
-        <target>Departamento de Origen</target>
+        <target>Dpto de Origen</target>
       </trans-unit>
       <trans-unit id="12">
         <source>Lehentasuna</source>
@@ -90,7 +90,7 @@
       </trans-unit>
       <trans-unit id="23">
         <source>Saila</source>
-        <target>Sección</target>
+        <target>Dpto/Sección</target>
       </trans-unit>
       <trans-unit id="24">
         <source>Mota/Azpimota</source>
@@ -130,7 +130,7 @@
       </trans-unit>
       <trans-unit id="33">
         <source>Irekiera data</source>
-        <target>Fecha apertura</target>
+        <target>Fecha alta</target>
       </trans-unit>
       <trans-unit id="34">
         <source>Baztertu</source>
@@ -262,7 +262,7 @@
       </trans-unit>
       <trans-unit id="66">
         <source>Sailak</source>
-        <target>Secciones</target>
+        <target>Dptos/Secciones</target>
       </trans-unit>
       <trans-unit id="67">
         <source>Barrutia</source>
@@ -410,7 +410,7 @@
       </trans-unit>
       <trans-unit id="109">
         <source>Sailaren arabera</source>
-        <target>Por sección</target>
+        <target>Por dpto/sección</target>
       </trans-unit>
       <trans-unit id="110">
         <source>Egun desbiderapenaren arabera</source>
@@ -490,15 +490,15 @@
       </trans-unit>
       <trans-unit id="131">
         <source>Sail bakoitzeko irekita dauden gertakariak</source>
-        <target>Incidencias abiertas por cada sección</target>
+        <target>Incidencias abiertas por cada dpto/sección</target>
       </trans-unit>
       <trans-unit id="132">
         <source>Sail bakoitzeko ebatziak dauden gertakariak</source>
-        <target>Incidencias resueltas por cada sección</target>
+        <target>Incidencias resueltas por cada dpto/sección</target>
       </trans-unit>
       <trans-unit id="133">
         <source>Sail bakoitzeko ebaztutako gertakarien egun batazbestekoa</source>
-        <target>Promedio de dias de resolución de incidencias por cada sección</target>
+        <target>Promedio de dias de resolución de incidencias por cada dpto/sección</target>
       </trans-unit>
       <trans-unit id="134">
         <source>Egun-tarte horretan desbideratzen diren gertakari kopurua (aurrez ikusitako iraupenarekiko)</source>
@@ -549,11 +549,11 @@
         <target>La fecha de fin no puede ser anterior a la de inicio</target>
       </trans-unit>
       <trans-unit id="146">
-        <source>Zerrendatuak</source>
+        <source>Zerrendak</source>
         <target>Listados</target>
       </trans-unit>
       <trans-unit id="147">
-        <source>Gertakari Zerrendatua</source>
+        <source>Gertakari Zerrenda</source>
         <target>Listado de Incidencias</target>
       </trans-unit>
       <trans-unit id="148">
@@ -601,7 +601,7 @@
         <target>Descripción de incidencia</target>
       </trans-unit>
       <trans-unit id="159">
-        <source>Zuk zabaldutako gertakari honek ondorengo aldaketa izan du</source>
+        <source>Gertakari honek ondorengo aldaketa izan du</source>
         <target>La incidencia ha tenido el siguiente cambio</target>
       </trans-unit>
       <trans-unit id="160">
@@ -647,6 +647,22 @@
       <trans-unit id="168">
         <source>Invalid.</source>
         <target>No válido</target>
+      </trans-unit>
+      <trans-unit id="1167">
+        <source>Eskaerak (%eskaerak%)</source>
+        <target>Peticiones (%eskaerak%)</target>
+      </trans-unit>
+      <trans-unit id="1168">
+        <source>Irekiera data (noiztik-nora)</source>
+        <target>Fecha apertura (desde-hasta)</target>
+      </trans-unit>
+      <trans-unit id="1169">
+        <source>Ixte data (noiztik-nora)</source>
+        <target>Fecha cierre (desde-hasta)</target>
+      </trans-unit>
+      <trans-unit id="1170">
+        <source>Eskaera berria</source>
+        <target>Petición nueva</target>
       </trans-unit>
     </body>
   </file>

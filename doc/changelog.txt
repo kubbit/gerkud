@@ -1,4 +1,22 @@
 ================================================================================
+  Version 1.10
+  2013-05-13  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Separación de incidencias y peticiones en dos pantallas diferentes
+* Notificación a todos los usuarios del departamento de cambios en incidencias
+* Nuevo filtro de fechas de búsqueda
+* Nuevo filtro de subtipo para la generación de listados
+* Búsquedas directas en la base de datos (eliminando Lucene)
+* Mejoras visuales en los listados
+* Correcciones menores
+
+================================================================================
+  Version 1.8.1
+  2013-04-09  Pasaiako Udala (http://www.pasaia.net)
+================================================================================
+* Soporte para versiones anteriores a PHP 5.4
+
+================================================================================
   Version 1.8
   2013-03-19  Kubbit Information Technology (http://kubbit.com)
 ================================================================================

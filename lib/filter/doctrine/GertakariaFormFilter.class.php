@@ -30,7 +30,6 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 	));
 */
 
-
         $this->widgetSchema['id'] = new sfWidgetFormFilterInput(array(
                 'with_empty' => false,
                 ));
@@ -38,7 +37,25 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
                 'required' => false
         ));
 
+        $this->widgetSchema['created_at_noiztik'] = new sfWidgetFormI18nDate(array
+        (
+                'culture' => $culture
+        ));
 
+        $this->widgetSchema['created_at_nora'] = new sfWidgetFormI18nDate(array
+        (
+                'culture' => $culture
+        ));
+
+        $this->widgetSchema['ixte_data_noiztik'] = new sfWidgetFormI18nDate(array
+        (
+                'culture' => $culture
+        ));
+
+        $this->widgetSchema['ixte_data_nora'] = new sfWidgetFormI18nDate(array
+        (
+                'culture' => $culture
+        ));
 
         $this->widgetSchema['barrutia_id'] = new sfWidgetFormDoctrineChoice(array(
                 'model'     => 'Barrutia',

@@ -16,6 +16,8 @@ class Gertakaria extends BaseGertakaria
 
 public function save(Doctrine_Connection $conn = null)
 {
+  $berria = $this->isNew();
+
 //  $conn = $conn ? $conn : GertakariaTable::getConnection();
   $conn = $conn ? $conn : Doctrine_Core::getTable('Gertakaria')->getConnection();
   $conn->beginTransaction();
@@ -24,6 +26,11 @@ public function save(Doctrine_Connection $conn = null)
 	$ret = parent::save($conn);
 	$this->updateLuceneIndex();
 	$conn->commit();
+
+	// eskaera berria bada, bidali mezua saileko langileei
+	if ($berria)
+		$this->ohartarazi();
+
 	return $ret;
   }
   catch (Exception $e)
@@ -141,4 +148,106 @@ public function getLehentasunaKolorea()
 
 }
 
+	/*
+	 * Gertakariaren oharra jaso behar duten langile guztien e-mailak itzuli
+	 */
+	protected function getAbisuaNori($langilea, $egoera_aldaketa)
+	{
+		$nori = array();
+
+		$erabiltzaileak = null;
+
+		$saila = $this->getSaila();
+		$mota = $this->getMota();
+		if ($this->getSailaId() != null)
+			$erabiltzaileak = $saila->getLangileak();
+		else
+			$erabiltzaileak = $mota->getLangileak();
+
+		// gertakariaren sortzailea gehitu
+		array_push($erabiltzaileak, $this->getLangileaId());
+
+		foreach ($erabiltzaileak as $erab_id)
+		{
+			// ez mezurik bidali ekintza sortu duen langileari
+			if ($langilea->getId() == $erab_id)
+				continue;
+
+			$erab = Doctrine::getTable('langilea')->find($erab_id);
+
+			$ohartarazi = true;
+			switch ($erab->getOhartarazteaId())
+			{
+				// ez ohartarazi
+				case 1:
+					$ohartarazi = false;
+					break;
+				// ohartarazi egoera aldaketekin bakarrik
+				case 2:
+					$ohartarazi = $egoera_aldaketa;
+					break;
+			}
+
+			if (!$ohartarazi)
+				continue;
+
+			if (!in_array($erab->getEmailAddress(), $nori))
+				array_push($nori, $erab->getEmailAddress());
+		}
+
+		return $nori;
+	}
+	protected function ohartarazi()
+	{
+		$langilea = $this->getLangilea();
+		$this->mezuaBidali($langilea, __('Eskaera berria'), true, null, null);
+	}
+	public function mezuaBidali($langilea, $gai_ekintza, $egoera_aldaketa, $ekintza, $aldaketa)
+	{
+		$nori = $this->getAbisuaNori($langilea, $egoera_aldaketa);
+
+		// ez du inorrek abisua jaso nahi
+		if (count($nori) == 0)
+			return;
+
+		$mezua = Swift_Message::newInstance();
+		$mezua->setContentType('text/html');
+
+		$mezua->setBcc($nori);
+		$mezua->setFrom(sfConfig::get('app_abisuak_nork'));
+		$mezua->setSubject(sprintf('%s %d: %s', $gai_ekintza, $this->getId(), $this->getLaburpena()));
+
+		$cid = $mezua->embed(Swift_Image::fromPath('./images/logoa_mail.jpg'));
+
+		$html = sprintf('<table border=0><tr><td colspan=2><img src="%s" /></td></tr>', $cid)
+		 . '<tr><th colspan=2><hr><br></th></tr>'
+		 . sprintf('<tr><th align=left><b>%s:</b></th><td>%d</td></tr>', __('Gertakariaren kodea'), $this->getId())
+		 . sprintf('<tr><th colspan=2 align=left><b>%s:</b></th></tr>', __('Gertakariaren deskribapena'))
+		 . sprintf('<tr><td colspan=2>%s</td></tr></table><br>', $this->getDeskribapena());
+
+		// Aldaketagatik bada, azaldu zein izan den aldaketa
+		if (!empty($ekintza))
+		{
+			$html .= sprintf('<p>%s:</p>', __('Gertakari honek ondorengo aldaketa izan du'))
+			 . '<table border=0>'
+			 . sprintf('<tr><th align=left><b>%s:</b></th><td>%s</td></tr>', $ekintza, $aldaketa);
+		}
+
+		$html .= sprintf('<tr><th align=left><b>%s:</b></th><td>%s</td></tr>', __('Nork egin du'), $langilea->getName())
+		 . '</table><br><br>'
+		 . sprintf('<hr><p>%s</p>', __('EZ ERANTZUN MEZU HONI. Mezu hau automatikoki bidali dizu GERKUD gertakarien kudeaketa aplikazioak zuk horrela konfiguratuta daukazulako. Ez baduzu horrelako mezurik jaso nahi, aldatu konfigurazioa "nire datuak" atalean'));
+
+		$mezua->setBody($html);
+
+		$mailer = sfContext::getInstance()->getMailer();
+
+		try
+		{
+			$mailer->send($mezua);
+		}
+		catch (Exception $e)
+		{
+			echo '<script>alert("Errorea abisua bidaltzean")</script>';
+		}
+	}
 }

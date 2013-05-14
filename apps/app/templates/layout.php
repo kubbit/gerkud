@@ -29,18 +29,22 @@
 		<div id="gorputza">
 <?php if ($sf_user->isAuthenticated()): ?>
 			<ul class="sesioa">
+				<li id="bilatu"><?php echo link_to(image_tag('Bilatu.png', array('alt' => 'Bilatu')), 'gertakaria/index?bilaketa=true') ?></li>
+	<?php if (sfContext::getInstance()->getRouting()->getCurrentInternalUri() != "gertakaria/new" && sfContext::getInstance()->getRouting()->getCurrentInternalUri() != "gertakaria/create"): ?>
+				<li id="sortu"><?php echo link_to(__('Gertakaria Sortu'), 'gertakaria/new') ?></li>
+	<?php endif; ?>
+				<li><?php echo link_to(__('Eskaerak (%eskaerak%)', array('%eskaerak%' => Doctrine_Core::getTable('Gertakaria')->getEskaeraKopurua())), 'eskaerak/index') ?></li>
 				<li><?php echo link_to(__('Gertakariak'), 'gertakaria/index') ?></li>
 	<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
-				<li><?php echo link_to(__('Zerrendatuak'), 'zerrendatu/index') ?></li>
+				<li><?php echo link_to(__('Zerrendak'), 'zerrendatu/index') ?></li>
 				<li><?php echo link_to(__('Erabilera datuak'), 'datuak/index') ?></li>
-				<li><?php echo link_to(__('Egoerak'), 'egoera/index') ?></li>
+				<!--li><?php echo link_to(__('Egoerak'), 'egoera/index') ?></li>
 				<li><?php echo link_to(__('Sailak'), 'saila/index') ?></li>
-				<li><?php echo link_to(__('Kaleak'), 'kalea/index') ?></li>
+				<li><?php echo link_to(__('Kaleak'), 'kalea/index') ?></li-->
 	<?php endif; ?>
 
 	<?php if ($sf_user->hasCredential('admins')): ?>
 				<li><?php echo link_to(__('Erabiltzaileak'), 'erabiltzaileak/index') ?></li>
-				<li><?php echo link_to(__('Indexatu'), 'gertakaria/indexatu') ?></li>
 	<?php endif; ?>
 	<?php if (!$sf_user->hasCredential('admins')): ?>
 				<li><?php echo link_to(__('Nire datuak'), 'langilea') ?></li>

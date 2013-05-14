@@ -10,6 +10,16 @@
  */
 sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
 
+// PDF-aren oinan sortze data ezartzeko
+class ZerrendaPDF extends TCPDF
+{
+	public function Footer()
+	{
+		$this->Cell(0, 10, date("Y/m/d"), 0, false, 'L', 0, '', 0, false, 'T', 'M');
+		$this->Cell(0, 10, sprintf('%s/%s', $this->getAliasNumPage(), $this->getAliasNbPages()), 0, false, 'R', 0, '', 0, false, 'T', 'M');
+	}
+}
+
 class zerrendatuActions extends sfActions
 {
 	/**
@@ -27,13 +37,13 @@ class zerrendatuActions extends sfActions
 	}
 	public function inprimatu()
 	{
-		$config = sfTCPDFPluginConfigHandler::loadConfig();
+		$config = sfYaml::load(sfConfig::get("sf_app_config_dir") . '/pdf_configs.yml');
 		// 'L' = Landscape orientation
-		$pdf = new TCPDF('L');
-		$pdf->SetFont('FreeSerif', '', 8);
+		$pdf = new ZerrendaPDF('L');
+		$pdf->SetFont('FreeSerif', '', 10);
 		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 		$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
+		$pdf->SetHeaderData($config['default']['PDF_HEADER_LOGO'], $config['default']['PDF_HEADER_LOGO_WIDTH'], utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
 		$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
@@ -94,12 +104,20 @@ class zerrendatuActions extends sfActions
 			$strSaila = Doctrine::getTable('Saila')->find(array($this->formularioa['saila']))->getName();
 		}
 		$strMota = '';
-		if ($this->formularioa['mota'])
+		if ($this->formularioa['mota_id'])
 		{
 			array_push($condiciones, 'g.mota_id = :mota');
-			$parametroak[':mota'] = $this->formularioa['mota'];
+			$parametroak[':mota'] = $this->formularioa['mota_id'];
 
-			$strMota = Doctrine::getTable('Mota')->find(array($this->formularioa['mota']))->getIzena();
+			$strMota = Doctrine::getTable('Mota')->find(array($this->formularioa['mota_id']))->getIzena();
+		}
+		$strAzpiMota = '';
+		if ($this->formularioa['azpimota_id'])
+		{
+			array_push($condiciones, 'g.azpimota_id = :azpimota');
+			$parametroak[':azpimota'] = $this->formularioa['azpimota_id'];
+
+			$strAzpiMota = Doctrine::getTable('Azpimota')->find(array($this->formularioa['azpimota_id']))->getIzena();
 		}
 		$strBarrutia = '';
 		if ($this->formularioa['barrutia'])
@@ -135,13 +153,13 @@ class zerrendatuActions extends sfActions
 		}
 
 		$htmlIragazkiak = '<table>';
-		$htmlIragazkiak .= sprintf('<tr><td width="50"></td><td width="75">%s:</td><td width="150" style="border-bottom: 0.25px solid black;">%s</td><td width="200"></td>', __('Klasea'), $strKlasea);
-		$htmlIragazkiak .= sprintf('<td width="75">%s:</td><td width="150" style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Kalea'), $strKalea);
+		$htmlIragazkiak .= sprintf('<tr><td width="50"></td><td width="85">%s:</td><td width="150" style="border-bottom: 0.25px solid black;">%s</td><td width="180"></td>', __('Klasea'), $strKlasea);
+		$htmlIragazkiak .= sprintf('<td width="85">%s:</td><td width="150" style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Kalea'), $strKalea);
 		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Saila'), $strSaila);
 		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Eraikina'), $strEraikina);
 		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Auzoa'), $strBarrutia);
-		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s - %s</td></tr>', __('Data tartea'), $hasiera, $amaiera);
-		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Mota'), $strMota);
+		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Data tartea'), $hasiera, !empty($hasiera) && !empty($amaiera) ? ' - ' : '', $amaiera);
+		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s</td><td></td>', __('Mota'), $strMota, empty($strAzpiMota) ? '' :  ' / ' . $strAzpiMota);
 		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Egoera'), $strEgoera);
 		$htmlIragazkiak .= '</table>';
 
@@ -161,17 +179,17 @@ class zerrendatuActions extends sfActions
 		if ($this->formularioa['sailkapena1'] > 0)
 		{
 			array_push($orden, $SAILKAPEN_KANPOAK[$this->formularioa['sailkapena1']]);
-			$htmlSailkapen .= sprintf('<td style="font-weight: bold">%s</td>', strtoupper($orden[0]));
+			$htmlSailkapen .= sprintf('<td style="font-weight: bold">%s</td>', strtoupper(__(ZerrendatuaForm::$sailkapena[$this->formularioa['sailkapena1']])));
 		}
 		if ($this->formularioa['sailkapena2'] > 0)
 		{
 			array_push($orden, $SAILKAPEN_KANPOAK[$this->formularioa['sailkapena2']]);
-			$htmlSailkapen .= sprintf('<td style="font-weight: bold">%s</td>', strtoupper($orden[1]));
+			$htmlSailkapen .= sprintf('<td style="font-weight: bold">%s</td>', strtoupper(__(ZerrendatuaForm::$sailkapena[$this->formularioa['sailkapena2']])));
 		}
 		if ($this->formularioa['sailkapena3'] > 0)
 		{
 			array_push($orden, $SAILKAPEN_KANPOAK[$this->formularioa['sailkapena3']]);
-			$htmlSailkapen .= sprintf('<td style="font-weight: bold">%s</td>', strtoupper($orden[2]));
+			$htmlSailkapen .= sprintf('<td style="font-weight: bold">%s</td>', strtoupper(__(ZerrendatuaForm::$sailkapena[$this->formularioa['sailkapena3']])));
 		}
 		$htmlSailkapen .= '</tr></table>';
 
@@ -252,40 +270,42 @@ class zerrendatuActions extends sfActions
 				$html .= '<table>'
 				 . '<thead><tr style="text-decoration: underline">'
 				 . '<td width="30">' . __('Kodea') . '</td>'
-				 . '<td width="50">' . __('Egoera') . '</td>'
-				 . '<td width="250">' . __('Laburpena') . '</td>'
-				 . '<td width="50">' . __('Auzoa') . '</td>'
+				 . '<td width="54">' . __('Egoera') . '</td>'
+				 . '<td width="228">' . __('Laburpena') . '</td>'
+				 . '<td width="54">' . __('Auzoa') . '</td>'
 				 . '<td width="150">' . __('Kalea') . ' / ' . __('Eraikina') . '</td>'
 				 . '<td width="80">' . __('Eskatzailea') . '</td>'
-				 . '<td width="50">' . __('Erabiltzailea') . '</td>'
-				 . '<td width="50">' . __('Irekiera data') . '</td>'
-				 . '<td width="50">' . __('Ixte data') . '</td>'
+				 . '<td width="54">' . __('Erabiltzailea') . '</td>'
+				 . '<td width="54">' . __('Irekiera data') . '</td>'
+				 . '<td width="54">' . __('Ixte data') . '</td>'
 				 . '</tr></thead>';
 			}
 
 			$html .= '<tr>';
 			$html .= sprintf('<td width="30">%s</td>', $datuak['kodea']);
-			$html .= sprintf('<td width="50">%s</td>', $datuak['egoera']);
-			$html .= sprintf('<td width="250">%s</td>', $datuak['laburpena']);
-			$html .= sprintf('<td width="50">%s</td>', $datuak['barrutia']);
+			$html .= sprintf('<td width="54">%s</td>', $datuak['egoera']);
+			$html .= sprintf('<td width="228">%s</td>', $datuak['laburpena']);
+			$html .= sprintf('<td width="54">%s</td>', $datuak['barrutia']);
 			if ($datuak['eraikina'] != null)
 				$html .= sprintf('<td width="150">%s</td>', $datuak['eraikina']);
-			else
+			else if ($datuak['zenbakia'] != null)
 				$html .= sprintf('<td width="150">%s, %s</td>', $datuak['kalea'], $datuak['zenbakia']);
+			else
+				$html .= sprintf('<td width="150">%s</td>', $datuak['kalea']);
 			$html .= sprintf('<td width="80">%s</td>', $datuak['abisuanork']);
-			$html .= sprintf('<td width="50">%s</td>', $datuak['erabiltzailea']);
+			$html .= sprintf('<td width="54">%s</td>', $datuak['erabiltzailea']);
 
 			// no mostrar fechas sin valor
 			if ($datuak['irekiera_data'] == 0)
-				$html .= '<td width="50">-</td>';
+				$html .= '<td width="54">-</td>';
 			else
-				$html .= sprintf('<td width="50">%s</td>', $datuak['irekiera_data']);
+				$html .= sprintf('<td width="54">%s</td>', $datuak['irekiera_data']);
 
 			// no mostrar fechas sin valor
 			if ($datuak['ixte_data'] == 0)
-				$html .= '<td width="50">-</td>';
+				$html .= '<td width="54">-</td>';
 			else
-				$html .= sprintf('<td width="50">%s</td>', $datuak['ixte_data']);
+				$html .= sprintf('<td width="54">%s</td>', $datuak['ixte_data']);
 			$html .= '</tr>';
 		}
 		if ($gertaerak)

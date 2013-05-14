@@ -8,13 +8,16 @@
  * @property string $izena
  * @property Doctrine_Collection $Gertakaria
  * @property Doctrine_Collection $Azpimota
+ * @property Doctrine_Collection $SailaMota
  * 
  * @method string              getIzena()      Returns the current record's "izena" value
  * @method Doctrine_Collection getGertakaria() Returns the current record's "Gertakaria" collection
  * @method Doctrine_Collection getAzpimota()   Returns the current record's "Azpimota" collection
+ * @method Doctrine_Collection getSailaMota()  Returns the current record's "SailaMota" collection
  * @method Mota                setIzena()      Sets the current record's "izena" value
  * @method Mota                setGertakaria() Sets the current record's "Gertakaria" collection
  * @method Mota                setAzpimota()   Sets the current record's "Azpimota" collection
+ * @method Mota                setSailaMota()  Sets the current record's "SailaMota" collection
  * 
  * @package    gerkud
  * @subpackage model
@@ -41,6 +44,10 @@ abstract class BaseMota extends sfDoctrineRecord
              'foreign' => 'mota_id'));
 
         $this->hasMany('Azpimota', array(
+             'local' => 'id',
+             'foreign' => 'mota_id'));
+
+        $this->hasMany('SailaMota', array(
              'local' => 'id',
              'foreign' => 'mota_id'));
 

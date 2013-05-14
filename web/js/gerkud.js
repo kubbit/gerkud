@@ -1,18 +1,13 @@
 function erakutsiEzkutatuBilaketa()
 {
-	var erakutsiBilaketa = document.getElementById('erakutsiBilaketa');
 	var bilaketa = document.getElementById('bilaketa');
+	if (!bilaketa)
+		return;
 
 	if (bilaketa.style.display == 'none')
-	{
 		bilaketa.style.display = 'inherit';
-		erakutsiBilaketa.style.display = 'none';
-	}
 	else
-	{
 		bilaketa.style.display = 'none';
-		erakutsiBilaketa.style.display = 'inherit';
-	}
 }
 function erakutsiEzkutatuAurreratua()
 {
@@ -68,6 +63,11 @@ onload = function()
 	var ezkutatuBilaketa = document.getElementById('ezkutatuBilaketa');
 	if (ezkutatuBilaketa)
 	{
+		// kodean fokoa jarri
+		var kodea = document.getElementById('gertakaria_filters_id');
+		if (kodea)
+			kodea.focus();
+
 		ezkutatuBilaketa.onclick = function()
 		{
 			erakutsiEzkutatuBilaketa();

@@ -120,6 +120,14 @@ Saila:
     extends: sfGuardGroup
     type: simple
 
+SailaMota:
+  columns:
+    saila_id: { type: integer, notnull: true }
+    mota_id: { type: integer, notnull: true }
+  relations:
+    Saila: { onDelete: CASCADE, local: saila_id, foreign: id }
+    Mota: { onDelete: CASCADE, local: mota_id, foreign: id }
+
 SailekoLangileak:
   connection: doctrine
   inheritance:

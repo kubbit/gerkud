@@ -52,6 +52,19 @@ img
 	border: 2px outset #808080;
 	white-space: nowrap;
 }
+.sesioa li#bilatu
+{
+	border: none;
+}
+.sesioa li#bilatu img
+{
+	vertical-align: middle;
+}
+.sesioa li#sortu
+{
+	margin: 0 2em 0 0;
+	background-color: #eee;
+}
 .sesioa a, .sesioa a:visited
 {
 	text-decoration: none;
@@ -135,13 +148,6 @@ a.boton, input[type='submit']
 	color: red;
 }
 
-.bilaketaIkonoa
-{
-	cursor: pointer;
-	float: right;
-	margin-right: 5%;
-}
-
 .bilaketa_form
 {
 	position: relative;
@@ -159,9 +165,12 @@ a.boton, input[type='submit']
 	top: 0.5em;
 	right: 0.5em;
 }
-.bilaketa_form input[name=filter]
+/* IE: si el boton de submit esta en posicion absoluta o flotando, no funciona el boton ENTER */
+.bilaketa_form #ie_fix
 {
-	float: right;
+	display: inline-block;
+	width: 100%;
+	text-align: right;
 }
 .aldatuAukeraAurreratuak
 {
@@ -178,6 +187,11 @@ a.boton, input[type='submit']
 .hilarak div
 {
 	display: table-row;
+}
+.hilarak fieldset
+{
+	border: none;
+	margin-bottom: 1em;
 }
 .hilarak label
 {
@@ -202,9 +216,10 @@ table.taula
 {
 	border: 5px ridge #000;
 	border-collapse: collapse;
-	margin: auto auto 3em auto;
+	margin: auto;
 	text-align: left;
 	max-width: 90%;
+	margin-bottom: 1em;
 }
 .taula thead
 {
@@ -271,28 +286,14 @@ table.taula
 	padding-right: 0.25em;
 }
 
-.taulaAzpi
-{
-	margin: -3em auto 5em auto;
-	width: 90%;
-}
-.taulaAzpi a
-{
-	float: right;
-}
-.taulaGain
-{
-	margin: 0 auto -0.1em;
-	width: 90%;
-}
-.taulaGain a
-{
-	float: right;
-}
-
 .orriak
 {
+	margin: auto;
 	text-align: center;
+}
+.orriak img
+{
+	vertical-align: middle;
 }
 
 .izkutua
@@ -414,12 +415,12 @@ table.taula
 .formularioa div:first-child
 {
 	font-weight: bold;
-	margin: 0.5em 0.5em 2em;
+	margin: 0.5em 0.5em 1em;
 }
 .formularioa div
 {
 	display: block;
-	margin-bottom: 0.7em;
+	margin-bottom: 0.2em;
 }
 .formularioa label
 {
@@ -427,8 +428,8 @@ table.taula
 	display: inline-block;
 	text-align: right;
 	vertical-align: top;
-	width: 13em;
-	margin-right: 1em;
+	width: 10em;
+	margin-right: 0.2em;
 }
 
 .erab_form

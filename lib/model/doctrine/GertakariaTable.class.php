@@ -42,6 +42,15 @@ class GertakariaTable extends Doctrine_Table
 		->orderBy('created_at DESC');
 	return $q;
     }
+    public function getEskaeraKopurua()
+    {
+	$q = $this->createQuery('j')
+		->select('count(*)')
+        	->from('gertakaria g')
+		->where('g.egoera_id = ?', 1);
+	return $q->fetchOne(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+    }
+
     public function getForLuceneQuery($query1)
     {
 	if (!empty($query1))
@@ -50,31 +59,9 @@ class GertakariaTable extends Doctrine_Table
 	  $kodea = $query1['id']['text'];
      	  if ($kodea=='')
 	  {
+	    $q = $this->createQuery('j');
 	    if ($query!='')
-	    {
-	  	  $hits = self::getLuceneIndex()->find($query);
-		  $pks = array();
-		  foreach ($hits as $hit)
-		  {
-	              $pks[] = $hit->pk;
-		  }
-
-		  if (empty($pks))
-		  {
-//			      return array();
-			$q = $this->createQuery('j')
-        	           ->where(0);
-		  }else
-		  {
-		  $q = $this->createQuery('j')
-		      ->whereIn('j.id', $pks)
-		      ->orderBy('j.lehentasuna_id DESC, j.id DESC');
-	//	      ->limit(20);
-		  }
-	    }else
-	    {
-		  $q = $this->createQuery('j');
-	    }
+		    $q->where('j.laburpena LIKE :query OR j.deskribapena LIKE :query', array(':query' => '%' . $query . '%'));
 
 	    if ($query1['egoera_id']) $q->andWhere('j.egoera_id = ?', $query1['egoera_id']);
             if ($query1['klasea_id']) $q->andWhere('j.klasea_id = ?', $query1['klasea_id']);
@@ -86,6 +73,29 @@ class GertakariaTable extends Doctrine_Table
 	    if ($query1['kale_zbkia']['text']) $q->andWhere('j.kale_zbkia = ?', $query1['kale_zbkia']['text']);
             if ($query1['jatorrizkoSaila_id']) $q->andWhere('j.jatorrizkosaila_id = ?', $query1['jatorrizkoSaila_id']);
             if ($query1['eraikina_id']) $q->andWhere('j.eraikina_id = ?', $query1['eraikina_id']);
+
+	    if ($query1['created_at_noiztik']['year'])
+	    {
+		    $noiztik = sprintf('%04d-%02d-%02d', $query1['created_at_noiztik']['year'], $query1['created_at_noiztik']['month'], $query1['created_at_noiztik']['day']);
+		    $q->andWhere('j.created_at >= ?', $noiztik);
+	    }
+	    if ($query1['created_at_nora']['year'])
+	    {
+		    $noiztik = sprintf('%04d-%02d-%02d', $query1['created_at_nora']['year'], $query1['created_at_nora']['month'], $query1['created_at_nora']['day']);
+		    $q->andWhere('j.created_at <= ?', $noiztik);
+	    }
+
+	    if ($query1['ixte_data_noiztik']['year'])
+	    {
+		    $noiztik = sprintf('%04d-%02d-%02d', $query1['ixte_data_noiztik']['year'], $query1['ixte_data_noiztik']['month'], $query1['ixte_data_noiztik']['day']);
+		    $q->andWhere('j.ixte_data >= ?', $noiztik);
+	    }
+	    if ($query1['ixte_data_nora']['year'])
+	    {
+		    $noiztik = sprintf('%04d-%02d-%02d', $query1['ixte_data_nora']['year'], $query1['ixte_data_nora']['month'], $query1['ixte_data_nora']['day']);
+		    $q->andWhere('j.ixte_data <= ?', $noiztik);
+	    }
+
             $q->orderBy('j.created_at DESC');
 	    return $q;
 

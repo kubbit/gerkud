@@ -86,20 +86,20 @@ class iruzkinaActions extends sfActions
 		$iruzkina = $form->save();
 		$s=$iruzkina->getSaila($saila);
 
-                $testua=__('Gertakaria "%taldea%" (a)ri esleitu zaio. ', array('%taldea%' => $s[0]));
-		$iruzkina->setTestua($testua);
-		$iruzkina->save();
-
 		//Gertakariaren (saila/erabiltzailea) aldatzen dugu
 		$gertakariak=$iruzkina->getGertakaria();
                 $gertakariak[0]->setSailaId($saila);
 		if ($gertakariak[0]->getEgoeraId()==1) $gertakariak[0]->setEgoeraId(2);
                 $gertakariak[0]->save();
 
+                $testua=__('Gertakaria "%taldea%" (a)ri esleitu zaio. ', array('%taldea%' => $s[0]));
+		$iruzkina->setTestua($testua);
+		$iruzkina->save();
+
 	}else
 	{
 		$iruzkina = $form->save();
-		if ($form['ekintza_id']->getValue()==3) 
+		if ($form['ekintza_id']->getValue()==3)
 		{
 		//Berrirekitzea bada, prozesuan aurreko egoeran jarri.
 		$gertakariak=$iruzkina->getGertakaria();
@@ -109,7 +109,7 @@ class iruzkinaActions extends sfActions
 			$gertakariak[0]->setEgoeraId(1);
                 $gertakariak[0]->save();
 		}
-	
+
 	}
 
 //      $this->redirect('iruzkina/edit?id='.$iruzkina->getId());

@@ -14,6 +14,11 @@ INSERT INTO `barrutia` (`id`, `izena`) VALUES
   (13, 'Morrongilleta'),
   (10, 'Olibet - casas nuevas'),
   (12, 'Otros'),
-  (11, 'Pontika');
+  (11, 'Pontika'),
+  (14, 'Zona Rural'),
+  (15, 'ZZ_Colegios'),
+  (17, 'ZZ_Edificios y Locales'),
+  (18, 'ZZ_Genérico'),
+  (16, 'ZZ_Servicios Sociales');
 
 SET foreign_key_checks = 1;

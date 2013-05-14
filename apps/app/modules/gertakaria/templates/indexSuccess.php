@@ -1,9 +1,8 @@
 <?php use_helper('Javascript', 'GMap') ?>
 <?php use_helper('Pagination'); ?>
 
-<img id="erakutsiBilaketa" src="/images/Bilatu.png" alt="Bilatu" class="bilaketaIkonoa" />
-
-<form id="bilaketa" action="<?php echo url_for('gertakaria/index'); ?>" method="post" class="bilaketa_form" style="display: none">
+<?php if ($bilaketa == "true"): ?>
+<form id="bilaketa" action="<?php echo url_for('gertakaria/index'); ?>" method="post" class="bilaketa_form">
 	<h2><?php echo __('Gertakarien bilaketa') ?></h2>
 	<img id="ezkutatuBilaketa" src="/images/Ezabatu.png" class="ezkutatu" alt="Ezkutatu" />
 
@@ -18,6 +17,18 @@
 		</div>
 	</div>
 	<div id="aurreratua" class="hilarak" style="display: none">
+		<fieldset>
+			<div>
+				<label><?php echo __('Irekiera data (noiztik-nora)') ?>:</label>
+				<div><?php echo $filter['created_at_noiztik']->render(); ?></div>
+				<div><?php echo $filter['created_at_nora']->render(); ?></div>
+			</div>
+			<div>
+				<label><?php echo __('Ixte data (noiztik-nora)') ?>:</label>
+				<div><?php echo $filter['ixte_data_noiztik']->render(); ?></div>
+				<div><?php echo $filter['ixte_data_nora']->render(); ?></div>
+			</div>
+		</fieldset>
 		<div>
 			<label><?php echo __('Klasea') ?>:</label>
 			<?php echo $filter['klasea_id']->render(); ?>
@@ -51,54 +62,15 @@
 		</div>
 		<?php $filter->setDefault('mapa', 0); ?>
 	</div>
-	<input name="filter" type="submit" value="<?php echo __('Bilatu') ?>" />
+	<div id="ie_fix"><input name="filter" type="submit" value="<?php echo __('Bilatu') ?>" /></div>
 	<h4 id="arrunta" class="aldatuAukeraAurreratuak" onclick="erakutsiEzkutatuAurreratua();"><?php echo __('Bilaketa aurreratua') ?>...</h4>
 	<h4 id="aurreratuaB" class="aldatuAukeraAurreratuak" style="display: none" onclick="erakutsiEzkutatuAurreratua();"><?php echo __('Bilaketa arrunta') ?>...</h4>
 </form>
-
-<!--ESKAERAK-->
-<table class="taula gertakariZerrenda">
-	<caption class="txikia"><?php echo __('%eskaerak% eskaera topatu dira', array('%eskaerak%' => count($eskaerak))) ?>:</caption>
-	<thead>
-		<tr>
-			<th></th>
-			<th><?php echo __('Id') ?></th>
-			<th style="width: 5em;"><?php echo __('Irekiera') ?></th>
-			<th><?php echo __('Mota') ?></th>
-			<th style="width: 4em;"><?php echo __('Auzoa') ?></th>
-			<th style="min-width: 8em;"><?php echo sprintf('%s / %s', __('Kalea'), __('Eraikina')) ?></th>
-			<th><?php echo __('Laburpena') ?></th>
-			<!--th><?php echo __('Egoera') ?></th-->
-			<th style="min-width: 6em;"><?php echo __('Abisua nork') ?></th>
-			<!--th>Aldatuta</th-->
-		</tr>
-	</thead>
-	<tbody>
-<?php foreach ($eskaerak as $eskaera): ?>
-		<tr>
-			<td class="lehentasuna"><?php for ($i = 0; $i < $eskaera->getLehentasunaId() - 1; $i++) echo '!'; ?></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->getId()) ?>"><?php echo $eskaera->getId() ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->getId()) ?>"><?php echo date(sfConfig::get('app_data_formatoa'), strtotime($eskaera->getCreatedAt())) ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->getId()) ?>"><?php echo $eskaera->getMota() ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->getId()) ?>"><?php if ($eskaera->getBarrutiaId()) echo $eskaera->getBarrutia() ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->getId()) ?>"><?php if ($eskaera->getEraikinaId()) echo $eskaera->getEraikina(); else if ($eskaera->getKaleaId()) echo sprintf('%s, %s', $eskaera->getKalea(), $eskaera->getKaleZbkia()) ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->getId()) ?>"><?php echo $eskaera->getLaburpena() ?></a></td>
-			<?php //$kol=$eskaera->getEgoeraKolorea(); ?>
-			<!--td <?php //echo "bgcolor='".$kol[0]->getKolorea()."'";  ?>><a href="<?php //echo url_for('gertakaria/show?id='.$eskaera->getId())  ?>"-->
-			<?php //echo $eskaera->getEgoera() ?><!--/a></td-->
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->getId()) ?>"><?php echo $eskaera->getAbisuaNork() ?></a></td>
-			<!--td><a href="<?php //echo url_for('gertakaria/show?id='.$eskaera->getId())  ?>"><?php //echo $eskaera->getUpdatedAt()  ?></a></td-->
-		</tr>
-<?php endforeach; ?>
-	</tbody>
-</table>
+<?php endif; ?>
 
 <!-- ZERRENDA -->
 <div class="orriak">
 	<?php echo pager_navigation($pager, 'gertakaria/index') ?>
-</div>
-<div class="taulaGain">
-	<a class="boton" href="<?php echo url_for('gertakaria/new') ?>"><?php echo __('Gertakaria Sortu') ?></a>
 </div>
 <table class="taula gertakariZerrenda">
 	<caption class="txikia">
@@ -140,13 +112,10 @@
 	</tbody>
 </table>
 
-<div class="taulaAzpi">
-	<a class="boton" href="<?php echo url_for('gertakaria/new') ?>"><?php echo __('Gertakaria Sortu') ?></a>
-</div>
-
 <div class="orriak">
 	<?php echo pager_navigation($pager, 'gertakaria/index') ?>
 </div>
+
 
 <!-- MAPA orri berri batean irekitzeko. Helbidea begiratu behar da! -->
 <a href="#" onclick="<?php echo sprintf('window.open(\'%s\', \'%s\', \'%s\')', url_for('gertakaria/mapa?page=' . $pager->getPage()), 'Planoa', 'width=800,height=600,scroll=yes'); ?>">
