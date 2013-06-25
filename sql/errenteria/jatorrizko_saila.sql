@@ -20,7 +20,8 @@ INSERT INTO `jatorrizko_saila` (`id`) VALUES
   (16),
   (17),
   (18),
-  (19);
+  (19),
+  (20);
 
 TRUNCATE TABLE jatorrizko_saila_translation;
 INSERT INTO `jatorrizko_saila_translation` (`id`, `izena`, `lang`) VALUES
@@ -61,6 +62,8 @@ INSERT INTO `jatorrizko_saila_translation` (`id`, `izena`, `lang`) VALUES
   (18, 'Servicios', 'es'),
   (18, 'Zerbitzuak', 'eu'),
   (19, 'Otros (externos)', 'es'),
-  (19, 'Beste batzuk (kanpokoak)', 'eu');
+  (19, 'Beste batzuk (kanpokoak)', 'eu'),
+  (20, 'Deportes', 'es'),
+  (20, 'Kirolak', 'eu');
 
 SET foreign_key_checks = 1;

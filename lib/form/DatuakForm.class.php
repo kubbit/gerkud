@@ -23,13 +23,11 @@ class DatuakForm extends sfForm
 			(
 				'choices' => self::$taulak
 			)),
-			'hasiera' => new sfWidgetFormI18nDate(array
+			'hasiera' => new sfWidgetFormData(array
 			(
-				'culture' => $culture
 			)),
-			'amaiera' => new sfWidgetFormI18nDate(array
+			'amaiera' => new sfWidgetFormData(array
 			(
-				'culture' => $culture
 			)),
 			'tartea' => new sfWidgetFormSelect(array
 			(
@@ -45,6 +43,11 @@ class DatuakForm extends sfForm
 					->orderBy('t.name ASC')
 			))
 		));
+		$this->validatorSchema['taula'] = new sfValidatorString(array('required' => true));
+		$this->validatorSchema['hasiera'] = new sfValidatorDataOrdua(array('required' => false));
+		$this->validatorSchema['amaiera'] = new sfValidatorDataOrdua(array('required' => false));
+		$this->validatorSchema['tartea'] = new sfValidatorString(array('required' => false));
+		$this->validatorSchema['saila'] = new sfValidatorString(array('required' => false));
 
 		$this->widgetSchema->setNameFormat('datuak[%s]');
 	}

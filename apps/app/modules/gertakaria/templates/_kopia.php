@@ -20,13 +20,21 @@ $form->setDefault('kalea_id', $formZ->getObject()->getKaleaId());
 $form->setDefault('kale_zbkia', $formZ->getObject()->getKaleZbkia());
 $form->setDefault('deskribapena', $formZ->getObject()->getDeskribapena());
 $form->setDefault('lehentasuna_id', $formZ->getObject()->getLehentasunaId());
-$form->setDefault('jatorrizkosaila_id', $formZ->getObject()->getJatorrizkosailaId());
+$form->setDefault('jatorrizkoSaila_id', $formZ->getObject()->getJatorrizkosailaId());
 $form->setDefault('eraikina_id', $formZ->getObject()->getEraikinaId());
+// Gertakariaren eremu guztiak kopiatzeko
+if (true)
+{
+	$form->setDefault('created_at', $formZ->getObject()->getCreatedAt());
+	$form->setDefault('abisuaNork', $formZ->getObject()->getAbisuanork());
+	$form->setDefault('hasiera_aurreikusia', $formZ->getObject()->getHasieraAurreikusia());
+	$form->setDefault('amaiera_aurreikusia', $formZ->getObject()->getAmaieraAurreikusia());
+}
 ?>
 
 <?php if (!sfConfig::get('app_sortze_data_automatikoa')): ?>
 		<div>
-			<label for="gertakaria_created_at_day"><?php echo __('Sortze Data') ?>:*</label>
+			<label for="gertakaria_created_at"><?php echo __('Irekiera data') ?>:*</label>
 			<?php echo $form['created_at']->render(); ?>
 			<span class="errorea"><?php echo __($form['created_at']->getError()); ?></span>
 		</div>
@@ -66,6 +74,18 @@ $form->setDefault('eraikina_id', $formZ->getObject()->getEraikinaId());
 			<label><?php echo __('Nork eman du abisua') ?>:</label>
 			<?php echo $form['abisuaNork']->render(array('cols' => 32, 'rows' => 1)); ?>
 		</div>
+<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
+		<div>
+			<label for="gertakaria_hasiera_aurreikusia"><?php echo __('Hasiera aurreikusia') ?>:</label>
+			<?php echo $form['hasiera_aurreikusia']->render(); ?>
+			<span class="errorea"><?php echo __($form['hasiera_aurreikusia']->getError()); ?></span>
+		</div>
+		<div>
+			<label for="gertakaria_amaiera_aurreikusia"><?php echo __('Amaiera aurreikusia') ?>:</label>
+			<?php echo $form['amaiera_aurreikusia']->render(); ?>
+			<span class="errorea"><?php echo __($form['amaiera_aurreikusia']->getError()); ?></span>
+		</div>
+<?php endif; ?>
 		<div>
 			<label><?php echo __('Deskribapena') ?>:*</label>
 			<?php echo $form['deskribapena']->render(array('cols' => 50, 'rows' => 4)); ?>

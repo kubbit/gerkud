@@ -10,7 +10,7 @@
  */
 class LehentasunaForm extends BaseLehentasunaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

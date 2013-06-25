@@ -10,7 +10,7 @@
  */
 class EraikinaFormFilter extends BaseEraikinaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

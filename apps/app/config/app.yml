@@ -11,16 +11,20 @@ dev:
 all:
   sf_guard_plugin:
     check_password_callable: [bhLDAPAuth, checkPassword]
+  sfDependentSelectPlugin:
+    js: full
   google:
     maps_api_keys:
       default:
     helbidea: 20100, ERRENTERIA
   erakundea: ERRENTERIAKO UDALA
   pdf_goiburua: Gertakari Zerrenda
-  abisuak_nork: kubbit.gerkud@kubbit.com
+  abisuak_nork: gerkud@example.org
   gertakariak_orriko: 30
   #proxy: 127.0.0.1:3128
   data_formatoa: Y-m-d
   sortze_data_automatikoa: true
   balidatu:
     aurreikuspen_datak: true
+  zerrendatua:
+    iragazkiak_erakutsi: true

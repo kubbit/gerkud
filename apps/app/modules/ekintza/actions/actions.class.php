@@ -10,70 +10,70 @@
  */
 class ekintzaActions extends sfActions
 {
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->ekintzas = Doctrine::getTable('ekintza')
-      ->createQuery('a')
-      ->execute();
-  }
+	public function executeIndex(sfWebRequest $request)
+	{
+		$this->ekintzas = Doctrine::getTable('ekintza')
+			->createQuery('a')
+			->execute();
+	}
 
-  public function executeShow(sfWebRequest $request)
-  {
-    $this->ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id')));
-    $this->forward404Unless($this->ekintza);
-  }
+	public function executeShow(sfWebRequest $request)
+	{
+		$this->ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id')));
+		$this->forward404Unless($this->ekintza);
+	}
 
-  public function executeNew(sfWebRequest $request)
-  {
-    $this->form = new ekintzaForm();
-  }
+	public function executeNew(sfWebRequest $request)
+	{
+		$this->form = new ekintzaForm();
+	}
 
-  public function executeCreate(sfWebRequest $request)
-  {
-    $this->forward404Unless($request->isMethod(sfRequest::POST));
+	public function executeCreate(sfWebRequest $request)
+	{
+		$this->forward404Unless($request->isMethod(sfRequest::POST));
 
-    $this->form = new ekintzaForm();
+		$this->form = new ekintzaForm();
 
-    $this->processForm($request, $this->form);
+		$this->processForm($request, $this->form);
 
-    $this->setTemplate('new');
-  }
+		$this->setTemplate('new');
+	}
 
-  public function executeEdit(sfWebRequest $request)
-  {
-    $this->forward404Unless($ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
-    $this->form = new ekintzaForm($ekintza);
-  }
+	public function executeEdit(sfWebRequest $request)
+	{
+		$this->forward404Unless($ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
+		$this->form = new ekintzaForm($ekintza);
+	}
 
-  public function executeUpdate(sfWebRequest $request)
-  {
-    $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $this->forward404Unless($ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
-    $this->form = new ekintzaForm($ekintza);
+	public function executeUpdate(sfWebRequest $request)
+	{
+		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
+		$this->forward404Unless($ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
+		$this->form = new ekintzaForm($ekintza);
 
-    $this->processForm($request, $this->form);
+		$this->processForm($request, $this->form);
 
-    $this->setTemplate('edit');
-  }
+		$this->setTemplate('edit');
+	}
 
-  public function executeDelete(sfWebRequest $request)
-  {
-    $request->checkCSRFProtection();
+	public function executeDelete(sfWebRequest $request)
+	{
+		$request->checkCSRFProtection();
 
-    $this->forward404Unless($ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
-    $ekintza->delete();
+		$this->forward404Unless($ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
+		$ekintza->delete();
 
-    $this->redirect('ekintza/index');
-  }
+		$this->redirect('ekintza/index');
+	}
 
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
-      $ekintza = $form->save();
+	protected function processForm(sfWebRequest $request, sfForm $form)
+	{
+		$form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+		if ($form->isValid())
+		{
+			$ekintza = $form->save();
 
-      $this->redirect('ekintza/edit?id='.$ekintza->getId());
-    }
-  }
+			$this->redirect('ekintza/edit?id=' . $ekintza->getId());
+		}
+	}
 }

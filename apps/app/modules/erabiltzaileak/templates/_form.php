@@ -50,7 +50,7 @@
 	<div>
 		<label>
 			<span><?php echo __('Azkenekoz sartua') ?>:</span>
-			<?php echo $form['last_login']->render(array('readonly' => 'readonly')) ?>
+			<span><?php echo $form['last_login']->getValue() ?></span>
 		</label>
 	</div>
 

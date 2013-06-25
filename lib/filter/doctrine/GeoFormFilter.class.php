@@ -10,7 +10,7 @@
  */
 class GeoFormFilter extends BaseGeoFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

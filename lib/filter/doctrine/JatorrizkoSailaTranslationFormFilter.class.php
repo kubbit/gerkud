@@ -10,7 +10,7 @@
  */
 class JatorrizkoSailaTranslationFormFilter extends BaseJatorrizkoSailaTranslationFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

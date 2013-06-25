@@ -20,7 +20,7 @@ class sfWidgetFormDependentSelect extends sfWidgetForm
     /**
      * Configures the current widget.
      *
-     * Available options details in 
+     * Available options details in
      * http://www.symfony-project.org/plugins/sfDependentSelectPlugin
      *
      * @param array $options     An array of options
@@ -40,7 +40,7 @@ class sfWidgetFormDependentSelect extends sfWidgetForm
         // source
         $this->addRequiredOption('source_class', '');
         $this->addOption('source_params', array());
-        
+
         parent::configure($options, $attributes);
     }
 
@@ -54,12 +54,12 @@ class sfWidgetFormDependentSelect extends sfWidgetForm
      *
      * @see sfWidgetForm
      */
-    public function render($name, $value = null, $attributes = array(), $errors = array()) 
+    public function render($name, $value = null, $attributes = array(), $errors = array())
     {
         $group = '';
         $sourceClass = $this->getOption('source_class');
         $source = new $sourceClass($this->getOption('source_params'));
-        
+
         if ($this->getOption('ajax')) {
             $values = array();
         } else {
@@ -69,11 +69,33 @@ class sfWidgetFormDependentSelect extends sfWidgetForm
                 $group = 'unique';
             }
         }
-    
+
+        // 2013/05/23 - Kubbit Information Technology (http://kubbit.com)
+        // Fix sorting problem (more info in SelectDependiente.js)
+        $oldValues = $values;
+        $values = array();
+        foreach ($oldValues as $groupId => $groupValues)
+        {
+            $valueGroup = new stdClass();
+            if (is_array($groupValues))
+            {
+                $valueGroup->id = $groupId;
+                $valueGroup->list = array();
+                foreach ($groupValues as $optionId => $optionValue)
+                {
+                    $option = new stdClass();
+                    $option->id = $optionId;
+                    $option->value = $optionValue;
+                    array_push($valueGroup->list, $option);
+                }
+            }
+            array_push($values, $valueGroup);
+        }
+
         if ($this->getOption('depends')) {
             $this->setOption('depends', $this->generateJavascriptVar($name, $this->getOption('depends')));
         }
-    
+
         $config = array(
             'id'          => $this->generateId($name),
             'opciones'    => $values,
@@ -86,9 +108,9 @@ class sfWidgetFormDependentSelect extends sfWidgetForm
             'varsoloref'  => '_ds_get_ref_value',
             'params'      => array_merge($this->getOption('params'), array(
                 '_ds_id'            => $this->generateId($name),
-                '_ds_source_class'  => $sourceClass,                                    
+                '_ds_source_class'  => $sourceClass,
                 '_ds_source_params' => $this->getOption('source_params'),
-            )),            
+            )),
         );
 
         $jsConfig = json_encode($config);
@@ -102,13 +124,13 @@ class sfWidgetFormDependentSelect extends sfWidgetForm
         if (strlen($jsGroup)) {
             $jsGroup = "'{$jsGroup}'";
         }
-        
-        $js = "var ds_$jsVar = new SelectDependiente({$jsConfig}).mostrar({$jsGroup})"
+
+        $js = "var ds_$jsVar = new SelectDependiente({$jsConfig})"
             . (strlen($value) ? ".seleccionar('{$value}');" : ';');
-        
+
         $script = $this->renderContentTag('script', $js, array('type' => 'text/javascript'));
         $widget = $this->renderContentTag('select', null, array_merge(array('name' => $name), $attributes));
-        
+
         return $widget . $script;
     }
 
@@ -116,16 +138,16 @@ class sfWidgetFormDependentSelect extends sfWidgetForm
     {
         if ( ! $var) {
             $jsName = $baseName;
-        } else {   
+        } else {
             $base = preg_match('/(.*)\[.*\]$/i', $baseName, $matches) ? $matches[1] : '';
             $jsName = $base . '[' . sfInflector::underscore($var) . ']';
         }
-        
+
         $jsVar = $this->generateId($jsName);
 
         return $jsVar;
     }
-    
+
     protected function setSourceParam($var, $val = null)
     {
         if ( ! is_array($var)) {
@@ -133,11 +155,11 @@ class sfWidgetFormDependentSelect extends sfWidgetForm
         }
         $this->setOption('source_params', array_merge($this->getOption('source_params'), $var));
     }
-    
+
     public function getJavascripts()
     {
         $jsConfig = sfConfig::get('app_sfDependentSelectPlugin_js', 'minimized');
-        
+
         if ($jsConfig) {
             $jsName = 'SelectDependiente';
             if ('minimized' === $jsConfig) {
@@ -145,7 +167,7 @@ class sfWidgetFormDependentSelect extends sfWidgetForm
             }
             return array("/sfDependentSelectPlugin/js/{$jsName}");
         }
-        
+
         return array();
     }
 }

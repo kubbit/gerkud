@@ -350,6 +350,10 @@ table.taula
 	font-size: small;
 }
 
+#erakutsiPlanoa, #ezkutatuPlanoa, #mapa_ikonoa
+{
+	cursor: pointer;
+}
 #plano_icon
 {
 	display: block;
@@ -522,6 +526,11 @@ table.taula
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	margin-bottom: 1em;
+}
+input.eskubian
+{
+	float: right;
+	margin-right: 1em;
 }
 .gertakaria table
 {

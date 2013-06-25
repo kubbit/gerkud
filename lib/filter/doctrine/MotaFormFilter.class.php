@@ -10,7 +10,7 @@
  */
 class MotaFormFilter extends BaseMotaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

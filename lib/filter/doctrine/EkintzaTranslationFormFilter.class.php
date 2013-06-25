@@ -10,7 +10,7 @@
  */
 class EkintzaTranslationFormFilter extends BaseEkintzaTranslationFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

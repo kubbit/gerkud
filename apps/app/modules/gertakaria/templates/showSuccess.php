@@ -41,8 +41,8 @@
 <?php endif; ?>
 			</div>
 			<?php if ($gertakaria->getSailaId()) $form2->setDefault('saila_id', $gertakaria->getSailaId()); ?>
-			<?php echo $form2['saila_id']->render(); ?>
-			<input type="submit" value="<?php echo __('Gertakaria esleitu') ?>" />
+			<?php echo $form2['saila_id']->render(); ?>			
+			<input type="submit" value="<?php echo ($gertakaria->getEgoeraId() == 1) ? __('Gertakaria esleitu') : __('Berriz esleitu')?>" />
 		</form>
 	<?php endif; ?>
 <?php endif; ?>
@@ -94,13 +94,11 @@
 	<?php endif; ?>
 <?php endif; ?>
 
-		<!-- Gertakaria berrireki -->
-<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
+		<!-- Gertakaria kopiatu -->
 		<a class="boton" href="<?php echo url_for('gertakaria/kopiatu?id=' . $gertakaria->getId()) ?>">
 			<?php echo __('Kopiatu') ?>
 		</a>
-<?php endif; ?>
-		</div>
+	</div>
 
 	<div class="detailea">
 		<div>
@@ -113,7 +111,7 @@
 		</div>
 		<div>
 			<div><?php echo __('Mota/Azpimota') ?>:</div>
-			<span><?php echo sprintf('%s/%s', $gertakaria->getMota(), $gertakaria->getAzpimota()); ?>&nbsp;</span>
+			<span><?php echo sprintf('%s%s', $gertakaria->getMota(), $gertakaria->getAzpimotaId() == null ? '' : '/'.$gertakaria->getAzpimota()); ?>&nbsp;</span>
 		</div>
 		<div>
 			<div><?php echo __('Irekiera data') ?>:</div>
@@ -264,23 +262,20 @@
 
 <!-- Planoak: -->
 <div id="plano_icon">
-	<a href="#" onclick="mapaErakutsi();">
-		<img src="<?php echo sprintf('/images/Planoa_%s.png', $sf_user->getCulture()); ?>" alt="<?php echo __('Planoa'); ?>" />
-	</a>
+	<img id="erakutsiPlanoa" src="<?php echo sprintf('/images/Planoa_%s.png', $sf_user->getCulture()); ?>" alt="<?php echo __('Planoa'); ?>" />
 </div>
-<div id="geolokalizazioa" style="display: block; visibility: hidden;">
+<div id="geolokalizazioa" style="display: none;">
 	<?php log_message('Planoak....', 'info'); ?>
 	<div class="planoa">
 		<div class="taulaGoiburua">
 			<?php echo __('Planoa') ?>
-			<a href="#" onclick="mapaErakutsi();">
-				<img src="/images/Ezabatu.png" alt="<?php echo __('Ezabatu'); ?>" />
-			</a>
+			<img id="ezkutatuPlanoa" src="/images/Ezabatu.png" alt="<?php echo __('Ezabatu'); ?>" />
 		</div>
 <?php
 	$herria = sfConfig::get('app_google_helbidea');
 
 	$gMap = new GMap();
+	$gMap->setParameters(array('onload_method' => 'none'));
 	$gMap->setZoom(15);
 	$gMap->setScroll('false');
 	$coord = $gMap->geocodeXml($herria);
@@ -292,7 +287,8 @@
 	foreach ($gertakaria->getKoordenadak() as $i => $puntua)
 	{
 		$test = "'" . $puntua->getTestua() . "'";
-		$gMapMarker = new GMapMarker($puntua->getLatitudea(), $puntua->getLongitudea(), array('title' => $test));
+		$ikonoa = sprintf('\'https://chart.googleapis.com/chart?chst=%s&chld=edge_bc|%s|%s\'', 'd_bubble_text_small_withshadow', urlencode($puntua->getTestua()), 'C6EF8C', '000000');
+		$gMapMarker = new GMapMarker($puntua->getLatitudea(), $puntua->getLongitudea(), array('title ' => $test, 'icon ' => $ikonoa));
 		$gMap->addMarker($gMapMarker);
 		$k++;
 	}
@@ -317,7 +313,8 @@
 	if ($gertakaria->getEraikinaId() != null)
 	{
 		$eraikina = $gertakaria->getEraikina();
-		$gMapMarker = new GMapMarker($eraikina->getLatitudea(), $eraikina->getLongitudea(), array('title' => "'" . $eraikina->getIzena() . "'"));
+		$ikonoa = sprintf('\'https://chart.googleapis.com/chart?chst=%s&chld=%s|%s\'', 'd_map_pin_icon_withshadow', 'home', '99ffff');
+		$gMapMarker = new GMapMarker($eraikina->getLatitudea(), $eraikina->getLongitudea(), array('title' => "'" . $eraikina->getIzena() . "'", 'icon ' => $ikonoa));
 		$gMap->addMarker($gMapMarker);
 		$k++;
 	}

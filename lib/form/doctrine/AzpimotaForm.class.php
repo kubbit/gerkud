@@ -10,7 +10,7 @@
  */
 class AzpimotaForm extends BaseAzpimotaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

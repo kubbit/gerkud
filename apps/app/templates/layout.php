@@ -1,12 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<?php include_http_metas() ?>
-		<?php include_metas() ?>
-		<?php include_title() ?>
+		<meta charset="utf-8" />
+		<!--[if IE]>
+		<meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=IE8" />
+		<![endif]-->
+		<meta name="robots" content="noindex, nofollow" />
+		<?php include_title(); ?>
 		<link rel="shortcut icon" href="/favicon.ico" />
-		<?php include_stylesheets() ?>
-		<?php include_javascripts() ?>
+		<?php include_stylesheets(); ?>
+		<?php include_javascripts(); ?>
 	</head>
 
 	<body>
@@ -29,7 +32,7 @@
 		<div id="gorputza">
 <?php if ($sf_user->isAuthenticated()): ?>
 			<ul class="sesioa">
-				<li id="bilatu"><?php echo link_to(image_tag('Bilatu.png', array('alt' => 'Bilatu')), 'gertakaria/index?bilaketa=true') ?></li>
+				<li id="bilatu"><?php echo link_to(image_tag('Bilatu.png', array('alt' => 'Bilatu')), 'gertakaria/index?bilaketa=true', array('id' => 'erakutsiBilaketa')) ?></li>
 	<?php if (sfContext::getInstance()->getRouting()->getCurrentInternalUri() != "gertakaria/new" && sfContext::getInstance()->getRouting()->getCurrentInternalUri() != "gertakaria/create"): ?>
 				<li id="sortu"><?php echo link_to(__('Gertakaria Sortu'), 'gertakaria/new') ?></li>
 	<?php endif; ?>

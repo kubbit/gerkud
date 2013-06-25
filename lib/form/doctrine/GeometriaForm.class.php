@@ -10,7 +10,7 @@
  */
 class GeometriaForm extends BaseGeometriaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

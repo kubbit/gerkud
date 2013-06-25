@@ -10,7 +10,7 @@
  */
 abstract class BaseFormFilterDoctrine extends sfFormFilterDoctrine
 {
-  public function setup()
-  {
-  }
+	public function setup()
+	{
+	}
 }

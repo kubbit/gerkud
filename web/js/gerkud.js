@@ -4,20 +4,33 @@ function erakutsiEzkutatuBilaketa()
 	if (!bilaketa)
 		return;
 
-	if (bilaketa.style.display == 'none')
+	if (bilaketa.style.display === 'none')
+	{
 		bilaketa.style.display = 'inherit';
+
+		// kodean fokoa jarri
+		var kodea = document.getElementById('gertakaria_filters_id');
+		if (kodea)
+			kodea.focus();
+	}
 	else
 		bilaketa.style.display = 'none';
+
+	// orri aldaketa saihestu
+	if (event.preventDefault)
+		event.preventDefault();
+	else
+		event.returnValue = false;
 }
 function erakutsiEzkutatuAurreratua()
 {
-	if (document.getElementById('aurreratua').style.display == 'none')
+	if (document.getElementById('aurreratua').style.display === 'none')
 	{
 		document.getElementById('aurreratua').style.display = 'block';
 		document.getElementById('arrunta').style.display = 'none';
 		document.getElementById('aurreratuaB').style.display = 'block';
 	}
-	else if (document.getElementById('aurreratua').style.display == 'block')
+	else if (document.getElementById('aurreratua').style.display === 'block')
 	{
 		document.getElementById('aurreratua').style.display = 'none';
 		document.getElementById('arrunta').style.display = 'block';
@@ -27,18 +40,16 @@ function erakutsiEzkutatuAurreratua()
 
 function mapaErakutsi()
 {
-	if (document.getElementById('geolokalizazioa').style.visibility == 'hidden')
-	{
-		document.getElementById('geolokalizazioa').style.visibility = 'visible';
-		document.getElementById('plano_icon').style.display = 'none';
-	}
-	else if (document.getElementById('geolokalizazioa').style.display == 'none')
+	if (document.getElementById('geolokalizazioa').style.display === 'none')
 	{
 		document.getElementById('geolokalizazioa').style.display = 'block';
 		document.getElementById('plano_icon').style.display = 'none';
-		document.getElementById('map').event.trigger(gmap, "resize");
+
+		if (map === null)
+			initialize();
+		google.maps.event.trigger(map, 'resize');
 	}
-	else if (document.getElementById('geolokalizazioa').style.display == 'block')
+	else if (document.getElementById('geolokalizazioa').style.display === 'block')
 	{
 		document.getElementById('geolokalizazioa').style.display = 'none';
 		document.getElementById('plano_icon').style.display = 'block';
@@ -58,7 +69,7 @@ onload = function()
 		erakutsiBilaketa.onclick = function()
 		{
 			erakutsiEzkutatuBilaketa();
-		}
+		};
 	}
 	var ezkutatuBilaketa = document.getElementById('ezkutatuBilaketa');
 	if (ezkutatuBilaketa)
@@ -71,7 +82,24 @@ onload = function()
 		ezkutatuBilaketa.onclick = function()
 		{
 			erakutsiEzkutatuBilaketa();
-		}
+		};
+	}
+
+	var erakutsiPlanoa = document.getElementById('erakutsiPlanoa');
+	if (erakutsiPlanoa)
+	{
+		erakutsiPlanoa.onclick = function()
+		{
+			mapaErakutsi();
+		};
+	}
+	var ezkutatuPlanoa = document.getElementById('ezkutatuPlanoa');
+	if (ezkutatuPlanoa)
+	{
+		ezkutatuPlanoa.onclick = function()
+		{
+			mapaErakutsi();
+		};
 	}
 
 	// Datuak modulua

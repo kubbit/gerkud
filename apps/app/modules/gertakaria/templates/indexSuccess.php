@@ -1,7 +1,8 @@
 <?php use_helper('Javascript', 'GMap') ?>
 <?php use_helper('Pagination'); ?>
+<?php use_javascripts_for_form($filter) ?>
 
-<?php if ($bilaketa == "true"): ?>
+<?php if ($bilaketa == "true" || $erroreak): ?>
 <form id="bilaketa" action="<?php echo url_for('gertakaria/index'); ?>" method="post" class="bilaketa_form">
 	<h2><?php echo __('Gertakarien bilaketa') ?></h2>
 	<img id="ezkutatuBilaketa" src="/images/Ezabatu.png" class="ezkutatu" alt="Ezkutatu" />
@@ -16,17 +17,21 @@
 			<?php echo $filter['librea']->render(array('size' => 75)); ?>
 		</div>
 	</div>
-	<div id="aurreratua" class="hilarak" style="display: none">
+	<div id="aurreratua" class="hilarak" style="<?php echo ($erroreak) ? '' : 'display: none' ?>">
 		<fieldset>
 			<div>
 				<label><?php echo __('Irekiera data (noiztik-nora)') ?>:</label>
-				<div><?php echo $filter['created_at_noiztik']->render(); ?></div>
-				<div><?php echo $filter['created_at_nora']->render(); ?></div>
+				<?php echo $filter['created_at_noiztik']->render(); ?>
+				<span class="errorea"><?php echo __($filter['created_at_noiztik']->getError()); ?></span>
+				<?php echo $filter['created_at_nora']->render(); ?>
+				<span class="errorea"><?php echo __($filter['created_at_nora']->getError()); ?></span>
 			</div>
 			<div>
 				<label><?php echo __('Ixte data (noiztik-nora)') ?>:</label>
-				<div><?php echo $filter['ixte_data_noiztik']->render(); ?></div>
-				<div><?php echo $filter['ixte_data_nora']->render(); ?></div>
+				<?php echo $filter['ixte_data_noiztik']->render(); ?>
+				<span class="errorea"><?php echo __($filter['ixte_data_noiztik']->getError()); ?></span>
+				<?php echo $filter['ixte_data_nora']->render(); ?>
+				<span class="errorea"><?php echo __($filter['ixte_data_nora']->getError()); ?></span>
 			</div>
 		</fieldset>
 		<div>
@@ -81,7 +86,7 @@
 			<th></th>
 			<th><?php echo __('Id') ?></th>
 			<th style="width: 6em;"><?php echo __('Irekiera') ?></th>
-			<th><?php echo __('Mota') ?></th>
+			<th><?php echo __('Saila') ?></th>
 			<th style="width: 5em;"><?php echo __('Auzoa') ?></th>
 			<th style="min-width: 8em;"><?php echo sprintf('%s / %s', __('Kalea'), __('Eraikina')) ?></th>
 			<th><?php echo __('Laburpena') ?></th>
@@ -97,12 +102,12 @@
 			<td class="lehentasuna"><?php for ($i = 0; $i < $gertakaria->getLehentasunaId() - 1; $i++) echo '!'; ?></td>
 			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo $gertakaria->getId() ?></a></td>
 			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getCreatedAt())) ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo $gertakaria->getMota() ?></a></td>
+			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo $gertakaria->getSaila() ?></a></td>
 			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php if ($gertakaria->getBarrutiaId()) echo $gertakaria->getBarrutia() ?></a></td>
 			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php if ($gertakaria->getEraikinaId()) echo $gertakaria->getEraikina(); else if ($gertakaria->getKaleaId()) echo sprintf('%s, %s', $gertakaria->getKalea(), $gertakaria->getKaleZbkia()); ?></a></td>
 			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo $gertakaria->getLaburpena() ?></a></td>
 			<?php $kol = $gertakaria->getEgoeraKolorea(); ?>
-			<td <?php echo "bgcolor='" . $kol[0]->getKolorea() . "'"; ?>><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>">
+			<td <?php echo "style='background-color: " . $kol[0]->getKolorea() . "'"; ?>><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>">
 			<?php echo $gertakaria->getEgoera() ?></a></td>
 			<!--td><?php //if ($gertakaria->getLangileaId()) {echo $gertakaria->getLangilea();}  ?></td-->
 			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo $gertakaria->getAbisuaNork() ?></a></td>
@@ -117,7 +122,5 @@
 </div>
 
 
-<!-- MAPA orri berri batean irekitzeko. Helbidea begiratu behar da! -->
-<a href="#" onclick="<?php echo sprintf('window.open(\'%s\', \'%s\', \'%s\')', url_for('gertakaria/mapa?page=' . $pager->getPage()), 'Planoa', 'width=800,height=600,scroll=yes'); ?>">
-	<img class="mapa" src="<?php echo sprintf('/images/Planoa_%s.png', $sf_user->getCulture()); ?>" alt="Planoa" />
-</a>
+<img id="mapa_ikonoa" class="mapa" src="<?php echo sprintf('/images/Planoa_%s.png', $sf_user->getCulture()); ?>" alt="Planoa"
+ onclick="<?php echo sprintf('window.open(\'%s\', \'%s\', \'%s\')', url_for('gertakaria/mapa?page=' . $pager->getPage()), 'Planoa', 'width=800,height=600,scroll=yes'); ?>" />

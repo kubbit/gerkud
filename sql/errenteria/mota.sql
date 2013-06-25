@@ -38,14 +38,6 @@ INSERT INTO `mota_translation` (`id`, `izena`, `lang`) VALUES
 
 TRUNCATE TABLE azpimota;
 INSERT INTO `azpimota` (`id`, `mota_id`) VALUES
-  (199, 1),
-  (299, 2),
-  (399, 3),
-  (499, 4),
-  (599, 5),
-  (699, 6),
-  (799, 7),
-  (899, 8),
   (901, 9),
   (902, 9),
   (903, 9),
@@ -55,28 +47,10 @@ INSERT INTO `azpimota` (`id`, `mota_id`) VALUES
   (907, 9),
   (908, 9),
   (909, 9),
-  (910, 9),
-  (999, 9),
-  (1099, 10);
+  (910, 9);
 
 TRUNCATE TABLE azpimota_translation;
 INSERT INTO `azpimota_translation` (`id`, `izena`, `lang`) VALUES
-  (199, 'Genérico', 'es'),
-  (199, 'Orokorra', 'eu'),
-  (299, 'Genérico', 'es'),
-  (299, 'Orokorra', 'eu'),
-  (399, 'Genérico', 'es'),
-  (399, 'Orokorra', 'eu'),
-  (499, 'Genérico', 'es'),
-  (499, 'Orokorra', 'eu'),
-  (599, 'Genérico', 'es'),
-  (599, 'Orokorra', 'eu'),
-  (699, 'Genérico', 'es'),
-  (699, 'Orokorra', 'eu'),
-  (799, 'Genérico', 'es'),
-  (799, 'Orokorra', 'eu'),
-  (899, 'Genérico', 'es'),
-  (899, 'Orokorra', 'eu'),
   (901, 'Asfaltado', 'es'),
   (901, 'Asfaltatzea', 'eu'),
   (902, 'Garajes, Vados, Reservados', 'es'),
@@ -96,10 +70,6 @@ INSERT INTO `azpimota_translation` (`id`, `izena`, `lang`) VALUES
   (909, 'Tráfico y Transportes-otros', 'es'),
   (909, 'Trafikoa eta garraioak - besteak', 'eu'),
   (910, 'Veladores', 'es'),
-  (910, 'Terrazak', 'eu'),
-  (999, 'Genérico', 'es'),
-  (999, 'Orokorra', 'eu'),
-  (1099, 'Genérico', 'es'),
-  (1099, 'Orokorra', 'eu');
+  (910, 'Terrazak', 'eu');
 
 SET foreign_key_checks = 1;

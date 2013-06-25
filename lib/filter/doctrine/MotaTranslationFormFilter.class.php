@@ -10,7 +10,7 @@
  */
 class MotaTranslationFormFilter extends BaseMotaTranslationFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

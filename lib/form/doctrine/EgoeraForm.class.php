@@ -10,7 +10,7 @@
  */
 class EgoeraForm extends BaseEgoeraForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

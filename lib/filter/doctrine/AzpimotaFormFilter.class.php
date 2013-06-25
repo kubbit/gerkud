@@ -10,7 +10,7 @@
  */
 class AzpimotaFormFilter extends BaseAzpimotaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

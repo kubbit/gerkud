@@ -10,7 +10,7 @@
  */
 class JatorrizkoSailaForm extends BaseJatorrizkoSailaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

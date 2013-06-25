@@ -10,7 +10,7 @@
  */
 class AzpimotaTranslationForm extends BaseAzpimotaTranslationForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

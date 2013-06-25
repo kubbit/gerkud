@@ -10,7 +10,7 @@
  */
 class KlaseaForm extends BaseKlaseaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

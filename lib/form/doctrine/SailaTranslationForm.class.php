@@ -10,7 +10,7 @@
  */
 class SailaTranslationForm extends BaseSailaTranslationForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

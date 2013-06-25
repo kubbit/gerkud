@@ -12,141 +12,73 @@
  */
 class Gertakaria extends BaseGertakaria
 {
+	public function save(Doctrine_Connection $conn = null)
+	{
+		$berria = $this->isNew();
 
+		$conn = $conn ? $conn : Doctrine_Core::getTable('Gertakaria')->getConnection();
+		$conn->beginTransaction();
+		try
+		{
+			$ret = parent::save($conn);
+			$conn->commit();
 
-public function save(Doctrine_Connection $conn = null)
-{
-  $berria = $this->isNew();
+			// eskaera berria bada, bidali mezua saileko langileei
+			if ($berria)
+				$this->ohartarazi();
 
-//  $conn = $conn ? $conn : GertakariaTable::getConnection();
-  $conn = $conn ? $conn : Doctrine_Core::getTable('Gertakaria')->getConnection();
-  $conn->beginTransaction();
-  try
-  {
-	$ret = parent::save($conn);
-	$this->updateLuceneIndex();
-	$conn->commit();
+			return $ret;
+		}
+		catch (Exception $e)
+		{
+			$conn->rollBack();
+			throw $e;
+		}
+	}
 
-	// eskaera berria bada, bidali mezua saileko langileei
-	if ($berria)
-		$this->ohartarazi();
+	public function getFitxategiak()
+	{
+		$q = Doctrine_Query::create()
+			->from('Fitxategia f')
+			->where('f.gertakaria_id = ?', $this->getId());
 
-	return $ret;
-  }
-  catch (Exception $e)
-  {
-    	$conn->rollBack();
-    	throw $e;
-  }
-}
+		return $q->execute();
+	}
 
-public function delete(Doctrine_Connection $conn = null)
-{
-  $index = GertakariaTable::getLuceneIndex();
-  if ($hit = $index->find('pk:'.$this->getId()))
-  {
-    $index->delete($hit->id);
-  }
-  return parent::delete($conn);
-}
+	public function getIruzkinak()
+	{
+		$q = Doctrine_Query::create()
+			->from('Iruzkina i')
+			->where('i.gertakaria_id = ?', $this->getId())
+			->orderBy('created_at');
 
+		return $q->execute();
+	}
 
-public function updateLuceneIndex()
-{
-  $index = GertakariaTable::getLuceneIndex();
-  // remove an existing entry
-  if ($hit = $index->find('pk:'.$this->getId()))
-  {
-    $index->delete($hit->id);
-  }
+	public function getKoordenadak()
+	{
+		$q = Doctrine_Query::create()
+			->from('geo g')
+			->where('g.gertakaria_id = ?', $this->getId());
 
-  $doc = new Zend_Search_Lucene_Document();
+		return $q->execute();
+	}
 
-  // store job primary key URL to identify it in the search results
-  $doc->addField(Zend_Search_Lucene_Field::UnIndexed('pk', $this->getId()));
+	public function getEgoeraKolorea()
+	{
+		$q = Doctrine_Query::create()
+			->from('Egoera e')
+			->where('e.id = ?', $this->getEgoeraId());
+		return $q->execute();
+	}
 
-  // index job fields
-  $doc->addField(Zend_Search_Lucene_Field::UnStored('laburpena', $this->getLaburpena(), 'utf-8'));
-  $doc->addField(Zend_Search_Lucene_Field::UnStored('abisuanork', $this->getAbisuanork(), 'utf-8'));
-  $doc->addField(Zend_Search_Lucene_Field::UnStored('deskribapena', $this->getDeskribapena(), 'utf-8'));
-
-  // add job to the index
-  $index->addDocument($doc);
-  $index->commit();
-}
-
-public function getForLuceneQuery($query)
-{
-  $hits = self::getLuceneIndex()->find($query);
-  $pks = array();
-  foreach ($hits as $hit)
-  {
-	    $pks[] = $hit->pk;
-  }
-  if (empty($pks))
-  {
-	    return array();
-  }
-
-  $q = $this->createQuery('j')
-    ->whereIn('j.id', $pks);
-//    ->limit(20);
-//  $q = $this->addActiveJobsQuery($q);
-  return $q->execute();
-}
-
-
-public function getFitxategiak()
-{
-  $q = Doctrine_Query::create()
-    ->from('Fitxategia f')
-    ->where('f.gertakaria_id = ?', $this->getId());
-
-    return $q->execute();
-}
-
-public function getIruzkinak()
-{
-  $q = Doctrine_Query::create()
-    ->from('Iruzkina i')
-//    ->where('e.gertakaria_id = ?', $this->getId())
-    ->where('i.gertakaria_id = ?', $this->getId())
-    ->orderBy('created_at');
-
-    return $q->execute();
-}
-
-public function getKoordenadak()
-{
-  $q = Doctrine_Query::create()
-    ->from('geo g')
-//    ->where('e.gertakaria_id = ?', $this->getId())
-    ->where('g.gertakaria_id = ?', $this->getId());
-//    ->orderBy('created_at');
-
-    return $q->execute();
-}
-
-
-
-
-public function getEgoeraKolorea()
-{
-  $q = Doctrine_Query::create()
-    ->from('Egoera e')
-    ->where('e.id = ?', $this->getEgoeraId());
-    return $q->execute();
-
-}
-
-public function getLehentasunaKolorea()
-{
-  $q = Doctrine_Query::create()
-    ->from('Lehentasuna l')
-    ->where('l.id = ?', $this->getLehentasunaId());
-    return $q->execute();
-
-}
+	public function getLehentasunaKolorea()
+	{
+		$q = Doctrine_Query::create()
+			->from('Lehentasuna l')
+			->where('l.id = ?', $this->getLehentasunaId());
+		return $q->execute();
+	}
 
 	/*
 	 * Gertakariaren oharra jaso behar duten langile guztien e-mailak itzuli

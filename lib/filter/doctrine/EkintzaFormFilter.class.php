@@ -10,7 +10,7 @@
  */
 class EkintzaFormFilter extends BaseEkintzaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

@@ -20,14 +20,29 @@ class datuakActions extends sfActions
 	public function executeIndex(sfWebRequest $request)
 	{
 		$this->datuakForm = new DatuakForm();
+		if (!$request->isMethod(sfRequest::POST))
+			return;
+
+		$this->processForm($request, $this->datuakForm);
+	}
+	protected function processForm(sfWebRequest $request, sfForm $form)
+	{
+		$form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+		if (!$form->isValid())
+			return;
 
 		// definidas en lib/form/DatuakForm.class.php, puestas aquí para la traducción
 		$tarteak = array(__('Urteak'), __('Hilabeteak'), __('Asteak'), __('Egunak'));
 
 		$this->formularioa = $request->getParameter('datuak');
 
-		$this->hasiera = $this->widget2date($this->formularioa['hasiera']);
-		$this->amaiera = $this->widget2date($this->formularioa['amaiera']);
+		$this->hasiera = $this->formularioa['hasiera'];
+		if (!$this->hasiera)
+			$this->hasiera = null;
+
+		$this->amaiera = $this->formularioa['amaiera'];
+		if (!$this->amaiera)
+			$this->amaiera = null;
 
 		$this->taula = $this->formularioa['taula'];
 		$this->tartea = $this->formularioa['tartea'];
@@ -89,13 +104,6 @@ class datuakActions extends sfActions
 				$this->getDatuak();
 				break;
 		}
-	}
-	protected function widget2date($widget)
-	{
-		if ($widget['year'] == null || $widget['month'] == null || $widget['day'] == null)
-			return null;
-
-		return sprintf('%d/%d/%d', $widget['year'], $widget['month'], $widget['day']);
 	}
 	public function getDatuak()
 	{

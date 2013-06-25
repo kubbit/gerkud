@@ -10,44 +10,32 @@
  */
 class langileaActions extends sfActions
 {
-  public function executeEdit(sfWebRequest $request)
-  {
-//    $this->forward404Unless($langilea = Doctrine::getTable('langilea')->find(array($request->getParameter('id'))), sprintf('Object langilea does not exist (%s).', $request->getParameter('id')));
+	public function executeEdit(sfWebRequest $request)
+	{
+		$this->forward404Unless($langilea = Doctrine::getTable('langilea')->find(array($this->getUser()->getguardUser()->getId())), sprintf('Object langilea does not exist (%s).', $request->getParameter('id')));
 
+		$this->form = new langileaForm($langilea);
+	}
 
-//$sf_user->getGuardUser()->getFirstName()
-    $this->forward404Unless($langilea = Doctrine::getTable('langilea')->find(array($this->getUser()->getguardUser()->getId())), sprintf('Object langilea does not exist (%s).', $request->getParameter('id')));
+	public function executeUpdate(sfWebRequest $request)
+	{
+		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
+		$this->forward404Unless($langilea = Doctrine::getTable('langilea')->find(array($request->getParameter('id'))), sprintf('Object langilea does not exist (%s).', $request->getParameter('id')));
+		$this->form = new langileaForm($langilea);
 
+		$this->processForm($request, $this->form);
 
+		$this->setTemplate('edit');
+	}
 
+	protected function processForm(sfWebRequest $request, sfForm $form)
+	{
+		$form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+		if ($form->isValid())
+		{
+			$langilea = $form->save();
 
-
-
-    $this->form = new langileaForm($langilea);
-  }
-
-  public function executeUpdate(sfWebRequest $request)
-  {
-    $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $this->forward404Unless($langilea = Doctrine::getTable('langilea')->find(array($request->getParameter('id'))), sprintf('Object langilea does not exist (%s).', $request->getParameter('id')));
-    $this->form = new langileaForm($langilea);
-
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('edit');
-  }
-
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
-      $langilea = $form->save();
-
-      $this->redirect('langilea/edit?id='.$langilea->getId());
-    }
-  }
-
-
-
+			$this->redirect('langilea/edit?id='.$langilea->getId());
+		}
+	}
 }

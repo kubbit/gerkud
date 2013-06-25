@@ -10,7 +10,7 @@
  */
 class LehentasunaFormFilter extends BaseLehentasunaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

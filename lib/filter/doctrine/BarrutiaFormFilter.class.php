@@ -10,7 +10,7 @@
  */
 class BarrutiaFormFilter extends BaseBarrutiaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

@@ -10,7 +10,7 @@
  */
 class EgoeraTranslationForm extends BaseEgoeraTranslationForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

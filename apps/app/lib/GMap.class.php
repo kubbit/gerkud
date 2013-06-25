@@ -48,42 +48,42 @@ class GMap
 {
 
   protected $options = array(
-    // boolean  If true, do not clear the contents of the Map div.  
+    // boolean  If true, do not clear the contents of the Map div.
     'noClear ' => null,
-    // string Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as a user pans.  
+    // string Color used for the background of the Map div. This color will be visible when tiles have not yet loaded as a user pans.
     'backgroundColor' => null,
-    // string The name or url of the cursor to display on a draggable object.  
+    // string The name or url of the cursor to display on a draggable object.
     'draggableCursor' => null,
-    // string The name or url of the cursor to display when an object is dragging.  
+    // string The name or url of the cursor to display when an object is dragging.
     'draggingCursor' => null,
-    // boolean If false, prevents the map from being dragged. Dragging is enabled by default.  
+    // boolean If false, prevents the map from being dragged. Dragging is enabled by default.
     'draggable' => null,
-    // boolean If true, enables scrollwheel zooming on the map. The scrollwheel is disabled by default.  
+    // boolean If true, enables scrollwheel zooming on the map. The scrollwheel is disabled by default.
     'scrollwheel' => null,
-    // boolean If false, prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default.  
+    // boolean If false, prevents the map from being controlled by the keyboard. Keyboard shortcuts are enabled by default.
     'keyboardShortcuts' => null,
-    // LatLng The initial Map center. Required.  
+    // LatLng The initial Map center. Required.
     'center' => null,
-    // number The initial Map zoom level. Required.  
+    // number The initial Map zoom level. Required.
     'zoom' => null,
-    // string The initial Map mapTypeId. Required.  
+    // string The initial Map mapTypeId. Required.
     'mapTypeId' => 'google.maps.MapTypeId.ROADMAP',
-    // boolean Enables/disables all default UI. May be overridden individually.  
+    // boolean Enables/disables all default UI. May be overridden individually.
     'disableDefaultUI' => null,
-    // boolean The initial enabled/disabled state of the Map type control.  
+    // boolean The initial enabled/disabled state of the Map type control.
     'mapTypeControl' => null,
-    // MapTypeControl options The initial display options for the Map type control.  
+    // MapTypeControl options The initial display options for the Map type control.
     'mapTypeControlOptions' => null,
-    // boolean The initial enabled/disabled state of the scale control.  
+    // boolean The initial enabled/disabled state of the scale control.
     'scaleControl' => null,
-    // ScaleControl options The initial display options for the scale control.  
+    // ScaleControl options The initial display options for the scale control.
     'scaleControlOptions' => null,
-    // boolean The initial enabled/disabled state of the navigation control.  
+    // boolean The initial enabled/disabled state of the navigation control.
     'navigationControl' => null,
-    // NavigationControl options The initial display options for the navigation control.  
+    // NavigationControl options The initial display options for the navigation control.
     'navigationControlOptions' => null
   );
-  
+
   protected $parameters = array(
       'js_name' => 'map',
       'onload_method' => 'js',
@@ -94,7 +94,7 @@ class GMap
   protected $container_attributes = array(
       'id' =>'map'
   );
-  
+
   // style of the container
   protected $container_style=array(
     'width'=>'512px',
@@ -112,7 +112,7 @@ class GMap
   protected $global_variables=array();
 
   // the interface to the Google Maps API web service
-  protected $gMapClient = false;  
+  protected $gMapClient = false;
 
   /**
    * Constructs a Google Map PHP object
@@ -126,7 +126,7 @@ class GMap
     $this->setContainerAttributes($container_attributes);
     $this->setContainerStyles($container_style);
     $this->setParameters($parameters);
-    
+
     // delcare the Google Map Javascript object as global
     $this->addGlobalVariable($this->getJsName(),'null');
 
@@ -348,9 +348,9 @@ class GMap
 
     return RenderTag::renderContent('div',null,$attributes);
   }
-  
+
   /**
-   * 
+   *
    * @return string
    * @author fabriceb
    * @since 2009-08-20
@@ -380,12 +380,12 @@ class GMap
     }
     $tab = '  ';
     $separator = "\n".$tab.$tab;
-    
+
     return '{'.$separator.$tab.implode(','.$separator.$tab, $options_array).$separator.'}';
   }
-  
+
   /**
-   * 
+   *
    * @return unknown_type
    * @author fabriceb
    * @since Oct 8, 2009
@@ -399,6 +399,9 @@ class GMap
         break;
       case 'prototype':
         return 'document.observe("dom:loaded", function(){initialize();});';
+        break;
+      case 'none':
+        return '';
         break;
       default:
       case 'js':
@@ -455,6 +458,10 @@ class GMap
       }
     }
     $return .= '
+    google.maps.event.addDomListener(window, \'resize\', function()
+    {
+      map.setCenter(mapOptions.center);
+    });
   }
 ';
     $return .= $this->getOnloadJs()."\n";
@@ -520,7 +527,7 @@ class GMap
 
   /**
    * checks which markers have special icons and binds these icons to the map
-   * 
+   *
    * @return void
    */
   public function loadMarkerIcons()
@@ -576,7 +583,7 @@ class GMap
       $return .= $event->getEventJs($this->getJsName());
       $return .= "\n";
     }
-    
+
     return $return;
   }
 
@@ -601,9 +608,9 @@ class GMap
   {
     $this->global_variables[$name] = $value;
   }
-  
+
   /**
-   * 
+   *
    * @param string $name
    * @return mixed
    * @author fabriceb
@@ -611,12 +618,12 @@ class GMap
    */
   public function getOption($name)
   {
-    
+
     return $this->options[$name];
   }
-  
+
   /**
-   * 
+   *
    * @param string $name
    * @param mixed $value
    * @return void
@@ -627,9 +634,9 @@ class GMap
   {
     $this->options[$name] = $value;
   }
-  
+
   /**
-   * 
+   *
    * @return integer $zoom
    */
   public function getZoom()
@@ -637,9 +644,9 @@ class GMap
 
     return $this->getOption('zoom');
   }
-  
+
   /**
-   * 
+   *
    * @param integer $zoom
    * @return void
    */
@@ -647,8 +654,8 @@ class GMap
   {
     $this->setOption('zoom',$zoom);
   }
-  
-  
+
+
   /**
    * Gorka 2012/01/30
    * @param boolean $scroll
@@ -658,9 +665,9 @@ class GMap
   {
     $this->setOption('scrollwheel',$scroll);
   }
-  
-  
-  
+
+
+
   /**
    * Sets the center of the map at the beginning
    *
@@ -672,7 +679,7 @@ class GMap
   {
     $this->setOption('center',new GMapCoord($lat, $lng));
   }
-  
+
   /**
    *
    * @return GMapCoord
@@ -719,10 +726,10 @@ class GMap
     // percentage or 0px
     if (substr($this->getContainerStyle('width'),-2,2) != 'px')
     {
-      
+
       return false;
     }
-    
+
     return intval(substr($this->getContainerStyle('width'),0,-2));
   }
 
@@ -737,7 +744,7 @@ class GMap
     // percentage or 0px
     if (substr($this->getContainerStyle('height'),-2,2) != 'px')
     {
-      
+
       return false;
     }
 
@@ -860,7 +867,7 @@ class GMap
   public function getMarkersFittingZoom($margin = 0, $default_zoom = 14)
   {
     $bounds = GMapBounds::getBoundsContainingMarkers($this->markers, $margin);
-    
+
     return $bounds->getZoom(min($this->getWidth(),$this->getHeight()), $default_zoom);
   }
 
@@ -914,7 +921,7 @@ class GMap
 
     return GMapClient::guessAPIKey($api_keys);
   }
-  
+
   /**
    * $directions getter
    *
@@ -924,10 +931,10 @@ class GMap
    */
   public function getDirections()
   {
-    
+
     return $this->directions;
   }
-  
+
   /**
    * $directions setter
    *
@@ -939,7 +946,7 @@ class GMap
   {
     $this->directions = $directions;
   }
-  
+
   /**
    * Add direction to list ($this->directions)
    *
@@ -953,10 +960,10 @@ class GMap
     {
       throw new sfException('The direction must be an instance of GMapDirection !');
     }
-    
+
     array_push($this->directions, $direction);
   }
-  
+
   /**
    * Get the directions javascript code
    *
@@ -967,7 +974,7 @@ class GMap
   public function getDirectionsJs()
   {
     $js_code = '';
-    
+
     foreach ($this->directions as $direction)
     {
       $js_code .= $direction->toJs($this->getJsName());

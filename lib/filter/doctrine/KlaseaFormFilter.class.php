@@ -10,7 +10,7 @@
  */
 class KlaseaFormFilter extends BaseKlaseaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

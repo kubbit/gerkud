@@ -1,11 +1,9 @@
 <?php
 
-
 class PlanifikazioaTable extends Doctrine_Table
 {
-    
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Planifikazioa');
-    }
+	public static function getInstance()
+	{
+		return Doctrine_Core::getTable('Planifikazioa');
+	}
 }

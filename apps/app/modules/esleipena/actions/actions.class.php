@@ -10,70 +10,70 @@
  */
 class esleipenaActions extends sfActions
 {
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->esleipenas = Doctrine::getTable('esleipena')
-      ->createQuery('a')
-      ->execute();
-  }
+	public function executeIndex(sfWebRequest $request)
+	{
+		$this->esleipenas = Doctrine::getTable('esleipena')
+			->createQuery('a')
+			->execute();
+	}
 
-  public function executeShow(sfWebRequest $request)
-  {
-    $this->esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id')));
-    $this->forward404Unless($this->esleipena);
-  }
+	public function executeShow(sfWebRequest $request)
+	{
+		$this->esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id')));
+		$this->forward404Unless($this->esleipena);
+	}
 
-  public function executeNew(sfWebRequest $request)
-  {
-    $this->form = new esleipenaForm();
-  }
+	public function executeNew(sfWebRequest $request)
+	{
+		$this->form = new esleipenaForm();
+	}
 
-  public function executeCreate(sfWebRequest $request)
-  {
-    $this->forward404Unless($request->isMethod(sfRequest::POST));
+	public function executeCreate(sfWebRequest $request)
+	{
+		$this->forward404Unless($request->isMethod(sfRequest::POST));
 
-    $this->form = new esleipenaForm();
+		$this->form = new esleipenaForm();
 
-    $this->processForm($request, $this->form);
+		$this->processForm($request, $this->form);
 
-    $this->setTemplate('new');
-  }
+		$this->setTemplate('new');
+	}
 
-  public function executeEdit(sfWebRequest $request)
-  {
-    $this->forward404Unless($esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
-    $this->form = new esleipenaForm($esleipena);
-  }
+	public function executeEdit(sfWebRequest $request)
+	{
+		$this->forward404Unless($esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
+		$this->form = new esleipenaForm($esleipena);
+	}
 
-  public function executeUpdate(sfWebRequest $request)
-  {
-    $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $this->forward404Unless($esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
-    $this->form = new esleipenaForm($esleipena);
+	public function executeUpdate(sfWebRequest $request)
+	{
+		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
+		$this->forward404Unless($esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
+		$this->form = new esleipenaForm($esleipena);
 
-    $this->processForm($request, $this->form);
+		$this->processForm($request, $this->form);
 
-    $this->setTemplate('edit');
-  }
+		$this->setTemplate('edit');
+	}
 
-  public function executeDelete(sfWebRequest $request)
-  {
-    $request->checkCSRFProtection();
+	public function executeDelete(sfWebRequest $request)
+	{
+		$request->checkCSRFProtection();
 
-    $this->forward404Unless($esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
-    $esleipena->delete();
+		$this->forward404Unless($esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
+		$esleipena->delete();
 
-    $this->redirect('esleipena/index');
-  }
+		$this->redirect('esleipena/index');
+	}
 
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
-      $esleipena = $form->save();
+	protected function processForm(sfWebRequest $request, sfForm $form)
+	{
+		$form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+		if ($form->isValid())
+		{
+			$esleipena = $form->save();
 
-      $this->redirect('esleipena/edit?id='.$esleipena->getId());
-    }
-  }
+			$this->redirect('esleipena/edit?id='.$esleipena->getId());
+		}
+	}
 }

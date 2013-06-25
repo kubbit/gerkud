@@ -10,19 +10,16 @@
  */
 class LangileaForm extends BaseLangileaForm
 {
-  /**
-   * @see sfGuardUserForm
-   */
-  public function configure()
-  {
-//    parent::configure();
-       $this->widgetSchema['ohartaraztea_id'] = new sfWidgetFormDoctrineChoice(array(
-                'model'     => 'Ohartaraztea',
-                ));
-    parent::configure();
+	/**
+	 * @see sfGuardUserForm
+	 */
+	public function configure()
+	{
+		$this->widgetSchema['ohartaraztea_id'] = new sfWidgetFormDoctrineChoice(array
+		(
+			'model' => 'Ohartaraztea',
+		));
 
-//    unset(
-//         $this['created_at'], $this['updated_at']
-//      );
-  }
+		parent::configure();
+	}
 }

@@ -10,7 +10,7 @@
  */
 class EgunTarteakForm extends BaseEgunTarteakForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

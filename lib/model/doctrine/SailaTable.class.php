@@ -1,11 +1,9 @@
 <?php
 
-
 class SailaTable extends Doctrine_Table
 {
-    
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Saila');
-    }
+	public static function getInstance()
+	{
+		return Doctrine_Core::getTable('Saila');
+	}
 }

@@ -10,7 +10,7 @@
  */
 class LehentasunaTranslationFormFilter extends BaseLehentasunaTranslationFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

@@ -10,7 +10,7 @@
  */
 class GeometriaFormFilter extends BaseGeometriaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

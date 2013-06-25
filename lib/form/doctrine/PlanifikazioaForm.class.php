@@ -10,7 +10,7 @@
  */
 class PlanifikazioaForm extends BasePlanifikazioaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

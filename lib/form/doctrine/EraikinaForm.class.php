@@ -10,7 +10,7 @@
  */
 class EraikinaForm extends BaseEraikinaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

@@ -10,7 +10,7 @@
  */
 class PlanifikazioaFormFilter extends BasePlanifikazioaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

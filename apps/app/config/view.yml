@@ -2,22 +2,11 @@
 # http://www.symfony-project.org/reference/1_4/en/13-View
 
 default:
-  http_metas:
-    content-type: text/html
-    X-UA-Compatible: IE=edge,chrome=IE8
-
   metas:
     title:        Gerkud - Gertakarien Kudeaketa
-    #description:  symfony project
-    #keywords:     symfony, project
-    #language:     en
-    robots:       noindex, nofollow
 
   stylesheets:    [main.css]
 
-#  javascripts:    []
-#  stylesheets: [/sfEasyGMapPlugin/css/sfEasyGMapPlugin.css]
-#  javascripts: [/js/sfEasyGMapPlugin.js]
   javascripts: [jquery-latest.js, jquery.tablesorter.js, gerkud.js]
 
   has_layout:     true

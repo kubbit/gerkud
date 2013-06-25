@@ -10,7 +10,7 @@
  */
 class EgunTarteakFormFilter extends BaseEgunTarteakFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

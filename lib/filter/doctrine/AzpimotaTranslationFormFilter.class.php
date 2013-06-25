@@ -10,7 +10,7 @@
  */
 class AzpimotaTranslationFormFilter extends BaseAzpimotaTranslationFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

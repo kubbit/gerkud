@@ -10,7 +10,7 @@
  */
 class SailaFormFilter extends BaseSailaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

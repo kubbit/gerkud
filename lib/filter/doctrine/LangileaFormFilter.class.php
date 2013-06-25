@@ -10,7 +10,7 @@
  */
 class LangileaFormFilter extends BaseLangileaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

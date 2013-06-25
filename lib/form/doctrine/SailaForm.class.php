@@ -10,7 +10,7 @@
  */
 class SailaForm extends BaseSailaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

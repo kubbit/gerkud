@@ -26,7 +26,7 @@ mapa:
   credentials: [[admins, gerkud, zerbitzu, arrunta]]
 
 kopiatu:
- credentials: [[admins, gerkud]]
+ credentials: [[admins, gerkud, zerbitzu, arrunta]]
 
 egoera:
   credentials: [[admins, gerkud, zerbitzu]]

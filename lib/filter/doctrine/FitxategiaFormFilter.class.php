@@ -10,7 +10,7 @@
  */
 class FitxategiaFormFilter extends BaseFitxategiaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

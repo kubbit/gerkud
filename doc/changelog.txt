@@ -1,4 +1,21 @@
 ================================================================================
+  Version 1.12
+  2013-06-25  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Conversión a XHTML 5
+* Corrección de la ordenación de listas con el plugin sfDependentSelectPlugin
+* Uso de iconos diferenciados en el mapa
+* Subtipo como dependiente de tipo en panel de búsqueda
+* Correcciones en la copia de incidencias
+* Visualización de sección en vez de tipo en lista de incidencias
+* Correcciones y mejoras en los listados
+* Añadido nuevo botón en edición de incidencias para guardar, poner en proceso
+  y cerrar una incidencia
+* El campo subtipo pasa a ser opcional
+* Uso de los nuevos tipos date y datetime de HTML 5 para los campos de fecha
+* Cambios menores en literales
+
+================================================================================
   Version 1.10
   2013-05-13  Kubbit Information Technology (http://kubbit.com)
 ================================================================================

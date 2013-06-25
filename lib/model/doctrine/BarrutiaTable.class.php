@@ -1,11 +1,9 @@
 <?php
 
-
 class BarrutiaTable extends Doctrine_Table
 {
-    
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Barrutia');
-    }
+	public static function getInstance()
+	{
+		return Doctrine_Core::getTable('Barrutia');
+	}
 }

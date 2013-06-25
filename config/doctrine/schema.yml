@@ -5,7 +5,7 @@ Gertakaria:
     laburpena: { type: string(255) }
     klasea_id: { type: integer, notnull: false }
     mota_id: { type: integer, notnull: true }
-    azpimota_id:  { type: integer, notnull: true }
+    azpimota_id:  { type: integer, notnull: false }
     abisuaNork: { type: string(512) }
     egoera_id: { type: integer, notnull: true, default: 1 }
     saila_id: { type: integer, notnull: false }

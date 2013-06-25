@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2013-05-03T11:30:18Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2013-06-24T13:33:53Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -21,8 +21,8 @@
         <target>Id</target>
       </trans-unit>
       <trans-unit id="5">
-        <source>Sortze Data</source>
-        <target>Fecha Creación</target>
+        <source>Irekiera data</source>
+        <target>Fecha alta</target>
       </trans-unit>
       <trans-unit id="6">
         <source>Klasea</source>
@@ -111,10 +111,6 @@
       <trans-unit id="28">
         <source>%eskaerak% eskaera topatu dira</source>
         <target>Se han encontrado %eskaerak% peticiones</target>
-      </trans-unit>
-      <trans-unit id="29">
-        <source>Irekitze data</source>
-        <target>Fecha de apertura</target>
       </trans-unit>
       <trans-unit id="30">
         <source>%gertakariak% gertakari topatu dira</source>
@@ -541,8 +537,8 @@
         <target>Datos estadísticos</target>
       </trans-unit>
       <trans-unit id="144">
-        <source>Hasiera data ezin da sortzerakoa baino lehenagokoa izan</source>
-        <target>La fecha de inicio no puede ser anterior a la de creación</target>
+        <source>Hasiera data ezin da irekierakoa baino lehenagokoa izan</source>
+        <target>La fecha de inicio no puede ser anterior a la de alta</target>
       </trans-unit>
       <trans-unit id="145">
         <source>Amaiera data ezin da hasierakoa baino lehenagokoa izan</source>
@@ -630,13 +626,13 @@
       </trans-unit>
       <trans-unit id="164">
         <source>Irekiera</source>
-        <target>F.Apertura</target>
+        <target>F.Alta</target>
       </trans-unit>
       <trans-unit id="165">
         <source>Aldatuta</source>
         <target>Modificado</target>
       </trans-unit>
-      <trans-unit id="1166">
+      <trans-unit id="166">
         <source>Eskuliburua</source>
         <target>Manual</target>
       </trans-unit>
@@ -648,21 +644,33 @@
         <source>Invalid.</source>
         <target>No válido</target>
       </trans-unit>
-      <trans-unit id="1167">
+      <trans-unit id="169">
         <source>Eskaerak (%eskaerak%)</source>
         <target>Peticiones (%eskaerak%)</target>
       </trans-unit>
-      <trans-unit id="1168">
+      <trans-unit id="170">
         <source>Irekiera data (noiztik-nora)</source>
-        <target>Fecha apertura (desde-hasta)</target>
+        <target>Fecha alta (desde-hasta)</target>
       </trans-unit>
-      <trans-unit id="1169">
+      <trans-unit id="171">
         <source>Ixte data (noiztik-nora)</source>
         <target>Fecha cierre (desde-hasta)</target>
       </trans-unit>
-      <trans-unit id="1170">
+      <trans-unit id="172">
         <source>Eskaera berria</source>
         <target>Petición nueva</target>
+      </trans-unit>
+      <trans-unit id="173">
+        <source>Berriz esleitu</source>
+        <target>Reasignar incidencia</target>
+      </trans-unit>
+      <trans-unit id="174">
+        <source>Data formatoa ez da zuzena (uuuu-hh-ee oo:mm)</source>
+        <target>El formato de fecha no es correcto (aaaa-MM-dd HH:mm)</target>
+      </trans-unit>
+      <trans-unit id="175">
+        <source>Gorde eta Itxi</source>
+        <target>Guardar y Cerrar</target>
       </trans-unit>
     </body>
   </file>

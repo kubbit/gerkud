@@ -10,7 +10,7 @@
  */
 class EkintzaForm extends BaseEkintzaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

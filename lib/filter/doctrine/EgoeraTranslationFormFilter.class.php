@@ -10,7 +10,7 @@
  */
 class EgoeraTranslationFormFilter extends BaseEgoeraTranslationFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

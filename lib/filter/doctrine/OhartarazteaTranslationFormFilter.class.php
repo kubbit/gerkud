@@ -10,7 +10,7 @@
  */
 class OhartarazteaTranslationFormFilter extends BaseOhartarazteaTranslationFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

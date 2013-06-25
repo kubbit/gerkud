@@ -1,12 +1,9 @@
 <?php
 
-
 class KaleaTable extends Doctrine_Table
 {
-    
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Kalea');
-    }
-
+	public static function getInstance()
+	{
+		return Doctrine_Core::getTable('Kalea');
+	}
 }

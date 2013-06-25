@@ -10,7 +10,7 @@
  */
 class SailekoLangileakFormFilter extends BaseSailekoLangileakFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

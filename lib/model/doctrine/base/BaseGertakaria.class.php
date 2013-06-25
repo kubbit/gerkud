@@ -130,7 +130,7 @@ abstract class BaseGertakaria extends sfDoctrineRecord
              ));
         $this->hasColumn('azpimota_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
+             'notnull' => false,
              ));
         $this->hasColumn('abisuaNork', 'string', 512, array(
              'type' => 'string',

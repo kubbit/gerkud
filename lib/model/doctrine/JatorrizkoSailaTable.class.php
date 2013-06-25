@@ -3,9 +3,8 @@
 
 class JatorrizkoSailaTable extends Doctrine_Table
 {
-    
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('JatorrizkoSaila');
-    }
+	public static function getInstance()
+	{
+		return Doctrine_Core::getTable('JatorrizkoSaila');
+	}
 }

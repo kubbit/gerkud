@@ -10,7 +10,7 @@
  */
 class LehentasunaTranslationForm extends BaseLehentasunaTranslationForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

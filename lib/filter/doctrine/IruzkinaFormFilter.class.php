@@ -10,7 +10,7 @@
  */
 class IruzkinaFormFilter extends BaseIruzkinaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

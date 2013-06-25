@@ -23,15 +23,15 @@
 			<label><?php echo __('Kodea') ?>:</label>
 			<?php echo $form->getObject()->getId(); ?>
 	<?php if (sfConfig::get('app_sortze_data_automatikoa')): ?>
-			<label><?php echo __('Sortze Data') ?>:</label>
+			<label><?php echo __('Irekiera data') ?>:</label>
 			<?php echo date(sfConfig::get('app_data_formatoa'), strtotime($form->getObject()->getCreatedAt())); ?>
 	<?php else: ?>
-			<label for="gertakaria_created_at_day"><?php echo __('Sortze Data') ?>:*</label>
+			<label for="gertakaria_created_at"><?php echo __('Irekiera data') ?>:*</label>
 			<?php echo $form['created_at']->render(); ?>
 			<span class="errorea"><?php echo __($form['created_at']->getError()); ?></span>
 	<?php endif; ?>
 <?php elseif (!sfConfig::get('app_sortze_data_automatikoa')): ?>
-			<label for="gertakaria_created_at_day"><?php echo __('Sortze Data') ?>:*</label>
+			<label for="gertakaria_created_at"><?php echo __('Irekiera data') ?>:*</label>
 			<?php echo $form['created_at']->render(); ?>
 			<span class="errorea"><?php echo __($form['created_at']->getError()); ?></span>
 <?php endif; ?>
@@ -45,7 +45,7 @@
 			<label for="gertakaria_mota_id"><?php echo __('Mota') ?>:*</label>
 			<?php echo $form['mota_id']->render(); ?>
 			<span class="errorea"><?php echo __($form['mota_id']->getError()); ?></span>
-			<label for="gertakaria_azpimota_id"><?php echo __('Azpimota') ?>:*</label>
+			<label for="gertakaria_azpimota_id"><?php echo __('Azpimota') ?>:</label>
 			<?php echo $form['azpimota_id']->render(); ?>
 			<span class="errorea"><?php echo __($form['azpimota_id']->getError()); ?></span>
 		</div>
@@ -85,12 +85,12 @@
 
 <?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
 		<div>
-			<label for="gertakaria_hasiera_aurreikusia_day"><?php echo __('Hasiera aurreikusia') ?>:</label>
+			<label for="gertakaria_hasiera_aurreikusia"><?php echo __('Hasiera aurreikusia') ?>:</label>
 			<?php echo $form['hasiera_aurreikusia']->render(); ?>
 			<span class="errorea"><?php echo __($form['hasiera_aurreikusia']->getError()); ?></span>
 		</div>
 		<div>
-			<label for="gertakaria_amaiera_aurreikusia_day"><?php echo __('Amaiera aurreikusia') ?>:</label>
+			<label for="gertakaria_amaiera_aurreikusia"><?php echo __('Amaiera aurreikusia') ?>:</label>
 			<?php echo $form['amaiera_aurreikusia']->render(); ?>
 			<span class="errorea"><?php echo __($form['amaiera_aurreikusia']->getError()); ?></span>
 		</div>
@@ -109,6 +109,10 @@
 			<input type="submit" value="<?php echo __('Gorde') ?>" />
 <?php else: ?>
 			<input type="submit" value="<?php echo __('Sortu') ?>" />
+<?php endif; ?>
+
+<?php if ($form->getObject()->getSailaId()): ?>
+			<input type="submit" class="eskubian" name="gertakaria_itxi" value="<?php echo __('Gorde eta Itxi'); ?>" />
 <?php endif; ?>
 		</div>
 

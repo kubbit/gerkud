@@ -10,7 +10,7 @@
  */
 class KaleaForm extends BaseKaleaForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

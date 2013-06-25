@@ -10,10 +10,8 @@
  */
 class GeoForm extends BaseGeoForm
 {
-  public function configure()
-  {
-
-
-        $this->widgetSchema['gertakaria_id'] = new sfWidgetFormTextarea();
-  }
+	public function configure()
+	{
+		$this->widgetSchema['gertakaria_id'] = new sfWidgetFormTextarea();
+	}
 }

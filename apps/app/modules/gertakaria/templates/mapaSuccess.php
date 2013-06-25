@@ -15,9 +15,9 @@
 		$gMap->setWidth('100%');
 		?>
 		<?php foreach ($pager->getResults() as $gertakaria): ?>
-			<?php if (($gertakaria->getKalea_id()) && ($gertakaria->getBarrutia_id() != 6)) : ?>
+			<?php if ($gertakaria->getKalea_id()) : ?>
 				<?php
-				$test = "'" . $gertakaria->getId() . "'";
+				$test = "'" . $gertakaria->getLaburpena() . "'";
 				$kale = Doctrine::getTable('Kalea')->find($gertakaria->getKaleaId());
 
 				$helbidea = sprintf('%s, %s %s', $kale->getGoogle(), $gertakaria->getKale_zbkia(), $herria);
@@ -25,7 +25,8 @@
 				$puntua = $gMap->geocodeXml($helbidea);
 				if (($puntua->getLat() != '') || ($puntua->getLng() != ''))
 				{
-					$gMapMarker = new GMapMarker($puntua->getLat(), $puntua->getLng(), array('title' => $test));
+					$ikonoa = sprintf('\'https://chart.googleapis.com/chart?chst=%s&chld=%s|%s|%s\'', 'd_map_pin_letter_withshadow', $gertakaria->getId(), 'ff8888', '000000');
+					$gMapMarker = new GMapMarker($puntua->getLat(), $puntua->getLng(), array('title' => $test, 'icon ' => $ikonoa));
 					$gMap->addMarker($gMapMarker);
 				}
 				?>

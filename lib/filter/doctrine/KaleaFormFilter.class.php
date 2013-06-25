@@ -10,7 +10,7 @@
  */
 class KaleaFormFilter extends BaseKaleaFormFilter
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }

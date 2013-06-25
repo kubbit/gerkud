@@ -10,7 +10,7 @@
  */
 class KlaseaTranslationForm extends BaseKlaseaTranslationForm
 {
-  public function configure()
-  {
-  }
+	public function configure()
+	{
+	}
 }
