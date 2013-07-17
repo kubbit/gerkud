@@ -10,7 +10,7 @@
  */
 class DatuakForm extends sfForm
 {
-	protected static $taulak = array(1 => 'Dataren arabera', 2 => 'Sailaren arabera', 3 => 'Egun desbiderapenaren arabera');
+	protected static $taulak = array(1 => 'Dataren arabera', 2 => 'Sailaren arabera', 3 => 'Egun desbiderapenaren arabera', 4 => 'Jatorrizko sailaren arabera');
 	protected static $tarteak = array(1 => 'Urteak', 2 => 'Hilabeteak', 4 => 'Asteak', 3 => 'Egunak');
 
 	public function configure()
@@ -41,6 +41,14 @@ class DatuakForm extends sfForm
 				'query' => Doctrine::getTable('Saila')->createQuery('s')
 					->leftJoin('s.Translation t WITH t.lang = ?', $culture)
 					->orderBy('t.name ASC')
+			)),
+			'jatorrizkosaila' => new sfWidgetFormDoctrineChoice(array
+			(
+				'model' => 'JatorrizkoSaila',
+				'add_empty' => '--',
+				'query' => Doctrine::getTable('JatorrizkoSaila')->createQuery('s')
+					->leftJoin('s.Translation t WITH t.lang = ?', $culture)
+					->orderBy('t.id ASC')
 			))
 		));
 		$this->validatorSchema['taula'] = new sfValidatorString(array('required' => true));
@@ -48,6 +56,7 @@ class DatuakForm extends sfForm
 		$this->validatorSchema['amaiera'] = new sfValidatorDataOrdua(array('required' => false));
 		$this->validatorSchema['tartea'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['saila'] = new sfValidatorString(array('required' => false));
+		$this->validatorSchema['jatorrizkosaila'] = new sfValidatorString(array('required' => false));
 
 		$this->widgetSchema->setNameFormat('datuak[%s]');
 	}

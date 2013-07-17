@@ -122,6 +122,8 @@ function IzkutatuFiltroak()
 	var taula = document.getElementById("datuak_taula");
 	var tartea = document.getElementById("tartea");
 	var saila = document.getElementById("saila");
+	var jatorrizkosaila = document.getElementById("jatorrizkosaila");
+	var aukera = document.getElementById("datuak_jatorrizkosaila");
 
 	if (!taula)
 		return;
@@ -131,14 +133,22 @@ function IzkutatuFiltroak()
 		case 1:
 			saila.style.display = '';
 			tartea.style.display = '';
+			jatorrizkosaila.style.display = '';
 			break;
 		case 2:
 			saila.style.display = 'none';
 			tartea.style.display = 'none';
+			jatorrizkosaila.style.display = '';
 			break;
 		case 3:
 			saila.style.display = '';
 			tartea.style.display = 'none';
+			jatorrizkosaila.style.display = '';
+			break;
+		case 4:
+			saila.style.display = '';
+			tartea.style.display = 'none';
+			jatorrizkosaila.style.display = 'none';
 			break;
 	}
 }

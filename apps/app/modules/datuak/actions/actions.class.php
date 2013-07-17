@@ -47,6 +47,7 @@ class datuakActions extends sfActions
 		$this->taula = $this->formularioa['taula'];
 		$this->tartea = $this->formularioa['tartea'];
 		$this->saila = $this->formularioa['saila'];
+		$this->saila = $this->formularioa['jatorrizkosaila'];
 
 		// volver a asignar a los campos los valores recibidos
 		$this->datuakForm->setDefault('taula', $this->taula);
@@ -54,6 +55,7 @@ class datuakActions extends sfActions
 		$this->datuakForm->setDefault('amaiera', $this->amaiera);
 		$this->datuakForm->setDefault('tartea', $this->tartea);
 		$this->datuakForm->setDefault('saila', $this->saila);
+		$this->datuakForm->setDefault('jatorrizkosaila', $this->jatorrizkosaila);
 
 		if ($this->tartea == 0)
 			$this->tartea = null;
@@ -103,11 +105,23 @@ class datuakActions extends sfActions
 				);
 				$this->getDatuak();
 				break;
+			case 4:
+				$this->titulua = __('Jatorrizko Sailaren arabera');
+				$this->goiburuak = array(__('Saila'), __('Irekiak'), __('Ebatziak'), __('Ebatzien egun batazbestekoa'));
+				$this->argibideak = array
+				(
+					'',
+					__('Sail bakoitzeko irekita dauden gertakariak'),
+					__('Sail bakoitzeko ebatziak dauden gertakariak'),
+					__('Sail bakoitzeko ebaztutako gertakarien egun batazbestekoa')
+				);
+				$this->getDatuak();
+				break;
 		}
 	}
 	public function getDatuak()
 	{
-		$sql = "CALL estatistikak(:hasiera, :amaiera, :taula, :tartea, :saila, :hizkuntza)";
+		$sql = "CALL estatistikak(:hasiera, :amaiera, :taula, :tartea, :saila, :jatorrizkosaila, :hizkuntza)";
 
 		$cn = Doctrine_Manager::getInstance()->connection();
 		$cmd = $cn->prepare($sql);
@@ -119,6 +133,7 @@ class datuakActions extends sfActions
 			':taula' => $this->taula,
 			':tartea' => $this->tartea,
 			':saila' => $this->saila,
+			':jatorrizkosaila' => $this->jatorrizkosaila,
 			':hizkuntza' => $this->getUser()->getCulture()
 		);
 		$cmd->execute($parametroak);

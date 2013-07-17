@@ -672,6 +672,10 @@
         <source>Gorde eta Itxi</source>
         <target>Guardar y Cerrar</target>
       </trans-unit>
+      <trans-unit id="176">
+        <source>Jatorrizko sailaren arabera</source>
+        <target>Por departamento de origen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

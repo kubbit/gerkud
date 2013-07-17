@@ -25,6 +25,11 @@
 			<?php echo $datuakForm['saila']->render(); ?>
 			<span class="errorea"><?php echo __($datuakForm['saila']->getError()); ?></span>
 		</div>
+		<div id="jatorrizkosaila">
+			<label id="lb_datuak_jatorrizkosaila" for="datuak_jatorrizkosaila"><?php echo __('Jatorrizko Saila'); ?></label>
+			<?php echo $datuakForm['jatorrizkosaila']->render(); ?>
+			<span class="errorea"><?php echo __($datuakForm['jatorrizkosaila']->getError()); ?></span>
+		</div>
 		<div id="onartu">
 			<label for="datuak_onartu"></label>
 			<input id="datuak_onartu" type="submit" value="<?php echo __('Onartu')?>" />
