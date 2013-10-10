@@ -41,7 +41,7 @@ class GertakariaTable extends Doctrine_Table
 			{
 				$q = $this->createQuery('j');
 				if ($query != '')
-					$q->where('j.laburpena LIKE :query OR j.deskribapena LIKE :query', array(':query' => '%' . $query . '%'));
+					$q->where('j.laburpena LIKE :query OR j.deskribapena LIKE :query OR j.abisuaNork LIKE :query', array(':query' => '%' . $query . '%'));
 
 				if ($query1['egoera_id']) $q->andWhere('j.egoera_id = ?', $query1['egoera_id']);
 				if ($query1['klasea_id']) $q->andWhere('j.klasea_id = ?', $query1['klasea_id']);
