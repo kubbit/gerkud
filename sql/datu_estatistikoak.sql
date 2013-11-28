@@ -7,7 +7,8 @@ SELECT
   ixte_data,
   amaiera_aurreikusia,
   saila_id,
-  egoera_id
+  egoera_id,
+  jatorrizkosaila_id
  FROM gertakaria g;
 
 DROP PROCEDURE IF EXISTS estatistikak;
@@ -20,6 +21,7 @@ DELIMITER //
  *         1: por periodos de fechas
  *         2: por departamento
  *         3: por rangos de dias
+ *         4: por departamento de origen
  * pTartea: periodos (sólo válido para el tipo de tabla 1)
  *          1: por año
  *          2: por mes
@@ -82,7 +84,9 @@ BEGIN
 			SET agno = primerAgno;
 			WHILE agno <= ultimoAgno DO
 				SELECT 1 INTO primerMes;
+				SELECT 31 INTO ultimoDia;
 				SELECT 12 INTO ultimoMes;
+				SELECT week(concat(agno, '/12/31')) INTO ultimaSemana;
 		
 				IF agno = primerAgno THEN
 					SELECT day(pInicio) INTO primerDia;
@@ -134,11 +138,20 @@ BEGIN
 				END IF;
 				
 				IF pTartea = 4 THEN
-					SET semana = primeraSemana;
+					IF agno = primerAgno THEN
+						SET semana = primeraSemana;
+					ELSE
+						SET semana = 1;
+					END IF;
+
 					WHILE semana <= ultimaSemana DO
 						SET fecha = adddate(concat(agno, '/01/01'), INTERVAL 7 * semana DAY);
 						SELECT subdate(fecha, INTERVAL weekday(fecha) DAY) INTO semanaIni;
 						SELECT adddate(fecha, INTERVAL 6 - weekday(fecha) DAY) INTO semanaFin;
+
+						IF agno = ultimoAgno AND semana = ultimaSemana THEN
+							SELECT pFin INTO semanaFin;
+						END IF;
 
 						# si es la semana de inicio o fin del filtro, coger las fechas indicadas
 						SET fecha = semanaIni;
@@ -165,10 +178,10 @@ BEGIN
 			(
 			SELECT
 			  CASE
-			   WHEN pTartea = 1 THEN date_format(i.hasiera, '%Y')
-			   WHEN pTartea = 2 THEN date_format(i.hasiera, '%Y - %m')
-			   WHEN pTartea = 3 THEN date_format(i.hasiera, '%Y-%m-%d')
-			   WHEN pTartea = 4 THEN date_format(i.hasiera, '%Y - %v')
+			   WHEN pTartea = 1 THEN date_format(i.amaiera, '%Y')
+			   WHEN pTartea = 2 THEN date_format(i.amaiera, '%Y - %m')
+			   WHEN pTartea = 3 THEN date_format(i.amaiera, '%Y-%m-%d')
+			   WHEN pTartea = 4 THEN date_format(i.amaiera, '%Y - %v')
 			  END AS datatartea,
 			  # nuevas incidencias creadas durante el intervalo
 			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(created_at AS DATE) BETWEEN i.hasiera AND i.amaiera) AS berriak,
@@ -203,9 +216,9 @@ BEGIN
 		# Por departamentos
 		WHEN 2 THEN
 		BEGIN
-		    SELECT *
-		     FROM
-		    (
+			SELECT *
+			FROM
+			(
 			SELECT
 			  s.name AS saila,
 			  # nuevas incidencias creadas durante el intervalo
@@ -217,7 +230,7 @@ BEGIN
 			 FROM sf_guard_group_translation s
 			 WHERE lang = pHizkuntza
 			 ORDER BY saila
-			 ) datuak
+			) datuak
 			UNION ALL
 			SELECT
 			  NULL,

@@ -15,7 +15,7 @@ class Saila extends BaseSaila
 	/*
 	 * Saileko langileak eskuratu
 	 */
-	protected function getLangileak()
+	public function getLangileak()
 	{
 		$sql = 'SELECT DISTINCT e.user_id AS id'
 		 . ' FROM sf_guard_user_group e,'

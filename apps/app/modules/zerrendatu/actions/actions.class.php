@@ -105,6 +105,8 @@ class zerrendatuActions extends sfActions
 	}
 	public function inprimatu()
 	{
+		$configEremuak = sfConfig::get('app_gerkud_eremuak');
+
 		$config = sfYaml::load(sfConfig::get("sf_app_config_dir") . '/pdf_configs.yml');
 		// 'L' = Landscape orientation
 		$pdf = new ZerrendaPDF('L');
@@ -123,17 +125,23 @@ class zerrendatuActions extends sfActions
 		// set color for text
 		$pdf->SetTextColor(0, 0, 0);
 
-		$html = '<html><head></head><body>';
+		$pdf->writeHTML('<html><head></head><body>', false, false, true, false, '');
+
+		if (sfConfig::get('app_gerkud_izena_eta_abizena'))
+			$erabiltzailea = ' concat(u.first_name, " ", coalesce(u.last_name, ""))';
+		else
+			$erabiltzailea = ' u.username';
 
 		$sql = 'SELECT s.name AS saila, m.izena AS mota, g.id AS kodea, e.izena AS egoera, laburpena,'
-		 . ' b.izena AS barrutia, er.izena AS eraikina, k.izena AS kalea, g.kale_zbkia AS zenbakia,'
-		 . ' u.username AS erabiltzailea, abisuanork, date(g.created_at) AS irekiera_data, date(ixte_data) AS ixte_data'
+		 . ' b.izena AS barrutia, a.izena AS auzoa, er.izena AS eraikina, k.izena AS kalea, g.kale_zbkia AS zenbakia,'
+		 . $erabiltzailea . ' AS erabiltzailea, abisuanork, date(g.created_at) AS irekiera_data, date(ixte_data) AS ixte_data'
 		 . ' FROM gertakaria g'
 		 . '  LEFT JOIN sf_guard_user u ON u.id = g.langilea_id'
 		 . '  LEFT JOIN sf_guard_group_translation s ON s.id = g.saila_id AND s.lang = :hizkuntza'
 		 . '  LEFT JOIN mota_translation m ON m.id = g.mota_id AND m.lang = :hizkuntza'
 		 . '  LEFT JOIN egoera_translation e ON e.id = g.egoera_id AND e.lang = :hizkuntza'
 		 . '  LEFT JOIN barrutia b ON b.id = g.barrutia_id'
+		 . '  LEFT JOIN auzoa a ON a.id = g.auzoa_id'
 		 . '  LEFT JOIN kalea k ON k.id = g.kalea_id'
 		 . '  LEFT JOIN eraikina er ON er.id = g.eraikina_id';
 
@@ -195,6 +203,14 @@ class zerrendatuActions extends sfActions
 
 			$strBarrutia = Doctrine::getTable('Barrutia')->find(array($this->formularioa['barrutia']))->getIzena();
 		}
+		$strAuzoa = '';
+		if ($this->formularioa['auzoa'])
+		{
+			array_push($condiciones, 'g.auzoa_id = :auzoa');
+			$parametroak[':auzoa'] = $this->formularioa['auzoa'];
+
+			$strAuzoa = Doctrine::getTable('Auzoa')->find(array($this->formularioa['auzoa']))->getIzena();
+		}
 		$strKalea = '';
 		if ($this->formularioa['kalea'])
 		{
@@ -225,7 +241,17 @@ class zerrendatuActions extends sfActions
 		$htmlIragazkiak .= sprintf('<td width="85">%s:</td><td width="150" style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Kalea'), $strKalea);
 		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Saila'), $strSaila);
 		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Eraikina'), $strEraikina);
-		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Auzoa'), $strBarrutia);
+
+		if (in_array('barrutia',$configEremuak) && in_array('auzoa',$configEremuak))
+		{
+			$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Barrutia'), $strBarrutia);
+			$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Auzoa'), $strAuzoa);
+		}
+		elseif (in_array('barrutia',$configEremuak))
+			$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Barrutia'), $strBarrutia);
+		else
+			$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Auzoa'), $strAuzoa);
+
 		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Data tartea'), $hasiera, !empty($hasiera) && !empty($amaiera) ? ' - ' : '', $amaiera);
 		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s</td><td></td>', __('Mota'), $strMota, empty($strAzpiMota) ? '' : ' / ' . $strAzpiMota);
 		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Egoera'), $strEgoera);
@@ -235,13 +261,36 @@ class zerrendatuActions extends sfActions
 			$sql .= ' WHERE ' . implode(' AND ', $condiciones);
 
 		$orden = array();
-		$SAILKAPEN_KANPOAK = array
-		(
-			// codigos definidos en el formulario ZerrendatuaForm.class.php
-			1 => 'saila',
-			2 => 'barrutia',
-			3 => 'mota'
-		);
+
+		if (in_array('barrutia',$configEremuak) && in_array('auzoa',$configEremuak))
+		{
+			$SAILKAPEN_KANPOAK = array
+			(
+				// codigos definidos en el formulario ZerrendatuaForm.class.php
+				1 => 'saila',
+				2 => 'barrutia',
+				3 => 'auzoa',
+				4 => 'mota'
+			);
+		}
+		elseif (in_array('barrutia',$configEremuak))
+		{
+			$SAILKAPEN_KANPOAK = array
+			(
+				1 => 'saila',
+				2 => 'barrutia',
+				3 => 'mota'
+			);
+		}
+		else
+		{
+			$SAILKAPEN_KANPOAK = array
+			(
+				1 => 'saila',
+				2 => 'auzoa',
+				3 => 'mota'
+			);
+		}
 
 		$htmlSailkapen = '<table style="text-align: right; width: 90%"><tr>' . sprintf('<td>%s:</td>', __('Sailkapena'));
 		if ($this->formularioa['sailkapena1'] > 0)
@@ -261,13 +310,11 @@ class zerrendatuActions extends sfActions
 		}
 		$htmlSailkapen .= '</tr></table>';
 
-		if (sfConfig::get('app_zerrendatua_iragazkiak_erakutsi'))
-			$html .= '<div style="background-color: #e8e8e8;">';
+		$html = '<div style="background-color: #e8e8e8;">';
 
 		if (count($orden) > 0)
 		{
-			if (sfConfig::get('app_zerrendatua_iragazkiak_erakutsi'))
-				$html .= '<br />' . $htmlSailkapen . '<br />';
+			$html .= '<br />' . $htmlSailkapen . '<br />';
 
 			// crear ORDER BY con campos de clasificación nulos al final
 			for ($i = 0; $i < count($orden); $i++)
@@ -281,11 +328,11 @@ class zerrendatuActions extends sfActions
 			}
 		}
 
+		$html .= $htmlIragazkiak;
+		$html .= '</div>';
+
 		if (sfConfig::get('app_zerrendatua_iragazkiak_erakutsi'))
-		{
-			$html .= $htmlIragazkiak;
-			$html .= '</div>';
-		}
+			$pdf->writeHTML($html, false, false, true, false, '');
 
 		$cn = Doctrine_Manager::getInstance()->connection();
 		$cmd = $cn->prepare($sql);
@@ -302,7 +349,6 @@ class zerrendatuActions extends sfActions
 		$goiburua2 = '';
 		$goiburua3 = '';
 		$lehenTaula = true;
-		$pdf->writeHTML($html, true, false, true, false, '');
 		foreach ($gertaerak as $datuak)
 		{
 			$aldaketak = false;
@@ -337,7 +383,11 @@ class zerrendatuActions extends sfActions
 			{
 				if (!$lehenTaula)
 				{
+					/*
+					// Cuando coincide que el último registro de una sección completa una página, el cierre de la etiqueta </table>
+					// fuera de la transacción provoca el salto de página añadiendo una página en blanco.
 					$pdf->writeHTML('</table>', false, false, true, false, '');
+					*/
 
 					if ($orriBerria)
 						$pdf->AddPage();
@@ -357,10 +407,27 @@ class zerrendatuActions extends sfActions
 				 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
 				 . '<th width="54">' . __('Egoera') . '</th>'
 				 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
-				 . '<th width="228">' . __('Laburpena') . '</th>'
-				 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
-				 . '<th width="54">' . __('Auzoa') . '</th>'
-				 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
+				 . '<th width="228">' . __('Laburpena') . '</th>';
+
+				if (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')) && in_array('auzoa',sfConfig::get('app_gerkud_eremuak')))
+				{
+					$izenak .= sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
+					 . '<th width="54">' . __('Barrutia') . '</th>'
+					 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
+					 . '<th width="54">' . __('Auzoa') . '</th>';
+				}
+				elseif (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')))
+				{
+					$izenak .= sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
+					 . '<th width="54">' . __('Barrutia') . '</th>';
+				}
+				else
+				{
+					$izenak .= sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
+					 . '<th width="54">' . __('Auzoa') . '</th>';
+				}
+
+				$izenak .= sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
 				 . '<th width="150">' . __('Kalea') . ' / ' . __('Eraikina') . '</th>'
 				 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
 				 . '<th width="80">' . __('Eskatzailea') . '</th>'
@@ -384,7 +451,16 @@ class zerrendatuActions extends sfActions
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 			$html .= sprintf('<td width="228">%s</td>', $datuak['laburpena']);
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
-			$html .= sprintf('<td width="54">%s</td>', $datuak['barrutia']);
+			if (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')) && in_array('auzoa',sfConfig::get('app_gerkud_eremuak')))
+			{
+				$html .= sprintf('<td width="54">%s</td>', $datuak['barrutia']);
+				$html .= sprintf('<td width="54">%s</td>', $datuak['auzoa']);
+			}
+			elseif (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')))
+				$html .= sprintf('<td width="54">%s</td>', $datuak['barrutia']);
+			else
+				$html .= sprintf('<td width="54">%s</td>', $datuak['auzoa']);
+
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 			if ($datuak['eraikina'] != null)
 				$html .= sprintf('<td width="150">%s</td>', $datuak['eraikina']);
@@ -428,8 +504,12 @@ class zerrendatuActions extends sfActions
 			}
 			$pdf->commitTransaction();
 		}
+		/*
+		// Cuando coincide que el último registro de una sección completa una página, el cierre de la etiqueta </table>
+		// fuera de la transacción provoca el salto de página añadiendo una página en blanco.
 		if ($gertaerak)
-			$pdf->writeHTML('</table>', true, false, true, false, '');
+			$pdf->writeHTML('</table>', false, false, true, false, '');
+		*/
 
 		$pdf->Output();
 

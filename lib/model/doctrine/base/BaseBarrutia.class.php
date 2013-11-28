@@ -7,15 +7,18 @@
  * 
  * @property string $izena
  * @property Doctrine_Collection $Gertakaria
+ * @property Doctrine_Collection $Auzoa
  * @property Doctrine_Collection $Kalea
  * @property Doctrine_Collection $Eraikina
  * 
  * @method string              getIzena()      Returns the current record's "izena" value
  * @method Doctrine_Collection getGertakaria() Returns the current record's "Gertakaria" collection
+ * @method Doctrine_Collection getAuzoa()      Returns the current record's "Auzoa" collection
  * @method Doctrine_Collection getKalea()      Returns the current record's "Kalea" collection
  * @method Doctrine_Collection getEraikina()   Returns the current record's "Eraikina" collection
  * @method Barrutia            setIzena()      Sets the current record's "izena" value
  * @method Barrutia            setGertakaria() Sets the current record's "Gertakaria" collection
+ * @method Barrutia            setAuzoa()      Sets the current record's "Auzoa" collection
  * @method Barrutia            setKalea()      Sets the current record's "Kalea" collection
  * @method Barrutia            setEraikina()   Sets the current record's "Eraikina" collection
  * 
@@ -41,6 +44,10 @@ abstract class BaseBarrutia extends sfDoctrineRecord
     {
         parent::setUp();
         $this->hasMany('Gertakaria', array(
+             'local' => 'id',
+             'foreign' => 'barrutia_id'));
+
+        $this->hasMany('Auzoa', array(
              'local' => 'id',
              'foreign' => 'barrutia_id'));
 

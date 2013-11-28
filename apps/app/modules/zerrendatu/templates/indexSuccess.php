@@ -1,9 +1,10 @@
 <?php use_javascripts_for_form($zerrendatuaForm) ?>
+<?php $configEremuak = sfConfig::get('app_gerkud_eremuak'); ?>
 <div>
 	<form action="<?php echo url_for('zerrendatu/index'); ?>" method="post" target="_blank" class="bilaketa_form hilarak">
 		<div id="sailkapena">
 			<label for="zerrendatu_sailkapena1"><?php echo __('Sailkapena'); ?></label>
-			<?php echo $zerrendatuaForm['sailkapena']->render(array('name' => 'zerrendatu[sailkapena1]')); ?>
+			<?php echo $zerrendatuaForm['sailkapena']->render(array('name' => 'zerrendatu[sailkapena1]', 'autofocus' => 'autofocus')); ?>
 			<?php echo $zerrendatuaForm['sailkapena']->render(array('name' => 'zerrendatu[sailkapena2]')); ?>
 			<?php echo $zerrendatuaForm['sailkapena']->render(array('name' => 'zerrendatu[sailkapena3]')); ?>
 			<span class="errorea"><?php echo __($zerrendatuaForm['sailkapena']->getError()); ?></span>
@@ -38,11 +39,30 @@
 			<?php echo $zerrendatuaForm['azpimota_id']->render(); ?>
 			<span class="errorea"><?php echo __($zerrendatuaForm['azpimota_id']->getError()); ?></span>
 		</div>
+<?php if (in_array('barrutia', $configEremuak) && in_array('auzoa', $configEremuak)) :?>
 		<div id="barrutia">
-			<label for="zerrendatu_barrutia"><?php echo __('Auzoa'); ?></label>
+			<label for="zerrendatu_barrutia"><?php echo __('Barrutia'); ?></label>
 			<?php echo $zerrendatuaForm['barrutia']->render(); ?>
 			<span class="errorea"><?php echo __($zerrendatuaForm['barrutia']->getError()); ?></span>
 		</div>
+		<div id="auzoa">
+			<label for="zerrendatu_auzoa"><?php echo __('Auzoa'); ?></label>
+			<?php echo $zerrendatuaForm['auzoa']->render(); ?>
+			<span class="errorea"><?php echo __($zerrendatuaForm['auzoa']->getError()); ?></span>
+		</div>
+<?php elseif (in_array('barrutia', $configEremuak)) : ?>
+		<div id="barrutia">
+			<label for="zerrendatu_barrutia"><?php echo __('Barrutia'); ?></label>
+			<?php echo $zerrendatuaForm['barrutia']->render(); ?>
+			<span class="errorea"><?php echo __($zerrendatuaForm['barrutia']->getError()); ?></span>
+		</div>
+<?php else : ?>
+		<div id="auzoa">
+			<label for="zerrendatu_auzoa"><?php echo __('Auzoa'); ?></label>
+			<?php echo $zerrendatuaForm['auzoa']->render(); ?>
+			<span class="errorea"><?php echo __($zerrendatuaForm['auzoa']->getError()); ?></span>
+		</div>
+<?php endif; ?>
 		<div id="kalea">
 			<label for="zerrendatu_kalea"><?php echo __('Kalea'); ?></label>
 			<?php echo $zerrendatuaForm['kalea']->render(); ?>

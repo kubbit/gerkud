@@ -7,22 +7,28 @@
  * 
  * @property string $izena
  * @property integer $barrutia_id
+ * @property integer $auzoa_id
  * @property double $longitudea
  * @property double $latitudea
  * @property Barrutia $Barrutia
+ * @property Auzoa $Auzoa
  * @property Doctrine_Collection $Gertakaria
  * 
  * @method string              getIzena()       Returns the current record's "izena" value
  * @method integer             getBarrutiaId()  Returns the current record's "barrutia_id" value
+ * @method integer             getAuzoaId()     Returns the current record's "auzoa_id" value
  * @method double              getLongitudea()  Returns the current record's "longitudea" value
  * @method double              getLatitudea()   Returns the current record's "latitudea" value
  * @method Barrutia            getBarrutia()    Returns the current record's "Barrutia" value
+ * @method Auzoa               getAuzoa()       Returns the current record's "Auzoa" value
  * @method Doctrine_Collection getGertakaria()  Returns the current record's "Gertakaria" collection
  * @method Eraikina            setIzena()       Sets the current record's "izena" value
  * @method Eraikina            setBarrutiaId()  Sets the current record's "barrutia_id" value
+ * @method Eraikina            setAuzoaId()     Sets the current record's "auzoa_id" value
  * @method Eraikina            setLongitudea()  Sets the current record's "longitudea" value
  * @method Eraikina            setLatitudea()   Sets the current record's "latitudea" value
  * @method Eraikina            setBarrutia()    Sets the current record's "Barrutia" value
+ * @method Eraikina            setAuzoa()       Sets the current record's "Auzoa" value
  * @method Eraikina            setGertakaria()  Sets the current record's "Gertakaria" collection
  * 
  * @package    gerkud
@@ -42,7 +48,11 @@ abstract class BaseEraikina extends sfDoctrineRecord
              ));
         $this->hasColumn('barrutia_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
+             'notnull' => false,
+             ));
+        $this->hasColumn('auzoa_id', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => false,
              ));
         $this->hasColumn('longitudea', 'double', 18, array(
              'type' => 'double',
@@ -64,7 +74,12 @@ abstract class BaseEraikina extends sfDoctrineRecord
         $this->hasOne('Barrutia', array(
              'local' => 'barrutia_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'SET NULL'));
+
+        $this->hasOne('Auzoa', array(
+             'local' => 'auzoa_id',
+             'foreign' => 'id',
+             'onDelete' => 'SET NULL'));
 
         $this->hasMany('Gertakaria', array(
              'local' => 'id',

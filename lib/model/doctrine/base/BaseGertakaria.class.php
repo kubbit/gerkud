@@ -14,6 +14,7 @@
  * @property integer $saila_id
  * @property integer $langilea_id
  * @property integer $barrutia_id
+ * @property integer $auzoa_id
  * @property integer $kalea_id
  * @property string $kale_zbkia
  * @property string $deskribapena
@@ -27,6 +28,7 @@
  * @property Mota $Mota
  * @property Azpimota $Azpimota
  * @property Barrutia $Barrutia
+ * @property Auzoa $Auzoa
  * @property Kalea $Kalea
  * @property Saila $Saila
  * @property Langilea $Langilea
@@ -48,6 +50,7 @@
  * @method integer             getSailaId()             Returns the current record's "saila_id" value
  * @method integer             getLangileaId()          Returns the current record's "langilea_id" value
  * @method integer             getBarrutiaId()          Returns the current record's "barrutia_id" value
+ * @method integer             getAuzoaId()             Returns the current record's "auzoa_id" value
  * @method integer             getKaleaId()             Returns the current record's "kalea_id" value
  * @method string              getKaleZbkia()           Returns the current record's "kale_zbkia" value
  * @method string              getDeskribapena()        Returns the current record's "deskribapena" value
@@ -61,6 +64,7 @@
  * @method Mota                getMota()                Returns the current record's "Mota" value
  * @method Azpimota            getAzpimota()            Returns the current record's "Azpimota" value
  * @method Barrutia            getBarrutia()            Returns the current record's "Barrutia" value
+ * @method Auzoa               getAuzoa()               Returns the current record's "Auzoa" value
  * @method Kalea               getKalea()               Returns the current record's "Kalea" value
  * @method Saila               getSaila()               Returns the current record's "Saila" value
  * @method Langilea            getLangilea()            Returns the current record's "Langilea" value
@@ -81,6 +85,7 @@
  * @method Gertakaria          setSailaId()             Sets the current record's "saila_id" value
  * @method Gertakaria          setLangileaId()          Sets the current record's "langilea_id" value
  * @method Gertakaria          setBarrutiaId()          Sets the current record's "barrutia_id" value
+ * @method Gertakaria          setAuzoaId()             Sets the current record's "auzoa_id" value
  * @method Gertakaria          setKaleaId()             Sets the current record's "kalea_id" value
  * @method Gertakaria          setKaleZbkia()           Sets the current record's "kale_zbkia" value
  * @method Gertakaria          setDeskribapena()        Sets the current record's "deskribapena" value
@@ -94,6 +99,7 @@
  * @method Gertakaria          setMota()                Sets the current record's "Mota" value
  * @method Gertakaria          setAzpimota()            Sets the current record's "Azpimota" value
  * @method Gertakaria          setBarrutia()            Sets the current record's "Barrutia" value
+ * @method Gertakaria          setAuzoa()               Sets the current record's "Auzoa" value
  * @method Gertakaria          setKalea()               Sets the current record's "Kalea" value
  * @method Gertakaria          setSaila()               Sets the current record's "Saila" value
  * @method Gertakaria          setLangilea()            Sets the current record's "Langilea" value
@@ -126,7 +132,7 @@ abstract class BaseGertakaria extends sfDoctrineRecord
              ));
         $this->hasColumn('mota_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
+             'notnull' => false,
              ));
         $this->hasColumn('azpimota_id', 'integer', null, array(
              'type' => 'integer',
@@ -150,6 +156,10 @@ abstract class BaseGertakaria extends sfDoctrineRecord
              'notnull' => false,
              ));
         $this->hasColumn('barrutia_id', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => false,
+             ));
+        $this->hasColumn('auzoa_id', 'integer', null, array(
              'type' => 'integer',
              'notnull' => false,
              ));
@@ -180,8 +190,7 @@ abstract class BaseGertakaria extends sfDoctrineRecord
              ));
         $this->hasColumn('lehentasuna_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
-             'default' => 1,
+             'notnull' => false,
              ));
         $this->hasColumn('jatorrizkoSaila_id', 'integer', null, array(
              'type' => 'integer',
@@ -214,7 +223,12 @@ abstract class BaseGertakaria extends sfDoctrineRecord
         $this->hasOne('Barrutia', array(
              'local' => 'barrutia_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'SET NULL'));
+
+        $this->hasOne('Auzoa', array(
+             'local' => 'auzoa_id',
+             'foreign' => 'id',
+             'onDelete' => 'SET NULL'));
 
         $this->hasOne('Kalea', array(
              'local' => 'kalea_id',

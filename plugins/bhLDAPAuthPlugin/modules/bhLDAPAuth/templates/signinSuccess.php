@@ -6,12 +6,12 @@
 	<div class="login_form">
 		<?php echo form_tag('@bh_ldap_signin') ?>
 			<fieldset>
-				<div class="erroreak">
+				<div class="errorea">
 					<?php echo $form['username']->getError() ?>
 				</div>
 				<div>
 					<label for="signin_username"><?php echo __('Erabiltzaile izena') ?>:</label>
-					<?php echo $form['username']->render() ?>
+					<?php echo $form['username']->render(array('autofocus' => 'autofocus')) ?>
 				</div>
 				<div>
 					<label for="signin_password"><?php echo __('Pasahitza') ?>:</label>

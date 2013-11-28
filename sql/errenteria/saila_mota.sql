@@ -16,6 +16,9 @@ INSERT INTO `saila_mota` (`id`, `saila_id`, `mota_id`) VALUES
   (12, 13, 5),
   (13, 14, 5),
   (14, 1, 7),
-  (15, 15, 9);
+  (15, 15, 9),
+  (16, 16, 5),
+  (17, 17, 5),
+  (18, 18, 5);
 
 SET foreign_key_checks = 1;

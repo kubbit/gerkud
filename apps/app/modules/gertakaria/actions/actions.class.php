@@ -48,6 +48,234 @@ class gertakariaActions extends sfActions
 		$this->pager->init();
 
 		$this->bilaketa = $request->getParameter('bilaketa');
+
+		$this->zutabeakConfig = sfConfig::get('app_zutabeak_gertakariak');
+		$this->zutabeak = [];
+		$this->gertakarienZutabeakSortu();
+		$this->datuak = $this->gertakarienDatuakSortu($this->pager->getResults());
+	}
+
+	public function gertakarienZutabeakSortu()
+	{
+		foreach ($this->zutabeakConfig as $bakoitza)
+		{
+			$zutabea = new stdClass();
+			switch($bakoitza)
+			{
+				case 'id':
+					$zutabea->izena = __('Id');
+					$zutabea->klasea = 'id';
+					break;
+				case 'laburpena':
+					$zutabea->izena = __('Laburpena');
+					$zutabea->klasea = 'laburpena';
+					break;
+				case 'klasea':
+					$zutabea->izena = __('Klasea');
+					$zutabea->klasea = 'klasea';
+					break;
+				case 'mota':
+					$zutabea->izena = __('Mota');
+					$zutabea->klasea = 'mota';
+					break;
+				case 'azpimota':
+					$zutabea->izena = __('Azpimota');
+					$zutabea->klasea = 'azpimota';
+					break;
+				case 'abisuanork':
+					$zutabea->izena = __('Abisua nork');
+					$zutabea->klasea = 'abisuanork';
+					break;
+				case 'egoera':
+					$zutabea->izena = __('Egoera');
+					$zutabea->klasea = 'egoera';
+					break;
+				case 'saila':
+					$zutabea->izena = __('Saila');
+					$zutabea->klasea = 'saila';
+					break;
+				case 'langilea':
+					$zutabea->izena = __('Langilea');
+					$zutabea->klasea = 'langilea';
+					break;
+				case 'barrutia':
+					$zutabea->izena = __('Barrutia');
+					$zutabea->klasea = 'barrutia';
+					break;
+				case 'auzoa':
+					$zutabea->izena = __('Auzoa');
+					$zutabea->klasea = 'auzoa';
+					break;
+				case 'kalea':
+					$zutabea->izena = __('Kalea');
+					$zutabea->klasea = 'kalea';
+					break;
+				case 'kale_zbkia':
+					$zutabea->izena = __('Zbk.');
+					$zutabea->klasea = 'kale_zbkia';
+					break;
+				case 'deskribapena':
+					$zutabea->izena = __('Deskribapena');
+					$zutabea->klasea = 'deskribapena';
+					break;
+				case 'ixte_data':
+					$zutabea->izena = __('Ixte data');
+					$zutabea->klasea = 'ixte_data';
+					break;
+				case 'hasiera_aurreikusia':
+					$zutabea->izena = __('Hasiera aurreikusia');
+					$zutabea->klasea = 'hasiera_aurreikusia';
+					break;
+				case 'amaiera_aurreikusia':
+					$zutabea->izena = __('Amaiera aurreikusia');
+					$zutabea->klasea = 'amaiera_aurreikusia';
+					break;
+				case 'lehentasuna':
+					$zutabea->izena = '';
+					$zutabea->klasea = 'lehentasuna';
+					break;
+				case 'jatorrizkosaila':
+					$zutabea->izena = __('Jatorrizko saila');
+					$zutabea->klasea = 'jatorrizkosaila';
+					break;
+				case 'eraikina':
+					$zutabea->izena = __('Eraikina');
+					$zutabea->klasea = 'eraikina';
+					break;
+				case 'created_at':
+					$zutabea->izena = __('Irekiera');
+					$zutabea->klasea = 'created_at';
+					break;
+				case 'updated_at':
+					$zutabea->izena = __('Aldatuta');
+					$zutabea->klasea = 'updated_at';
+					break;
+				case 'eraikinakalea':
+					$zutabea->izena = __('Kalea') . ' / ' . __('Eraikina');
+					$zutabea->klasea = 'eraikinakalea';
+					break;
+			}
+			array_push($this->zutabeak, $zutabea);
+		}
+	}
+
+	public function gertakarienDatuakSortu($cursor)
+	{
+		$datuak = [];
+
+		foreach ($cursor as $fila)
+		{
+			$ilara = new stdClass();
+			$ilara->lehentasuna = $fila->getLehentasunaId();
+			$ilara->estekaId = $fila->getId();
+			$ilara->egoeraKolorea = $fila->getEgoera()->getKolorea();
+			$ilara->datuak = [];
+
+			foreach ($this->zutabeakConfig as $bakoitza)
+			{
+				$balioa = '';
+				switch($bakoitza)
+				{
+					case 'id':
+						$balioa = $fila->getId();
+						break;
+					case 'laburpena':
+						$balioa = $fila->getLaburpena();
+						break;
+					case 'klasea':
+						$balioa = $fila->getKlasea();
+						break;
+					case 'mota':
+						$balioa = $fila->getMota();
+						break;
+					case 'azpimota':
+						$balioa = $fila->getAzpimota();
+						break;
+					case 'abisuanork':
+						$balioa = $fila->getAbisuaNork();
+						break;
+					case 'egoera':
+						$balioa = $fila->getEgoera();
+						break;
+					case 'saila':
+						$balioa = $fila->getSaila();
+						break;
+					case 'langilea':
+						$balioa = $fila->getLangilea();
+						break;
+					case 'barrutia':
+						$balioa = $fila->getBarrutia();
+						break;
+					case 'auzoa':
+						$balioa = $fila->getAuzoa();
+						break;
+					case 'kalea':
+						$balioa = $fila->getKalea();
+						break;
+					case 'kale_zbkia':
+						$balioa = $fila->getKaleZbkia();
+						break;
+					case 'deskribapena':
+						$balioa = $fila->getDeskribapena();
+						break;
+					case 'ixte_data':
+						$balioa = date(sfConfig::get('app_data_formatoa'), strtotime($fila->getIxteData()));
+						break;
+					case 'hasiera_aurreikusia':
+						$balioa = $fila->getHasieraAurreikusia();
+						break;
+					case 'amaiera_aurreikusia':
+						$balioa = $fila->getAmaieraAurreikusia();
+						break;
+					case 'lehentasuna':
+						switch ($fila->getLehentasunaId())
+						{
+							case 1:
+								$balioa = '';
+								break;
+							case 2:
+								$balioa = '!';
+								break;
+							case 3:
+								$balioa = '!!';
+								break;
+							default:
+								$balioa = '';
+								break;
+						}
+						break;
+					case 'jatorrizkosaila':
+						$balioa = $fila->getJatorrizkoSaila();
+						break;
+					case 'eraikina':
+						$balioa = $fila->getEraikina();
+						break;
+					case 'created_at':
+						$balioa = date(sfConfig::get('app_data_formatoa'), strtotime($fila->getCreatedAt()));
+						break;
+					case 'updated_at':
+						$balioa = date(sfConfig::get('app_data_formatoa'), strtotime($fila->getUpdatedAt()));
+						break;
+					case 'eraikinakalea':
+						if ($fila->getEraikinaId())
+						{
+							$balioa = $fila->getEraikina();
+						}
+						else if ($fila->getKaleaId())
+						{
+							$balioa = $fila->getKalea() . ', ' . $fila->getKaleZbkia();
+						}
+						else
+						{
+							$balioa = '';
+						}
+						break;
+				}
+				$ilara->datuak[$bakoitza] = $balioa;
+			}
+			array_push($datuak, $ilara);
+		}
+		return $datuak;
 	}
 
 	protected function processBilaketa(sfWebRequest $request, sfForm $form)
@@ -218,6 +446,8 @@ class gertakariaActions extends sfActions
 
 	public function executeInprimatu(sfWebRequest $request)
 	{
+		$configEremuak = sfConfig::get('app_gerkud_eremuak');
+
 		$gertakaria = Doctrine::getTable('gertakaria')->find(array($request->getParameter('id')));
 		$config = sfTCPDFPluginConfigHandler::loadConfig();
 		$pdf = new TCPDF();
@@ -236,76 +466,141 @@ class gertakariaActions extends sfActions
 		$pdf->SetTextColor(0, 0, 0);
 
 		$html = '<table border="0" class="gertakaria" cellspacing="0" cellpadding="4">
-			<tr><th style="background-color: #CCC;font-weight: bold;font-size:1.1em;" colspan="3">' . $gertakaria->getLaburpena() . '</th></tr>
-			<tr><th style="background-color: #CCC;font-weight: bold;">' . __('Kodea') . ':</th>
-				<th style="background-color: #CCC;font-weight: bold;">' . __('Lehentasuna') . '</th>
-				<th style="background-color: #CCC;font-weight: bold;">' . __('Mota/Azpimota') . '</th></tr>
-			<tr><td>' . $gertakaria->getId() . '</td>
-				<td>' . $gertakaria->getLehentasuna() . '</td>
-				<td>' . sprintf('%s%s', $gertakaria->getMota(), $gertakaria->getAzpimotaId() == null ? '' : '/'.$gertakaria->getAzpimota()) . '</td>
-			</tr>
-			<tr>
-				<th style="background-color: #CCC;font-weight: bold;">' . __('Irekiera data') . '</th>
-				<th style="background-color: #CCC;font-weight: bold;">' . __('Egoera') . ':</th>
-				<th style="background-color: #CCC;font-weight: bold;">' . __('Saila') . ':</th>
-				</tr><tr>
-				<td>' . date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getCreatedAt()));
+			<tr><th style="background-color: #CCC;font-weight: bold;font-size:1.1em;" colspan="3">' . $gertakaria->getLaburpena() . '</th></tr>';
 
-		if (($gertakaria->getEgoeraId() == 5) || ($gertakaria->getEgoeraId() == 6))
+		$html .= '<tr>';
+		if (in_array('id', $configEremuak))
+			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Kodea') . ':</th>';
+		if (in_array('lehentasuna', $configEremuak))
+			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Lehentasuna') . '</th>';
+		if (in_array('mota', $configEremuak))
 		{
-			$html .= '<br>' . $gertakaria->getIxteData();
+			if (in_array('azpimota', $configEremuak))
+			{
+				$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Mota/Azpimota') . '</th>';
+			}
+			else
+			{
+				$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Mota') . '</th>';
+			}
 		}
-		$html .= '</td>
-			<td>' . $gertakaria->getEgoera() . '</td><td>';
+		$html .= '</tr>';
 
-		if (($gertakaria->getEgoeraId() != 1) && ($gertakaria->getSailaId()))
+		$html .= '<tr>';
+		if (in_array('id', $configEremuak))
+			$html .= '<td>' . $gertakaria->getId() . '</td>';
+		if (in_array('lehentasuna', $configEremuak))
+			$html .= '<td>' . $gertakaria->getLehentasuna() . '</td>';
+		if (in_array('mota', $configEremuak))
 		{
-			$html .= $gertakaria->getSaila();
+			if (in_array('azpimota', $configEremuak))
+			{
+				$html .= '<td>' . sprintf('%s%s', $gertakaria->getMota(), $gertakaria->getAzpimotaId() == null ? '' : '/'.$gertakaria->getAzpimota()) . '</td>';
+			}
+			else
+			{
+				$html .= '<td>' . sprintf('%s', $gertakaria->getMota()) . '</td>';
+			}
+		}
+		$html .= '</tr>';
+
+		$html .= '<tr>';
+		$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Irekiera data') . '</th>';
+		if (in_array('egoera', $configEremuak))
+			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Egoera') . ':</th>';
+		if (in_array('saila', $configEremuak))
+			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Saila') . ':</th>';
+		$html .= '</tr>';
+
+		$html .= '<tr>';
+		$html .= '<td>' . date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getCreatedAt()));
+		if (in_array('ixte_data', $configEremuak))
+		{
+			if (($gertakaria->getEgoeraId() == 5) || ($gertakaria->getEgoeraId() == 6))
+				$html .= '<br>' . date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getIxteData()));
+		}
+		$html .= '</td>';
+		if (in_array('egoera', $configEremuak))
+			$html .= '<td>' . $gertakaria->getEgoera() . '</td>';
+		if (in_array('saila', $configEremuak))
+		{
+			if (($gertakaria->getEgoeraId() != 1) && ($gertakaria->getSailaId()))
+				$html .= '<td>' . $gertakaria->getSaila() . '</td>';
+		}
+		$html .= '</tr>';
+
+		$html .= '<tr>';
+		if (in_array('langilea', $configEremuak))
+			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Erabiltzailea') . ':</th>';
+		if (in_array('abisuanork', $configEremuak))
+			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Abisua nork') . ':</th>';
+		if (in_array('hasiera_aurreikusia', $configEremuak))
+			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Hasiera aurreikusia') . ':</th>';
+		$html .= '</tr>';
+
+		$html .= '<tr>';
+		if (in_array('langilea', $configEremuak))
+			$html .= '<td>' . $gertakaria->getLangilea() . '</td>';
+
+		if (in_array('abisuanork', $configEremuak))
+			$html .= '<td>' . $gertakaria->getAbisuaNork() . '</td>';
+
+		if (in_array('hasiera_aurreikusia', $configEremuak))
+			$html .= '<td>' . $gertakaria->getHasieraAurreikusia() . '</td>';
+		$html .= '</tr>';
+
+		if (in_array('amaiera_aurreikusia', $configEremuak))
+		{
+			$html .= '<tr>';
+			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Amaiera aurreikusia') . ':</th>';
+			$html .= '<th style="background-color: #CCC;font-weight: bold;"></th><th style="background-color: #CCC;font-weight: bold;"></th>';
+			$html .= '</tr>';
 		}
 
-		$html .= '</td><td class="azkena">
-				' . $gertakaria->getAbisuaNork() . '
-			      </td></tr>';
-		$html .= '
-			<tr>
-				<th style="background-color: #CCC;font-weight: bold;">' . __('Erabiltzailea') . ':</th>
-				<th style="background-color: #CCC;font-weight: bold;">' . __('Abisua nork') . ':</th>
-				<th style="background-color: #CCC;font-weight: bold;">' . __('Hasiera aurreikusia') . ':</th>
-			</tr>
-			<tr>
-				<td>' . $gertakaria->getLangilea() . '</td>
-				<td>' . $gertakaria->getHasieraAurreikusia() . '</td>
-				<td>' . $gertakaria->getAmaieraAurreikusia() . '</td>
-			</tr>
-			<tr>
-				<th style="background-color: #CCC;font-weight: bold;">' . __('Amaiera aurreikusia') . ':</th>
-				<th style="background-color: #CCC;font-weight: bold;"></th>
-				<th style="background-color: #CCC;font-weight: bold;"></th>
-			</tr>
-			<tr>
-				<td>' . $gertakaria->getAmaieraAurreikusia() . '</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>';
-		$html .= '<tr><th style="background-color: #CCC;font-weight: bold;" colspan="3">' . __('Helbidea') . ':</th></tr><tr>
-				<td colspan="3" class="azkena">';
-		if ($gertakaria->getKaleaId())
+		if (in_array('amaiera_aurreikusia', $configEremuak))
 		{
-			$html .= $gertakaria->getKalea() . ', ' . $gertakaria->getKaleZbkia();
+			$html .= '<tr>';
+			$html .= '<td>' . $gertakaria->getAmaieraAurreikusia() . '</td>';
+			$html .= '<td>&nbsp;</td><td>&nbsp;</td>';
+			$html .= '</tr>';
 		}
-		if ($gertakaria->getBarrutiaId())
-		{
-			$html .= ' (' . $gertakaria->getBarrutia() . ')';
-		}
-		if ($gertakaria->getEraikinaId())
-		{
-			$html .= ' -- ' . $gertakaria->getEraikina() . ' --';
-		}
-		$desk = str_replace("\r\n", "<br>", $gertakaria->getDeskribapena());
 
-		$html .= '</td></tr><tr><th style="background-color: #CCC;font-weight: bold;" colspan="3">' . __('Deskribapena') . ':</th></tr>
-			<tr><td colspan="3">' . $desk . '</td></tr>
-			</table><br /><br />';
+		if(count(array_intersect($configEremuak, ['barrutia', 'auzoa', 'kalea', 'kale_zbkia', 'eraikina'])) > 0)
+		{
+			$html .= '<tr>';
+			$html .= '<th style="background-color: #CCC;font-weight: bold;" colspan="3">' . __('Helbidea') . ':</th>';
+			$html .= '</tr>';
+			$html .= '<tr>';
+			$html .= '<td colspan="3" class="azkena">';
+
+			if ($gertakaria->getKaleaId())
+				$html .= $gertakaria->getKalea() . ', ' . $gertakaria->getKaleZbkia();
+
+			if ($gertakaria->getBarrutiaId())
+				$html .= ' (' . $gertakaria->getBarrutia() . ')';
+
+			if ($gertakaria->getAuzoaId())
+				$html .= ' (' . $gertakaria->getAuzoa() . ')';
+
+			if ($gertakaria->getEraikinaId())
+				$html .= ' -- ' . $gertakaria->getEraikina() . ' --';
+
+			$html .= '</td>';
+			$html .= '</tr>';
+		}
+
+		if (in_array('deskribapena', $configEremuak))
+		{
+			$desk = str_replace("\r\n", "<br>", $gertakaria->getDeskribapena());
+			$html .= '<tr>';
+			$html .= '<th style="background-color: #CCC;font-weight: bold;" colspan="3">' . __('Deskribapena') . ':</th>';
+			$html .= '</tr>';
+			$html .= '<tr>';
+			$html .= '<td colspan="3">' . $desk . '</td>';
+			$html .= '</tr>';
+		}
+
+		$html .= '</table><br /><br />';
 
 		$html2 = '<table>
 			<tr><th style="background-color: #CCC;font-weight: bold;font-size:1.1em;" colspan="4">' . __('Iruzkinak / Oharrak') . '</th></tr>
@@ -319,7 +614,7 @@ class gertakariaActions extends sfActions
 		{
 			$html2 .=
 			'<tr><td width="15%" NOWRAP>' . substr($iruzkina->getCreated_at('U'), 0, 10) .
-			'</td><td width="13%">' . $iruzkina->getLangilea()->getFirstName() .
+			'</td><td width="13%">' . $iruzkina->getLangilea() .
 			'</td><td width="13%">' . $iruzkina->getEkintza() .
 			'</td><td width="59%">' . $iruzkina->getTestua() . '</td></tr>';
 			$k--;

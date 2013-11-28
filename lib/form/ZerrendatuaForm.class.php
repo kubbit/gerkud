@@ -10,11 +10,20 @@
  */
 class ZerrendatuaForm extends sfForm
 {
-	public static $sailkapena = array(-1 => '--', 1 => 'Saila', 2 => 'Auzoa', 3 => 'Mota');
+	public static $sailkapena;
 
 	public function configure()
 	{
 		$culture = sfContext::getInstance()->getUser()->getCulture();
+
+		if (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')) && in_array('auzoa',sfConfig::get('app_gerkud_eremuak')))
+			$sailkapen = array(-1 => '--', 1 => 'Saila', 2 => 'Barrutia', 3 => 'Auzoa', 4 => 'Mota');
+		elseif (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')))
+			$sailkapen = array(-1 => '--', 1 => 'Saila', 2 => 'Barrutia', 3 => 'Mota');
+		else
+			$sailkapen = array(-1 => '--', 1 => 'Saila', 2 => 'Auzoa', 3 => 'Mota');
+
+		self::$sailkapena = $sailkapen;
 
 		$this->setWidgets(array
 		(
@@ -68,6 +77,13 @@ class ZerrendatuaForm extends sfForm
 				'query' => Doctrine::getTable('Barrutia')->createQuery('b')
 					->orderBy('b.izena ASC')
 			)),
+			'auzoa' => new sfWidgetFormDoctrineChoice(array
+			(
+				'model' => 'Auzoa',
+				'add_empty' => '--',
+				'query' => Doctrine::getTable('Auzoa')->createQuery('a')
+					->orderBy('a.izena ASC')
+			)),
 			'kalea' => new sfWidgetFormDoctrineChoice(array
 			(
 				'model' => 'Kalea',
@@ -102,6 +118,7 @@ class ZerrendatuaForm extends sfForm
 		$this->validatorSchema['mota_id'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['azpimota_id'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['barrutia'] = new sfValidatorString(array('required' => false));
+		$this->validatorSchema['auzoa'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['kalea'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['eraikina'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['egoera'] = new sfValidatorString(array('required' => false));

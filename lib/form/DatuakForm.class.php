@@ -48,7 +48,7 @@ class DatuakForm extends sfForm
 				'add_empty' => '--',
 				'query' => Doctrine::getTable('JatorrizkoSaila')->createQuery('s')
 					->leftJoin('s.Translation t WITH t.lang = ?', $culture)
-					->orderBy('t.id ASC')
+					->orderBy('t.izena ASC')
 			))
 		));
 		$this->validatorSchema['taula'] = new sfValidatorString(array('required' => true));

@@ -14,12 +14,14 @@ abstract class BaseKaleaFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'barrutia_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Barrutia'), 'add_empty' => true)),
+      'auzoa_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Auzoa'), 'add_empty' => true)),
       'izena'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'google'      => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
       'barrutia_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Barrutia'), 'column' => 'id')),
+      'auzoa_id'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Auzoa'), 'column' => 'id')),
       'izena'       => new sfValidatorPass(array('required' => false)),
       'google'      => new sfValidatorPass(array('required' => false)),
     ));
@@ -43,6 +45,7 @@ abstract class BaseKaleaFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'          => 'Number',
       'barrutia_id' => 'ForeignKey',
+      'auzoa_id'    => 'ForeignKey',
       'izena'       => 'Text',
       'google'      => 'Text',
     );

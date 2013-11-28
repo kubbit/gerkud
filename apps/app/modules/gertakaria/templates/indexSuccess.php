@@ -1,6 +1,7 @@
 <?php use_helper('Javascript', 'GMap') ?>
 <?php use_helper('Pagination'); ?>
 <?php use_javascripts_for_form($filter) ?>
+<?php $configEremuak = sfConfig::get('app_gerkud_eremuak')?>
 
 <?php if ($bilaketa == "true" || $erroreak): ?>
 <form id="bilaketa" action="<?php echo url_for('gertakaria/index'); ?>" method="post" class="bilaketa_form">
@@ -10,7 +11,7 @@
 	<div class="hilarak">
 		<div>
 			<label><?php echo __('Kodea') ?>:</label>
-			<?php echo $filter['id']->render(array('size' => 5)); ?>
+			<?php echo $filter['id']->render(array('autofocus' => 'autofocus', 'size' => 5)); ?>
 		</div>
 		<div>
 			<label><?php echo __('Sartu bilatu nahi duzun testua') ?>:</label>
@@ -34,37 +35,52 @@
 				<span class="errorea"><?php echo __($filter['ixte_data_nora']->getError()); ?></span>
 			</div>
 		</fieldset>
+<?php if (in_array('klasea', $configEremuak)) : ?>
 		<div>
 			<label><?php echo __('Klasea') ?>:</label>
 			<?php echo $filter['klasea_id']->render(); ?>
 		</div>
+<?php endif; ?>
 		<div>
 			<label><?php echo __('Egoera') ?>:</label>
 			<?php echo $filter['egoera_id']->render(); ?>
 		</div>
+<?php if (in_array('saila', $configEremuak)) : ?>
 		<div>
 			<label><?php echo __('Saila') ?>:</label>
 			<?php echo $filter['saila_id']->render(); ?>
 		</div>
+<?php endif; ?>
+<?php if (in_array('mota', $configEremuak)) : ?>
 		<div>
 			<label><?php echo __('Mota/Azpimota') ?>:</label>
-			<?php echo $filter['mota_id']->render(); ?><?php echo $filter['azpimota_id']->render(); ?>
+			<?php echo $filter['mota_id']->render(); ?>
+	<?php if (in_array('azpimota', $configEremuak)) : ?>
+			<?php echo $filter['azpimota_id']->render(); ?>
+	<?php endif; ?>
 		</div>
+<?php endif; ?>
+<?php if(count(array_intersect($configEremuak, ['barrutia', 'auzoa', 'kalea', 'kale_zbkia'])) > 0): ?>
 		<div>
 			<label><?php echo __('Helbidea') ?>:</label>
-			<?php $filter->setDefault('barrutia_id', 'Donibane'); ?>
-			<?php echo $filter['barrutia_id']->render(); ?>
-			<?php echo $filter['kalea_id']->render(); ?>
-			<?php echo $filter['kale_zbkia']->render(array('size' => 5)); ?>
+			<?php echo (in_array('barrutia', $configEremuak)) ? $filter['barrutia_id']->render() : ''; ?>
+			<?php echo (in_array('auzoa', $configEremuak)) ? $filter['auzoa_id']->render() : ''; ?>
+			<?php echo (in_array('kalea', $configEremuak)) ? $filter['kalea_id']->render() : ''; ?>
+			<?php echo (in_array('kale_zbkia', $configEremuak)) ? $filter['kale_zbkia']->render(array('size' => 5)) : ''; ?>
 		</div>
+<?php endif; ?>
+<?php if (in_array('eraikina', $configEremuak)) : ?>
 		<div>
 			<label><?php echo __('Eraikina') ?>:</label>
 			<?php echo $filter['eraikina_id']->render(); ?>
 		</div>
+<?php endif; ?>
+<?php if (in_array('jatorrizkosaila', $configEremuak)) : ?>
 		<div>
 			<label><?php echo __('Jatorrizko Saila') ?>:</label>
 			<?php echo $filter['jatorrizkoSaila_id']->render(); ?>
 		</div>
+<?php endif; ?>
 		<?php $filter->setDefault('mapa', 0); ?>
 	</div>
 	<div id="ie_fix"><input name="filter" type="submit" value="<?php echo __('Bilatu') ?>" /></div>
@@ -77,41 +93,31 @@
 <div class="orriak">
 	<?php echo pager_navigation($pager, 'gertakaria/index') ?>
 </div>
-<table class="taula gertakariZerrenda">
+<table class="gertakariak taula gertakariZerrenda">
 	<caption class="txikia">
 		<?php echo __('%gertakariak% gertakari topatu dira', array('%gertakariak%' => count($pager->getCountQuery()))) ?>:
 	</caption>
-	<thead>
+	<thead class="zutabeak">
 		<tr>
-			<th></th>
-			<th><?php echo __('Id') ?></th>
-			<th style="width: 6em;"><?php echo __('Irekiera') ?></th>
-			<th><?php echo __('Saila') ?></th>
-			<th style="width: 5em;"><?php echo __('Auzoa') ?></th>
-			<th style="min-width: 8em;"><?php echo sprintf('%s / %s', __('Kalea'), __('Eraikina')) ?></th>
-			<th><?php echo __('Laburpena') ?></th>
-			<th style="width: 6em;"><?php echo __('Egoera') ?></th>
-			<!--th>Langilea</th-->
-			<th style="min-width: 6em;"><?php echo __('Abisua nork') ?></th>
-			<th style="width: 6em;"><?php echo __('Aldatuta') ?></th>
+<?php foreach ($zutabeak as $item): ?>
+			<th class="<?php echo $item->klasea ?>"><?php echo $item->izena ?></th>
+<?php endforeach; ?>
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($pager->getResults() as $gertakaria): ?>
-		<tr class="<?php echo sprintf('lehen%d', $gertakaria->getLehentasunaId()); ?>">
-			<td class="lehentasuna"><?php for ($i = 0; $i < $gertakaria->getLehentasunaId() - 1; $i++) echo '!'; ?></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo $gertakaria->getId() ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getCreatedAt())) ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo $gertakaria->getSaila() ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php if ($gertakaria->getBarrutiaId()) echo $gertakaria->getBarrutia() ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php if ($gertakaria->getEraikinaId()) echo $gertakaria->getEraikina(); else if ($gertakaria->getKaleaId()) echo sprintf('%s, %s', $gertakaria->getKalea(), $gertakaria->getKaleZbkia()); ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo $gertakaria->getLaburpena() ?></a></td>
-			<?php $kol = $gertakaria->getEgoeraKolorea(); ?>
-			<td <?php echo "style='background-color: " . $kol[0]->getKolorea() . "'"; ?>><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>">
-			<?php echo $gertakaria->getEgoera() ?></a></td>
-			<!--td><?php //if ($gertakaria->getLangileaId()) {echo $gertakaria->getLangilea();}  ?></td-->
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo $gertakaria->getAbisuaNork() ?></a></td>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $gertakaria->getId()) ?>"><?php echo date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getUpdatedAt())) ?></a></td>
+<?php foreach ($datuak as $eskaera): ?>
+		<tr class="<?php echo sprintf('lehen%d', $eskaera->lehentasuna); ?>">
+	<?php foreach ($eskaera->datuak as $klabea => $datua): ?>
+		<?php if (!$datua) : ?>
+			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>">&nbsp;</a></td>
+		<?php elseif ($klabea === 'lehentasuna') : ?>
+			<td class="lehentasuna"><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>"><?php echo $datua ?></a></td>
+		<?php elseif ($klabea === 'egoera') : ?>
+			<td style='background-color:<?php  echo $eskaera->egoeraKolorea ?>'><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>"><?php echo $datua ?></a></td>
+		<?php else : ?>
+			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>"><?php echo $datua ?></a></td>
+		<?php endif; ?>
+	<?php endforeach; ?>
 		</tr>
 <?php endforeach; ?>
 	</tbody>

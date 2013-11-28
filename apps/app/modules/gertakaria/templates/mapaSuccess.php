@@ -17,7 +17,7 @@
 		<?php foreach ($pager->getResults() as $gertakaria): ?>
 			<?php if ($gertakaria->getKalea_id()) : ?>
 				<?php
-				$test = "'" . $gertakaria->getLaburpena() . "'";
+				$test = "'" . urlencode($gertakaria->getLaburpena()) . "'";
 				$kale = Doctrine::getTable('Kalea')->find($gertakaria->getKaleaId());
 
 				$helbidea = sprintf('%s, %s %s', $kale->getGoogle(), $gertakaria->getKale_zbkia(), $herria);

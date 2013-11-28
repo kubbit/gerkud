@@ -2,7 +2,7 @@
 	<form action="<?php echo url_for('datuak/index'); ?>" method="post" class="bilaketa_form hilarak">
 		<div id="taula_mota">
 			<label for="datuak_taula"><?php echo __('Taula mota'); ?></label>
-			<?php echo $datuakForm['taula']->render(array('onchange' => 'IzkutatuFiltroak()')); ?>
+			<?php echo $datuakForm['taula']->render(array('autofocus' => 'autofocus', 'onchange' => 'IzkutatuFiltroak()')); ?>
 			<span class="errorea"><?php echo __($datuakForm['taula']->getError()); ?></span>
 		</div>
 		<div id="hasiera">

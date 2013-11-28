@@ -4,6 +4,9 @@
 <?php use_helper('Debug') ?>
 
 <?php log_message('Gertakaria....', 'info') ?>
+
+<?php $configEremuak = sfConfig::get('app_gerkud_eremuak'); ?>
+
 <div class="gertakaria">
 	<div class="taulaGoiburua"><?php echo $gertakaria->getLaburpena() ?></div>
 	<div class="botoiak">
@@ -41,7 +44,7 @@
 <?php endif; ?>
 			</div>
 			<?php if ($gertakaria->getSailaId()) $form2->setDefault('saila_id', $gertakaria->getSailaId()); ?>
-			<?php echo $form2['saila_id']->render(); ?>			
+			<?php echo $form2['saila_id']->render(); ?>
 			<input type="submit" value="<?php echo ($gertakaria->getEgoeraId() == 1) ? __('Gertakaria esleitu') : __('Berriz esleitu')?>" />
 		</form>
 	<?php endif; ?>
@@ -105,14 +108,18 @@
 			<div><?php echo __('Kodea') ?>:</div>
 			<span><?php echo $gertakaria->getId() ?></span>
 		</div>
+<?php if (in_array('lehentasuna', $configEremuak)): ?>
 		<div>
 			<div><?php echo __('Lehentasuna') ?>:</div>
-			<span><?php echo $gertakaria->getLehentasuna() ?></span>
+			<span><?php echo $gertakaria->getLehentasuna() ?>&nbsp;</span>
 		</div>
+<?php endif; ?>
+<?php if (in_array('mota', $configEremuak)): ?>
 		<div>
 			<div><?php echo __('Mota/Azpimota') ?>:</div>
-			<span><?php echo sprintf('%s%s', $gertakaria->getMota(), $gertakaria->getAzpimotaId() == null ? '' : '/'.$gertakaria->getAzpimota()); ?>&nbsp;</span>
+			<span><?php echo sprintf('%s%s', $gertakaria->getMota(), $gertakaria->getAzpimotaId() == null ? '' : '/' . $gertakaria->getAzpimota()); ?>&nbsp;</span>
 		</div>
+<?php endif; ?>
 		<div>
 			<div><?php echo __('Irekiera data') ?>:</div>
 			<span>
@@ -122,51 +129,69 @@
 <?php endif; ?>
 			&nbsp;</span>
 		</div>
+<?php if (in_array('egoera', $configEremuak)): ?>
 		<div>
 			<div><?php echo __('Egoera') ?>:</div>
 			<span><?php echo $gertakaria->getEgoera() ?>&nbsp;</span>
 		</div>
+<?php endif; ?>
+<?php if (in_array('saila', $configEremuak)): ?>
 		<div>
 			<div><?php echo __('Saila') ?>:</div>
 			<span>
-<?php if (($gertakaria->getEgoeraId() != 1) && ($gertakaria->getSailaId())): ?>
+	<?php if (($gertakaria->getEgoeraId() != 1) && ($gertakaria->getSailaId())): ?>
 			<?php echo $gertakaria->getSaila() ?>
-<?php endif; ?>
+	<?php endif; ?>
 			&nbsp;</span>
 		</div>
+<?php endif; ?>
+<?php if (in_array('langilea', $configEremuak)): ?>
 		<div>
 			<div><?php echo __('Erabiltzailea') ?>:</div>
 			<span><?php echo $gertakaria->getLangilea() ?>&nbsp;</span>
 		</div>
+<?php endif; ?>
+<?php if (in_array('abisuanork', $configEremuak)): ?>
 		<div>
 			<div><?php echo __('Abisua nork') ?>:</div>
 			<span><?php echo $gertakaria->getAbisuaNork() ?>&nbsp;</span>
 		</div>
+<?php endif; ?>
+<?php if (in_array('hasiera_aurreikusia', $configEremuak)): ?>
 		<div>
 			<div><?php echo __('Hasiera aurreikusia') ?>:</div>
 			<span><?php echo $gertakaria->getHasieraAurreikusia() ?>&nbsp;</span>
 		</div>
+<?php endif; ?>
+<?php if (in_array('amaiera_aurreikusia', $configEremuak)): ?>
 		<div>
 			<div><?php echo __('Amaiera aurreikusia') ?>:</div>
 			<span><?php echo $gertakaria->getAmaieraAurreikusia() ?>&nbsp;</span>
 		</div>
+<?php endif; ?>
+<?php if(count(array_intersect($configEremuak, ['barrutia', 'auzoa', 'kalea', 'kale_zbkia', 'eraikina'])) > 0): ?>
 		<div class="luzea">
 			<div><?php echo __('Helbidea') ?>:</div>
 			<span>
-<?php
-	if ($gertakaria->getKalea_id())
-		echo sprintf('%s, %s', $gertakaria->getKalea(), $gertakaria->getKaleZbkia());
-	if ($gertakaria->getBarrutia_id())
-		echo sprintf(' (%s)', $gertakaria->getBarrutia());
-	if ($gertakaria->getEraikina_id())
-		echo sprintf('  -- %s --', $gertakaria->getEraikina());
-?>
+	<?php
+		if ($gertakaria->getKalea_id())
+			echo sprintf('%s, %s', $gertakaria->getKalea(), $gertakaria->getKaleZbkia());
+		if ($gertakaria->getBarrutia_id())
+			echo sprintf(' (%s)', $gertakaria->getBarrutia());
+		if ($gertakaria->getAuzoa_id())
+			echo sprintf(' (%s)', $gertakaria->getAuzoa());
+		if ($gertakaria->getEraikina_id())
+			echo sprintf('  -- %s --', $gertakaria->getEraikina());
+	?>
 			&nbsp;</span>
 		</div>
+<?php endif; ?>
+<?php if (in_array('deskribapena', $configEremuak)): ?>
 		<div class="luzea">
 			<div><?php echo __('Deskribapena') ?>:</div>
 			<span><?php echo htmlspecialchars($gertakaria->getDeskribapena(), ENT_QUOTES, "utf-8"); ?>&nbsp;</span>
 		</div>
+<?php endif; ?>
 	</div>
 </div>
 
@@ -190,7 +215,7 @@
 	<?php foreach ($gertakaria->getIruzkinak() as $i => $iruzkina): ?>
 			<tr>
 				<td><?php echo date(sfConfig::get('app_data_formatoa'), strtotime($iruzkina->getCreated_at())); ?></td>
-				<td><?php echo $iruzkina->getLangilea()->getFirstName(); ?></td>
+				<td><?php echo $iruzkina->getLangilea(); ?></td>
 				<td><?php echo $iruzkina->getEkintza(); ?></td>
 				<td><?php echo $iruzkina->getTestua(); ?></td>
 			</tr>

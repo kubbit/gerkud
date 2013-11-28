@@ -47,7 +47,7 @@ class datuakActions extends sfActions
 		$this->taula = $this->formularioa['taula'];
 		$this->tartea = $this->formularioa['tartea'];
 		$this->saila = $this->formularioa['saila'];
-		$this->saila = $this->formularioa['jatorrizkosaila'];
+		$this->jatorrizkosaila = $this->formularioa['jatorrizkosaila'];
 
 		// volver a asignar a los campos los valores recibidos
 		$this->datuakForm->setDefault('taula', $this->taula);
@@ -61,6 +61,8 @@ class datuakActions extends sfActions
 			$this->tartea = null;
 		if ($this->saila == 0)
 			$this->saila = null;
+		if ($this->jatorrizkosaila == 0)
+			$this->jatorrizkosaila = null;
 
 		switch ($this->taula)
 		{

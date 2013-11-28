@@ -97,12 +97,13 @@ class Gertakaria extends BaseGertakaria
 			$erabiltzaileak = $mota->getLangileak();
 
 		// gertakariaren sortzailea gehitu
-		array_push($erabiltzaileak, $this->getLangileaId());
+		if ($this->getLangileaId())
+			array_push($erabiltzaileak, $this->getLangileaId());
 
 		foreach ($erabiltzaileak as $erab_id)
 		{
 			// ez mezurik bidali ekintza sortu duen langileari
-			if ($langilea->getId() == $erab_id)
+			if ($langilea && $langilea->getId() == $erab_id)
 				continue;
 
 			$erab = Doctrine::getTable('langilea')->find($erab_id);

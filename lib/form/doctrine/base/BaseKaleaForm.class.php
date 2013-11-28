@@ -16,14 +16,16 @@ abstract class BaseKaleaForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
-      'barrutia_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Barrutia'), 'add_empty' => false)),
+      'barrutia_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Barrutia'), 'add_empty' => true)),
+      'auzoa_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Auzoa'), 'add_empty' => true)),
       'izena'       => new sfWidgetFormInputText(),
       'google'      => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
       'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'barrutia_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Barrutia'))),
+      'barrutia_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Barrutia'), 'required' => false)),
+      'auzoa_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Auzoa'), 'required' => false)),
       'izena'       => new sfValidatorString(array('max_length' => 255)),
       'google'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));

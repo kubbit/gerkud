@@ -28,7 +28,7 @@
 	<div>
 		<label>
 			<span><?php echo __('Izena') ?>:</span>
-			<?php echo $form['first_name']->render(array('size' => 30)) ?>
+			<?php echo $form['first_name']->render(array('autofocus' => 'autofocus', 'size' => 30)) ?>
 		</label>
 		<label>
 			<span><?php echo __('Abizena(k)') ?>:</span>

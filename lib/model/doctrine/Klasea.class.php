@@ -14,6 +14,9 @@ class Klasea extends BaseKlasea
 {
 	public function __toString()
 	{
-		return $this->getIzena();
+		if (!is_null($this->getId()))
+			return $this->getIzena();
+		else
+			return '';
 	}
 }

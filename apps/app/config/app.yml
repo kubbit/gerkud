@@ -28,3 +28,18 @@ all:
     aurreikuspen_datak: true
   zerrendatua:
     iragazkiak_erakutsi: true
+  #Aukeratu daitezkeen zutabeen zerrenda osoa:
+  #  id, laburpena, klasea, mota, azpimota, abisuanork, egoera, saila, langilea, barrutia, kalea,
+  #  kale_zbkia, deskribapena, ixte_data, hasiera_aurreikusia, amaiera_aurreikusia, lehentasuna,
+  #  jatorrizkosaila, eraikina, created_at, updated_at, eraikinakalea
+  zutabeak:
+    eskaerak: [lehentasuna, id, created_at, mota, auzoa, eraikinakalea, laburpena, abisuanork]
+    gertakariak: [lehentasuna, id, created_at, saila, auzoa, eraikinakalea, laburpena, egoera, abisuanork, updated_at]
+  ordenaketa:
+    eskaerak: [created_at DESC]
+    gertakariak: [created_at DESC]
+  gerkud:
+    eremuak: [id, laburpena, klasea, mota, azpimota, abisuanork, egoera, saila, langilea, auzoa, kalea, kale_zbkia, deskribapena, ixte_data, hasiera_aurreikusia, amaiera_aurreikusia, lehentasuna, jatorrizkosaila, eraikina, created_at, updated_at]
+    derrigorrezkoak: [id,  created_at, laburpena, mota, lehentasuna]
+    kopia_zehatza: true
+    izena_eta_abizena: false

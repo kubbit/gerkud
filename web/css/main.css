@@ -96,7 +96,7 @@ img
 	border-bottom: 1px solid #444;
 	border-top: 1px solid #444;
 }
-.gertakariZerrenda td.lehentasuna
+.gertakariZerrenda td.lehentasuna, .gertakariZerrenda td.lehentasuna a
 {
 	text-align: center;
 	color: #990000;
@@ -253,6 +253,7 @@ table.taula
 {
 	text-decoration: none;
 	color: black;
+	display: block;
 }
 .taula th.header
 {
@@ -560,4 +561,33 @@ input.eskubian
 {
 	display: block;
 	width: 100%;
+}
+.eskaerak .created_at,
+.eskaerak .updated_at,
+.eskaerak .ixte_data,
+.eskaerak .hasiera_aurreikusia,
+.eskaerak .amaiera_aurreikusia,
+.gertakariak .created_at,
+.gertakariak .updated_at,
+.gertakariak .ixte_data,
+.gertakariak .hasiera_aurreikusia,
+.gertakariak .amaiera_aurreikusia
+{
+	width: 5em;
+}
+.eskaerak .barrutia, .gertakariak .barrutia
+{
+	width: 5em;
+}
+.eskaerak .eraikinakalea, .gertakariak  .eraikinakalea
+{
+	min-width: 8em;
+}
+.eskaerak .abisuanork, .gertakariak  .abisuanork
+{
+	min-width: 6em;
+}
+.eskaerak .egoera, .gertakariak  .egoera
+{
+	width: 6em;
 }

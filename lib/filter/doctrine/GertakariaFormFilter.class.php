@@ -56,6 +56,12 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 			'add_empty' => '--',
 		));
 
+		$this->widgetSchema['auzoa_id'] = new sfWidgetFormDoctrineChoice(array
+		(
+			'model'     => 'Auzoa',
+			'add_empty' => '--',
+		));
+		
 		$this->widgetSchema['kalea_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model'     => 'Kalea',

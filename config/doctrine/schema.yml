@@ -4,27 +4,29 @@ Gertakaria:
   columns:
     laburpena: { type: string(255) }
     klasea_id: { type: integer, notnull: false }
-    mota_id: { type: integer, notnull: true }
+    mota_id: { type: integer, notnull: false }
     azpimota_id:  { type: integer, notnull: false }
     abisuaNork: { type: string(512) }
     egoera_id: { type: integer, notnull: true, default: 1 }
     saila_id: { type: integer, notnull: false }
     langilea_id: { type: integer, notnull: false }
     barrutia_id: {type: integer, notnull: false }
+    auzoa_id: {type: integer, notnull: false }
     kalea_id: { type: integer, notnull: false }
     kale_zbkia: { type: string(50) }
     deskribapena: { type: string(4000), notnull: false }
     ixte_data: { type: datetime, notnull: false }
     hasiera_aurreikusia: { type: date, notnull: false }
     amaiera_aurreikusia: { type: date, notnull: false }
-    lehentasuna_id: { type: integer, notnull: true, default: 1 }
+    lehentasuna_id: { type: integer, notnull: false}
     jatorrizkoSaila_id: { type: integer, notnull: false }
     eraikina_id: { type: integer, notnull: false }
   relations:
     Klasea: { onDelete: CASCADE, local: klasea_id, foreign: id }
     Mota: { onDelete: CASCADE, local: mota_id, foreign: id }
     Azpimota: { onDelete: CASCADE, local: azpimota_id, foreign: id }
-    Barrutia: { onDelete: CASCADE, local: barrutia_id, foreign: id }
+    Barrutia: { onDelete: SET NULL, local: barrutia_id, foreign: id }
+    Auzoa: { onDelete: SET NULL, local: auzoa_id, foreign: id }
     Kalea: { onDelete: CASCADE, local: kalea_id, foreign: id }
     Saila: { onDelete: CASCADE, local: saila_id, foreign: id }
     Langilea: { onDelete: CASCADE, local: langilea_id, foreign: id }
@@ -105,14 +107,24 @@ Barrutia:
   columns:
     izena: { type: string(255), notnull: true, unique: true }
 
+Auzoa:
+  actAs:
+  columns:
+    barrutia_id: { type: integer, notnull: false }
+    izena: { type: string(255), notnull: true, unique: true }
+  relations:
+    Barrutia: { onDelete: SET NULL, local: barrutia_id, foreign: id }
+
 Kalea:
   actAs:
   columns:
-    barrutia_id:  { type: integer, notnull: true }
+    barrutia_id: { type: integer, notnull: false }
+    auzoa_id: { type: integer, notnull: false }
     izena: { type: string(255), notnull: true, unique: true }
     google: { type: string(255), notnull: false }
   relations:
-    Barrutia: { onDelete: CASCADE, local: barrutia_id, foreign: id }
+    Barrutia: { onDelete: SET NULL, local: barrutia_id, foreign: id }
+    Auzoa: { onDelete: SET NULL, local: auzoa_id, foreign: id }
 
 Saila:
   connection: doctrine
@@ -199,11 +211,13 @@ Eraikina:
   actAs:
   columns:
     izena: { type: string(255), notnull: true }
-    barrutia_id:  { type: integer, notnull: true }
+    barrutia_id: { type: integer, notnull: false }
+    auzoa_id: { type: integer, notnull: false }
     longitudea: { type: double(18), scale: 6, notnull: true }
     latitudea: { type: double(18), scale: 6, notnull: true }
   relations:
-    Barrutia: { onDelete: CASCADE, local: barrutia_id, foreign: id }
+    Barrutia: { onDelete: SET NULL, local: barrutia_id, foreign: id }
+    Auzoa: { onDelete: SET NULL, local: auzoa_id, foreign: id }
 
 EgunTarteak:
   columns:

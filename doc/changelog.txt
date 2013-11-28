@@ -1,4 +1,20 @@
 ================================================================================
+  Version 1.14
+  2013-11-28  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Parametrización de varios aspectos de la aplicación usando el fichero de
+  configuración:
+  - los campos usados en toda la aplicación
+  - ordenación de los campos en listados de peticiones e incidencias
+  - modo de copia de incidencias (duplicación o plantilla)
+  - lista de campos obligatorios
+  - nombre usuario en la aplicación (nombre completo o código de usuario)
+* Añadido nuevo campo para indicar el barrio
+* Correcciones varias en listados
+* Correcciónes varias en datos estadísticos
+* Ligeras mejoras en la usabilidad de la aplicación
+
+================================================================================
   Version 1.12.4
   2013-10-10  Pasaiako Udala (http://www.pasaia.net)
 ================================================================================

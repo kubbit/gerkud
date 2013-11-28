@@ -14,13 +14,16 @@ class Mota extends BaseMota
 {
 	public function __toString()
 	{
-		return $this->getIzena();
+		if (!is_null($this->getId()))
+			return $this->getIzena();
+		else
+			return '';
 	}
 
 	/*
 	 * Motari dagozkion saileko langileak eskuratu
 	 */
-	protected function getLangileak()
+	public function getLangileak()
 	{
 		$sql = 'SELECT DISTINCT e.user_id AS id'
 		 . ' FROM sf_guard_user_group e,'

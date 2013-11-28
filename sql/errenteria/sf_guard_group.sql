@@ -16,7 +16,10 @@ INSERT INTO `sf_guard_group` (`id`, `description`, `created_at`, `updated_at`) V
   (12, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
   (13, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
   (14, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-  (15, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+  (15, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+  (16, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+  (17, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+  (18, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 TRUNCATE TABLE sf_guard_group_translation;
 INSERT INTO `sf_guard_group_translation` (`id`, `name`, `lang`) VALUES
@@ -49,6 +52,12 @@ INSERT INTO `sf_guard_group_translation` (`id`, `name`, `lang`) VALUES
   (14, 'Man-Volante', 'es'),
   (14, 'Man-Ibiltari', 'eu'),
   (15, 'Udaltzaingoa-Policía Local', 'es'),
-  (15, 'Udaltzaingoa', 'eu');
+  (15, 'Udaltzaingoa', 'eu'),
+  (16, 'Man-FCC', 'es'),
+  (16, 'Man-FCC', 'eu'),
+  (17, 'Man-Plagas', 'es'),
+  (17, 'Man-Izurriak', 'eu'),
+  (18, 'Man-Ascensores Públicos', 'es'),
+  (18, 'Man-Herri Igogailuak', 'eu');
 
 SET foreign_key_checks = 1;
