@@ -19,6 +19,7 @@ abstract class BaseGeoForm extends BaseFormDoctrine
       'gertakaria_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Gertakaria'), 'add_empty' => false)),
       'longitudea'    => new sfWidgetFormInputText(),
       'latitudea'     => new sfWidgetFormInputText(),
+      'zehaztasuna'   => new sfWidgetFormInputText(),
       'testua'        => new sfWidgetFormInputText(),
       'geometria_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Geometria'), 'add_empty' => false)),
     ));
@@ -28,6 +29,7 @@ abstract class BaseGeoForm extends BaseFormDoctrine
       'gertakaria_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Gertakaria'))),
       'longitudea'    => new sfValidatorPass(),
       'latitudea'     => new sfValidatorPass(),
+      'zehaztasuna'   => new sfValidatorPass(array('required' => false)),
       'testua'        => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'geometria_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Geometria'))),
     ));

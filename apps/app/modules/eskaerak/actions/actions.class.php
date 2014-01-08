@@ -23,7 +23,7 @@ class eskaerakActions extends sfActions
 		$this->eskaerak = $e->execute();
 
 		$this->zutabeakConfig = sfConfig::get('app_zutabeak_eskaerak');
-		$this->zutabeak = [];
+		$this->zutabeak = array();
 		$this->eskaerenZutabeakSortu();
 
 		$this->datuak = $this->eskaerenDatuakSortu($this->eskaerak);
@@ -135,13 +135,13 @@ class eskaerakActions extends sfActions
 
 	public function eskaerenDatuakSortu($cursor)
 	{
-		$datuak = [];
+		$datuak = array();
 
 		foreach ($cursor as $fila)
 		{
 			$ilara = new stdClass();
 			$ilara->estekaId = $fila->getId();
-			$ilara->datuak = [];
+			$ilara->datuak = array();
 
 			foreach ($this->zutabeakConfig as $bakoitza)
 			{
@@ -177,6 +177,7 @@ class eskaerakActions extends sfActions
 						break;
 					case 'barrutia':
 						$balioa = $fila->getBarrutia();
+						break;
 					case 'auzoa':
 						$balioa = $fila->getAuzoa();
 						break;

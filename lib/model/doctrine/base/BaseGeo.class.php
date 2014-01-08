@@ -8,6 +8,7 @@
  * @property integer $gertakaria_id
  * @property double $longitudea
  * @property double $latitudea
+ * @property double $zehaztasuna
  * @property string $testua
  * @property integer $geometria_id
  * @property Gertakaria $Gertakaria
@@ -16,6 +17,7 @@
  * @method integer    getGertakariaId()  Returns the current record's "gertakaria_id" value
  * @method double     getLongitudea()    Returns the current record's "longitudea" value
  * @method double     getLatitudea()     Returns the current record's "latitudea" value
+ * @method double     getZehaztasuna()   Returns the current record's "zehaztasuna" value
  * @method string     getTestua()        Returns the current record's "testua" value
  * @method integer    getGeometriaId()   Returns the current record's "geometria_id" value
  * @method Gertakaria getGertakaria()    Returns the current record's "Gertakaria" value
@@ -23,6 +25,7 @@
  * @method Geo        setGertakariaId()  Sets the current record's "gertakaria_id" value
  * @method Geo        setLongitudea()    Sets the current record's "longitudea" value
  * @method Geo        setLatitudea()     Sets the current record's "latitudea" value
+ * @method Geo        setZehaztasuna()   Sets the current record's "zehaztasuna" value
  * @method Geo        setTestua()        Sets the current record's "testua" value
  * @method Geo        setGeometriaId()   Sets the current record's "geometria_id" value
  * @method Geo        setGertakaria()    Sets the current record's "Gertakaria" value
@@ -52,6 +55,12 @@ abstract class BaseGeo extends sfDoctrineRecord
              'type' => 'double',
              'scale' => 6,
              'notnull' => true,
+             'length' => 18,
+             ));
+        $this->hasColumn('zehaztasuna', 'double', 18, array(
+             'type' => 'double',
+             'scale' => 6,
+             'notnull' => false,
              'length' => 18,
              ));
         $this->hasColumn('testua', 'string', 50, array(

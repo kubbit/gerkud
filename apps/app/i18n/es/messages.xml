@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2013-06-24T13:33:53Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2013-10-30T12:25:47Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -458,7 +458,7 @@
       </trans-unit>
       <trans-unit id="123">
         <source>Onartu</source>
-        <target>Mostrar</target>
+        <target>Aceptar</target>
       </trans-unit>
       <trans-unit id="124">
         <source>Taula mota</source>
@@ -588,26 +588,6 @@
         <source>Itxita</source>
         <target>Cerrada</target>
       </trans-unit>
-      <trans-unit id="157">
-        <source>Gertakariaren kodea</source>
-        <target>Código de incidencia</target>
-      </trans-unit>
-      <trans-unit id="158">
-        <source>Gertakariaren deskribapena</source>
-        <target>Descripción de incidencia</target>
-      </trans-unit>
-      <trans-unit id="159">
-        <source>Gertakari honek ondorengo aldaketa izan du</source>
-        <target>La incidencia ha tenido el siguiente cambio</target>
-      </trans-unit>
-      <trans-unit id="160">
-        <source>Nork egin du</source>
-        <target>Realizado por</target>
-      </trans-unit>
-      <trans-unit id="161">
-        <source>EZ ERANTZUN MEZU HONI. Mezu hau automatikoki bidali dizu GERKUD gertakarien kudeaketa aplikazioak zuk horrela konfiguratuta daukazulako. Ez baduzu horrelako mezurik jaso nahi, aldatu konfigurazioa "nire datuak" atalean</source>
-        <target>NO CONTESTE A ESTE CORREO. Este mensaje ha sido enviado automáticamente a través del gestor de incidencias GERKUD por que así consta en su configuración. Si no desea volver a recibir mensajes como este, cambie su configuración en el apartado "mis datos"</target>
-      </trans-unit>
       <trans-unit id="162">
         <source>Auzoa</source>
         <target>Barrio</target>
@@ -675,6 +655,70 @@
       <trans-unit id="176">
         <source>Jatorrizko sailaren arabera</source>
         <target>Por departamento de origen</target>
+      </trans-unit>
+      <trans-unit id="177">
+        <source>Jatorrizko Sailaren arabera</source>
+        <target>Por Departamento de Origen</target>
+      </trans-unit>
+      <trans-unit id="178">
+        <source>Langilea</source>
+        <target>Trabajador</target>
+      </trans-unit>
+      <trans-unit id="179">
+        <source>Zbk.</source>
+        <target>Nº</target>
+      </trans-unit>
+      <trans-unit id="180">
+        <source>Jatorrizko saila</source>
+        <target>Dpto de origen</target>
+      </trans-unit>
+      <trans-unit id="181">
+        <source>Erlazioak</source>
+        <target>Relaciones</target>
+      </trans-unit>
+      <trans-unit id="182">
+        <source>Errepikatutak</source>
+        <target>Duplicadas</target>
+      </trans-unit>
+      <trans-unit id="183">
+        <source>Errepikatuta dago</source>
+        <target>Añadir duplicada</target>
+      </trans-unit>
+      <trans-unit id="184">
+        <source>Erlazio berria sortu da.</source>
+        <target>Se ha creado una nueva relación.</target>
+      </trans-unit>
+      <trans-unit id="185">
+        <source>Gertakari honen kopia da:</source>
+        <target>Es duplicada de la siguiente incidencia:</target>
+      </trans-unit>
+      <trans-unit id="186">
+        <source>Errepikatuta</source>
+        <target>Duplicada</target>
+      </trans-unit>
+      <trans-unit id="187">
+        <source>Erlazioa ezabatu</source>
+        <target>Eliminar relación</target>
+      </trans-unit>
+      <trans-unit id="188">
+        <source>Kopia da</source>
+        <target>Es duplicada</target>
+      </trans-unit>
+      <trans-unit id="189">
+        <source>Gertakari honekin dituen erlazio guztiak ezabatu dira:</source>
+        <target>Se han eliminado todas las relaciones existentes con la siguiente incidencia:</target>
+      </trans-unit>
+      <trans-unit id="190">
+        <source>Bikoiztuak</source>
+        <target>Duplicadas</target>
+      </trans-unit>
+      <trans-unit id="191">
+        <source>Hurrengo gertakariaren bikoitza bezala baztertu:</source>
+        <target>Descartar incidencia por ser duplicada de:</target>
+      </trans-unit>
+      <trans-unit id="192">
+        <source>HorKonpon: ohartarazpena</source>
+        <target>HorKonpon: notificación</target>
       </trans-unit>
     </body>
   </file>

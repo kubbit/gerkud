@@ -174,7 +174,7 @@ class bhLDAP
   /*
    * Cargar nombre de usuario y e-mail desde LDAP
    */
-  public function fillUserInfo($user)
+  public static function fillUserInfo($user)
   {
 	$ldap = self::getLDAP();
 

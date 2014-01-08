@@ -60,7 +60,7 @@
 	<?php endif; ?>
 		</div>
 <?php endif; ?>
-<?php if(count(array_intersect($configEremuak, ['barrutia', 'auzoa', 'kalea', 'kale_zbkia'])) > 0): ?>
+<?php if(count(array_intersect($configEremuak, array('barrutia', 'auzoa', 'kalea', 'kale_zbkia'))) > 0): ?>
 		<div>
 			<label><?php echo __('Helbidea') ?>:</label>
 			<?php echo (in_array('barrutia', $configEremuak)) ? $filter['barrutia_id']->render() : ''; ?>

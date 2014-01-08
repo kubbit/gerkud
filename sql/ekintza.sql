@@ -7,7 +7,8 @@ INSERT INTO `ekintza` (`id`) VALUES
   (3),
   (4),
   (5),
-  (6);
+  (6),
+  (7);
 
 TRUNCATE TABLE ekintza_translation;
 INSERT INTO `ekintza_translation` (`id`, `mota`, `lang`) VALUES
@@ -22,6 +23,8 @@ INSERT INTO `ekintza_translation` (`id`, `mota`, `lang`) VALUES
   (5, 'Cambio de situación', 'es'),
   (5, 'Egoera aldatzea', 'eu'),
   (6, 'Cerrada', 'es'),
-  (6, 'Ixtea', 'eu');
+  (6, 'Ixtea', 'eu'),
+  (7, 'Relación', 'es'),
+  (7, 'Erlazioa', 'eu');
 
 SET foreign_key_checks = 1;

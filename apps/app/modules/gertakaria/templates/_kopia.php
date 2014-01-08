@@ -65,9 +65,9 @@ if (sfConfig::get('app_gerkud_kopia_zehatza'))
 	<?php endif; ?>
 		</div>
 <?php endif; ?>
-<?php if(count(array_intersect($configEremuak, ['barrutia', 'auzoa', 'kalea', 'kale_zbkia'])) > 0): ?>
+<?php if(count(array_intersect($configEremuak, array('barrutia', 'auzoa', 'kalea', 'kale_zbkia'))) > 0): ?>
 		<div>
-			<label><?php echo __('Helbidea') ?>:<?php echo (count(array_intersect($configDerrigorrezkoak, ['barrutia', 'auzoa', 'kalea', 'kale_zbkia'])) > 0)?'*':''?></label>
+			<label><?php echo __('Helbidea') ?>:<?php echo (count(array_intersect($configDerrigorrezkoak, array('barrutia', 'auzoa', 'kalea', 'kale_zbkia'))) > 0)?'*':''?></label>
 	<?php if (in_array('barrutia', $configEremuak)): ?>
 			<?php echo $form['barrutia_id']->render(); ?>
 	<?php endif; ?>

@@ -320,6 +320,17 @@ table.taula
 	text-align: left;
 }
 
+.erlazioak ul
+{
+	list-style: none;
+	padding-left: 0.25em;
+}
+.erlazioak li
+{
+	display: inline;
+	margin: 0 1em 0 0;
+}
+
 .fitxategiak
 {
 	-moz-box-sizing: border-box;

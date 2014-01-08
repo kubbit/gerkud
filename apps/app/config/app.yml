@@ -43,3 +43,4 @@ all:
     derrigorrezkoak: [id,  created_at, laburpena, mota, lehentasuna]
     kopia_zehatza: true
     izena_eta_abizena: false
+    hiritarrena_mota_id: 99

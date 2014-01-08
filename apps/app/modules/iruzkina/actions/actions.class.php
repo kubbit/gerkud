@@ -95,7 +95,6 @@ class iruzkinaActions extends sfActions
 				$testua=__('Gertakaria "%taldea%" (a)ri esleitu zaio. ', array('%taldea%' => $s[0]));
 				$iruzkina->setTestua($testua);
 				$iruzkina->save();
-
 			}
 			else
 			{
@@ -109,6 +108,17 @@ class iruzkinaActions extends sfActions
 					else
 						$gertakariak[0]->setEgoeraId(1);
 					$gertakariak[0]->save();
+
+					//Bikoizpen erlazioak ezabatzen dira
+					$sql = 'DELETE FROM erlazioak WHERE hasiera_id = :hasieraId';
+					$cn = Doctrine_Manager::getInstance()->connection();
+					$cmd = $cn->prepare($sql);
+					$parametroak = array
+					(
+						':hasieraId' => $gertakariak[0]->getId()
+					);
+					$cmd->execute($parametroak);
+					$cmd->closeCursor();
 				}
 			}
 

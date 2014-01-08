@@ -10,6 +10,8 @@
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
+sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
+
 class Iruzkina extends BaseIruzkina
 {
 	public function getGertakaria()
@@ -80,6 +82,7 @@ class Iruzkina extends BaseIruzkina
 				break;
 			case 6: //Ixtea
 				$aldaketa = __('Itxita');
+				$gertakaria->ohartaraziKontaktua();
 				break;
 			default:
 				return;
@@ -89,6 +92,11 @@ class Iruzkina extends BaseIruzkina
 		if (empty($aldaketa))
 			return;
 
-		$gertakaria->mezuaBidali($this->getLangilea(), $this->getEkintza(), $egoera_aldaketa, $ekintza, $aldaketa);
+		$langilea = $this->getLangilea();
+		$nori = $gertakaria->getAbisuaNori($langilea, $egoera_aldaketa);
+		$mezua = $gertakaria->mezuaSortu(Gertakaria::TXANTILOIA_FITXATEGIA_LANGILEAK, $langilea, $ekintza, $aldaketa);
+		$gaia = sprintf('%s %d: %s', $this->getEkintza(), $gertakaria->getId(), $gertakaria->getLaburpena());
+
+		$gertakaria->mezuaBidali($nori, $gaia, $mezua, true);
 	}
 }

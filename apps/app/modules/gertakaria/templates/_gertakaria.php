@@ -65,9 +65,9 @@
 			<span class="errorea"><?php echo __($form['klasea_id']->getError()); ?></span>
 		</div>
 <?php endif; ?>
-<?php if(count(array_intersect($configEremuak, ['barrutia', 'kalea', 'kale_zbkia', 'eraikina'])) > 0): ?>
+<?php if(count(array_intersect($configEremuak, array('barrutia', 'kalea', 'kale_zbkia', 'eraikina'))) > 0): ?>
 		<div>
-			<label for="gertakaria_barrutia_id"><?php echo __('Helbidea') ?>:<?php echo (count(array_intersect($configDerrigorrezkoak, ['barrutia', 'auzoa', 'kalea', 'kale_zbkia'])) > 0)?'*':'' ?></label>
+			<label for="gertakaria_barrutia_id"><?php echo __('Helbidea') ?>:<?php echo (count(array_intersect($configDerrigorrezkoak, array('barrutia', 'auzoa', 'kalea', 'kale_zbkia'))) > 0)?'*':'' ?></label>
 	<?php if (in_array('barrutia', $configEremuak)): ?>
 	<?php	echo $form['barrutia_id']->render(); ?>
 			<span class="errorea"><?php echo __($form['barrutia_id']->getError()); ?></span>

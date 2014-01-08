@@ -21,6 +21,8 @@ Gertakaria:
     lehentasuna_id: { type: integer, notnull: false}
     jatorrizkoSaila_id: { type: integer, notnull: false }
     eraikina_id: { type: integer, notnull: false }
+    herritarrena: { type: boolean, notnull: false }
+    kontaktua_id: { type: integer, notnull: false }
   relations:
     Klasea: { onDelete: CASCADE, local: klasea_id, foreign: id }
     Mota: { onDelete: CASCADE, local: mota_id, foreign: id }
@@ -34,6 +36,8 @@ Gertakaria:
     Lehentasuna: { onDelete: CASCADE, local: lehentasuna_id, foreign: id }
     JatorrizkoSaila: { onDelete: CASCADE, local: jatorrizkoSaila_id, foreign: id }
     Eraikina: { onDelete: CASCADE, local: eraikina_id, foreign: id }
+    Kontaktua:
+      foreignType: one
 
 Langilea:
   connection: doctrine
@@ -175,6 +179,7 @@ Geo:
     gertakaria_id: { type: integer, notnull: true }
     longitudea: { type: double(18), scale: 6, notnull: true }
     latitudea: { type: double(18), scale: 6, notnull: true }
+    zehaztasuna: { type: double(18), scale: 6, notnull: false }
     testua: { type: string(50) }
     geometria_id: { type: integer, notnull: true }
   relations:
@@ -223,3 +228,41 @@ EgunTarteak:
   columns:
     minimoa: { type: integer, notnull: true, unique: true }
     maximoa: { type: integer, notnull: true, unique: true }
+
+ErlazioMota:
+  actAs:
+    I18n:
+      fields: [izena]
+  columns:
+    izena: { type: string(255), notnull: true }
+
+Erlazioak:
+  columns:
+    hasiera_id: { type: integer, notnull: true }
+    amaiera_id: { type: integer, notnull: true }
+    erlazio_mota_id: { type: integer, notnull: false }
+  relations:
+    ErlazioMota:
+      onDelete: SET NULL
+      local: erlazio_mota_id
+      foreign: id
+      type: one
+    Gertakaria:
+      onDelete: CASCADE
+      local: amaiera_id
+      foreign: id
+      type: one
+    Gertakaria_3:
+      onDelete: CASCADE
+      class: Gertakaria
+      local: hasiera_id
+      foreign: id
+      type: one
+
+Kontaktua:
+  columns:
+    izena: { type: string(255), notnull: false }
+    posta: { type: string(100), notnull: false }
+    telefonoa: { type: string(30), notnull: false }
+    ohartarazi: { type: boolean, notnull: false }
+    hizkuntza: { type: string(2), notnull: false }

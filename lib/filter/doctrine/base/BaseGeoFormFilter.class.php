@@ -16,6 +16,7 @@ abstract class BaseGeoFormFilter extends BaseFormFilterDoctrine
       'gertakaria_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Gertakaria'), 'add_empty' => true)),
       'longitudea'    => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'latitudea'     => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'zehaztasuna'   => new sfWidgetFormFilterInput(),
       'testua'        => new sfWidgetFormFilterInput(),
       'geometria_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Geometria'), 'add_empty' => true)),
     ));
@@ -24,6 +25,7 @@ abstract class BaseGeoFormFilter extends BaseFormFilterDoctrine
       'gertakaria_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Gertakaria'), 'column' => 'id')),
       'longitudea'    => new sfValidatorPass(array('required' => false)),
       'latitudea'     => new sfValidatorPass(array('required' => false)),
+      'zehaztasuna'   => new sfValidatorPass(array('required' => false)),
       'testua'        => new sfValidatorPass(array('required' => false)),
       'geometria_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Geometria'), 'column' => 'id')),
     ));
@@ -49,6 +51,7 @@ abstract class BaseGeoFormFilter extends BaseFormFilterDoctrine
       'gertakaria_id' => 'ForeignKey',
       'longitudea'    => 'Text',
       'latitudea'     => 'Text',
+      'zehaztasuna'   => 'Text',
       'testua'        => 'Text',
       'geometria_id'  => 'ForeignKey',
     );

@@ -50,9 +50,31 @@ class gertakariaActions extends sfActions
 		$this->bilaketa = $request->getParameter('bilaketa');
 
 		$this->zutabeakConfig = sfConfig::get('app_zutabeak_gertakariak');
-		$this->zutabeak = [];
+		$this->zutabeak = array();
 		$this->gertakarienZutabeakSortu();
 		$this->datuak = $this->gertakarienDatuakSortu($this->pager->getResults());
+	}
+
+	public function erlazioakAurkitu($gertakariaId)
+	{
+		$erlazioMotaId = '1';
+
+		$sql = 'SELECT DISTINCT hasiera_id AS gertakaria_id FROM '
+			. '(SELECT hasiera_id FROM erlazioak WHERE amaiera_id = :gertakariaId and erlazio_mota_id = :erlazioMotaId'
+			. ' UNION ALL SELECT amaiera_id FROM erlazioak WHERE hasiera_id = :gertakariaId and erlazio_mota_id = :erlazioMotaId)'
+			. ' erlazioak order by gertakaria_id desc';
+		$cn = Doctrine_Manager::getInstance()->connection();
+		$cmd = $cn->prepare($sql);
+		$parametroak = array
+		(
+			':gertakariaId' => $gertakariaId[0],
+			':erlazioMotaId' =>  $erlazioMotaId
+		);
+		$cmd->execute($parametroak);
+		$erlazionatutakoak = $cmd->fetchAll(PDO::FETCH_COLUMN, 0);
+		$cmd->closeCursor();
+
+		$this->erlazioak = $erlazionatutakoak;
 	}
 
 	public function gertakarienZutabeakSortu()
@@ -161,7 +183,7 @@ class gertakariaActions extends sfActions
 
 	public function gertakarienDatuakSortu($cursor)
 	{
-		$datuak = [];
+		$datuak = array();
 
 		foreach ($cursor as $fila)
 		{
@@ -169,7 +191,7 @@ class gertakariaActions extends sfActions
 			$ilara->lehentasuna = $fila->getLehentasunaId();
 			$ilara->estekaId = $fila->getId();
 			$ilara->egoeraKolorea = $fila->getEgoera()->getKolorea();
-			$ilara->datuak = [];
+			$ilara->datuak = array();
 
 			foreach ($this->zutabeakConfig as $bakoitza)
 			{
@@ -295,6 +317,9 @@ class gertakariaActions extends sfActions
 			$this->sailakoa = true;
 		else
 			$this->sailakoa = false;
+
+		$this->erlazioak = array();
+		$this->erlazioakAurkitu(array($request->getParameter('id')));
 
 		$this->forward404Unless($this->gertakaria);
 	}
@@ -565,7 +590,7 @@ class gertakariaActions extends sfActions
 			$html .= '</tr>';
 		}
 
-		if(count(array_intersect($configEremuak, ['barrutia', 'auzoa', 'kalea', 'kale_zbkia', 'eraikina'])) > 0)
+		if(count(array_intersect($configEremuak, array('barrutia', 'auzoa', 'kalea', 'kale_zbkia', 'eraikina'))) > 0)
 		{
 			$html .= '<tr>';
 			$html .= '<th style="background-color: #CCC;font-weight: bold;" colspan="3">' . __('Helbidea') . ':</th>';

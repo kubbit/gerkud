@@ -12,6 +12,22 @@
  */
 class Gertakaria extends BaseGertakaria
 {
+	const TXANTILOIAK_PATH = '../txantiloiak';
+
+	const TXANTILOIA_FITXATEGIA_LANGILEAK = 'langileak';
+	const TXANTILOIA_FITXATEGIA_HORKONPON = 'herritarrak';
+
+	const TXANTILOIA_LOGOTIPOA = '[logotipoa]';
+
+	const TXANTILOIA_DATUAK_ID = '[id]';
+	const TXANTILOIA_DATUAK_DESKRIBAPENA = '[deskribapena]';
+	const TXANTILOIA_DATUAK_EKINTZA = '[ekintza]';
+	const TXANTILOIA_DATUAK_ALDAKETA = '[aldaketa]';
+	const TXANTILOIA_DATUAK_LANGILEA = '[langilea]';
+	const TXANTILOIA_DATUAK_SORTZE_DATA = '[sortze_data]';
+
+	const TXANTILOIA_CSS_ALDAKETA = '[css-aldaketa]';
+
 	public function save(Doctrine_Connection $conn = null)
 	{
 		$berria = $this->isNew();
@@ -83,7 +99,7 @@ class Gertakaria extends BaseGertakaria
 	/*
 	 * Gertakariaren oharra jaso behar duten langile guztien e-mailak itzuli
 	 */
-	protected function getAbisuaNori($langilea, $egoera_aldaketa)
+	public function getAbisuaNori($langilea, $egoera_aldaketa)
 	{
 		$nori = array();
 
@@ -99,6 +115,13 @@ class Gertakaria extends BaseGertakaria
 		// gertakariaren sortzailea gehitu
 		if ($this->getLangileaId())
 			array_push($erabiltzaileak, $this->getLangileaId());
+
+		// gertakariaren bikoizketen langileak gehitu
+		$bikoiztuenLangileak = $this->getBikoiztuenLangileak();
+		foreach ($bikoiztuenLangileak as $erab)
+		{
+			array_push($erabiltzaileak, $erab);
+		}
 
 		foreach ($erabiltzaileak as $erab_id)
 		{
@@ -133,12 +156,77 @@ class Gertakaria extends BaseGertakaria
 	protected function ohartarazi()
 	{
 		$langilea = $this->getLangilea();
-		$this->mezuaBidali($langilea, __('Eskaera berria'), true, null, null);
+		$nori = $this->getAbisuaNori($langilea, true);
+		$mezua = $this->mezuaSortu(self::TXANTILOIA_FITXATEGIA_LANGILEAK, $langilea, null, null);
+		$gaia = sprintf('%s %d: %s', __('Eskaera berria'), $this->getId(), $this->getLaburpena());
+		$this->mezuaBidali($nori, $gaia, $mezua, true);
 	}
-	public function mezuaBidali($langilea, $gai_ekintza, $egoera_aldaketa, $ekintza, $aldaketa)
+	public function ohartaraziKontaktua()
 	{
-		$nori = $this->getAbisuaNori($langilea, $egoera_aldaketa);
+		$kontaktuak = array();
 
+		$kontaktua = $this->getKontaktua();
+		if ($kontaktua && $kontaktua->getPosta() !== null)
+			$kontaktuak[] = $kontaktua;
+
+		$bikoiztuak = $this->getBikoiztuak();
+		foreach ($bikoiztuak as $gertakaria)
+		{
+			$kontaktua = $gertakaria->getKontaktua();
+			if ($kontaktua && $kontaktua->getPosta() !== null)
+				$kontaktuak[] = $kontaktua;
+		}
+
+		foreach ($kontaktuak as $kontaktua)
+		{
+			// cambiar temporalmente el idioma de usuario para poder enviar
+			// la notificacion al ciudadano en el idioma correcto
+			$culture = sfContext::getInstance()->getUser()->getCulture();
+			sfContext::getInstance()->getUser()->setCulture($kontaktua->getHizkuntza());
+
+			$gaia = __('HorKonpon: ohartarazpena');
+			$mezua = $this->mezuaSortu(self::TXANTILOIA_FITXATEGIA_HORKONPON, null, null, null);
+
+			sfContext::getInstance()->getUser()->setCulture($culture);
+
+			$nori = array();
+			$nori[] = $kontaktua->getPosta();
+			$this->mezuaBidali($nori, $gaia, $mezua, false);
+		}
+	}
+	public function mezuaSortu($mezuMota, $langilea, $ekintza, $aldaketa)
+	{
+		$culture = sfContext::getInstance()->getUser()->getCulture();
+
+		$fitxategia = '';
+		switch ($mezuMota)
+		{
+			case self::TXANTILOIA_FITXATEGIA_LANGILEAK:
+				$fitxategia = 'langileak';
+				break;
+			case self::TXANTILOIA_FITXATEGIA_HORKONPON:
+				$fitxategia = 'horkonpon';
+				break;
+		}
+
+		$mezua = file_get_contents(sprintf('%s/%s_%s.template', self::TXANTILOIAK_PATH, $fitxategia, $culture));
+
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_ID, $this->getId(), $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_DESKRIBAPENA, $this->getDeskribapena(), $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_EKINTZA, $ekintza, $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_ALDAKETA, $aldaketa, $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_SORTZE_DATA, date(sfConfig::get('app_data_formatoa'), strtotime($this->getCreatedAt())), $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_LANGILEA , $langilea ? $langilea->getName() : '', $mezua);
+
+		if (!empty($ekintza))
+			$mezua = str_replace(self::TXANTILOIA_CSS_ALDAKETA, 'inherit', $mezua);
+		else
+			$mezua = str_replace(self::TXANTILOIA_CSS_ALDAKETA, 'none', $mezua);
+
+		return $mezua;
+ 	}
+	public function mezuaBidali($nori, $gaia, $gorputza, $izkutua)
+	{
 		// ez du inorrek abisua jaso nahi
 		if (count($nori) == 0)
 			return;
@@ -146,31 +234,23 @@ class Gertakaria extends BaseGertakaria
 		$mezua = Swift_Message::newInstance();
 		$mezua->setContentType('text/html');
 
-		$mezua->setBcc($nori);
+		if ($izkutua)
+			$mezua->setBcc($nori);
+		else
+			$mezua->setTo($nori);
+
 		$mezua->setFrom(sfConfig::get('app_abisuak_nork'));
-		$mezua->setSubject(sprintf('%s %d: %s', $gai_ekintza, $this->getId(), $this->getLaburpena()));
+		$mezua->setSubject($gaia);
 
-		$cid = $mezua->embed(Swift_Image::fromPath('./images/logoa_mail.jpg'));
-
-		$html = sprintf('<table border=0><tr><td colspan=2><img src="%s" /></td></tr>', $cid)
-		 . '<tr><th colspan=2><hr><br></th></tr>'
-		 . sprintf('<tr><th align=left><b>%s:</b></th><td>%d</td></tr>', __('Gertakariaren kodea'), $this->getId())
-		 . sprintf('<tr><th colspan=2 align=left><b>%s:</b></th></tr>', __('Gertakariaren deskribapena'))
-		 . sprintf('<tr><td colspan=2>%s</td></tr></table><br>', $this->getDeskribapena());
-
-		// Aldaketagatik bada, azaldu zein izan den aldaketa
-		if (!empty($ekintza))
+		// Mezuaren gorputzan logotipoa ezarri bada, fitxategia erantsi
+		// eta helbidea berrezarri
+		if (strpos($gorputza, self::TXANTILOIA_LOGOTIPOA ) !== false)
 		{
-			$html .= sprintf('<p>%s:</p>', __('Gertakari honek ondorengo aldaketa izan du'))
-			 . '<table border=0>'
-			 . sprintf('<tr><th align=left><b>%s:</b></th><td>%s</td></tr>', $ekintza, $aldaketa);
+			$cid = $mezua->embed(Swift_Image::fromPath('./images/logoa_mail.jpg'));
+			$gorputza = str_replace(self::TXANTILOIA_LOGOTIPOA , $cid, $gorputza);
 		}
 
-		$html .= sprintf('<tr><th align=left><b>%s:</b></th><td>%s</td></tr>', __('Nork egin du'), $langilea->getName())
-		 . '</table><br><br>'
-		 . sprintf('<hr><p>%s</p>', __('EZ ERANTZUN MEZU HONI. Mezu hau automatikoki bidali dizu GERKUD gertakarien kudeaketa aplikazioak zuk horrela konfiguratuta daukazulako. Ez baduzu horrelako mezurik jaso nahi, aldatu konfigurazioa "nire datuak" atalean'));
-
-		$mezua->setBody($html);
+		$mezua->setBody($gorputza);
 
 		$mailer = sfContext::getInstance()->getMailer();
 
@@ -182,5 +262,42 @@ class Gertakaria extends BaseGertakaria
 		{
 			echo '<script>alert("Errorea abisua bidaltzean")</script>';
 		}
+	}
+	public function getBikoiztuak()
+	{
+		$amaiera_id = $this->getId();
+
+		$sql = 'SELECT hasiera_id FROM erlazioak WHERE amaiera_id = :amaieraId';
+		$cn = Doctrine_Manager::getInstance()->connection();
+		$cmd = $cn->prepare($sql);
+		$parametroak = array
+		(
+			':amaieraId' => $amaiera_id
+		);
+		$cmd->execute($parametroak);
+		$bikoiztuenGertakariaId = $cmd->fetchAll(PDO::FETCH_COLUMN, 0);
+		$cmd->closeCursor();
+
+		$bikoiztuak = array();
+
+		foreach ($bikoiztuenGertakariaId as $bakoitza)
+		{
+			$gertakaria = Doctrine::getTable('gertakaria')->find($bakoitza);
+			if ($gertakaria)
+				array_push($bikoiztuak, $gertakaria);
+		}
+
+		return $bikoiztuak;
+	}
+	protected function getBikoiztuenLangileak()
+	{
+		$bikoiztuenLangileak = array();
+		$bikoiztuak = $this->getBikoiztuak();
+
+		foreach ($bikoiztuak as $gertakaria)
+			if ($gertakaria->getLangileaId())
+				array_push($bikoiztuenLangileak, $gertakaria->getLangileaId());
+
+		return $bikoiztuenLangileak;
 	}
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Gerkud</title>
+		<style type="text/css">
+table
+{
+	border: 0;
+}
+th
+{
+	text-align: left;
+}
+.aldaketa
+{
+	display: [css-aldaketa];
+}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td colspan="2">
+					<img src="[logotipoa]" alt="logotipoa" />
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<hr />
+					<br />
+				</th>
+			</tr>
+			<tr>
+				<th>
+					<b>Código de incidencia:</b>
+				</th>
+				<td>[id]</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<b>Descripción de incidencia:</b>
+				</th>
+			</tr>
+			<tr>
+				<td colspan="2">[deskribapena]</td>
+			</tr>
+		</table>
+
+		<br />
+
+		<p class="aldaketa">La incidencia ha tenido el siguiente cambio:</p>
+
+		<table>
+			<tr class="aldaketa">
+				<th>
+					<b>[ekintza]:</b>
+				</th>
+				<td>[aldaketa]</td>
+			</tr>
+			<tr>
+				<th>
+					<b>Realizado por:</b>
+				</th>
+				<td>[langilea]</td>
+			</tr>
+		</table>
+
+		<br />
+		<br />
+		<hr />
+
+		<p>NO CONTESTE A ESTE CORREO. Este mensaje ha sido enviado automáticamente a través del gestor de incidencias GERKUD por que así consta en su configuración. Si no desea volver a recibir mensajes como este, cambie su configuración en el apartado "mis datos"</p>
+	</body>
+</html>

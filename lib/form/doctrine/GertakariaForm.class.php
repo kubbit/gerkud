@@ -263,7 +263,9 @@ class GertakariaForm extends BaseGertakariaForm
 
 		unset
 		(
-			$this['updated_at']
+			$this['updated_at'],
+			$this['herritarrena'],
+			$this['kontaktua_id']
 		);
 
 		$this->validatorSchema->setPostValidator

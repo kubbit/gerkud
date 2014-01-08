@@ -46,7 +46,8 @@ class sfWidgetFormDataOrdua extends sfWidgetForm
 					$data = new DateTime($value);
 
 				// evitar la correccion automatica de la fecha
-				if (DateTime::getLastErrors()['warning_count'] > 0)
+				$errors = DateTime::getLastErrors();
+				if ($errors['warning_count'] > 0)
 					throw new Exception('Invalid date');
 
 				switch ($this->getOption('type'))

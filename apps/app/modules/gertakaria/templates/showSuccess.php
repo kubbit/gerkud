@@ -169,7 +169,7 @@
 			<span><?php echo $gertakaria->getAmaieraAurreikusia() ?>&nbsp;</span>
 		</div>
 <?php endif; ?>
-<?php if(count(array_intersect($configEremuak, ['barrutia', 'auzoa', 'kalea', 'kale_zbkia', 'eraikina'])) > 0): ?>
+<?php if(count(array_intersect($configEremuak, array('barrutia', 'auzoa', 'kalea', 'kale_zbkia', 'eraikina'))) > 0): ?>
 		<div class="luzea">
 			<div><?php echo __('Helbidea') ?>:</div>
 			<span>
@@ -195,7 +195,41 @@
 	</div>
 </div>
 
+<!-- Erlazioak -->
+<?php log_message('Erlazioak....', 'info'); ?>
+<div class="gertakaria erlazioak">
+	<div class="taulaGoiburua"><?php echo __('Bikoiztuak') ?></div>
+<?php if (count($erlazioak) > 0): ?>
+		<ul>
+		<?php foreach ($erlazioak as $bakoitza): ?>
+			<li><a href="<?php echo url_for('gertakaria/show?id=' . $bakoitza) ?>"><?php echo $bakoitza ?></a></li>
+		<?php endforeach; ?>
+		</ul>
+<?php endif; ?>
 
+<?php if ($sf_user->hasCredential(array('admins', 'gerkud', 'zerbitzu'), false) && $gertakaria->getEgoeraId() <> "6"): ?>
+	<?php
+		$form4 = new ErlazioakForm();
+		$form4->setDefault('hasiera_id', $gertakaria->getId());
+		$form4->setDefault('erlazio_mota_id', 1);
+		$form4->setDefault('ekintza_id', 1);
+	?>
+	<form action="<?php echo url_for('erlazioak/create') ?>" method="post">
+		<div class="izkutua">
+			<input type="hidden" name="erlazioak[langilea_id]" value="<?php echo $lang; ?>" />
+			<?php echo $form4['hasiera_id']->render(array('id' => '')); ?>
+			<?php echo $form4['erlazio_mota_id']->render(array('id' => '')); ?>
+			<?php echo $form4['ekintza_id']->render(array('id' => '')); ?>
+	<?php if ($form4->isCSRFProtected()) : ?>
+			<?php echo $form4['_csrf_token']->render(); ?>
+	<?php endif; ?>
+		</div>
+		<?php echo __('Hurrengo gertakariaren bikoitza bezala baztertu:'); ?>
+		<?php echo $form4['amaiera_id']->render(array('id' => '')); ?>
+		<input type="submit" value="<?php echo __('Baztertu') ?>" />
+	</form>
+<?php endif; ?>
+</div>
 
 <!-- Historikoa  -->
 <?php log_message('Historikoa....', 'info') ?>
@@ -249,7 +283,6 @@
 </div>
 
 
-
 <!-- Fitxategiak:  -->
 <?php log_message('Fitxategiak....', 'info'); ?>
 <div class="gertakaria fitxategiak">
@@ -282,7 +315,6 @@
 		</div>
 	</form>
 </div>
-
 
 
 <!-- Planoak: -->

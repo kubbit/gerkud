@@ -35,6 +35,8 @@ abstract class BaseGertakariaForm extends BaseFormDoctrine
       'lehentasuna_id'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Lehentasuna'), 'add_empty' => true)),
       'jatorrizkoSaila_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('JatorrizkoSaila'), 'add_empty' => true)),
       'eraikina_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Eraikina'), 'add_empty' => true)),
+      'herritarrena'        => new sfWidgetFormInputCheckbox(),
+      'kontaktua_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Kontaktua'), 'add_empty' => true)),
       'created_at'          => new sfWidgetFormDateTime(),
       'updated_at'          => new sfWidgetFormDateTime(),
     ));
@@ -60,6 +62,8 @@ abstract class BaseGertakariaForm extends BaseFormDoctrine
       'lehentasuna_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Lehentasuna'), 'required' => false)),
       'jatorrizkoSaila_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('JatorrizkoSaila'), 'required' => false)),
       'eraikina_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Eraikina'), 'required' => false)),
+      'herritarrena'        => new sfValidatorBoolean(array('required' => false)),
+      'kontaktua_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Kontaktua'), 'required' => false)),
       'created_at'          => new sfValidatorDateTime(),
       'updated_at'          => new sfValidatorDateTime(),
     ));

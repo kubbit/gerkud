@@ -24,6 +24,8 @@
  * @property integer $lehentasuna_id
  * @property integer $jatorrizkoSaila_id
  * @property integer $eraikina_id
+ * @property boolean $herritarrena
+ * @property integer $kontaktua_id
  * @property Klasea $Klasea
  * @property Mota $Mota
  * @property Azpimota $Azpimota
@@ -36,10 +38,12 @@
  * @property Lehentasuna $Lehentasuna
  * @property JatorrizkoSaila $JatorrizkoSaila
  * @property Eraikina $Eraikina
+ * @property Kontaktua $Kontaktua
  * @property Doctrine_Collection $Fitxategia
  * @property Doctrine_Collection $Iruzkina
  * @property Doctrine_Collection $Planifikazioa
  * @property Doctrine_Collection $Geo
+ * @property Doctrine_Collection $Erlazioak
  * 
  * @method string              getLaburpena()           Returns the current record's "laburpena" value
  * @method integer             getKlaseaId()            Returns the current record's "klasea_id" value
@@ -60,6 +64,8 @@
  * @method integer             getLehentasunaId()       Returns the current record's "lehentasuna_id" value
  * @method integer             getJatorrizkoSailaId()   Returns the current record's "jatorrizkoSaila_id" value
  * @method integer             getEraikinaId()          Returns the current record's "eraikina_id" value
+ * @method boolean             getHerritarrena()        Returns the current record's "herritarrena" value
+ * @method integer             getKontaktuaId()         Returns the current record's "kontaktua_id" value
  * @method Klasea              getKlasea()              Returns the current record's "Klasea" value
  * @method Mota                getMota()                Returns the current record's "Mota" value
  * @method Azpimota            getAzpimota()            Returns the current record's "Azpimota" value
@@ -72,10 +78,12 @@
  * @method Lehentasuna         getLehentasuna()         Returns the current record's "Lehentasuna" value
  * @method JatorrizkoSaila     getJatorrizkoSaila()     Returns the current record's "JatorrizkoSaila" value
  * @method Eraikina            getEraikina()            Returns the current record's "Eraikina" value
+ * @method Kontaktua           getKontaktua()           Returns the current record's "Kontaktua" value
  * @method Doctrine_Collection getFitxategia()          Returns the current record's "Fitxategia" collection
  * @method Doctrine_Collection getIruzkina()            Returns the current record's "Iruzkina" collection
  * @method Doctrine_Collection getPlanifikazioa()       Returns the current record's "Planifikazioa" collection
  * @method Doctrine_Collection getGeo()                 Returns the current record's "Geo" collection
+ * @method Doctrine_Collection getErlazioak()           Returns the current record's "Erlazioak" collection
  * @method Gertakaria          setLaburpena()           Sets the current record's "laburpena" value
  * @method Gertakaria          setKlaseaId()            Sets the current record's "klasea_id" value
  * @method Gertakaria          setMotaId()              Sets the current record's "mota_id" value
@@ -95,6 +103,8 @@
  * @method Gertakaria          setLehentasunaId()       Sets the current record's "lehentasuna_id" value
  * @method Gertakaria          setJatorrizkoSailaId()   Sets the current record's "jatorrizkoSaila_id" value
  * @method Gertakaria          setEraikinaId()          Sets the current record's "eraikina_id" value
+ * @method Gertakaria          setHerritarrena()        Sets the current record's "herritarrena" value
+ * @method Gertakaria          setKontaktuaId()         Sets the current record's "kontaktua_id" value
  * @method Gertakaria          setKlasea()              Sets the current record's "Klasea" value
  * @method Gertakaria          setMota()                Sets the current record's "Mota" value
  * @method Gertakaria          setAzpimota()            Sets the current record's "Azpimota" value
@@ -107,10 +117,12 @@
  * @method Gertakaria          setLehentasuna()         Sets the current record's "Lehentasuna" value
  * @method Gertakaria          setJatorrizkoSaila()     Sets the current record's "JatorrizkoSaila" value
  * @method Gertakaria          setEraikina()            Sets the current record's "Eraikina" value
+ * @method Gertakaria          setKontaktua()           Sets the current record's "Kontaktua" value
  * @method Gertakaria          setFitxategia()          Sets the current record's "Fitxategia" collection
  * @method Gertakaria          setIruzkina()            Sets the current record's "Iruzkina" collection
  * @method Gertakaria          setPlanifikazioa()       Sets the current record's "Planifikazioa" collection
  * @method Gertakaria          setGeo()                 Sets the current record's "Geo" collection
+ * @method Gertakaria          setErlazioak()           Sets the current record's "Erlazioak" collection
  * 
  * @package    gerkud
  * @subpackage model
@@ -200,6 +212,14 @@ abstract class BaseGertakaria extends sfDoctrineRecord
              'type' => 'integer',
              'notnull' => false,
              ));
+        $this->hasColumn('herritarrena', 'boolean', null, array(
+             'type' => 'boolean',
+             'notnull' => false,
+             ));
+        $this->hasColumn('kontaktua_id', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => false,
+             ));
     }
 
     public function setUp()
@@ -265,6 +285,10 @@ abstract class BaseGertakaria extends sfDoctrineRecord
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
 
+        $this->hasOne('Kontaktua', array(
+             'local' => 'kontaktua_id',
+             'foreign' => 'id'));
+
         $this->hasMany('Fitxategia', array(
              'local' => 'id',
              'foreign' => 'gertakaria_id'));
@@ -280,6 +304,10 @@ abstract class BaseGertakaria extends sfDoctrineRecord
         $this->hasMany('Geo', array(
              'local' => 'id',
              'foreign' => 'gertakaria_id'));
+
+        $this->hasMany('Erlazioak', array(
+             'local' => 'id',
+             'foreign' => 'amaiera_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

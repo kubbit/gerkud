@@ -1,4 +1,13 @@
 ================================================================================
+  Version 1.16
+  2014-01-08  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Nuevo API para recibir incidencias a través de la aplicación para dispositivos
+  móviles HorKonpon
+* Posibilidad de marcar una incidencia como duplicada de otra
+* Uso de plantillas para envío de correos de notificación
+
+================================================================================
   Version 1.14
   2013-11-28  Kubbit Information Technology (http://kubbit.com)
 ================================================================================
