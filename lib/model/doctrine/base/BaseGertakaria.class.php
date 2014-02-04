@@ -18,7 +18,7 @@
  * @property integer $kalea_id
  * @property string $kale_zbkia
  * @property string $deskribapena
- * @property datetime $ixte_data
+ * @property timestamp $ixte_data
  * @property date $hasiera_aurreikusia
  * @property date $amaiera_aurreikusia
  * @property integer $lehentasuna_id
@@ -58,7 +58,7 @@
  * @method integer             getKaleaId()             Returns the current record's "kalea_id" value
  * @method string              getKaleZbkia()           Returns the current record's "kale_zbkia" value
  * @method string              getDeskribapena()        Returns the current record's "deskribapena" value
- * @method datetime            getIxteData()            Returns the current record's "ixte_data" value
+ * @method timestamp           getIxteData()            Returns the current record's "ixte_data" value
  * @method date                getHasieraAurreikusia()  Returns the current record's "hasiera_aurreikusia" value
  * @method date                getAmaieraAurreikusia()  Returns the current record's "amaiera_aurreikusia" value
  * @method integer             getLehentasunaId()       Returns the current record's "lehentasuna_id" value
@@ -188,8 +188,8 @@ abstract class BaseGertakaria extends sfDoctrineRecord
              'notnull' => false,
              'length' => 4000,
              ));
-        $this->hasColumn('ixte_data', 'datetime', null, array(
-             'type' => 'datetime',
+        $this->hasColumn('ixte_data', 'timestamp', null, array(
+             'type' => 'timestamp',
              'notnull' => false,
              ));
         $this->hasColumn('hasiera_aurreikusia', 'date', null, array(

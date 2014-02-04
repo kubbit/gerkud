@@ -112,3 +112,8 @@ CREATE TABLE IF NOT EXISTS erlazioak
 	CONSTRAINT erlazioak_erlazio_mota_id_erlazio_mota_id FOREIGN KEY (erlazio_mota_id) REFERENCES erlazio_mota (id) ON DELETE SET NULL,
 	CONSTRAINT erlazioak_hasiera_id_gertakaria_id FOREIGN KEY (hasiera_id) REFERENCES gertakaria (id) ON DELETE CASCADE
 );
+
+
+
+/* v1.16.2 */
+UPDATE gertakaria SET ixte_data = NULL WHERE year(ixte_data) = 0;

@@ -15,7 +15,7 @@ Gertakaria:
     kalea_id: { type: integer, notnull: false }
     kale_zbkia: { type: string(50) }
     deskribapena: { type: string(4000), notnull: false }
-    ixte_data: { type: datetime, notnull: false }
+    ixte_data: { type: timestamp, notnull: false }
     hasiera_aurreikusia: { type: date, notnull: false }
     amaiera_aurreikusia: { type: date, notnull: false }
     lehentasuna_id: { type: integer, notnull: false}
