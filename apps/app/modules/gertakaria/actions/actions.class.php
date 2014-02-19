@@ -176,6 +176,18 @@ class gertakariaActions extends sfActions
 					$zutabea->izena = __('Kalea') . ' / ' . __('Eraikina');
 					$zutabea->klasea = 'eraikinakalea';
 					break;
+				case 'klaseamota':
+					$zutabea->izena = __('Klasea') . ' / ' . __('Mota');
+					$zutabea->klasea = 'klaseamota';
+					break;
+				case 'barrutiaeraikinakalealaburpena':
+					$zutabea->izena = __('Laburpena') ;
+					$zutabea->klasea = 'barrutiaeraikinakalealaburpena';
+					break;
+				case 'egoerasaila':
+					$zutabea->izena = __('Egoera') . ' / ' . __('Saila');
+					$zutabea->klasea = 'egoerasaila';
+					break;
 			}
 			array_push($this->zutabeak, $zutabea);
 		}
@@ -291,6 +303,28 @@ class gertakariaActions extends sfActions
 						{
 							$balioa = '';
 						}
+						break;
+					case 'klaseamota':
+						$balioa = '';
+						if ($fila->getKlaseaId())
+							$balioa = $fila->getKlasea();
+						if ($fila->getMotaId())
+							$balioa = $balioa . '###' . $fila->getMota();
+						break;
+					case 'barrutiaeraikinakalealaburpena':
+						$balioa = '';
+						if ($fila->getBarrutiaId())
+							$balioa = $fila->getBarrutia();
+						if ($fila->getEraikinaId())
+							$balioa = $balioa . '/' . $fila->getEraikina();
+						else if ($fila->getKaleaId())
+							$balioa = $balioa . '/' . $fila->getKalea() . ', ' . $fila->getKaleZbkia();
+						$balioa = $balioa . '###' . $fila->getLaburpena();
+						break;
+					case 'egoerasaila':
+						$balioa = $fila->getEgoera();
+						if ($fila->getSailaId())
+							$balioa = $balioa . '###' . $fila->getSaila();
 						break;
 				}
 				$ilara->datuak[$bakoitza] = $balioa;

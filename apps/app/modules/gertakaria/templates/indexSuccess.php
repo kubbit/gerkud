@@ -114,8 +114,12 @@
 			<td class="lehentasuna"><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>"><?php echo $datua ?></a></td>
 		<?php elseif ($klabea === 'egoera') : ?>
 			<td style='background-color:<?php  echo $eskaera->egoeraKolorea ?>'><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>"><?php echo $datua ?></a></td>
+		<?php elseif ($klabea === 'egoerasaila'): ?>
+			<td style='background-color:<?php echo $eskaera->egoeraKolorea; ?>'><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId); ?>"><?php echo str_replace('###', '<br />',$datua); ?></a></td>
+		<?php elseif ($klabea === 'created_at'): ?>
+			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId); ?>"><?php echo date('Y-m-d',strtotime($datua)); ?></a></td>
 		<?php else : ?>
-			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>"><?php echo $datua ?></a></td>
+			<td><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId); ?>"><?php echo str_replace('###', '<br />',$datua) ?></a></td>
 		<?php endif; ?>
 	<?php endforeach; ?>
 		</tr>

@@ -31,7 +31,8 @@ all:
   #Aukeratu daitezkeen zutabeen zerrenda osoa:
   #  id, laburpena, klasea, mota, azpimota, abisuanork, egoera, saila, langilea, barrutia, kalea,
   #  kale_zbkia, deskribapena, ixte_data, hasiera_aurreikusia, amaiera_aurreikusia, lehentasuna,
-  #  jatorrizkosaila, eraikina, created_at, updated_at, eraikinakalea
+  #  jatorrizkosaila, eraikina, created_at, updated_at, eraikinakalea, klaseamota,
+  #  barrutiaeraikinakalealaburpena, egoerasaila
   zutabeak:
     eskaerak: [lehentasuna, id, created_at, mota, auzoa, eraikinakalea, laburpena, abisuanork]
     gertakariak: [lehentasuna, id, created_at, saila, auzoa, eraikinakalea, laburpena, egoera, abisuanork, updated_at]
