@@ -45,8 +45,25 @@ all:
     secure_action:          secure
     login_module:           bhLDAPAuth
     login_action:           signin
+    error_400_module:       erroreak
+    error_400_action:       error
+    error_401_module:       erroreak
+    error_401_action:       error
+    error_403_module:       erroreak
+    error_403_action:       error
+    error_404_module:       erroreak
+    error_404_action:       error
+    error_500_module:       erroreak
+    error_500_action:       error
+    error_501_module:       erroreak
+    error_501_action:       error
+    error_502_module:       erroreak
+    error_502_action:       error
+    error_503_module:       erroreak
+    error_503_action:       error
+    error_504_module:       erroreak
+    error_504_action:       error
 #    login_module:           sfGuardAuth
 #    login_action:           signin
 #    secure_module:          sfGuardAuth
 #    secure_action:          secure
-

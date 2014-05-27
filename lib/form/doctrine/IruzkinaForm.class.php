@@ -14,14 +14,18 @@ class IruzkinaForm extends BaseIruzkinaForm
 	{
 		$culture = sfContext::getInstance()->getUser()->getCulture();
 
+		$this->widgetSchema['gertakaria_id'] = new sfWidgetFormInputHidden();
+		$this->widgetSchema['langilea_id'] = new sfWidgetFormInputHidden();
+		$this->widgetSchema['ekintza_id'] = new sfWidgetFormInputHidden();
+
 		$this->widgetSchema['saila_id'] = new sfWidgetFormDoctrineChoice(array
 		(
-			'model'     => 'Saila',
+			'model' => 'Saila',
 			'add_empty' => false,
-			'query'     => Doctrine::getTable('Saila')->createQuery('s')
-			                                          ->select('s.id, t.name')
-			                                          ->leftJoin('s.Translation t WITH t.lang = ?', $culture)
-			                                          ->orderBy('t.name ASC')
+			'query' => Doctrine::getTable('Saila')->createQuery('s')
+				->select('s.id, t.name')
+				->leftJoin('s.Translation t WITH t.lang = ?', $culture)
+				->orderBy('t.name ASC')
 		));
 
 		$this->validatorSchema['saila_id'] = new sfValidatorString(array

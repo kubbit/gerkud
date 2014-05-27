@@ -1,122 +1,139 @@
-function erakutsiEzkutatuBilaketa()
-{
-	var bilaketa = document.getElementById('bilaketa');
-	if (!bilaketa)
-		return;
+var puntuBerria = null;
+var infoLeihoa = null;
 
-	if (bilaketa.style.display === 'none')
-	{
-		bilaketa.style.display = 'inherit';
-
-		// kodean fokoa jarri
-		var kodea = document.getElementById('gertakaria_filters_id');
-		if (kodea)
-			kodea.focus();
-	}
-	else
-		bilaketa.style.display = 'none';
-
-	// orri aldaketa saihestu
-	if (event.preventDefault)
-		event.preventDefault();
-	else
-		event.returnValue = false;
-}
-function erakutsiEzkutatuAurreratua()
-{
-	if (document.getElementById('aurreratua').style.display === 'none')
-	{
-		document.getElementById('aurreratua').style.display = 'block';
-		document.getElementById('arrunta').style.display = 'none';
-		document.getElementById('aurreratuaB').style.display = 'block';
-	}
-	else if (document.getElementById('aurreratua').style.display === 'block')
-	{
-		document.getElementById('aurreratua').style.display = 'none';
-		document.getElementById('arrunta').style.display = 'block';
-		document.getElementById('aurreratuaB').style.display = 'none';
-	}
-}
-
-function mapaErakutsi()
-{
-	if (document.getElementById('geolokalizazioa').style.display === 'none')
-	{
-		document.getElementById('geolokalizazioa').style.display = 'block';
-		document.getElementById('plano_icon').style.display = 'none';
-
-		if (map === null)
-			initialize();
-		google.maps.event.trigger(map, 'resize');
-	}
-	else if (document.getElementById('geolokalizazioa').style.display === 'block')
-	{
-		document.getElementById('geolokalizazioa').style.display = 'none';
-		document.getElementById('plano_icon').style.display = 'block';
-	}
-}
 function click_coord(event)
 {
-	document.getElementById('geo_latitudea').value=event.latLng.lat();
-	document.getElementById('geo_longitudea').value=event.latLng.lng();
+	if (!google || !map)
+		return;
+
+	if (puntuBerria !== null)
+	{
+		// ezabatu aurreko puntua
+		puntuBerria.setMap(null);
+		puntuBerria = null;
+
+		return;
+	}
+
+	var puntua = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+	puntuBerria = new google.maps.Marker
+	({
+			position: puntua,
+			map: map,
+			icon: 'http://chart.googleapis.com/chart?chst=d_map_xpin_icon_withshadow&chld=pin_star|glyphish_location|ff6600|ffff66'
+	});
+
+	infoLeihoa = new google.maps.InfoWindow();
+	google.maps.event.addListener(infoLeihoa, 'closeclick', function()
+	{
+		// ezabatu puntua leihoa ixterakoan
+		puntuBerria.setMap(null);
+		puntuBerria = null;
+	});
+	google.maps.event.addListener(infoLeihoa, 'domready', function()
+	{
+		document.getElementById('geo_latitudea').value = event.latLng.lat();
+		document.getElementById('geo_longitudea').value = event.latLng.lng();
+		document.getElementById('geo_testua').focus();
+	});
+
+	infoLeihoa.setContent(puntuBerriaForm);
+	infoLeihoa.open(map, puntuBerria);
 }
 
 onload = function()
 {
-	var erakutsiBilaketa = document.getElementById('erakutsiBilaketa');
-	if (erakutsiBilaketa)
-	{
-		erakutsiBilaketa.onclick = function()
-		{
-			erakutsiEzkutatuBilaketa();
-		};
-	}
-	var ezkutatuBilaketa = document.getElementById('ezkutatuBilaketa');
-	if (ezkutatuBilaketa)
-	{
-		// kodean fokoa jarri
-		var kodea = document.getElementById('gertakaria_filters_id');
-		if (kodea)
-			kodea.focus();
+	orriak();
 
-		ezkutatuBilaketa.onclick = function()
-		{
-			erakutsiEzkutatuBilaketa();
-		};
-	}
-
-	var erakutsiPlanoa = document.getElementById('erakutsiPlanoa');
-	if (erakutsiPlanoa)
-	{
-		erakutsiPlanoa.onclick = function()
-		{
-			mapaErakutsi();
-		};
-	}
-	var ezkutatuPlanoa = document.getElementById('ezkutatuPlanoa');
-	if (ezkutatuPlanoa)
-	{
-		ezkutatuPlanoa.onclick = function()
-		{
-			mapaErakutsi();
-		};
-	}
+	erakutsiMenua();
+	erakutsiEkintzak();
+	erakutsiErroreak();
 
 	// Datuak modulua
  	IzkutatuFiltroak();
 	EzarriTableSorter();
+
+	estekakSortu();
+	autofocus();
 };
+
+function erakutsiErroreak()
+{
+	var erroreak = document.getElementById('erroreak');
+	if (!erroreak)
+		return;
+
+	erroreak.setAttribute('class', 'erroreak');
+
+	var zerrenda = erroreak.getElementsByTagName("li");
+	for (var i = 0; i < zerrenda.length; i++)
+	{
+		var erroreaId = zerrenda[i].getAttribute('title');
+		var eremua = document.getElementById(erroreaId);
+		if (!eremua)
+			continue;
+
+		eremua.className += " " + 'errorea';
+	}
+
+	// IE8-an erroreak izkutatu denbora pasatzean
+	setTimeout(function()
+	{
+		erroreak.setAttribute('style', 'display: none');
+	}, 5 * 1000);
+}
+
+function erakutsiMenua()
+{
+	var botoia = document.getElementById('navIreki');
+	var menua = document.getElementById('nav');
+	if (!botoia || !menua)
+		return;
+
+	botoia.innerHTML = '<img src="/images/asc.gif" alt="Menua ireki" />';
+	botoia.onclick = function()
+	{
+		if (menua.style.display === '' || menua.style.display === 'none')
+		{
+			menua.style.display = 'block';
+			botoia.innerHTML = '<img src="/images/desc.gif" alt="Menua ireki" />';
+		}
+		else
+		{
+			menua.removeAttribute('style');
+			botoia.innerHTML = '<img src="/images/asc.gif" alt="Menua itxi" />';
+		}
+	};
+}
+
+function erakutsiEkintzak()
+{
+	var botoia = document.getElementById('ekintzakIreki');
+	var menua = document.getElementById('ekintzak');
+	if (!botoia || !menua)
+		return;
+
+	botoia.innerHTML = '<img src="/images/desc.gif" alt="Ekintzak ireki" />';
+	botoia.onclick = function()
+	{
+		if (menua.style.display === '' || menua.style.display === 'none')
+		{
+			menua.style.display = 'block';
+			botoia.innerHTML = '<img src="/images/asc.gif" alt="Ekintzak ireki" />';
+		}
+		else
+		{
+			menua.removeAttribute('style');
+			botoia.innerHTML = '<img src="/images/desc.gif" alt="Ekintzak itxi" />';
+		}
+	};
+}
+
 function EzarriTableSorter()
 {
-	$("#taula").tablesorter({sortList: [[0,0]],
-	textExtraction: function(node)
-	{
-		if (node.hasAttribute('title'))
-			return node.getAttribute('title');
-		else
-			return node.innerHTML;
-	}});
+	$("#taula").tablesorter({sortList: [[0,0]]});
 };
+
 function IzkutatuFiltroak()
 {
 	var taula = document.getElementById("datuak_taula");
@@ -151,4 +168,125 @@ function IzkutatuFiltroak()
 			jatorrizkosaila.style.display = 'none';
 			break;
 	}
+}
+
+/*
+ * Tauletan <tr> hilara osoa estekan bihurtu lehen <td>-ak esteka badu
+ */
+function estekakSortu()
+{
+	var trs = document.getElementsByTagName('tr');
+
+	for (var i = 0; i < trs.length; i++)
+	{
+		var tr = trs[i];
+		if (tr.children.length > 0 && tr.children[0].tagName.toLowerCase() === 'td')
+		{
+			var td = tr.children[0];
+			if (td.children.length > 0 && td.children[0].tagName.toLowerCase() === 'a')
+			{
+				var a = td.children[0];
+				tr.href = a.getAttribute('href');
+
+				// kurtsorea aldatzeko klasea ezarri
+				tr.className += ' esteka';
+
+				// klik egiterakoan esteka ireki
+				tr.onclick = function()
+				{
+					window.location = this.href;
+				};
+			}
+		}
+
+	}
+}
+
+/*
+ * Internet Explorer-en bertsio zaharretan autofocus atributoa erabiltzeko
+ */
+function autofocus()
+{
+	// begiratu ea arakatzaileak HTML5-ko 'autofocus' atributoa duen
+	var input = document.createElement('input');
+	if ('autofocus' in input)
+		return;
+
+	var elements = ['input', 'textarea'];
+	for (var iElement = 0; iElement < elements.length; iElement++)
+	{
+		var inputs = document.getElementsByTagName(elements[iElement]);
+
+		for (var i = 0; i < inputs.length; i++)
+		{
+			if (inputs[i].getAttribute('autofocus'))
+			{
+				inputs[i].focus();
+				return;
+			}
+		}
+	}
+}
+
+var GERTAKARI_ORRIAK = new Array('gertakaria', 'iruzkina', 'fitxategiak', 'erlazioak', 'historikoa', 'planoa');
+
+window.onhashchange = function()
+{
+	var aukeratuta;
+	if (window.location.hash)
+		aukeratuta = window.location.hash.substring(1);
+
+	var aukeratutakoOrria = document.getElementById('tab' + aukeratuta);
+	erakutsiEzkutatuOrriak(aukeratutakoOrria);
+};
+
+function orriak()
+{
+	var orriak = document.getElementById('orriak');
+	if (!orriak)
+		return;
+
+	for (var iOrria = 0; iOrria < GERTAKARI_ORRIAK.length; iOrria++)
+	{
+		var orria = document.getElementById('tab' + GERTAKARI_ORRIAK[iOrria]);
+		orria.onclick = function()
+		{
+			erakutsiEzkutatuOrriak(this);
+		};
+	}
+
+	var aukeratuta = '#' + GERTAKARI_ORRIAK[0];;
+	if (window.location.hash)
+		aukeratuta = window.location.hash;
+	window.location = aukeratuta;
+	window.onhashchange();
+}
+function erakutsiEzkutatuOrriak(aukeratuta)
+{
+	if (!aukeratuta)
+		return;
+
+	for (var iOrria = 0; iOrria < GERTAKARI_ORRIAK.length; iOrria++)
+	{
+		var tab = document.getElementById('tab' + GERTAKARI_ORRIAK[iOrria]);
+		var orria = document.getElementById('eduk' + GERTAKARI_ORRIAK[iOrria]);
+		if (GERTAKARI_ORRIAK[iOrria] === aukeratuta.title)
+		{
+			tab.setAttribute('data-aukeratuta', 'true');
+			orria.style.display = 'block';
+		}
+		else
+		{
+			tab.setAttribute('data-aukeratuta', 'false');
+			orria.style.display = 'none';
+		}
+	}
+
+	if (aukeratuta.title === 'planoa' && window.initialize)
+	{
+		initialize();
+		google.maps.event.trigger(map, 'resize');
+	}
+
+	window.location = '#' + aukeratuta.title;
 }

@@ -1,261 +1,482 @@
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td
+html
 {
-	margin:0;
-	padding:0;
+	height: 100%;
 }
-img
+body
 {
-	border: 0;
-}
-
-.eskuliburua
-{
-	float: right;
-	margin: 0.6em 0.6em 0em;
-	border: 2px outset #808080;
+	margin: 0;
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+	font-size: small;
+	background-color: #f0f0f0;
+	height: 100%;
+	text-align: center;
 }
 
-.post
-{
-	float: right;
-	text-align: right;
-	padding: 0.9em 0.6em 0;
-	color: #333;
-	list-style: none;
-}
-.post a, .post a:visited
+a
 {
 	text-decoration: none;
-	color: #333;
-}
-.post .erabiltzailea
-{
-	font-weight: bold;
-	margin-bottom: 1em;
+	color: inherit;
 }
 
-.sesioa
-{
-	display: block;
-	text-align: right;
-	margin: 0.2em 0.6em;
-	color: #333;
-	list-style: none;
-	font-weight: bold;
-}
-.sesioa li
-{
-	list-style-type: none;
-	display: inline;
-	margin: 0 0.2em;
-	padding: 0.1em 0.3em;
-	border: 2px outset #808080;
-	white-space: nowrap;
-}
-.sesioa li#bilatu
+img
 {
 	border: none;
 }
-.sesioa li#bilatu img
+
+input,
+select,
+textarea
+{
+	border: 1px solid #b0b0b0;
+}
+
+tr:hover,
+input:focus,
+select:focus,
+textarea:focus,
+.botoia:hover,
+.botoia:focus
+{
+	background-color: #ffffe0 !important;
+}
+
+#navIreki
+{
+	display: none;
+}
+#navIreki img,
+.menuaIreki img
+{
+	height: 8px;
+}
+#nav
+{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	font-size: larger;
+	color: white;
+	background-color: #6699cc;
+	z-index: 999;
+	opacity: 0.9;
+	box-shadow: 0 10px 5px grey;
+}
+#nav .menua2 ul,
+#nav .menua3 ul
+{
+	display: none;
+	cursor: pointer;
+	color: white;
+	background-color: #6699cc;
+	box-shadow: 0 10px 5px grey;
+	position: absolute;
+	right: 0;
+	text-align: left;
+	width: 8em;
+}
+#nav .menua2 ul > li,
+#nav .menua3 ul > li
+{
+	position: relative;
+	display: block;
+}
+#nav .menua3 ul
+{
+	top: 0;
+	left: -8em;
+}
+#nav li:hover > ul
+{
+	display: inherit;
+}
+
+#nav ul
+{
+	list-style: none;
+	text-align: right;
+	margin: 0;
+	padding: 0;
+}
+#nav li
+{
+	display: inline-block;
+	vertical-align: top;
+	line-height: 2em;
+}
+#nav li:hover > a
+{
+	color: #ccc;
+	background-color: #5588bb;
+}
+
+#nav #logoa
+{
+	float: left;
+	margin-left: 1em;
+}
+#nav #logoa img
+{
+	max-height: 28px;
+	max-width: 28px;
+}
+#nav #mapa
+{
+	float: left;
+	margin-left: 1em;
+	cursor: pointer;
+}
+#nav a
+{
+	display: block;
+	text-decoration: none;
+	padding: 0 0.5em;
+}
+#nav img
 {
 	vertical-align: middle;
-}
-.sesioa li#sortu
-{
-	margin: 0 2em 0 0;
-	background-color: #eee;
-}
-.sesioa a, .sesioa a:visited
-{
-	text-decoration: none;
-	color: #333;
+	margin: 0;
+	padding: 0;
+	border: none;
 }
 
 #edukia
 {
-	padding-top: 2em;
+	margin: 5em 2em 1em;
+	text-align: center;
+	position: relative;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	position: absolute;
 }
 
-.lehen2
+.orriak
 {
-	background-color: #fffcbe;
+	display: block;
+	list-style: none;
+	width: 100%;
+	padding: 0;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	margin-top: -1em;
+	border: none;
 }
-.lehen3
+.orriak li
 {
-	background-color: #ffcc66;
+	display: inline-block;
+	width: 16.6%;
+	margin: 0 -2px;
+	font-variant: small-caps;
+	font-size: larger;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border-bottom: 1px solid #b0b0b0;
+	background-color: #ddd;
+	background-image: linear-gradient(#f0f0f0, #ddd);
+}
+.orriak li:hover
+{
+	cursor: pointer;
+}
+.orriak li[data-aukeratuta=true]
+{
+	border: 1px solid #b0b0b0;
+	border-bottom: inherit;
+	background-color: #eee;
+	background-image: none;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.orriak .ezgaituta
+{
+	color: #ccc;
+}
+
+form.login
+{
+	position: relative;
+	display: block;
+	color: white;
+	box-shadow: 0 0 3px #606060;
+	background-color: #6699cc;
+	border-radius: 3px;
+	padding: 1em;
+	font-size: larger;
+	width: 500px;
+	margin: 2em auto;
+	max-width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+form.login img
+{
+	top: 10px;
+	right: 10px;
+	max-height: 50px;
+	max-width: 50px;
+	position: absolute;
+}
+form.login fieldset
+{
+	text-align: left;
+	border: none;
+	padding: 1em;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+form.login fieldset .field
+{
+	display: table-row;
+	white-space: nowrap;
+	padding: 0;
+}
+form.login fieldset .field *
+{
+	display: table-cell;
+}
+form.login fieldset .field label
+{
+	text-align: right;
+	width: 10em;
+	vertical-align: top;
+	padding-right: 0.25em;
+}
+form.login fieldset .field input
+{
+	width: 15em;
+}
+
+.panela
+{
+	display: inline-block;
+	margin: auto auto 2em;
+	width: 710px;
+	max-width: 100%;
+	box-sizing: border-box;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 3px #606060;
+	background-color: white;
+}
+.panela fieldset
+{
+	text-align: left;
+	border: none;
+	margin: 0.5em 0 0;
+	padding: 0;
+	overflow: hidden;
+	max-width: 100%;
+	box-sizing: border-box;
+	display: block;
+	background-color: white;
+}
+.panela fieldset legend
+{
+	font-size: larger;
 	font-weight: bold;
 }
+.panela ul
+{
+	list-style: circle;
+	margin: 0 2em 1em;
+	padding: 0;
+}
+.panela ul li
+{
+	border-bottom: 1px solid #eee;
+}
+.panela fieldset fieldset:nth-of-type(odd)
+{
+	background-color: #eee;
+}
+.panela fieldset fieldset
+{
+	background-color: #ddd;
+}
+.panela .field
+{
+	display: inline-block;
+	white-space: nowrap;
+}
+.panela label
+{
+	width: 140px;
+	display: inline-block;
+	text-align: right;
+	vertical-align: top;
+	font-weight: bold;
+}
+.panela label:first-of-type.luzea
+{
+	width: auto;
+}
+.panela .field input,
+.panela .field select,
+.panela .field textarea,
+.panela .field span
+{
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 200px;
+}
+.panela .field input[readonly=readonly]
+{
+	background-color: transparent;
+	border: none;
+}
+.panela .field span
+{
+	display: inline-block;
+	white-space: normal;
+}
+.panela .azpiSailkapena
+{
+	position: relative;
+	padding-left: 145px;
+}
+.panela .azpiSailkapena label.title
+{
+	position: absolute;
+	left: 0;
+	margin-top: 1.2em;
+}
+.panela .azpiSailkapena .field
+{
+	display: inline-block;
+	white-space: normal;
+}
+.panela .azpiSailkapena .field label
+{
+	display: block !important;
+	width: auto !important;
+	text-align: left !important;
+}
+.panela .field .luzea
+{
+	width: 550px;
+}
+.panela .field .motza
+{
+	width: 3em;
+}
+.panela form
+{
+	display: inline-block;
+	text-align: center;
+}
+.panela .botoia
+{
+	margin: 1em auto;
+}
 
-.gertakariZerrenda
+.iruzkinak
 {
-	clear: both;
+	width: 710px;
+	max-width: 100%;
+	margin: 0 auto;
 }
-.gertakariZerrenda tbody tr:hover td
+.iruzkinak fieldset
 {
-	background: #fffc8c;
-	border-bottom: 1px solid #444;
-	border-top: 1px solid #444;
+	border: none;
+	padding: 0;
 }
-.gertakariZerrenda td.lehentasuna, .gertakariZerrenda td.lehentasuna a
+.iruzkinak .field,
+.iruzkinak .field textarea
+{
+	width: 100%;
+	display: block;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+table
+{
+	box-shadow: 0 0 3px #606060;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	margin: auto auto 2em;
+	width: 100%;
+	text-align: left;
+	border-radius: 3px;
+}
+table caption
+{
+	text-align: left;
+}
+table thead tr th,
+table tfoot tr td
+{
+	color: #003366;
+	background-color: #90c3f8;
+	font-weight: bold;
+	font-size: 115%;
+	padding: 0.5em 0.35em;
+}
+table thead,
+table tfoot
+{
+	box-shadow: 0 0 3px #111;
+}
+table thead th
+{
+	text-align: left;
+}
+table tbody tr
+{
+	background-color: #eee;
+}
+table tbody tr:not(:last-child) td
+{
+	border-bottom: 1px solid white;
+}
+table tbody tr:nth-of-type(odd)
+{
+	background-color: #eee;
+}
+table tbody tr:nth-of-type(even)
+{
+	background-color: #ddd;
+}
+table tbody tr.egoera1
+{
+}
+table tbody tr.egoera2
+{
+	background-color: #e7f2ff;
+}
+table tbody tr.egoera3
+{
+}
+table tbody tr.egoera4
+{
+	background-color: #ffebce;
+}
+table tbody tr.egoera5
+{
+	background-color: #eaffd6;
+}
+table tbody tr.egoera6
+{
+	background-color: #fee5e5;
+}
+table tr.esteka:hover
+{
+	cursor: pointer;
+}
+table tr td.lehentasuna
 {
 	text-align: center;
 	color: #990000;
 	font-weight: bold;
 }
-
-a.boton, input[type='submit']
+table tbody td
 {
-	padding: 0.5em 1em;
-	font-weight: normal;
-	font-size: .84em;
-	font-family: sans-serif;
-	text-decoration: none;
-
-	background: #d4d0c8;
-	color: #000;
-	border: 2px outset #808080;
-	padding: .1em .5em;
+	padding-left: 0.35em;
+	padding-right: 0.35em;
 }
-
-.login_form
-{
-	margin-top: 3em;
-	background-color: #CCC;
-	border: 3px outset;
-	width: 40%;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 5px;
-}
-.login_form fieldset
-{
-	padding: 1em 0;
-}
-.login_form div
-{
-	margin-top: 0.5em;
-	text-align: center;
-}
-.login_form label
-{
-	display: inline-block;
-	text-align: right;
-	min-width: 7em;
-}
-
-.errorea
-{
-	color: red;
-}
-
-.bilaketa_form
-{
-	position: relative;
-	background-color: #F3F6F9;
-	border: 1px solid rgb(0%,0%,0%);
-	width: 90%;
-	margin: 0 auto 3em;
-	padding: 0.5em 3em 0.5em 0.5em;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-}
-.bilaketa_form .ezkutatu
-{
-	position: absolute;
-	top: 0.5em;
-	right: 0.5em;
-}
-/* IE: si el boton de submit esta en posicion absoluta o flotando, no funciona el boton ENTER */
-.bilaketa_form #ie_fix
-{
-	display: inline-block;
-	width: 100%;
-	text-align: right;
-}
-.aldatuAukeraAurreratuak
-{
-	display: block;
-	margin-top: 2em;
-	text-align: center;
-	cursor: pointer;
-}
-
-.hilarak
-{
-	padding: 1em 0;
-}
-.hilarak div
-{
-	display: table-row;
-}
-.hilarak fieldset
-{
-	border: none;
-	margin-bottom: 1em;
-}
-.hilarak label
-{
-	display: table-cell;
-	padding: 0 1em 0.5em 0;
-	text-align: right;
-	width: 20em;
-}
-
-.taula caption
-{
-	text-align: left;
-	font-size: 32px;
-	font-weight: bold;
-	margin-bottom: 0;
-}
-.taula caption.txikia
-{
-	font-size: medium;
-}
-table.taula
-{
-	border: 5px ridge #000;
-	border-collapse: collapse;
-	margin: auto;
-	text-align: left;
-	max-width: 90%;
-	margin-bottom: 1em;
-}
-.taula thead
-{
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#626262", endColorstr="#222222");
-	background-image: -webkit-linear-gradient(#626262, #222222);
-	background-image: linear-gradient(#626262, #222222);
-	color: #ccc;
-	background-color: #444;
-	padding: 3px 5px;
-}
-.taula tfoot
-{
-	color: #444;
-	background-color: #ccc;
-	font-weight: bold;
-}
-.taula tr
-{
-	border-bottom: 1px solid #444;
-}
-.taula th
-{
-	padding: 0.25em 1em;
-	text-align: left;
-}
-.taula td
-{
-	padding: 0 1em;
-}
-.taula a
-{
-	text-decoration: none;
-	color: black;
-	display: block;
-}
-.taula th.header
+table th.header
 {
 	cursor: pointer;
 	background-repeat: no-repeat;
@@ -264,37 +485,192 @@ table.taula
 	margin-right: -1px;
 	padding: 3px 20px 3px 5px;
 }
-.taula th.headerSortUp
+table th.headerSortUp
 {
 	background-image: url('../images/asc.gif');
-	color: #444;
-	background-color: #ccc;
+	color: white;
+	background-color: #6699cc;
 }
-.taula th.headerSortDown
+table th.headerSortDown
 {
 	background-image: url('../images/desc.gif');
-	color: #444;
-	background-color: #ccc;
+	color: white;
+	background-color: #6699cc;
 }
 
-.gertakariZerrenda
+#ekintzakIreki
 {
-	width: 90%;
+	display: none;
 }
-.gertakariZerrenda th, .gertakariZerrenda td
+#ekintzakIreki img
 {
-	padding-left: 0.25em;
-	padding-right: 0.25em;
+	height: 8px;
+}
+#ekintzak
+{
+	position: relative;
+	float: right;
+	top: 0;
+	width: auto;
+}
+#ekintzak .botoia,
+#ekintzak select,
+#ekintzak textarea
+{
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	text-align: center;
+	margin-bottom: 0.5em;
+	border-radius: 3px;
+	box-shadow: 0 0 3px #606060;
+}
+#ekintzak textarea
+{
+	text-align: left;
 }
 
-.orriak
+.erroreak
 {
-	margin: auto;
+	display: inherit;
+	list-style: none;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	margin: 0;
+	left: 0;
+	padding: 0;
+	border: 2px solid red;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-animation: izkutatu ease-out 5s;
+	animation: izkutatu ease-out 5s;
+	opacity: 0;
+}
+.erroreak li
+{
+	display: block;
+	font-weight: bold;
+	color: red;
+	background-color: #fee5e5;
+	border: 1px solid #eee;
 	text-align: center;
 }
-.orriak img
+.errorea > input,
+.errorea > select,
+.errorea > textarea
+{
+	background-color: #fee5e5;
+	border: 2px solid red;
+}
+@-webkit-keyframes izkutatu
+{
+	0%
+	{
+		opacity: 1;
+	}
+	75%
+	{
+		opacity: 1;
+	}
+	100%
+	{
+		opacity: 0;
+	}
+}
+@keyframes izkutatu
+{
+	0%
+	{
+		opacity: 1;
+	}
+	75%
+	{
+		opacity: 1;
+	}
+	100%
+	{
+		opacity: 0;
+	}
+}
+
+.aplikazioErroreOrokorra
+{
+	display: inline-block;
+	text-align: center;
+	font-size: xx-large;
+	color: white;
+	background-color: #6699cc;
+	box-shadow: 0 0 3px #606060;
+	border-radius: 3px;
+	margin-top: 10%;
+	padding: 1em;
+	width: 800px;
+	max-width: 75%;
+}
+.aplikazioErrorea
+{
+	text-align: center;
+	font-size: xx-large;
+	margin-top: 1em;
+}
+.aplikazioErroreOrokorra img,
+.aplikazioErrorea img
 {
 	vertical-align: middle;
+	margin-right: 0.25em;
+}
+
+.botoia,
+input[type=submit]
+{
+	display: inline-block;
+	color: black;
+	background-color: white;
+	text-decoration: none;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 3px #606060;
+	height: 2em;
+	line-height: 2em;
+	min-width: 5em;
+	vertical-align: middle;
+	font-size: small;
+}
+
+#planoOsoa
+{
+	box-shadow: 0 0 3px #606060;
+	width: auto;
+	height: auto;
+	position: absolute;
+	top: 1em;
+	bottom: 1em;
+	left: 1em;
+	right: 1em;
+}
+#edukplanoa
+{
+	border: 1px solid #ccc;
+	box-shadow: 0 0 3px #606060;
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top: 1em;
+	bottom: 0;
+}
+.mapa
+{
+	width: 100%;
+	height: 100%;
+}
+
+.infoWindow
+{
+	margin: 0.25em;
+	white-space: nowrap;
+	overflow: hidden;
+
 }
 
 .izkutua
@@ -302,277 +678,6 @@ table.taula
 	display: none;
 }
 
-.mapa
-{
-	clear: both;
-	display: block;
-	margin: 2em auto 1em;
-}
-
-.taulaGoiburua
-{
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0094ff", endColorstr="#c0c0c0");
-	background-image: -webkit-linear-gradient(#0094ff, #c0c0c0);
-	background-image: linear-gradient(#0094ff, #c0c0c0);
-	font-weight: bold;
-	padding: 0.5em 0.25em;
-	border-bottom: 1px solid #444;
-	text-align: left;
-}
-
-.erlazioak ul
-{
-	list-style: none;
-	padding-left: 0.25em;
-}
-.erlazioak li
-{
-	display: inline;
-	margin: 0 1em 0 0;
-}
-
-.fitxategiak
-{
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 80%;
-	padding: 0;
-}
-.fitxategiak ul
-{
-	list-style: none;
-	border-bottom: 1px solid #444;
-	background-color: white;
-	padding-left: 0.25em;
-	padding-bottom: 1em;
-	margin-bottom: 1em;
-}
-.fitxategiak a, .fitxategiak a:visited
-{
-	text-decoration: none;
-	color: #3F647F;
-	font-weight: bold;
-}
-.fitxategiak div
-{
-	padding: 0.25em;
-}
-.fitxategiak strong
-{
-	font-size: small;
-}
-
-#erakutsiPlanoa, #ezkutatuPlanoa, #mapa_ikonoa
-{
-	cursor: pointer;
-}
-#plano_icon
-{
-	display: block;
-	text-align: center;
-}
-.planoOsoa
-{
-	margin: 2em;
-	border: 1px solid #444;
-}
-.planoa
-{
-	border: 1px solid #444;
-	width: 512px;
-	margin: auto;
-}
-.planoa img, .planoa input[type=submit]
-{
-	float: right;
-}
-.planoa .puntuPanela
-{
-	border: 2px solid #444;
-	background-color: #ccc;
-}
-.planoa .puntuGoiburua div
-{
-	font-weight: bold;
-	margin: 0.5em 0 0.5em 0;
-}
-.planoa .puntuak
-{
-	background-color: white;
-	font-size: small;
-}
-.planoa .lerroa
-{
-	border-bottom: 1px solid #444;
-}
-.planoa .lerroa div
-{
-	display: inline-block;
-	min-width: 120px;
-	margin-left: 5px;
-}
-.planoa .lerroa input
-{
-	margin-top: 0.75em;
-	margin-bottom: 0.75em;
-}
-.planoa .lerroa input
-{
-	margin-right: 5px;
-}
-
-.formularioa
-{
-	border: 3px outset #808080;
-	width: 80%;
-	background: #ccc;
-	margin: auto;
-}
-.formularioa div:first-child
-{
-	font-weight: bold;
-	margin: 0.5em 0.5em 1em;
-}
-.formularioa div
-{
-	display: block;
-	margin-bottom: 0.2em;
-}
-.formularioa label
-{
-	font-weight: bold;
-	display: inline-block;
-	text-align: right;
-	vertical-align: top;
-	width: 10em;
-	margin-right: 0.2em;
-}
-
-.erab_form
-{
-	background-color: #ccc;
-	border: 2px solid #000;
-	width: 70%;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0.75em;
-}
-.erab_form label
-{
-	font-weight: bold;
-	display: inline-block;
-	vertical-align: top;
-	margin: 0 0.5em 1em 0;
-}
-.erab_form span
-{
-	display: block;
-	margin-bottom: 0.5em;
-}
-
-.erdiratuta
-{
-	text-align: center;
-}
-
-.gertakaria
-{
-	position: relative;
-	border: 5px ridge #ccc;
-	background-color: #ccc;
-	margin: auto auto 2em;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 90%;
-	overflow: auto;
-}
-.gertakaria .detailea
-{
-	position: relative;
-	margin-right: 11em;
-	margin-bottom: 1em;
-	border: none;
-}
-.gertakaria .detailea div
-{
-	display: inline-block;
-	min-width: 20em;
-}
-.gertakaria .detailea div div
-{
-	font-weight: bold;
-	display: block;
-	padding: 0.25em;
-}
-.gertakaria .detailea div span
-{
-	background-color: white;
-	display: block;
-	padding: 0 0.25em;
-	border: 1px solid #444;
-	min-height: 1em;
-}
-.gertakaria .detailea .luzea
-{
-	width: 100%;
-}
-.gertakaria .botoiak
-{
-	float: right;
-	width: 10em;
-	padding: 0.5em;
-	text-align: center;
-}
-.gertakaria .botoiak form
-{
-	margin: 0;
-	padding: 0;
-}
-.gertakaria .botoiak input,
-.gertakaria .botoiak a,
-.gertakaria .botoiak select,
-.gertakaria .botoiak textarea
-{
-	display: block;
-	width: 100%;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	margin-bottom: 1em;
-}
-input.eskubian
-{
-	float: right;
-	margin-right: 1em;
-}
-.gertakaria table
-{
-	border-collapse: collapse;
-	border-spacing: 0;
-	empty-cells: show;
-	text-align: left;
-	min-width: 100%;
-}
-.gertakaria th
-{
-	padding: 0.25em;
-	border-bottom: 1px solid #444;
-	text-align: left;
-}
-.gertakaria td
-{
-	background-color: white;
-	padding: 0 0.25em;
-	border-bottom: 1px solid #444;
-}
-.gertakaria form
-{
-	padding: 1em 0.5em 0.25em 0.25em;
-}
-.gertakaria form textarea
-{
-	display: block;
-	width: 100%;
-}
 .eskaerak .created_at,
 .eskaerak .updated_at,
 .eskaerak .ixte_data,
@@ -586,19 +691,23 @@ input.eskubian
 {
 	width: 5em;
 }
-.eskaerak .barrutia, .gertakariak .barrutia
+.eskaerak .barrutia,
+.gertakariak .barrutia
 {
 	width: 5em;
 }
-.eskaerak .eraikinakalea, .gertakariak  .eraikinakalea
+.eskaerak .eraikinakalea,
+.gertakariak .eraikinakalea
 {
 	min-width: 8em;
 }
-.eskaerak .abisuanork, .gertakariak  .abisuanork
+.eskaerak .abisuanork,
+.gertakariak .abisuanork
 {
 	min-width: 6em;
 }
-.eskaerak .egoera, .gertakariak  .egoera
+.eskaerak .egoera,
+.gertakariak .egoera
 {
 	width: 6em;
 }

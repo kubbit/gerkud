@@ -1,4 +1,15 @@
 ================================================================================
+  Version 1.18
+  2014-05-15  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Rediseño del interfaz de gráfico de toda la aplicación, adaptable a cualquier
+  tipo de pantalla, incluyendo dispositivos móviles
+* Corrección de los datos estadísticos
+* Modificadas relaciones entre tablas a modo RESTRICT
+* Validaciones básicas en el API de HorKonpon
+* Correcciones menores
+
+================================================================================
   Version 1.16.4
   2014-02-19  Pasaiako Udala (http://www.pasaia.net)
 ================================================================================

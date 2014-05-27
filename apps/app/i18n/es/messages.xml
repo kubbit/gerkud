@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2013-10-30T12:25:47Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2014-04-29T13:58:26Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -77,8 +77,8 @@
         <target>Código</target>
       </trans-unit>
       <trans-unit id="20">
-        <source>Sartu bilatu nahi duzun testua</source>
-        <target>Introduzca el término de búsqueda</target>
+        <source>Bilaketa testua</source>
+        <target>Término de búsqueda</target>
       </trans-unit>
       <trans-unit id="21">
         <source>Gertakarien bilaketa</source>
@@ -195,10 +195,6 @@
       <trans-unit id="50">
         <source>Fitxategiak</source>
         <target>Ficheros</target>
-      </trans-unit>
-      <trans-unit id="51">
-        <source>Fitxategia gehitu</source>
-        <target>Añadir fichero</target>
       </trans-unit>
       <trans-unit id="52">
         <source>Fitxategia</source>
@@ -629,12 +625,12 @@
         <target>Peticiones (%eskaerak%)</target>
       </trans-unit>
       <trans-unit id="170">
-        <source>Irekiera data (noiztik-nora)</source>
-        <target>Fecha alta (desde-hasta)</target>
+        <source>Irekiera data (noiztik)</source>
+        <target>Fecha alta (desde)</target>
       </trans-unit>
       <trans-unit id="171">
-        <source>Ixte data (noiztik-nora)</source>
-        <target>Fecha cierre (desde-hasta)</target>
+        <source>Ixte data (noiztik)</source>
+        <target>Fecha cierre (desde)</target>
       </trans-unit>
       <trans-unit id="172">
         <source>Eskaera berria</source>
@@ -705,20 +701,80 @@
         <target>Es duplicada</target>
       </trans-unit>
       <trans-unit id="189">
-        <source>Gertakari honekin dituen erlazio guztiak ezabatu dira:</source>
-        <target>Se han eliminado todas las relaciones existentes con la siguiente incidencia:</target>
+        <source>Gertakari honekin dituen erlazio guztiak ezabatu dira</source>
+        <target>Se han eliminado todas las relaciones existentes con la siguiente incidencia</target>
       </trans-unit>
       <trans-unit id="190">
         <source>Bikoiztuak</source>
         <target>Duplicadas</target>
       </trans-unit>
       <trans-unit id="191">
-        <source>Hurrengo gertakariaren bikoitza bezala baztertu:</source>
-        <target>Descartar incidencia por ser duplicada de:</target>
+        <source>Hurrengo gertakariaren bikoitza bezala baztertu</source>
+        <target>Descartar incidencia por ser duplicada de</target>
       </trans-unit>
       <trans-unit id="192">
         <source>HorKonpon: ohartarazpena</source>
         <target>HorKonpon: notificación</target>
+      </trans-unit>
+      <trans-unit id="193">
+        <source>Ezin da erlazio hau ezabatu</source>
+        <target>No es posible eliminar la relación indicada</target>
+      </trans-unit>
+      <trans-unit id="194">
+        <source>Ezin da erlazio hau sortu</source>
+        <target>No es posible crear la relación indicada</target>
+      </trans-unit>
+      <trans-unit id="195">
+        <source>(nora)</source>
+        <target>(hasta)</target>
+      </trans-unit>
+      <trans-unit id="196">
+        <source>Zbkia</source>
+        <target>Núm</target>
+      </trans-unit>
+      <trans-unit id="197">
+        <source>Gertakaria</source>
+        <target>Incidencia</target>
+      </trans-unit>
+      <trans-unit id="198">
+        <source>Historikoa</source>
+        <target>Historial</target>
+      </trans-unit>
+      <trans-unit id="199">
+        <source>Saioa hasi</source>
+        <target>Iniciar sesión</target>
+      </trans-unit>
+      <trans-unit id="200">
+        <source>Mapa</source>
+        <target>Mapa</target>
+      </trans-unit>
+      <trans-unit id="201">
+        <source>Gehiago</source>
+        <target>Más</target>
+      </trans-unit>
+      <trans-unit id="202">
+        <source>Hizkuntza</source>
+        <target>Idioma</target>
+      </trans-unit>
+      <trans-unit id="203">
+        <source>Euskera</source>
+        <target>Euskera</target>
+      </trans-unit>
+      <trans-unit id="204">
+        <source>Gaztelera</source>
+        <target>Castellano</target>
+      </trans-unit>
+      <trans-unit id="205">
+        <source>Errorea aplikazioan. Administratzailearekin harremanetan jarri.</source>
+        <target>Error en la aplicación. Contacte con el administrador.</target>
+      </trans-unit>
+      <trans-unit id="206">
+        <source>Ezin izan da eskatutako orria aurkitu.</source>
+        <target>La página solicitada no existe.</target>
+      </trans-unit>
+      <trans-unit id="207">
+        <source>Errorea</source>
+        <target>Error</target>
       </trans-unit>
     </body>
   </file>

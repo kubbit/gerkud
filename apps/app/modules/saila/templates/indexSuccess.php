@@ -1,4 +1,4 @@
-<table class="taula">
+<table>
 	<caption><?php echo __('Sailak') ?></caption>
 	<thead>
 		<tr>

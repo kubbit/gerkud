@@ -2,6 +2,8 @@ SET foreign_key_checks = 0;
 
 TRUNCATE TABLE kalea;
 INSERT INTO `kalea` (`id`, `barrutia_id`, `auzoa_id`, `izena`, `google`) VALUES
+	(1, NULL, 1, 'Miguel Alduncin (21-45)', 'Calle de Miguel Alduncin'),
+	(2, NULL, 8, 'Altxu', 'Paseo de Gaztaño'),
 	(121, NULL, 12, 'Txirrita - Maleo', NULL),
 	(181, NULL, 18, 'ZZ_Genérico', NULL),
 	(1101, NULL, 5, 'Goiko Kalea / C. Arriba', 'Calle de Arriba'),
@@ -9,7 +11,7 @@ INSERT INTO `kalea` (`id`, `barrutia_id`, `auzoa_id`, `izena`, `google`) VALUES
 	(1104, NULL, 5, 'Elizako Kalea', 'Calle de la Iglesia'),
 	(1105, NULL, 5, 'Madalen Kalea', 'Calle de la Magdalena'),
 	(1106, NULL, 5, 'Erdiko Kalea / C. Medio', 'Calle del Medio'),
-	(1107, NULL, 5, 'Miguel Alduntzin', 'Calle de Miguel Alduncin'),
+	(1107, NULL, 5, 'Miguel Alduncin (1-20)', 'Calle de Miguel Alduncin'),
 	(1108, NULL, 5, 'Orereta', 'Calle de Orereta'),
 	(1109, NULL, 5, 'Pablo Iglesias', 'Avenida de Pablo Iglesias'),
 	(1110, NULL, 5, 'Santa Klara', 'Calle de Santa Clara'),
@@ -156,7 +158,7 @@ INSERT INTO `kalea` (`id`, `barrutia_id`, `auzoa_id`, `izena`, `google`) VALUES
 	(6051, NULL, 5, 'Rioja, Glorieta', NULL),
 	(6052, NULL, 10, 'Glorieta Castilla La Mancha', NULL),
 	(6053, NULL, 12, 'Egiburuberri', 'Egiburuberri Pasealekua'),
-	(6054, NULL, 8, 'Gaztaño Pasalekua', 'Gaztaño Auzoa'),
+	(6054, NULL, 8, 'Gaztaño Pasalekua', 'Paseo de Gaztaño'),
 	(6055, NULL, 11, 'Arditurri Plaza', 'Arditurri Kalea'),
 	(6057, NULL, 14, 'Sagardiburu', NULL),
 	(6058, NULL, 14, 'San Marcos carretera', NULL),
@@ -167,6 +169,7 @@ INSERT INTO `kalea` (`id`, `barrutia_id`, `auzoa_id`, `izena`, `google`) VALUES
 	(6065, NULL, 11, 'Cataluña, Glorieta', NULL),
 	(6066, NULL, 7, 'Parque de Galtzaraborda', NULL),
 	(6067, NULL, 14, 'Añabitarte, Villas', NULL),
+	(6068, NULL, 14, 'Azeñeta', NULL),
 	(9050, NULL, 14, 'Listorreta Gunea', NULL),
 	(9051, NULL, 14, 'Zona Añarbe', NULL),
 	(21208, NULL, 2, 'Nafarroa Hiribidea 81', 'Nafarroa Etorbidea'),
@@ -181,7 +184,6 @@ INSERT INTO `kalea` (`id`, `barrutia_id`, `auzoa_id`, `izena`, `google`) VALUES
 	(61208, NULL, 6, 'Nafarroa Hiribidea 2-19', 'Nafarroa Etorbidea'),
 	(71701, NULL, 7, 'Galtzaraborda, Avda. de 1-61', 'Galtzaraborda Etorbidea'),
 	(91208, NULL, 9, 'Nafarroa Hiribidea 26-32', 'Nafarroa Etorbidea'),
-	(101208, NULL, 10, 'Nafarroa Hiribidea s/n,14', 'Nafarroa Etorbidea'),
-	(6068, NULL, 14, 'Azeñeta', NULL);
+	(101208, NULL, 10, 'Nafarroa Hiribidea s/n,14', 'Nafarroa Etorbidea');
 
 SET foreign_key_checks = 1;

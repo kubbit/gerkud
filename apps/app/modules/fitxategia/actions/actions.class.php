@@ -80,7 +80,7 @@ class fitxategiaActions extends sfActions
 			$iruzkina->setTestua($testua);
 			$iruzkina->save();
 
-			$this->redirect('gertakaria/show?id=' . $fitxategia->getGertakariaId());
+			$this->redirect(sprintf('gertakaria/show?id=%d#fitxategiak', $fitxategia->getGertakariaId()));
 		}
 	}
 }

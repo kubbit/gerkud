@@ -37,7 +37,7 @@ abstract class BaseLangilea extends sfGuardUser
         $this->hasOne('Ohartaraztea', array(
              'local' => 'ohartaraztea_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasMany('Gertakaria', array(
              'local' => 'id',

@@ -1,0 +1,403 @@
+@media only screen
+{
+	#ekintzak
+	{
+		position: absolute;
+		top: 1.5em;
+		right: 0;
+		width: 15em;
+	}
+}
+@media only screen and (max-height: 500px) and (min-width: 600px)
+{
+	#nav
+	{
+		position: relative;
+		box-shadow: 0 1px 1px grey;
+	}
+	#nav .azpimenua
+	{
+		box-shadow: 0 1px 1px grey;
+	}
+
+	#edukia
+	{
+		margin-top: 3em;
+	}
+
+	#orriak
+	{
+		margin-top: 0;
+	}
+
+	#planoa
+	{
+		top: 2em;
+	}
+
+	.panela legend
+	{
+		display: none;
+	}
+	.panela fieldset
+	{
+		margin: 0;
+	}
+	.panela .azpiSailkapena label.title
+	{
+		margin-top: 0;
+	}
+	.panela .azpiSailkapena .field label
+	{
+		display: none !important;
+	}
+	.panela .botoia
+	{
+		margin: 0.25em auto;
+	}
+}
+@media only screen and (max-width: 1300px)
+{
+	#ekintzak
+	{
+		position: relative;
+		float: right;
+		top: 0;
+		width: auto;
+	}
+}
+@media only screen and (max-width: 1024px)
+{
+	#nav
+	{
+		position: relative;
+		font-size: inherit;
+		font-weight: bold;
+	}
+
+	#edukia
+	{
+		margin-left: 1em;
+		margin-right: 1em;
+		margin-bottom: 1em;
+	}
+}
+@media only screen and (max-width: 920px)
+{
+	#ekintzak
+	{
+		position: absolute;
+		top: auto;
+		bottom: 0;
+		width: 100%;
+	}
+	#ekintzak .botoia,
+	#ekintzak select,
+	#ekintzak form
+	{
+		display: inline-block;
+		width: auto;
+	}
+	#ekintzak textarea
+	{
+		height: 1.4em;
+	}
+}
+@media only screen and (max-width: 800px)
+{
+	#nav
+	{
+		font-weight: normal;
+	}
+
+	#edukia
+	{
+		margin-left: 5px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}
+
+	#planoOsoa
+	{
+		box-shadow: none;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+}
+@media only screen and (max-width: 720px)
+{
+	.panela
+	{
+		width: 590px;
+	}
+	.panela .field input,
+	.panela .field select,
+	.panela .field textarea,
+	.panela .field span
+	{
+		width: 144px;
+	}
+	.panela .field .luzea
+	{
+		width: 440px;
+	}
+	.iruzkinak
+	{
+		width: 590px;
+	}
+}
+@media only screen and (max-width: 600px)
+{
+	body
+	{
+		font-size: medium;
+	}
+	#nav
+	{
+		display: none;
+		top: 3em;
+		position: fixed;
+		padding-top: 1em;
+		box-shadow: 0 1px 5px grey;
+	}
+	#nav li
+	{
+		display: block;
+		font-size: large;
+		text-align: center;
+	}
+	#nav #logoa
+	{
+		display: none;
+	}
+	#nav #mapa
+	{
+		float: none;
+		margin-left: auto;
+	}
+	#navIreki
+	{
+		display: block;
+		position: fixed;
+		z-index: 999;
+		top: 0;
+		height: 3em;
+		line-height: 3em;
+		width: 100%;
+		font-weight: bold;
+		text-align: center;
+		vertical-align: middle;
+		background-color: #6699cc;
+		box-shadow: 0 1px 5px grey;
+	}
+	#nav .menuaIreki img
+	{
+		display: none;
+	}
+	#nav .menua2,
+	#nav .menua2 ul
+	{
+		display: inherit;
+		width: inherit;
+		position: inherit;
+	}
+	#nav .menua3
+	{
+		display: none !important;
+	}
+
+	#edukia
+	{
+		margin-top: 5em;
+	}
+
+	#orriak li
+	{
+		font-size: smaller;
+	}
+
+	form.login img
+	{
+		display: none;
+	}
+	form.login fieldset .field
+	{
+		display: block;
+	}
+	form.login fieldset .field label
+	{
+		text-align: left;
+	}
+	form.login fieldset .field input
+	{
+		width: 100%;
+	}
+
+	.panela
+	{
+		box-shadow: none;
+	}
+	.panela .field
+	{
+		display: block;
+		white-space: normal;
+		width: 100%;
+	}
+	.panela label:first-of-type
+	{
+		display: block;
+		text-align: left;
+		width: 100%;
+	}
+	.panela form
+	{
+		width: 100%;
+	}
+	.panela .field input,
+	.panela .field select,
+	.panela .field textarea,
+	.panela .field span,
+	.panela .field .luzea
+	{
+		width: 100%;
+	}
+	.panela .field span
+	{
+		display: compact;
+	}
+	.panela .azpiSailkapena
+	{
+		padding: 0;
+	}
+	.panela .azpiSailkapena label.title
+	{
+		position: inherit;
+		display: block;
+		margin-top: 0;
+	}
+
+	table
+	{
+		border: none;
+		margin: 0 0 1em;
+		max-width: none;
+		width: 100%;
+		table-layout: fixed;
+		empty-cells: show;
+		box-shadow: none;
+	}
+	table thead
+	{
+		display: none;
+	}
+	table tr td
+	{
+		display: block;
+		border-bottom: 1px solid #ddd;
+		position: relative;
+		padding-left: 50% !important;
+		text-align: left;
+		word-wrap: break-word;
+		min-height: 1.2em;
+	}
+	table tr td:before
+	{
+		position: absolute;
+		left: 0;
+		width: 45%;
+		white-space: nowrap;
+		font-weight: bold;
+		overflow: hidden;
+
+		content: attr(title);
+	}
+	table tr td.lehentasuna
+	{
+		text-align: left;
+	}
+
+	table tfoot tr td
+	{
+		font-weight: bold;
+		padding: 0;
+	}
+
+	#gertakaria
+	{
+		padding-bottom: 3em;
+	}
+	#ekintzakIreki
+	{
+		display: block;
+		position: fixed;
+		z-index: 999;
+		bottom: 0;
+		height: 2em;
+		left: 0;
+		line-height: 2em;
+		width: 100%;
+		text-align: center;
+		vertical-align: middle;
+		background-color: #aaa;
+		box-shadow: 0 -1px 5px grey;
+	}
+	#ekintzak
+	{
+		position: fixed;
+		display: none;
+		bottom: 2em;
+		width: 100%;
+		z-index: 999;
+		background-color: #aaa;
+		opacity: 0.9;
+		box-shadow: 0 -1px 5px grey;
+	}
+	#ekintzak .botoia,
+	#ekintzak form,
+	#ekintzak select,
+	#ekintzak textarea
+	{
+		display: block;
+		width: 100%;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		margin-bottom: 0.5em;
+		box-shadow: none;
+		border: none;
+		background-color: #aaa;
+	}
+	#ekintzak select,
+	#ekintzak textarea
+	{
+		background-color: white;
+		width: 90%;
+		margin: auto;
+	}
+	#ekintzak .botoia:hover,
+	#ekintzak .botoia:focus
+	{
+		background-color: inherit !important;
+	}
+
+	.mapa
+	{
+		box-shadow: none;
+	}
+
+	.aplikazioErroreOrokorra
+	{
+		margin-left: 0.25em;
+		margin-right: 0.25em;
+		padding: 0.25em;
+		width: auto;
+		max-width: none;
+	}
+	.aplikazioErroreOrokorra img,
+	.aplikazioErrorea img
+	{
+		display: block;
+		margin: auto;
+	}
+}

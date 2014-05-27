@@ -45,11 +45,11 @@ abstract class BaseSailaMota extends sfDoctrineRecord
         $this->hasOne('Saila', array(
              'local' => 'saila_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Mota', array(
              'local' => 'mota_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
     }
 }

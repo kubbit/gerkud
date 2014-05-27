@@ -14,11 +14,13 @@ all:
   sfDependentSelectPlugin:
     js: full
   google:
+    offline: false
     maps_api_keys:
       default:
-    helbidea: 20100, ERRENTERIA
-  erakundea: ERRENTERIAKO UDALA
+    helbidea: 20004, Donostia-San Sebastián
+  erakundea: Erakundearen Izena
   pdf_goiburua: Gertakari Zerrenda
+  logotipoa: true
   abisuak_nork: gerkud@example.org
   gertakariak_orriko: 30
   #proxy: 127.0.0.1:3128
@@ -38,10 +40,13 @@ all:
     gertakariak: [lehentasuna, id, created_at, saila, auzoa, eraikinakalea, laburpena, egoera, abisuanork, updated_at]
   ordenaketa:
     eskaerak: [created_at DESC]
-    gertakariak: [created_at DESC]
+    gertakariak: [lehentasuna_id DESC, created_at DESC]
   gerkud:
     eremuak: [id, laburpena, klasea, mota, azpimota, abisuanork, egoera, saila, langilea, auzoa, kalea, kale_zbkia, deskribapena, ixte_data, hasiera_aurreikusia, amaiera_aurreikusia, lehentasuna, jatorrizkosaila, eraikina, created_at, updated_at]
-    derrigorrezkoak: [id,  created_at, laburpena, mota, lehentasuna]
+    derrigorrezkoak: [id, created_at, laburpena, mota, lehentasuna]
     kopia_zehatza: true
     izena_eta_abizena: false
     hiritarrena_mota_id: 99
+    hiritarrena_klasea_id: 99
+  horkonpon:
+    pasahitza:

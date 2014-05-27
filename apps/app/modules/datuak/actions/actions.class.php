@@ -108,7 +108,7 @@ class datuakActions extends sfActions
 				$this->getDatuak();
 				break;
 			case 4:
-				$this->titulua = __('Jatorrizko Sailaren arabera');
+				$this->titulua = __('Jatorrizko sailaren arabera');
 				$this->goiburuak = array(__('Saila'), __('Irekiak'), __('Ebatziak'), __('Ebatzien egun batazbestekoa'));
 				$this->argibideak = array
 				(
@@ -140,8 +140,8 @@ class datuakActions extends sfActions
 		);
 		$cmd->execute($parametroak);
 
-		// obtener datos sin indices numericos
-		$this->datuak = $cmd->fetchAll(PDO::FETCH_ASSOC);
+		// obtener datos con indices numericos
+		$this->datuak = $cmd->fetchAll(PDO::FETCH_NUM);
 		$cmd->closeCursor();
 
 		// sacar ultima fila y ponerla como pie para los totales

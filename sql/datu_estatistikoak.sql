@@ -84,6 +84,8 @@ BEGIN
 			SET agno = primerAgno;
 			WHILE agno <= ultimoAgno DO
 				SELECT 1 INTO primerMes;
+				SELECT 1 INTO primerDia;
+				SELECT 1 INTO primeraSemana;
 				SELECT 31 INTO ultimoDia;
 				SELECT 12 INTO ultimoMes;
 				SELECT week(concat(agno, '/12/31')) INTO ultimaSemana;
@@ -138,11 +140,7 @@ BEGIN
 				END IF;
 				
 				IF pTartea = 4 THEN
-					IF agno = primerAgno THEN
-						SET semana = primeraSemana;
-					ELSE
-						SET semana = 1;
-					END IF;
+					SET semana = primeraSemana;
 
 					WHILE semana <= ultimaSemana DO
 						SET fecha = adddate(concat(agno, '/01/01'), INTERVAL 7 * semana DAY);

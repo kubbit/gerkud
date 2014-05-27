@@ -69,7 +69,7 @@ class eskaerakActions extends sfActions
 					$zutabea->klasea = 'saila';
 					break;
 				case 'langilea':
-					$zutabea->izena = __('Langilea');
+					$zutabea->izena = __('Erabiltzailea');
 					$zutabea->klasea = 'langilea';
 					break;
 				case 'barrutia':
@@ -85,7 +85,7 @@ class eskaerakActions extends sfActions
 					$zutabea->klasea = 'kalea';
 					break;
 				case 'kale_zbkia':
-					$zutabea->izena = __('Zbk.');
+					$zutabea->izena = __('Zbkia');
 					$zutabea->klasea = 'kale_zbkia';
 					break;
 				case 'deskribapena':
@@ -109,7 +109,7 @@ class eskaerakActions extends sfActions
 					$zutabea->klasea = 'lehentasuna';
 					break;
 				case 'jatorrizkosaila':
-					$zutabea->izena = __('Jatorrizko saila');
+					$zutabea->izena = __('Jatorrizko Saila');
 					$zutabea->klasea = 'jatorrizkosaila';
 					break;
 				case 'eraikina':
@@ -129,7 +129,7 @@ class eskaerakActions extends sfActions
 					$zutabea->klasea = 'eraikinakalea';
 					break;
 			}
-			array_push($this->zutabeak, $zutabea);
+			$this->zutabeak[$bakoitza] = $zutabea;
 		}
 	}
 

@@ -74,12 +74,12 @@ abstract class BaseEraikina extends sfDoctrineRecord
         $this->hasOne('Barrutia', array(
              'local' => 'barrutia_id',
              'foreign' => 'id',
-             'onDelete' => 'SET NULL'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Auzoa', array(
              'local' => 'auzoa_id',
              'foreign' => 'id',
-             'onDelete' => 'SET NULL'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasMany('Gertakaria', array(
              'local' => 'id',

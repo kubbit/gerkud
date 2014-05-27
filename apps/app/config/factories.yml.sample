@@ -5,7 +5,7 @@ prod:
   user:
     class: myUser
     param:
-      timeout: 3600
+      timeout: 600
   logger:
     class:   sfNoLogger
     param:
@@ -21,7 +21,7 @@ prod:
       transport:
         class: Swift_SmtpTransport
         param:
-          host:       smtp
+          host:       smtp.example.org
           port:       25
           encryption: ~
           username:   ~
@@ -47,7 +47,7 @@ dev:
   user:
     class: myUser
     param:
-      timeout: 3600
+      timeout: 600
 #  mailer:
 #    param:
 #      delivery_strategy: realtime
@@ -60,7 +60,7 @@ dev:
       transport:
         class: Swift_SmtpTransport
         param:
-          host:       smtp
+          host:       smtp.example.org
           port:       25
           encryption: ~
           username:   ~

@@ -21,12 +21,13 @@ class FitxategiaForm extends BaseFitxategiaForm
 
 		$this->validatorSchema['fitxategia2'] = new sfValidatorFile(array
 		(
-			'required'   => false,
-			'path'       => sfConfig::get('sf_upload_dir') . '/FILES/',
+			'required' => false,
+			'path' => sfConfig::get('sf_upload_dir') . '/FILES/',
 //			'mime_types' => array('application/pdf'),
 		));
 
-		$this->widgetSchema['gertakaria_id'] = new sfWidgetFormTextarea();
+		$this->widgetSchema['gertakaria_id'] = new sfWidgetFormInputHidden();
+		$this->widgetSchema['langilea_id'] = new sfWidgetFormInputHidden();
 
 		unset
 		(

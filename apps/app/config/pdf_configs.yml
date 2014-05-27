@@ -24,11 +24,11 @@ default:
   # document creator
   PDF_CREATOR: "TCPDF"
   # document author
-  PDF_AUTHOR: "ERRENTERIAKO UDALA"
+  PDF_AUTHOR: ""
   # header title
-  PDF_HEADER_TITLE: "\nErrenteriako Udala"
+  PDF_HEADER_TITLE: ""
   # header description string
-  PDF_HEADER_STRING: "Galdutako objetuen jasotze agiria\nAlabran de recepcion de objeto perdido\n"
+  PDF_HEADER_STRING: ""
   # image logo
   PDF_HEADER_LOGO: "../../../../../web/images/logoa_pdf.png"
   # header logo image width [mm]

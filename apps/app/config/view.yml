@@ -5,7 +5,7 @@ default:
   metas:
     title:        Gerkud - Gertakarien Kudeaketa
 
-  stylesheets:    [main.css]
+  stylesheets:    [main.css, mobile.css]
 
   javascripts: [jquery-latest.js, jquery.tablesorter.js, gerkud.js]
 

@@ -196,7 +196,7 @@ class zerrendatuActions extends sfActions
 			$strAzpiMota = Doctrine::getTable('Azpimota')->find(array($this->formularioa['azpimota_id']))->getIzena();
 		}
 		$strBarrutia = '';
-		if ($this->formularioa['barrutia'])
+		if (in_array('barrutia', $configEremuak) && $this->formularioa['barrutia'])
 		{
 			array_push($condiciones, 'g.barrutia_id = :barrutia');
 			$parametroak[':barrutia'] = $this->formularioa['barrutia'];
@@ -204,7 +204,7 @@ class zerrendatuActions extends sfActions
 			$strBarrutia = Doctrine::getTable('Barrutia')->find(array($this->formularioa['barrutia']))->getIzena();
 		}
 		$strAuzoa = '';
-		if ($this->formularioa['auzoa'])
+		if (in_array('auzoa', $configEremuak) && $this->formularioa['auzoa'])
 		{
 			array_push($condiciones, 'g.auzoa_id = :auzoa');
 			$parametroak[':auzoa'] = $this->formularioa['auzoa'];
@@ -401,7 +401,7 @@ class zerrendatuActions extends sfActions
 				// No se puede usar cellspacing porque se escribe la tabla de manera parcial
 				// y una vez usada la funcion writeHTML() restaura su valor por defecto.
 				// Como solucion, se añaden columnas separadoras vacias
-				$izenak .= '<table>'
+				$izenak = '<table>'
 				 . '<thead><tr style="text-decoration: underline">'
 				 . '<th width="30">' . __('Kodea') . '</th>'
 				 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)

@@ -87,11 +87,11 @@ abstract class BasePlanifikazioa extends sfDoctrineRecord
         $this->hasOne('Gertakaria', array(
              'local' => 'gertakaria_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Langilea', array(
              'local' => 'langilea_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
     }
 }

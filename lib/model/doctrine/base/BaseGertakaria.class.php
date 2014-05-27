@@ -228,62 +228,62 @@ abstract class BaseGertakaria extends sfDoctrineRecord
         $this->hasOne('Klasea', array(
              'local' => 'klasea_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Mota', array(
              'local' => 'mota_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Azpimota', array(
              'local' => 'azpimota_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Barrutia', array(
              'local' => 'barrutia_id',
              'foreign' => 'id',
-             'onDelete' => 'SET NULL'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Auzoa', array(
              'local' => 'auzoa_id',
              'foreign' => 'id',
-             'onDelete' => 'SET NULL'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Kalea', array(
              'local' => 'kalea_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Saila', array(
              'local' => 'saila_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Langilea', array(
              'local' => 'langilea_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Egoera', array(
              'local' => 'egoera_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Lehentasuna', array(
              'local' => 'lehentasuna_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('JatorrizkoSaila', array(
              'local' => 'jatorrizkoSaila_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Eraikina', array(
              'local' => 'eraikina_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Kontaktua', array(
              'local' => 'kontaktua_id',

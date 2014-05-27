@@ -24,18 +24,18 @@ Gertakaria:
     herritarrena: { type: boolean, notnull: false }
     kontaktua_id: { type: integer, notnull: false }
   relations:
-    Klasea: { onDelete: CASCADE, local: klasea_id, foreign: id }
-    Mota: { onDelete: CASCADE, local: mota_id, foreign: id }
-    Azpimota: { onDelete: CASCADE, local: azpimota_id, foreign: id }
-    Barrutia: { onDelete: SET NULL, local: barrutia_id, foreign: id }
-    Auzoa: { onDelete: SET NULL, local: auzoa_id, foreign: id }
-    Kalea: { onDelete: CASCADE, local: kalea_id, foreign: id }
-    Saila: { onDelete: CASCADE, local: saila_id, foreign: id }
-    Langilea: { onDelete: CASCADE, local: langilea_id, foreign: id }
-    Egoera: { onDelete: CASCADE, local: egoera_id, foreign: id }
-    Lehentasuna: { onDelete: CASCADE, local: lehentasuna_id, foreign: id }
-    JatorrizkoSaila: { onDelete: CASCADE, local: jatorrizkoSaila_id, foreign: id }
-    Eraikina: { onDelete: CASCADE, local: eraikina_id, foreign: id }
+    Klasea: { onDelete: RESTRICT, local: klasea_id, foreign: id }
+    Mota: { onDelete: RESTRICT, local: mota_id, foreign: id }
+    Azpimota: { onDelete: RESTRICT, local: azpimota_id, foreign: id }
+    Barrutia: { onDelete: RESTRICT, local: barrutia_id, foreign: id }
+    Auzoa: { onDelete: RESTRICT, local: auzoa_id, foreign: id }
+    Kalea: { onDelete: RESTRICT, local: kalea_id, foreign: id }
+    Saila: { onDelete: RESTRICT, local: saila_id, foreign: id }
+    Langilea: { onDelete: RESTRICT, local: langilea_id, foreign: id }
+    Egoera: { onDelete: RESTRICT, local: egoera_id, foreign: id }
+    Lehentasuna: { onDelete: RESTRICT, local: lehentasuna_id, foreign: id }
+    JatorrizkoSaila: { onDelete: RESTRICT, local: jatorrizkoSaila_id, foreign: id }
+    Eraikina: { onDelete: RESTRICT, local: eraikina_id, foreign: id }
     Kontaktua:
       foreignType: one
 
@@ -47,7 +47,7 @@ Langilea:
   columns:
     ohartaraztea_id: { type: integer, notnull: false }
   relations:
-    Ohartaraztea: { onDelete: CASCADE, local: ohartaraztea_id, foreign: id }
+    Ohartaraztea: { onDelete: RESTRICT, local: ohartaraztea_id, foreign: id }
 
 Fitxategia:
   actAs:
@@ -58,8 +58,8 @@ Fitxategia:
     fitxategia: { type: string(255) }
     deskribapena: { type: string(255) }
   relations:
-    Gertakaria: { onDelete: CASCADE, local: gertakaria_id, foreign: id }
-    Langilea: { onDelete: CASCADE, local: langilea_id, foreign: id }
+    Gertakaria: { onDelete: RESTRICT, local: gertakaria_id, foreign: id }
+    Langilea: { onDelete: RESTRICT, local: langilea_id, foreign: id }
 
 Iruzkina:
   actAs:
@@ -70,9 +70,9 @@ Iruzkina:
     ekintza_id: { type: integer, notnull: false }
     testua: { type: string(4000) }
   relations:
-    Gertakaria: { onDelete: CASCADE, local: gertakaria_id, foreign: id }
-    Langilea: { onDelete: CASCADE, local: langilea_id, foreign: id }
-    Ekintza: { onDelete: CASCADE, local: ekintza_id, foreign: id }
+    Gertakaria: { onDelete: RESTRICT, local: gertakaria_id, foreign: id }
+    Langilea: { onDelete: RESTRICT, local: langilea_id, foreign: id }
+    Ekintza: { onDelete: RESTRICT, local: ekintza_id, foreign: id }
 
 Ekintza:
   actAs:
@@ -96,7 +96,7 @@ Azpimota:
     mota_id:  { type: integer, notnull: true }
     izena: { type: string(255), notnull: true }
   relations:
-    Mota: { onDelete: CASCADE, local: mota_id, foreign: id, foreignAlias: Azpimota }
+    Mota: { onDelete: RESTRICT, local: mota_id, foreign: id, foreignAlias: Azpimota }
 
 Egoera:
   actAs:
@@ -117,7 +117,7 @@ Auzoa:
     barrutia_id: { type: integer, notnull: false }
     izena: { type: string(255), notnull: true, unique: true }
   relations:
-    Barrutia: { onDelete: SET NULL, local: barrutia_id, foreign: id }
+    Barrutia: { onDelete: RESTRICT, local: barrutia_id, foreign: id }
 
 Kalea:
   actAs:
@@ -127,8 +127,8 @@ Kalea:
     izena: { type: string(255), notnull: true, unique: true }
     google: { type: string(255), notnull: false }
   relations:
-    Barrutia: { onDelete: SET NULL, local: barrutia_id, foreign: id }
-    Auzoa: { onDelete: SET NULL, local: auzoa_id, foreign: id }
+    Barrutia: { onDelete: RESTRICT, local: barrutia_id, foreign: id }
+    Auzoa: { onDelete: RESTRICT, local: auzoa_id, foreign: id }
 
 Saila:
   connection: doctrine
@@ -141,8 +141,8 @@ SailaMota:
     saila_id: { type: integer, notnull: true }
     mota_id: { type: integer, notnull: true }
   relations:
-    Saila: { onDelete: CASCADE, local: saila_id, foreign: id }
-    Mota: { onDelete: CASCADE, local: mota_id, foreign: id }
+    Saila: { onDelete: RESTRICT, local: saila_id, foreign: id }
+    Mota: { onDelete: RESTRICT, local: mota_id, foreign: id }
 
 SailekoLangileak:
   connection: doctrine
@@ -162,8 +162,8 @@ Planifikazioa:
     amaiera_ordua_noiztik: {type: time, notnull: true }
     amaiera_ordua_noizarte: {type: time, notnull: true }
   relations:
-    Gertakaria: { onDelete: CASCADE, local: gertakaria_id, foreign: id }
-    Langilea: { onDelete: CASCADE, local: langilea_id, foreign: id }
+    Gertakaria: { onDelete: RESTRICT, local: gertakaria_id, foreign: id }
+    Langilea: { onDelete: RESTRICT, local: langilea_id, foreign: id }
 
 Lehentasuna:
   actAs:
@@ -183,8 +183,8 @@ Geo:
     testua: { type: string(50) }
     geometria_id: { type: integer, notnull: true }
   relations:
-    Gertakaria: { onDelete: CASCADE, local: gertakaria_id, foreign: id }
-    Geometria: { onDelete: CASCADE, local: geometria_id, foreign: id }
+    Gertakaria: { onDelete: RESTRICT, local: gertakaria_id, foreign: id }
+    Geometria: { onDelete: RESTRICT, local: geometria_id, foreign: id }
 
 Geometria:
   actAs:
@@ -221,8 +221,8 @@ Eraikina:
     longitudea: { type: double(18), scale: 6, notnull: true }
     latitudea: { type: double(18), scale: 6, notnull: true }
   relations:
-    Barrutia: { onDelete: SET NULL, local: barrutia_id, foreign: id }
-    Auzoa: { onDelete: SET NULL, local: auzoa_id, foreign: id }
+    Barrutia: { onDelete: RESTRICT, local: barrutia_id, foreign: id }
+    Auzoa: { onDelete: RESTRICT, local: auzoa_id, foreign: id }
 
 EgunTarteak:
   columns:
@@ -243,17 +243,17 @@ Erlazioak:
     erlazio_mota_id: { type: integer, notnull: false }
   relations:
     ErlazioMota:
-      onDelete: SET NULL
+      onDelete: RESTRICT
       local: erlazio_mota_id
       foreign: id
       type: one
     Gertakaria:
-      onDelete: CASCADE
+      onDelete: RESTRICT
       local: amaiera_id
       foreign: id
       type: one
     Gertakaria_3:
-      onDelete: CASCADE
+      onDelete: RESTRICT
       class: Gertakaria
       local: hasiera_id
       foreign: id

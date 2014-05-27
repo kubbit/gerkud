@@ -1,8 +1,9 @@
 <?php use_helper('Javascript', 'GMap') ?>
 <?php use_helper('Pagination'); ?>
 
-<div id="geolokalizazioa">
-	<div class="planoOsoa">
+<div id="planoOsoa">
+	<div class="mapa">
+<?php if (!sfConfig::get('app_google_offline')): ?>
 		<?php
 		$herria = sfConfig::get('app_google_helbidea');
 
@@ -34,9 +35,10 @@
 		<?php endforeach; ?>
 
 		<?php $gMap->centerOnMarkers(); ?>
-		<?php include_map($gMap, array('width' => '100%', 'height' => '500px')); ?>
+		<?php include_map($gMap); ?>
 
 		<!-- Javascript included at the bottom of the page -->
 		<?php include_map_javascript($gMap); ?>
+<?php endif; ?>
 	</div>
 </div>

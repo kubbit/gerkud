@@ -46,7 +46,7 @@ abstract class BaseAzpimota extends sfDoctrineRecord
         $this->hasOne('Mota', array(
              'local' => 'mota_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasMany('Gertakaria', array(
              'local' => 'id',

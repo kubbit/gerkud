@@ -24,10 +24,24 @@ class horkonponActions extends sfActions
 			$json = $request->getParameter('datuak');
 
 			$array = json_decode($json, true);
+			if ($array === NULL)
+				throw new Exception(sprintf('Mezua ez da zuzena: %s', $json));
+
+			$pasahitza = $request->getParameter('pasahitza');
+			$confPasahitza = sfConfig::get('app_horkonpon_pasahitza');
+			if ($confPasahitza && $confPasahitza !== $pasahitza)
+				throw new Exception('Atzipena ukatuta');
 
 			$this->gertakaria = new Gertakaria();
 			$this->gertakaria->setHerritarrena(true);
-			$this->gertakaria->setMotaId(sfConfig::get('app_gerkud_hiritarrena_mota_id'));
+
+			$mota = sfConfig::get('app_gerkud_hiritarrena_mota_id');
+			if ($mota !== NULL)
+				$this->gertakaria->setMotaId($mota);
+
+			$klasea = sfConfig::get('app_gerkud_hiritarrena_klasea_id');
+			if ($klasea !== NULL)
+				$this->gertakaria->setKlaseaId($klasea);
 
 			$erabiltzaileDatuak = array();
 			if (array_key_exists('izena', $array))

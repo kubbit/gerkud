@@ -79,11 +79,11 @@ abstract class BaseGeo extends sfDoctrineRecord
         $this->hasOne('Gertakaria', array(
              'local' => 'gertakaria_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Geometria', array(
              'local' => 'geometria_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
     }
 }

@@ -1,4 +1,4 @@
-<table class="taula">
+<table>
 	<caption><?php echo __('Egoerak') ?></caption>
 	<thead>
 		<tr>

@@ -59,12 +59,12 @@ abstract class BaseFitxategia extends sfDoctrineRecord
         $this->hasOne('Gertakaria', array(
              'local' => 'gertakaria_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $this->hasOne('Langilea', array(
              'local' => 'langilea_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE'));
+             'onDelete' => 'RESTRICT'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

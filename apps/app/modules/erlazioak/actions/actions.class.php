@@ -46,12 +46,12 @@ class erlazioakActions extends sfActions
 					);
 					$cmd->execute($parametroak);
 					$cmd->closeCursor();
-					$testua = __('Gertakari honekin dituen erlazio guztiak ezabatu dira:') . ' ' . $this->parametroak['amaiera_id'];
+					$testua = __('Gertakari honekin dituen erlazio guztiak ezabatu dira') . ': ' . $this->parametroak['amaiera_id'];
 					break;
 
 				case "1":
 					$gertakaria_erlazioaren_amaiera = Doctrine_Core::getTable('Gertakaria')->find($this->parametroak['amaiera_id']);
-					if($gertakaria_erlazioaren_amaiera->getEgoeraId()==='6')
+					if ($gertakaria_erlazioaren_amaiera->getEgoeraId()==='6')
 					{
 						$iruzkina_sortu = false;
 						break;
@@ -62,7 +62,7 @@ class erlazioakActions extends sfActions
 					$gertakaria = Doctrine_Core::getTable('Gertakaria')->find($this->parametroak['hasiera_id']);
 
 					//gertakaria baztertu gabe badago orduan baztertu
-					if($gertakaria->getEgoeraId()<>'6')
+					if ($gertakaria->getEgoeraId()<>'6')
 					{
 						$gertakaria->setEgoeraId(6);
 						$gertakaria->setIxteData($gertakaria->getUpdatedAt());

@@ -1,0 +1,7 @@
+all:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'mysql:host=mysql.example.org;dbname=gerkud'
+      username: gerkud_user
+      password: gerkud_password

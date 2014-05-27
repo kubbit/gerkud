@@ -63,7 +63,7 @@ class geoActions extends sfActions
 		$this->forward404Unless($geo = Doctrine::getTable('geo')->find(array($request->getParameter('id'))), sprintf('Object geo does not exist (%s).', $request->getParameter('id')));
 		$geo->delete();
 
-		$this->redirect('gertakaria/show?id=' . $geo->getGertakariaId());
+		$this->redirect(sprintf('gertakaria/show?id=%d#planoa', $geo->getGertakariaId()));
 	}
 
 	protected function processForm(sfWebRequest $request, sfForm $form)
@@ -73,7 +73,7 @@ class geoActions extends sfActions
 		{
 			$geo = $form->save();
 
-			$this->redirect('gertakaria/show?id=' . $geo->getGertakariaId());
+			$this->redirect(sprintf('gertakaria/show?id=%d#planoa', $geo->getGertakariaId()));
 		}
 	}
 }

@@ -15,6 +15,10 @@ class LangileaForm extends BaseLangileaForm
 	 */
 	public function configure()
 	{
+		$this->widgetSchema['created_at'] = new sfWidgetFormInputHidden();
+		$this->widgetSchema['updated_at'] = new sfWidgetFormInputHidden();
+		$this->widgetSchema['last_login'] = new sfWidgetFormInputHidden();
+
 		$this->widgetSchema['ohartaraztea_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model' => 'Ohartaraztea',

@@ -122,7 +122,20 @@ class iruzkinaActions extends sfActions
 				}
 			}
 
-			$this->redirect('gertakaria/show?id=' . $iruzkina->getGertakariaId());
+			$url = sprintf('gertakaria/show?id=%d', $iruzkina->getGertakariaId());
+			switch ($form['ekintza_id']->getValue())
+			{
+				// Iruzkina
+				case 1:
+					$url .= '#historikoa';
+					break;
+				// Fitxategia
+				case 4:
+					$url .= '#fitxategiak';
+					break;
+			}
+
+			$this->redirect($url);
 		}
 	}
 }

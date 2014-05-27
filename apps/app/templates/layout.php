@@ -2,9 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="utf-8" />
-		<!--[if IE]>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=IE8" />
-		<![endif]-->
 		<meta name="robots" content="noindex, nofollow" />
 		<?php include_title(); ?>
 		<link rel="shortcut icon" href="/favicon.ico" />
@@ -12,28 +11,25 @@
 		<?php include_javascripts(); ?>
 	</head>
 
-	<body>
-		<div id="goiburua">
-			<img class="logoa" src="/images/logoa.jpg" alt="Logotipo" />
-<?php if ($sf_user->isAuthenticated()): ?>
-			<div class="post">
-				<div class="erabiltzailea">
-					<div><?php echo $sf_user->getGuardUser()->getFirstName() . " " . $sf_user->getGuardUser()->getLastName(); ?></div>
-					<div>( <?php echo $sf_user->getUsername(); ?> )</div>
-				</div>
+<?php
+	$helbidea = sfContext::getInstance()->getRouting()->getCurrentInternalUri();
+?>
 
-				[<a href="?sf_culture=eu">eu</a>] [<a href="?sf_culture=es">es</a>]
-			</div>
-			<a class="eskuliburua" target="_blank" href="<?php echo sprintf('/doc/Eskuliburua_%s.pdf', $sf_user->getCulture()); ?>">
-				<img src="<?php echo sprintf('/images/Eskuliburua_%s.png', $sf_user->getCulture()); ?>" alt="<?php echo __('Eskuliburua') ?>" />
-			</a>
-<?php endif; ?>
-		</div>
-		<div id="gorputza">
+	<body>
 <?php if ($sf_user->isAuthenticated()): ?>
-			<ul class="sesioa">
-				<li id="bilatu"><?php echo link_to(image_tag('Bilatu.png', array('alt' => 'Bilatu')), 'gertakaria/index?bilaketa=true', array('id' => 'erakutsiBilaketa')) ?></li>
-	<?php if (sfContext::getInstance()->getRouting()->getCurrentInternalUri() != "gertakaria/new" && sfContext::getInstance()->getRouting()->getCurrentInternalUri() != "gertakaria/create"): ?>
+		<div id="navIreki"></div>
+		<div id="nav">
+			<ul>
+	<?php if (sfConfig::get('app_logotipoa')): ?>
+				<li id="logoa"><?php echo image_tag('logoa.png', array('alt' => 'Logo')); ?></li>
+	<?php endif; ?>
+
+	<?php if (has_slot('mapa')): ?>
+				<?php include_slot('mapa'); ?>
+	<?php endif; ?>
+
+				<li id="bilatu"><?php echo link_to(image_tag('Bilatu.png', array('alt' => 'Bilatu')), 'bilaketa/index', array('id' => 'erakutsiBilaketa')) ?></li>
+	<?php if ($helbidea != "gertakaria/new" && $helbidea != "gertakaria/create"): ?>
 				<li id="sortu"><?php echo link_to(__('Gertakaria Sortu'), 'gertakaria/new') ?></li>
 	<?php endif; ?>
 				<li><?php echo link_to(__('Eskaerak (%eskaerak%)', array('%eskaerak%' => Doctrine_Core::getTable('Gertakaria')->getEskaeraKopurua())), 'eskaerak/index') ?></li>
@@ -45,21 +41,33 @@
 				<li><?php echo link_to(__('Sailak'), 'saila/index') ?></li>
 				<li><?php echo link_to(__('Kaleak'), 'kalea/index') ?></li-->
 	<?php endif; ?>
-
+				<li class="menuaIreki menua2">
+					<a><img src="/images/asc.gif" alt="<?php echo __('Gehiago'); ?>" /></a>
+					<ul>
 	<?php if ($sf_user->hasCredential('admins')): ?>
-				<li><?php echo link_to(__('Erabiltzaileak'), 'erabiltzaileak/index') ?></li>
+						<li><?php echo link_to(__('Erabiltzaileak'), 'erabiltzaileak/index') ?></li>
 	<?php endif; ?>
 	<?php if (!$sf_user->hasCredential('admins')): ?>
-				<li><?php echo link_to(__('Nire datuak'), 'langilea') ?></li>
+						<li><?php echo link_to(__('Nire datuak'), 'langilea') ?></li>
 	<?php endif; ?>
-				<li><?php echo link_to(__('Saioa amaitu'), 'sf_guard_signout') ?></li>
+						<li><a target="_blank" href="<?php echo sprintf('/doc/Eskuliburua_%s.pdf', $sf_user->getCulture()); ?>"><?php echo __('Eskuliburua'); ?></a></li>
+						<li class="menua3">
+							<a><?php echo __('Hizkuntza'); ?></a>
+							<ul>
+								<li><a href="?sf_culture=eu"><?php echo __('Euskera'); ?></a></li>
+								<li><a href="?sf_culture=es"><?php echo __('Gaztelera'); ?></a></li>
+							</ul>
+						</li>
+						<li><?php echo link_to(__('Saioa amaitu'), 'sf_guard_signout') ?></li>
+					</ul>
+				</li>
 			</ul>
+		</div>
 <?php endif; ?>
-			<div id="edukia">
+		<div id="edukia">
 <!-- Edukiaren hasiera -->
 <?php echo $sf_content; ?>
 <!-- Edukiaren amaiera -->
-			</div>
 		</div>
 	</body>
 </html>

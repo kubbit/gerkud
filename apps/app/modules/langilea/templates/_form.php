@@ -14,7 +14,7 @@
             &nbsp;<?php echo link_to('Delete', 'langilea/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
           <?php endif; ?>
 
-          <td class="ezker"><?php echo $form['ohartaraztea_id']->render() ?></td>
+          <td><?php echo $form['ohartaraztea_id']->render() ?></td>
 
           <input type="submit" value="Save" />
         </td>
