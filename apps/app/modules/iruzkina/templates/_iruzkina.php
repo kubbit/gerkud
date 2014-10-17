@@ -23,8 +23,8 @@
 					</td>
 				</tr>
 			</div>
-			<tr>
 <?php if ($form->getDefault('ekintza_id') != 2): ?>
+			<tr>
 				<th>Idatzi iruzkina:</th>
 			</tr>
 			<tr>

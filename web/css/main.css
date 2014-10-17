@@ -329,7 +329,7 @@ form.login fieldset .field input
 .panela .field span
 {
 	display: inline-block;
-	white-space: normal;
+	white-space: pre-wrap;
 }
 .panela .azpiSailkapena
 {
@@ -475,6 +475,8 @@ table tbody td
 {
 	padding-left: 0.35em;
 	padding-right: 0.35em;
+	white-space: pre-wrap;
+	vertical-align: top;
 }
 table th.header
 {

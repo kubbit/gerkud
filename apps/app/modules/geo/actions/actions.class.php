@@ -61,6 +61,12 @@ class geoActions extends sfActions
 		$request->checkCSRFProtection();
 
 		$this->forward404Unless($geo = Doctrine::getTable('geo')->find(array($request->getParameter('id'))), sprintf('Object geo does not exist (%s).', $request->getParameter('id')));
+
+		// gertakariaren eguneratze data berritu
+		$gertakaria = Doctrine::getTable('gertakaria')->find(array($geo->getGertakariaId()));
+		$gertakaria->setUpdatedAt(null); // gertakaria gordetzea behartu
+		$gertakaria->save();
+
 		$geo->delete();
 
 		$this->redirect(sprintf('gertakaria/show?id=%d#planoa', $geo->getGertakariaId()));
@@ -72,6 +78,11 @@ class geoActions extends sfActions
 		if ($form->isValid())
 		{
 			$geo = $form->save();
+
+			// gertakariaren eguneratze data berritu
+			$gertakaria = Doctrine::getTable('gertakaria')->find(array($geo->getGertakariaId()));
+			$gertakaria->setUpdatedAt(null); // gertakaria gordetzea behartu
+			$gertakaria->save();
 
 			$this->redirect(sprintf('gertakaria/show?id=%d#planoa', $geo->getGertakariaId()));
 		}

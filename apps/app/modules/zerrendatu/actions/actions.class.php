@@ -151,17 +151,29 @@ class zerrendatuActions extends sfActions
 		);
 
 		$condiciones = array();
-		$hasiera = $this->formularioa['hasiera'];
-		if ($hasiera)
+		$irekiera_noiztik = $this->formularioa['irekiera_noiztik'];
+		if ($irekiera_noiztik)
 		{
-			array_push($condiciones, 'date(g.created_at) >= date(:hasiera)');
-			$parametroak[':hasiera'] = $hasiera;
+			array_push($condiciones, 'date(g.created_at) >= date(:irekiera_noiztik)');
+			$parametroak[':irekiera_noiztik'] = $irekiera_noiztik;
 		}
-		$amaiera = $this->formularioa['amaiera'];
-		if ($amaiera)
+		$irekiera_nora = $this->formularioa['irekiera_nora'];
+		if ($irekiera_nora)
 		{
-			array_push($condiciones, 'date(g.created_at) <= date(:amaiera)');
-			$parametroak[':amaiera'] = $amaiera;
+			array_push($condiciones, 'date(g.created_at) <= date(:irekiera_nora)');
+			$parametroak[':irekiera_nora'] = $irekiera_nora;
+		}
+		$ixte_noiztik = $this->formularioa['ixte_noiztik'];
+		if ($ixte_noiztik)
+		{
+			array_push($condiciones, 'date(g.ixte_data) >= date(:ixte_noiztik)');
+			$parametroak[':ixte_noiztik'] = $ixte_noiztik;
+		}
+		$ixte_nora = $this->formularioa['ixte_nora'];
+		if ($ixte_nora)
+		{
+			array_push($condiciones, 'date(g.ixte_data) <= date(:ixte_nora)');
+			$parametroak[':ixte_nora'] = $ixte_nora;
 		}
 		$strKlasea = '';
 		if ($this->formularioa['klasea'])
@@ -252,7 +264,8 @@ class zerrendatuActions extends sfActions
 		else
 			$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Auzoa'), $strAuzoa);
 
-		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Data tartea'), $hasiera, !empty($hasiera) && !empty($amaiera) ? ' - ' : '', $amaiera);
+		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Irekiera data'), $irekiera_noiztik, !empty($irekiera_noiztik) && !empty($irekiera_nora) ? ' - ' : '', $irekiera_nora);
+		$htmlIragazkiak .= sprintf('<tr><td></td><td></td><td></td><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Ixte data'), $ixte_noiztik, !empty($ixte_noiztik) && !empty($ixte_nora) ? ' - ' : '', $ixte_nora);
 		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s</td><td></td>', __('Mota'), $strMota, empty($strAzpiMota) ? '' : ' / ' . $strAzpiMota);
 		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Egoera'), $strEgoera);
 		$htmlIragazkiak .= '</table>';

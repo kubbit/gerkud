@@ -12,22 +12,37 @@ sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
 
 class horkonponActions extends sfActions
 {
+	const GEOMETRIA_PUNTUA = 1;
+	const API_ERANTZUNA_ZUZENA = 0;
+	const API_ERANTZUNA_ERROREA = -1;
+	const API_AZKEN_BERTSIOA = 2;
+
 	public function executeIndex(sfWebRequest $request)
 	{
 		$erantzuna = array();
+
+		$erantzuna['version'] = self::API_AZKEN_BERTSIOA;
 
 		try
 		{
 			if (!$request->isMethod(sfRequest::POST))
 				throw new Exception('Ez da informaziorik jaso');
 
-			$json = $request->getParameter('datuak');
+			if ($request->getParameter('datuak') !== NULL)
+				$json = $request->getParameter('datuak');
+			else if ($request->getParameter('data') !== NULL)
+				$json = $request->getParameter('data');
+			else
+				throw new Exception(sprintf('Ez da informaziorik jaso: %s', $json));
 
 			$array = json_decode($json, true);
 			if ($array === NULL)
 				throw new Exception(sprintf('Mezua ez da zuzena: %s', $json));
 
-			$pasahitza = $request->getParameter('pasahitza');
+			if ($request->getParameter('pasahitza') !== NULL)
+				$pasahitza = $request->getParameter('pasahitza');
+			else if ($request->getParameter('key') !== NULL)
+				$pasahitza = $request->getParameter('key');
 			$confPasahitza = sfConfig::get('app_horkonpon_pasahitza');
 			if ($confPasahitza && $confPasahitza !== $pasahitza)
 				throw new Exception('Atzipena ukatuta');
@@ -43,89 +58,203 @@ class horkonponActions extends sfActions
 			if ($klasea !== NULL)
 				$this->gertakaria->setKlaseaId($klasea);
 
-			$erabiltzaileDatuak = array();
-			if (array_key_exists('izena', $array))
-				array_push($erabiltzaileDatuak, $array['izena']);
-			if (array_key_exists('telefonoa', $array))
-				array_push($erabiltzaileDatuak, $array['telefonoa']);
-			if (array_key_exists('posta', $array))
-				array_push($erabiltzaileDatuak, $array['posta']);
+			if (array_key_exists('bertsioa', $array))
+				$bertsioa = $array['bertsioa'];
+			else if (array_key_exists('version', $array))
+				$bertsioa = $array['version'];
+			else
+				throw new Exception('Mezuaren bertsioa ez dago ezarrita');
 
-			$this->gertakaria->setAbisuaNork(implode(', ', $erabiltzaileDatuak));
-			if (array_key_exists('oharrak', $array))
+			switch ($bertsioa)
 			{
-				$this->gertakaria->setLaburpena($array['oharrak']);
-				$this->gertakaria->setDeskribapena($this->gertakaria->getLaburpena());
-			}
-
-			$langilea = null;
-			$this->gertakaria->setLangilea($langilea);
-
-			if (count($erabiltzaileDatuak) > 0)
-			{
-				$kontaktua = new Kontaktua();
-				$kontaktua->setIzena($array['izena']);
-				$kontaktua->setPosta($array['posta']);
-				$kontaktua->setTelefonoa($array['telefonoa']);
-
-				if (array_key_exists('ohartarazi', $array) && $array['ohartarazi'])
-					$kontaktua->setOhartarazi($array['ohartarazi']);
-
-				if (array_key_exists('hizkuntza', $array))
-					$kontaktua->setHizkuntza($array['hizkuntza']);
-
-				$this->gertakaria->setKontaktua($kontaktua);
-			}
-
-			if (array_key_exists('gps', $array))
-			{
-				$this->geo = new Geo();
-				$this->geo->setGertakaria($this->gertakaria);
-				$this->geo->setGeometriaId(1);
-				$this->geo->setLatitudea($array['gps']['latitudea']);
-				$this->geo->setLongitudea($array['gps']['longitudea']);
-				$this->geo->setZehaztasuna($array['gps']['zehaztasuna']);
-
-				if (array_key_exists('helbidea', $array))
-				{
-					$this->geo->setTestua($array['helbidea']);
-
-					$kalea = Doctrine_Core::getTable('Kalea')->getKaleaGoogle($array['helbidea']);
-					if ($kalea)
-					{
-						$this->gertakaria->setKalea($kalea);
-						if ($kalea->getBarrutiaId())
-							$this->gertakaria->setBarrutiaId($kalea->getBarrutiaId());
-						if ($kalea->getAuzoaId())
-							$this->gertakaria->setAuzoaId($kalea->getAuzoaId());
-					}
-				}
-
-				$this->geo->save();
-			}
-
-			if (array_key_exists('argazkia', $array))
-			{
-				$this->fitxategia = new Fitxategia();
-				$this->fitxategia->setGertakaria($this->gertakaria);
-				$this->fitxategia->setFitxategia($array['argazkia']['izena']);
-				$this->fitxategia->setEdukia($array['argazkia']['edukia']);
-				$this->fitxategia->setLangilea($langilea);
-				$this->fitxategia->save();
+				case 1:
+					$this->APIv1($request, $array);
+					break;
+				case 2:
+				default:
+					$this->APIv2($request, $array);
+					break;
 			}
 
 			$this->gertakaria->save();
 
-			$erantzuna['kodea'] = $this->gertakaria->getId();
+			$erantzuna['status'] = self::API_ERANTZUNA_ZUZENA;
+			$erantzuna['message'] = sprintf('Bidalketa zuzena. Erreferentzia: %s.', $this->gertakaria->getId());
+			$erantzuna['code'] = $this->gertakaria->getId();
 		}
 		catch (Exception $e)
 		{
-			$erantzuna['kodea'] = -1;
-			$erantzuna['mezua'] = $e->getMessage();
+			$erantzuna['status'] = self::API_ERANTZUNA_ERROREA;
+			$erantzuna['message'] = $e->getMessage();
 		}
 
 		echo json_encode($erantzuna);
 
 		return;
+	}
+
+	private function APIv1(sfWebRequest $request, $array)
+	{
+		$erabiltzaileDatuak = array();
+		if (array_key_exists('izena', $array))
+			array_push($erabiltzaileDatuak, $array['izena']);
+		if (array_key_exists('telefonoa', $array))
+			array_push($erabiltzaileDatuak, $array['telefonoa']);
+		if (array_key_exists('posta', $array))
+			array_push($erabiltzaileDatuak, $array['posta']);
+
+		$this->gertakaria->setAbisuaNork(implode(', ', $erabiltzaileDatuak));
+		if (array_key_exists('oharrak', $array))
+		{
+			$this->gertakaria->setLaburpena($array['oharrak']);
+			$this->gertakaria->setDeskribapena($this->gertakaria->getLaburpena());
+		}
+
+		$langilea = null;
+		$this->gertakaria->setLangilea($langilea);
+
+		if (count($erabiltzaileDatuak) > 0)
+		{
+			$kontaktua = new Kontaktua();
+			$kontaktua->setIzena($array['izena']);
+			$kontaktua->setPosta($array['posta']);
+			$kontaktua->setTelefonoa($array['telefonoa']);
+
+			if (array_key_exists('ohartarazi', $array) && $array['ohartarazi'])
+				$kontaktua->setOhartarazi($array['ohartarazi']);
+
+			if (array_key_exists('hizkuntza', $array))
+				$kontaktua->setHizkuntza($array['hizkuntza']);
+
+			$this->gertakaria->setKontaktua($kontaktua);
+		}
+
+		if (array_key_exists('gps', $array))
+		{
+			$this->geo = new Geo();
+			$this->geo->setGertakaria($this->gertakaria);
+			$this->geo->setGeometriaId(self::GEOMETRIA_PUNTUA);
+			$this->geo->setLatitudea($array['gps']['latitudea']);
+			$this->geo->setLongitudea($array['gps']['longitudea']);
+			$this->geo->setZehaztasuna($array['gps']['zehaztasuna']);
+
+			if (array_key_exists('helbidea', $array))
+			{
+				$this->geo->setTestua($array['helbidea']);
+
+				$kalea = Doctrine_Core::getTable('Kalea')->getKaleaGoogle($array['helbidea']);
+				if ($kalea)
+				{
+					$this->gertakaria->setKalea($kalea);
+					if ($kalea->getBarrutiaId())
+						$this->gertakaria->setBarrutiaId($kalea->getBarrutiaId());
+					if ($kalea->getAuzoaId())
+						$this->gertakaria->setAuzoaId($kalea->getAuzoaId());
+				}
+			}
+
+			$this->geo->save();
+		}
+
+		if (array_key_exists('argazkia', $array))
+		{
+			$this->fitxategia = new Fitxategia();
+			$this->fitxategia->setGertakaria($this->gertakaria);
+			$this->fitxategia->setFitxategia($array['argazkia']['izena']);
+			$this->fitxategia->setEdukia($array['argazkia']['edukia']);
+			$this->fitxategia->setLangilea($langilea);
+			$this->fitxategia->save();
+		}
+	}
+
+	private function APIv2(sfWebRequest $request, $mezua)
+	{
+		if (array_key_exists('date', $mezua))
+			$this->gertakaria->setCreatedAt($mezua['date']);
+
+		$erabiltzaileDatuak = array();
+		if (array_key_exists('user', $mezua))
+		{
+			$user = $mezua['user'];
+			if (array_key_exists('fullname', $user))
+				array_push($erabiltzaileDatuak, $user['fullname']);
+			if (array_key_exists('phone', $user))
+				array_push($erabiltzaileDatuak, $user['phone']);
+			if (array_key_exists('mail', $user))
+				array_push($erabiltzaileDatuak, $user['mail']);
+
+			if (count($erabiltzaileDatuak) > 0)
+			{
+				$kontaktua = new Kontaktua();
+				if (array_key_exists('fullname', $user))
+					$kontaktua->setIzena($user['fullname']);
+				if (array_key_exists('phone', $user))
+					$kontaktua->setTelefonoa($user['phone']);
+				if (array_key_exists('mail', $user))
+					$kontaktua->setPosta($user['mail']);
+
+				if (array_key_exists('notify', $user))
+					$kontaktua->setOhartarazi($user['notify']);
+
+				if (array_key_exists('language', $user))
+					$kontaktua->setHizkuntza($user['language']);
+
+				$this->gertakaria->setKontaktua($kontaktua);
+			}
+		}
+
+		$this->gertakaria->setAbisuaNork(implode(', ', $erabiltzaileDatuak));
+		if (array_key_exists('comments', $mezua))
+		{
+			$this->gertakaria->setLaburpena($mezua['comments']);
+			$this->gertakaria->setDeskribapena($this->gertakaria->getLaburpena());
+		}
+
+		$langilea = null;
+		$this->gertakaria->setLangilea($langilea);
+
+		if (array_key_exists('gps', $mezua))
+		{
+			$gps = $mezua['gps'];
+
+			$this->geo = new Geo();
+			$this->geo->setGertakaria($this->gertakaria);
+			$this->geo->setGeometriaId(self::GEOMETRIA_PUNTUA);
+			$this->geo->setLatitudea($gps['latitude']);
+			$this->geo->setLongitudea($gps['longitude']);
+			$this->geo->setZehaztasuna($gps['accuracy']);
+
+			if (array_key_exists('address', $mezua) && array_key_exists('address', $mezua['address']))
+				$this->geo->setTestua(sprintf('HorKonpon: %s', $mezua['address']['address']));
+			else
+				$this->geo->setTestua('HorKonpon');
+
+			$this->geo->save();
+		}
+
+		if (array_key_exists('address', $mezua) && array_key_exists('address', $mezua['address']))
+		{
+			$kalea = Doctrine_Core::getTable('Kalea')->getKaleaGoogle($mezua['address']['address']);
+			if ($kalea)
+			{
+				$this->gertakaria->setKalea($kalea);
+				if ($kalea->getBarrutiaId())
+					$this->gertakaria->setBarrutiaId($kalea->getBarrutiaId());
+				if ($kalea->getAuzoaId())
+					$this->gertakaria->setAuzoaId($kalea->getAuzoaId());
+			}
+		}
+
+		if (array_key_exists('file', $mezua))
+		{
+			$file = $mezua['file'];
+
+			$this->fitxategia = new Fitxategia();
+			$this->fitxategia->setGertakaria($this->gertakaria);
+			$this->fitxategia->setFitxategia($file['filename']);
+			$this->fitxategia->setEdukia($file['content']);
+			$this->fitxategia->setLangilea($langilea);
+			$this->fitxategia->save();
+		}
 	}
 }

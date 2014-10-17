@@ -33,19 +33,32 @@ class IruzkinaForm extends BaseIruzkinaForm
 			'required' => false
 		));
 
-		$this->widgetSchema['testua']= new sfWidgetFormTextarea();
-
 		unset
 		(
 			$this['created_at'], $this['updated_at']
 		);
 
 		$this->widgetSchema['gertakaria_id'] = new sfWidgetFormTextarea();
-	}
 
+		$this->validatorSchema->setPostValidator
+		(
+			new sfValidatorCallback(array('callback' => array($this, 'postValidate')))
+		);
+	}
 
 	public function updateTestuaColumn($value)
 	{
 		return $value;
+	}
+
+	public function postValidate($validator, $values)
+	{
+		if ($values['ekintza_id'] == 1 AND empty($values['testua']))
+		{
+			$error = new sfValidatorError($validator, 'Required.');
+			throw new sfValidatorErrorSchema($validator, array('testua' => $error));
+		}
+
+		return $values;
 	}
 }

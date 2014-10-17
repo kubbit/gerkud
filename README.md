@@ -1,5 +1,5 @@
 # Gerkud
-Gerkud (**Ger**takarien **Kud**eaketa - Gestión de Incidencias) es un sistema de gestión de tareas de uso interno para los ayuntamientos. Permite llevar un seguimiento de todas las peticiones que se hacen en el ayuntamiento (tanto internas como externas) y encaminarlas hasta su resolución final: clasificarlas y asignarlas al departamento responsable en cada caso, registrar anotaciones, adjuntar ficheros, recibir notificaciones de cambios de estado, sacar informes, etc.
+Gerkud (Gertakarien Kudeaketa - Gestión de Incidencias) es un sistema de gestión de tareas de uso interno para los ayuntamientos. Permite llevar un seguimiento de todas las peticiones que se hacen en el ayuntamiento (tanto internas como externas) y encaminarlas hasta su resolución final: clasificarlas y asignarlas al departamento responsable en cada caso, registrar anotaciones, adjuntar ficheros, recibir notificaciones de cambios de estado, sacar informes, etc.
 
 Inicialmente fue desarrollado para gestionar de forma interna todas las tareas  del departamento de mantenimiento urbano de un ayuntamiento. Por ello dispone de un módulo para poder visualizar en un mapa cada una de las incidencias introducidas en el sistema, tanto por codificación de la calle como por coordenadas establecidas de forma manual.
 

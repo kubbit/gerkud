@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2014-04-29T13:58:26Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2014-10-16T10:10:46Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -337,8 +337,8 @@
         <target>La incidencia ha sido asignada a "%taldea%"</target>
       </trans-unit>
       <trans-unit id="90">
-        <source>'%fitxategia%' fitxategia gehitu da</source>
-        <target>Se ha añadido el fichero '%fitxategia%'</target>
+        <source>'%fitxategia%' fitxategia gehitu da. %deskribapena%</source>
+        <target>Se ha añadido el fichero '%fitxategia%'. %deskribapena%</target>
       </trans-unit>
       <trans-unit id="91">
         <source>Iruzkinak / Oharrak</source>
@@ -385,8 +385,8 @@
         <target>Nuevas</target>
       </trans-unit>
       <trans-unit id="105">
-        <source>Irekiak</source>
-        <target>Abiertas</target>
+        <source>Sortutakoak</source>
+        <target>Creadas</target>
       </trans-unit>
       <trans-unit id="106">
         <source>Baztertuak</source>
@@ -481,8 +481,8 @@
         <target>Promedio de dias de resolución de incidencias en el intervalo de tiempo</target>
       </trans-unit>
       <trans-unit id="131">
-        <source>Sail bakoitzeko irekita dauden gertakariak</source>
-        <target>Incidencias abiertas por cada dpto/sección</target>
+        <source>Sail bakoitzeko sortu diren gertakariak</source>
+        <target>Incidencias creadas por cada dpto/sección</target>
       </trans-unit>
       <trans-unit id="132">
         <source>Sail bakoitzeko ebatziak dauden gertakariak</source>
@@ -775,6 +775,26 @@
       <trans-unit id="207">
         <source>Errorea</source>
         <target>Error</target>
+      </trans-unit>
+      <trans-unit id="208">
+        <source>Idatzitako testua luzeegia da.</source>
+        <target>El texto introducido es demasiado largo.</target>
+      </trans-unit>
+      <trans-unit id="209">
+        <source>Irekiak</source>
+	<target>Abiertas</target>
+      </trans-unit>
+      <trans-unit id="210">
+        <source>Jatorrizko sail bakoitzeko sortu diren gertakariak</source>
+	<target>Incidencias creadas por cada departamento de origen</target>
+      </trans-unit>
+      <trans-unit id="211">
+        <source>Jatorrizko sail bakoitzeko ebatziak dauden gertakariak</source>
+	<target>Incidencias resueltas por cada departamento de origen</target>
+      </trans-unit>
+      <trans-unit id="212">
+        <source>Jatorrizko sail bakoitzeko ebaztutako gertakarien egun batazbestekoa</source>
+	<target>Promedio de dias de resolución de incidencias por cada departamento de origen</target>
       </trans-unit>
     </body>
   </file>

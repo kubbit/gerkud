@@ -46,6 +46,7 @@ all:
     derrigorrezkoak: [id, created_at, laburpena, mota, lehentasuna]
     kopia_zehatza: true
     izena_eta_abizena: false
+    ixterakoan_lehentasuna_berrezarri: false
     hiritarrena_mota_id: 99
     hiritarrena_klasea_id: 99
   horkonpon:

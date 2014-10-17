@@ -31,56 +31,80 @@
 			</div>
 		</fieldset>
 		<fieldset>
-			<div id="hasiera" class="field">
-				<label for="zerrendatu_hasiera"><?php echo __('Hasiera'); ?></label>
-				<?php echo $zerrendatuaForm['hasiera']->render(); ?>
+			<div id="irekiera_noiztik" class="field">
+				<label for="zerrendatu_irekiera_noiztik"><?php echo __('Irekiera data (noiztik)'); ?></label>
+				<?php echo $zerrendatuaForm['irekiera_noiztik']->render(); ?>
 			</div>
-			<div id="amaiera" class="field">
-				<label for="zerrendatu_amaiera"><?php echo __('Amaiera'); ?></label>
-				<?php echo $zerrendatuaForm['amaiera']->render(); ?>
+			<div id="irekiera_nora" class="field">
+				<label for="zerrendatu_irekiera_nora"><?php echo __('(nora)'); ?></label>
+				<?php echo $zerrendatuaForm['irekiera_nora']->render(); ?>
 			</div>
 		</fieldset>
 		<fieldset>
+			<div id="ixte_noiztik" class="field">
+				<label for="zerrendatu_ixte_noiztik"><?php echo __('Ixte data (noiztik)'); ?></label>
+				<?php echo $zerrendatuaForm['ixte_noiztik']->render(); ?>
+			</div>
+			<div id="ixte_nora" class="field">
+				<label for="zerrendatu_ixte_nora"><?php echo __('(nora)'); ?></label>
+				<?php echo $zerrendatuaForm['ixte_nora']->render(); ?>
+			</div>
+		</fieldset>
+		<fieldset>
+<?php if (in_array('mota', $configEremuak)): ?>
 			<div id="mota" class="field">
 				<label for="zerrendatu_mota_id"><?php echo __('Mota'); ?></label>
 				<?php echo $zerrendatuaForm['mota_id']->render(); ?>
 			</div>
+	<?php if (in_array('azpimota', $configEremuak)): ?>
 			<div id="azpimota" class="field">
 				<label for="zerrendatu_azpimota_id"><?php echo __('Azpimota'); ?></label>
 				<?php echo $zerrendatuaForm['azpimota_id']->render(); ?>
 			</div>
+	<?php endif; ?>
+<?php endif; ?>
+<?php if (in_array('saila', $configEremuak)): ?>
 			<div id="saila" class="field">
 				<label for="zerrendatu_saila"><?php echo __('Saila'); ?></label>
 				<?php echo $zerrendatuaForm['saila']->render(); ?>
 			</div>
+<?php endif; ?>
+<?php if (in_array('klasea', $configEremuak)): ?>
 			<div id="klasea" class="field">
 				<label for="zerrendatu_klasea"><?php echo __('Klasea'); ?></label>
 				<?php echo $zerrendatuaForm['klasea']->render(); ?>
 			</div>
+<?php endif; ?>
 		</fieldset>
+<?php if (count(array_intersect($configEremuak, array('barrutia', 'auzoa', 'kalea', 'eraikina'))) > 0): ?>
 		<fieldset class="azpiSailkapena">
 			<label class="title"><?php echo __('Helbidea'); ?></label>
-<?php if (in_array('barrutia', $configEremuak)): ?>
+	<?php if (in_array('barrutia', $configEremuak)): ?>
 			<div id="barrutia" class="field">
 				<label for="zerrendatu_barrutia"><?php echo __('Barrutia'); ?></label>
 				<?php echo $zerrendatuaForm['barrutia']->render(); ?>
 			</div>
-<?php endif; ?>
-<?php if (in_array('auzoa', $configEremuak)): ?>
+	<?php endif; ?>
+	<?php if (in_array('auzoa', $configEremuak)): ?>
 			<div id="auzoa" class="field">
 				<label for="zerrendatu_auzoa"><?php echo __('Auzoa'); ?></label>
 				<?php echo $zerrendatuaForm['auzoa']->render(); ?>
 			</div>
-<?php endif; ?>
+	<?php endif; ?>
+	<?php if (in_array('kalea', $configEremuak)): ?>
 			<div id="kalea" class="field">
 				<label for="zerrendatu_kalea"><?php echo __('Kalea'); ?></label>
 				<?php echo $zerrendatuaForm['kalea']->render(); ?>
 			</div>
+	<?php endif; ?>
+	<?php if (in_array('eraikina', $configEremuak)): ?>
 			<div id="eraikina" class="field">
 				<label for="zerrendatu_eraikina"><?php echo __('Eraikina'); ?></label>
 				<?php echo $zerrendatuaForm['eraikina']->render(); ?>
 			</div>
+	<?php endif; ?>
 		</fieldset>
+<?php endif; ?>
 		<fieldset>
 			<div id="egoera" class="field">
 				<label for="zerrendatu_egoera"><?php echo __('Egoera'); ?></label>

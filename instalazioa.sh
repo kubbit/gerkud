@@ -13,8 +13,8 @@ cd $GERKUD_BASE
 php symfony doctrine:build --all --and-load --no-confirmation
 
 # cargar datos de tablas externas
-cat sql/$GERKUD_HERRIA/*.sql | mysql -u $GERKUD_USER --password=$GERKUD_PWD $GERKUD_DB
 cat sql/*.sql | mysql -u $GERKUD_USER --password=$GERKUD_PWD $GERKUD_DB
+cat sql/$GERKUD_HERRIA/*.sql | mysql -u $GERKUD_USER --password=$GERKUD_PWD $GERKUD_DB
 
 # copiar logotipos especificos del municipio al area general
 cp -a web/images/$GERKUD_HERRIA/* web/images/

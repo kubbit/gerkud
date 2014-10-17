@@ -184,7 +184,7 @@ BEGIN
 			  # nuevas incidencias creadas durante el intervalo
 			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(created_at AS DATE) BETWEEN i.hasiera AND i.amaiera) AS berriak,
 			  # incidencias que había abiertas durante el intervalo
-			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(created_at AS DATE) BETWEEN pInicio AND i.amaiera AND ((egoera_id <> 5 AND egoera_id <> 6) OR CAST(ixte_data AS DATE) > i.amaiera)) AS irekiak,
+			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(created_at AS DATE) <= i.amaiera AND ((egoera_id <> 5 AND egoera_id <> 6) OR CAST(ixte_data AS DATE) > i.amaiera)) AS irekiak,
 			  # incidencias que han sido rechazadas durante el intervalo
 			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND egoera_id = 6 AND CAST(ixte_data AS DATE) BETWEEN i.hasiera AND i.amaiera) AS baztertuak,
 			  # incidencias que han sido resueltas durante el intervalo
@@ -198,7 +198,7 @@ BEGIN
 			SELECT
 			  NULL,
 			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(created_at AS DATE) BETWEEN pInicio AND pFin),
-			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(created_at AS DATE) BETWEEN pInicio AND pFin AND ((egoera_id <> 5 AND egoera_id <> 6) OR CAST(ixte_data AS DATE) > pFin)),
+			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(created_at AS DATE) <= pFin AND ((egoera_id <> 5 AND egoera_id <> 6) OR CAST(ixte_data AS DATE) >= pInicio)),
 			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND egoera_id = 6 AND CAST(ixte_data AS DATE) BETWEEN pInicio AND pFin),
 			  (SELECT count(*) FROM gertakaria WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND egoera_id = 5 AND CAST(ixte_data AS DATE) BETWEEN pInicio AND pFin),
 			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND egoera_id = 5 AND CAST(ixte_data AS DATE) BETWEEN pInicio AND pFin);
@@ -220,21 +220,27 @@ BEGIN
 			SELECT
 			  s.name AS saila,
 			  # nuevas incidencias creadas durante el intervalo
-			  (SELECT count(*) FROM denborak t WHERE s.id = t.saila_id AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin) AS irekiak,
+			  (SELECT count(*) FROM denborak t WHERE s.id = t.saila_id AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin) AS irekiak,
 			  # incidencias que han sido resueltas durante el intervalo
-			  (SELECT count(*) FROM denborak t WHERE s.id = t.saila_id AND t.egoera_id = 5 AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin) AS ebatziak,
+			  (SELECT count(*) FROM denborak t WHERE s.id = t.saila_id AND t.egoera_id = 5 AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin) AS ebatziak,
 			  # tiempos medios de resolución para las resueltas durante el intervalo
-			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE s.id = t.saila_id AND t.egoera_id = 5 AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin) AS 'ebatzien egun batazbestekoa'
+			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE s.id = t.saila_id AND t.egoera_id = 5 AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin) AS 'ebatzien egun batazbestekoa'
 			 FROM sf_guard_group_translation s
 			 WHERE lang = pHizkuntza
 			 ORDER BY saila
 			) datuak
 			UNION ALL
 			SELECT
+			  '-',
+			  (SELECT count(*) FROM denborak t WHERE saila_id IS NULL AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin),
+			  (SELECT count(*) FROM denborak t WHERE t.egoera_id = 5 AND saila_id IS NULL AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin),
+			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE t.egoera_id = 5 AND saila_id IS NULL AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin)
+			UNION ALL
+			SELECT
 			  NULL,
-			  (SELECT count(*) FROM denborak t WHERE if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin),
-			  (SELECT count(*) FROM denborak t WHERE t.egoera_id = 5 AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin),
-			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE t.egoera_id = 5 AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin);
+			  (SELECT count(*) FROM denborak t WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin),
+			  (SELECT count(*) FROM denborak t WHERE t.egoera_id = 5 AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin),
+			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE t.egoera_id = 5 AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin);
 		END;
 
 		# Por departamento de origen
@@ -246,21 +252,27 @@ BEGIN
 			SELECT
 			  s.izena AS saila,
 			  # nuevas incidencias creadas durante el intervalo
-			  (SELECT count(*) FROM denborak t WHERE s.id = t.jatorrizkosaila_id AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin) AS irekiak,
+			  (SELECT count(*) FROM denborak t WHERE s.id = t.jatorrizkosaila_id AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin) AS irekiak,
 			  # incidencias que han sido resueltas durante el intervalo
-			  (SELECT count(*) FROM denborak t WHERE s.id = t.jatorrizkosaila_id AND t.egoera_id = 5 AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin) AS ebatziak,
+			  (SELECT count(*) FROM denborak t WHERE s.id = t.jatorrizkosaila_id AND t.egoera_id = 5 AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin) AS ebatziak,
 			  # tiempos medios de resolución para las resueltas durante el intervalo
-			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE s.id = t.jatorrizkosaila_id AND t.egoera_id = 5 AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin) AS 'ebatzien egun batazbestekoa'
+			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE s.id = t.jatorrizkosaila_id AND t.egoera_id = 5 AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin) AS 'ebatzien egun batazbestekoa'
 			 FROM jatorrizko_saila_translation s
 			 WHERE lang = pHizkuntza
 			 ORDER BY saila
 			) datuak
 			UNION ALL
 			SELECT
+			  '-',
+			  (SELECT count(*) FROM denborak t WHERE jatorrizkosaila_id IS NULL AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin),
+			  (SELECT count(*) FROM denborak t WHERE t.egoera_id = 5 AND jatorrizkosaila_id IS NULL AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin),
+			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE t.egoera_id = 5 AND jatorrizkosaila_id IS NULL AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin)
+			UNION ALL
+			SELECT
 			  NULL,
-			  (SELECT count(*) FROM denborak t WHERE if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin),
-			  (SELECT count(*) FROM denborak t WHERE t.egoera_id = 5 AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin),
-			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE t.egoera_id = 5 AND if(pSaila IS NULL, 1 = 1, saila_id = pSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin);
+			  (SELECT count(*) FROM denborak t WHERE if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.created_at AS DATE) BETWEEN pInicio AND pFin),
+			  (SELECT count(*) FROM denborak t WHERE t.egoera_id = 5 AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin),
+			  (SELECT avg(datediff(ixte_data, esleitua)) FROM denborak t WHERE t.egoera_id = 5 AND if(pJatorrizkoSaila IS NULL, 1 = 1, jatorrizkosaila_id = pJatorrizkoSaila) AND CAST(t.ixte_data AS DATE) BETWEEN pInicio AND pFin);
 		END;
 
 		# Por margenes de tiempo

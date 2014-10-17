@@ -16,9 +16,12 @@
 		$gMap->setWidth('100%');
 		?>
 		<?php foreach ($pager->getResults() as $gertakaria): ?>
-			<?php if ($gertakaria->getKalea_id()) : ?>
-				<?php
-				$test = "'" . $gertakaria->getLaburpena() . "'";
+<?php
+			$latitudea = NULL;
+			$longitudea = NULL;
+
+			if ($gertakaria->getKalea_id())
+			{
 				$kale = Doctrine::getTable('Kalea')->find($gertakaria->getKaleaId());
 
 				$helbidea = sprintf('%s, %s %s', $kale->getGoogle(), $gertakaria->getKale_zbkia(), $herria);
@@ -26,12 +29,26 @@
 				$puntua = $gMap->geocodeXml($helbidea);
 				if (($puntua->getLat() != '') || ($puntua->getLng() != ''))
 				{
-					$ikonoa = sprintf('\'https://chart.googleapis.com/chart?chst=%s&chld=%s|%s|%s\'', 'd_map_pin_letter_withshadow', $gertakaria->getId(), 'ff8888', '000000');
-					$gMapMarker = new GMapMarker($puntua->getLat(), $puntua->getLng(), array('title' => $test, 'icon ' => $ikonoa));
-					$gMap->addMarker($gMapMarker);
+					$latitudea = $puntua->getLat();
+					$longitudea = $puntua->getLng();
 				}
-				?>
-			<?php endif; ?>
+			}
+			elseif ($gertakaria->getKoordenadak()->count() > 0)
+			{
+				$puntuak = $gertakaria->getKoordenadak();
+
+				$latitudea = $puntuak[0]->getLatitudea();
+				$longitudea = $puntuak[0]->getLongitudea();
+			}
+
+			if ($latitudea !== NULL && $longitudea !== NULL)
+			{
+				$test = "'" . $gertakaria->getLaburpena() . "'";
+				$ikonoa = sprintf('\'https://chart.googleapis.com/chart?chst=%s&chld=%s|%s|%s\'', 'd_map_pin_letter_withshadow', $gertakaria->getId(), 'ff8888', '000000');
+				$gMapMarker = new GMapMarker($latitudea, $longitudea, array('title' => $test, 'icon ' => $ikonoa));
+				$gMap->addMarker($gMapMarker);
+			}
+?>
 		<?php endforeach; ?>
 
 		<?php $gMap->centerOnMarkers(); ?>

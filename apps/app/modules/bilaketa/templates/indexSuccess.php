@@ -79,36 +79,36 @@
 <?php if(count(array_intersect($configEremuak, array('barrutia', 'auzoa', 'kalea', 'kale_zbkia'))) > 0): ?>
 		<fieldset class="azpiSailkapena">
 			<label class="title"><?php echo __('Helbidea') ?>:</label>
-<?php endif; ?>
-<?php if (in_array('barrutia', $configEremuak)): ?>
+	<?php if (in_array('barrutia', $configEremuak)): ?>
 			<div id="barrutia_id" class="field">
 				<label for="gertakaria_filters_barrutia_id"><?php echo __('Barrutia') ?>:</label>
 				<?php echo $filter['barrutia_id']->render(); ?>
 			</div>
-<?php endif; ?>
-<?php if (in_array('auzoa', $configEremuak)): ?>
+	<?php endif; ?>
+	<?php if (in_array('auzoa', $configEremuak)): ?>
 			<div id="auzoa_id" class="field">
 				<label for="gertakaria_filters_auzoa_id"><?php echo __('Auzoa') ?>:</label>
 				<?php echo $filter['auzoa_id']->render(); ?>
 			</div>
-<?php endif; ?>
-<?php if (in_array('kalea', $configEremuak)): ?>
+	<?php endif; ?>
+	<?php if (in_array('kalea', $configEremuak)): ?>
 			<div id="kalea_id" class="field">
 				<label for="gertakaria_filters_kalea_id"><?php echo __('Kalea') ?>:</label>
 				<?php echo $filter['kalea_id']->render(); ?>
 			</div>
-<?php if (in_array('kale_zbkia', $configEremuak)): ?>
+		<?php if (in_array('kale_zbkia', $configEremuak)): ?>
 			<div id="kale_zbkia" class="field">
 				<label for="gertakaria_filters_kale_zbkia"><?php echo __('Zbkia') ?>:</label>
 				<?php echo $filter['kale_zbkia']->render(array('class' => 'motza')); ?>
 			</div>
-<?php endif; ?>
-<?php if (in_array('eraikina', $configEremuak)): ?>
+		<?php endif; ?>
+	<?php endif; ?>
+	<?php if (in_array('eraikina', $configEremuak)): ?>
 			<div id="eraikina_id" class="field">
 				<label for="gertakaria_filters_eraikina_id"><?php echo __('Eraikina') ?>:</label>
 				<?php echo $filter['eraikina_id']->render(); ?>
 			</div>
-<?php endif; ?>
+	<?php endif; ?>
 		</fieldset>
 <?php endif; ?>
 <?php if (in_array('jatorrizkosaila', $configEremuak)): ?>

@@ -66,7 +66,7 @@ class fitxategiaActions extends sfActions
 			$fitxategia = $form->save();
 			if (!$fitxategia)
 			{
-				$this->redirect('gertakaria/show?id=' . $form['gertakaria_id']->getValue());
+				$this->redirect(sprintf('gertakaria/show?id=%d#fitxategiak', $form['gertakaria_id']->getValue()));
 				return;
 			}
 
@@ -76,9 +76,14 @@ class fitxategiaActions extends sfActions
 			$iruzkina->setEkintzaId(4);
 			$iruzkina->setLangileaId($fitxategia->getLangileaId());
 
-			$testua = __("'%fitxategia%' fitxategia gehitu da", array('%fitxategia%' => $fitxategia->getDeskribapena()));
+			$testua = __("'%fitxategia%' fitxategia gehitu da. %deskribapena%", array('%fitxategia%' => $fitxategia->getFitxategia(), '%deskribapena%' => $fitxategia->getDeskribapena()));
 			$iruzkina->setTestua($testua);
 			$iruzkina->save();
+
+			// gertakariaren eguneratze data berritu
+			$gertakaria = Doctrine::getTable('gertakaria')->find(array($fitxategia->getGertakariaId()));
+			$gertakaria->setUpdatedAt(null); // gertakaria gordetzea behartu
+			$gertakaria->save();
 
 			$this->redirect(sprintf('gertakaria/show?id=%d#fitxategiak', $fitxategia->getGertakariaId()));
 		}

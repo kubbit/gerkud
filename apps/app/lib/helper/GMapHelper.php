@@ -13,7 +13,7 @@ function include_map($gMap,$options=array())
   {
     $gMap = $gMap->getRawValue();
   }
-  
+
   echo $gMap->getContainer($options);
 }
 
@@ -81,12 +81,12 @@ function include_search_location_form()
  *
  * @param GMapAddressGuesser $addressGuesser
  * @param Array override default options
- * @author johannes 
+ * @author johannes
  */
 function include_address_guesser(GMapAddressGuesser $addressGuesser, $options = array())
 {
   if ($addressGuesser instanceof sfOutputEscaper)
-    $addressGuesser = $addressGuesser->getRawValue(); 
+    $addressGuesser = $addressGuesser->getRawValue();
   if (!($addressGuesser instanceof GMapAddressGuesser))
     throw new InvalidArgumentException('addressGuesser must be an instance of GMapAddressGuesser.');
   if (!is_array($options))
@@ -94,7 +94,7 @@ function include_address_guesser(GMapAddressGuesser $addressGuesser, $options = 
 
   use_helper('JavascriptBase');
 
-  sfContext::getInstance()->getResponse()->addJavascript('http://www.google.com/jsapi?key='.$addressGuesser->getApiKey());
+  sfContext::getInstance()->getResponse()->addJavascript('https://www.google.com/jsapi?key='.$addressGuesser->getApiKey());
   sfContext::getInstance()->getResponse()->addJavascript('/sfEasyGMapPlugin/js/addressGuesser.js');
   echo javascript_tag($addressGuesser->getJavascript($options));
 }

@@ -77,20 +77,26 @@ class iruzkinaActions extends sfActions
 	protected function processForm(sfWebRequest $request, sfForm $form)
 	{
 		$form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+		$url = sprintf('gertakaria/show?id=%d', $form['gertakaria_id']->getValue());
 		if ($form->isValid())
 		{
+			$iruzkina = $form->save();
+			$gertakariak = $iruzkina->getGertakaria();
+			if ($gertakariak->count() == 0)
+				throw new Exception(sprintf('Gertakari gabeko iruzkina: %s', $iruzkina->getId()));
+			$gertakaria = $gertakariak[0];
+
 			if ($form['ekintza_id']->getValue() == 2)
 			{
 				$saila = $form['saila_id']->getValue();
-				$iruzkina = $form->save();
 				$s=$iruzkina->getSaila($saila);
 
 				//Gertakariaren (saila/erabiltzailea) aldatzen dugu
-				$gertakariak=$iruzkina->getGertakaria();
-				$gertakariak[0]->setSailaId($saila);
-				if ($gertakariak[0]->getEgoeraId() == 1)
-					$gertakariak[0]->setEgoeraId(2);
-				$gertakariak[0]->save();
+				$gertakaria->setSailaId($saila);
+				if ($gertakaria->getEgoeraId() == 1)
+					$gertakaria->setEgoeraId(2);
+				// aldaketa iruzkina gorde aurretik gorde behar da, bestela gertakariko aldaketak berrezartzen dira
+				$gertakaria->save();
 
 				$testua=__('Gertakaria "%taldea%" (a)ri esleitu zaio. ', array('%taldea%' => $s[0]));
 				$iruzkina->setTestua($testua);
@@ -98,16 +104,15 @@ class iruzkinaActions extends sfActions
 			}
 			else
 			{
-				$iruzkina = $form->save();
 				if ($form['ekintza_id']->getValue() == 3)
 				{
 					//Berrirekitzea bada, prozesuan aurreko egoeran jarri.
-					$gertakariak = $iruzkina->getGertakaria();
-					if ($gertakariak[0]->getSailaId() != null)
-						$gertakariak[0]->setEgoeraId(2);
+					if ($gertakaria->getSailaId() != null)
+						$gertakaria->setEgoeraId(2);
 					else
-						$gertakariak[0]->setEgoeraId(1);
-					$gertakariak[0]->save();
+						$gertakaria->setEgoeraId(1);
+					// aldaketa iruzkina gorde aurretik gorde behar da, bestela gertakariko aldaketak berrezartzen dira
+					$gertakaria->save();
 
 					//Bikoizpen erlazioak ezabatzen dira
 					$sql = 'DELETE FROM erlazioak WHERE hasiera_id = :hasieraId';
@@ -115,14 +120,13 @@ class iruzkinaActions extends sfActions
 					$cmd = $cn->prepare($sql);
 					$parametroak = array
 					(
-						':hasieraId' => $gertakariak[0]->getId()
+						':hasieraId' => $gertakaria->getId()
 					);
 					$cmd->execute($parametroak);
 					$cmd->closeCursor();
 				}
 			}
 
-			$url = sprintf('gertakaria/show?id=%d', $iruzkina->getGertakariaId());
 			switch ($form['ekintza_id']->getValue())
 			{
 				// Iruzkina
@@ -135,7 +139,15 @@ class iruzkinaActions extends sfActions
 					break;
 			}
 
-			$this->redirect($url);
+			// eguneratze data berritu
+			$gertakaria->setUpdatedAt(null); // gertakaria gordetzea behartu
+			$gertakaria->save();
 		}
+		elseif ($form['ekintza_id']->getValue() == 1)
+		{
+			$url .= '#iruzkina';
+		}
+
+		$this->redirect($url);
 	}
 }

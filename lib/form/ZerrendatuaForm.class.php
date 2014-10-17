@@ -31,10 +31,16 @@ class ZerrendatuaForm extends sfForm
 			(
 				'choices' => self::$sailkapena
 			)),
-			'hasiera' => new sfWidgetFormData(array
+			'irekiera_noiztik' => new sfWidgetFormData(array
 			(
 			)),
-			'amaiera' => new sfWidgetFormData(array
+			'irekiera_nora' => new sfWidgetFormData(array
+			(
+			)),
+			'ixte_noiztik' => new sfWidgetFormData(array
+			(
+			)),
+			'ixte_nora' => new sfWidgetFormData(array
 			(
 			)),
 			'klasea' => new sfWidgetFormDoctrineChoice(array
@@ -111,8 +117,10 @@ class ZerrendatuaForm extends sfForm
 		$this->validatorSchema['sailkapena1'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['sailkapena2'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['sailkapena3'] = new sfValidatorString(array('required' => false));
-		$this->validatorSchema['hasiera'] = new sfValidatorDataOrdua(array('required' => false));
-		$this->validatorSchema['amaiera'] = new sfValidatorDataOrdua(array('required' => false));
+		$this->validatorSchema['irekiera_noiztik'] = new sfValidatorDataOrdua(array('required' => false));
+		$this->validatorSchema['irekiera_nora'] = new sfValidatorDataOrdua(array('required' => false));
+		$this->validatorSchema['ixte_noiztik'] = new sfValidatorDataOrdua(array('required' => false));
+		$this->validatorSchema['ixte_nora'] = new sfValidatorDataOrdua(array('required' => false));
 		$this->validatorSchema['klasea'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['saila'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['mota_id'] = new sfValidatorString(array('required' => false));

@@ -1,4 +1,29 @@
 ================================================================================
+  Version 1.20
+  2014-10-17  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Añadidos ejemplos de ficheros de configuración
+* Uso de protocolo HTTPS para Google Maps
+* Visualización de saltos de línea en tablas
+* Eliminada la duplicación del texto del campo resumen en descripción si se
+  dejaba el campo vacío
+* Establecimiento automático de foco en primer campo de las diferentes pantallas
+* Visualización de incidencias sin calle pero con coordenadas GPS en el mapa
+  general
+* Actualización a la versión 2 del API de HorKonpon
+* Posibilidad de establecer la clase en las incidencias recibidas desde
+  HorKonpon
+* Posibilidad de no restablecer la prioridad al cerrar incidencias
+* Posibilidad de filtrar listados PDF usando la fecha de cierre
+* Varias correcciones en datos estadísticos
+* Actualización de la fecha de última modificación de la incidencia al añadir
+  comentarios, ficheros, etc.
+* Añadido indicador de nº de ficheros en la pestaña de ficheros
+* Corrección de la fecha de cierre de incidencias
+* Añadidas validaciones en varios formularios
+* Correcciones generales
+
+================================================================================
   Version 1.18
   2014-05-15  Kubbit Information Technology (http://kubbit.com)
 ================================================================================

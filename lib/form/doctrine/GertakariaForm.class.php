@@ -169,7 +169,12 @@ class GertakariaForm extends BaseGertakariaForm
 		));
 		$this->validatorSchema['laburpena'] = new sfValidatorString(array
 		(
-			'required' => (in_array('laburpena', $configDerrigorrezkoak)) ? true : false
+			'required' => (in_array('laburpena', $configDerrigorrezkoak)) ? true : false,
+			'max_length' => 250
+		),
+		array
+		(
+			'max_length' => 'Idatzitako testua luzeegia da.'
 		));
 
 		$this->widgetSchema['deskribapena'] = new sfWidgetFormTextarea(array
@@ -301,19 +306,16 @@ class GertakariaForm extends BaseGertakariaForm
 		);
 	}
 
-	protected function doUpdateObject($values)
-	{
-		parent::doUpdateObject($values);
-
-		// establecer el resumen como descripcion si no ha sido rellenado
-		if (!isset($values['deskribapena']) || $values['deskribapena'] == '')
-			$this->getObject()->setDeskribapena($values['laburpena']);
-	}
-
 	public function postValidate($validator, $values)
 	{
-		if (sfConfig::get('app_sortze_data_automatikoa') || $values["created_at"] == null)
-			$sortze_data = date("Y-m-d");
+		// la variable 'created_at' del array '$values' sólo lo envía la fecha de creación no es automática
+		if (!array_key_exists('created_at', $values))
+		{
+			if ($this->getObject()->getCreatedAt() == null)
+				$sortze_data = date("Y-m-d");
+			else
+				$sortze_data = strftime("%Y-%m-%d", strtotime($this->getObject()->getCreatedAt()));
+		}
 		else
 			$sortze_data = strftime("%Y-%m-%d", strtotime($values["created_at"]));
 

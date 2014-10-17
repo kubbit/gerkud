@@ -54,7 +54,7 @@ onload = function()
 	EzarriTableSorter();
 
 	estekakSortu();
-	autofocus();
+	autofocus(false);
 };
 
 function erakutsiErroreak()
@@ -131,7 +131,14 @@ function erakutsiEkintzak()
 
 function EzarriTableSorter()
 {
-	$("#taula").tablesorter({sortList: [[0,0]]});
+	$("#taula").tablesorter({sortList: [[0,0]],
+	textExtraction: function(node)
+	{
+		if (node.hasAttribute('data-lerro'))
+			return node.getAttribute('data-lerro');
+		else
+			return node.innerHTML;
+	}});
 };
 
 function IzkutatuFiltroak()
@@ -205,11 +212,11 @@ function estekakSortu()
 /*
  * Internet Explorer-en bertsio zaharretan autofocus atributoa erabiltzeko
  */
-function autofocus()
+function autofocus(force)
 {
 	// begiratu ea arakatzaileak HTML5-ko 'autofocus' atributoa duen
 	var input = document.createElement('input');
-	if ('autofocus' in input)
+	if (!force && 'autofocus' in input)
 		return;
 
 	var elements = ['input', 'textarea'];
@@ -219,7 +226,8 @@ function autofocus()
 
 		for (var i = 0; i < inputs.length; i++)
 		{
-			if (inputs[i].getAttribute('autofocus'))
+			// autofocus-a ezarrita eta elementua ikusgai badago
+			if (inputs[i].getAttribute('autofocus') && inputs[i].offsetParent !== null)
 			{
 				inputs[i].focus();
 				return;
@@ -289,4 +297,6 @@ function erakutsiEzkutatuOrriak(aukeratuta)
 	}
 
 	window.location = '#' + aukeratuta.title;
+
+	autofocus(true);
 }

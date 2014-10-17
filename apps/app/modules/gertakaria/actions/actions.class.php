@@ -479,10 +479,11 @@ class gertakariaActions extends sfActions
 				break;
 		}
 
-		if ($egoera != 4)
+		if ($egoera == 5 OR $egoera == 6)
 		{
-			$this->gertakaria->setIxteData($this->gertakaria->getUpdatedAt());
-			$this->gertakaria->setLehentasunaId(1);
+			$this->gertakaria->setIxteData(date("Y-m-d H:i:s"));
+			if (sfConfig::get('app_gerkud_ixterakoan_lehentasuna_berrezarri'))
+				$this->gertakaria->setLehentasunaId(1);
 		}
 		$this->gertakaria->setEgoeraId($egoera);
 		$this->gertakaria->save();

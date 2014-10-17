@@ -29,8 +29,8 @@ class GMapClient
   protected $api_keys = null;
 
   //const API_URL = 'http://maps.google.com/maps/geo?';
-  const API_URL = 'http://maps.googleapis.com/maps/api/geocode/%s?key=%s&address=%s&sensor=false';
-  const JS_URL  = 'http://maps.google.com/maps/api/js?sensor=false';
+  const API_URL = 'https://maps.googleapis.com/maps/api/geocode/%s?key=%s&address=%s&sensor=false';
+  const JS_URL  = 'https://maps.google.com/maps/api/js?sensor=false';
 
   /**
    *

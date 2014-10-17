@@ -43,6 +43,8 @@
 	<?php echo pager_navigation($pager, 'gertakaria/index') ?>
 </div>
 
-<?php slot('mapa'); ?>
-	<li id="mapa" onclick="<?php echo sprintf('window.open(\'%s\', \'%s\', \'%s\')', url_for('gertakaria/mapa?page=' . $pager->getPage()), 'Planoa', 'width=805,height=600'); ?>"><?php echo __('Mapa'); ?></li>
-<?php end_slot(); ?>
+<?php if (!sfConfig::get('app_google_offline')): ?>
+	<?php slot('mapa'); ?>
+		<li id="mapa" onclick="<?php echo sprintf('window.open(\'%s\', \'%s\', \'%s\')', url_for('gertakaria/mapa?page=' . $pager->getPage()), 'Planoa', 'width=805,height=600'); ?>"><?php echo __('Mapa'); ?></li>
+	<?php end_slot(); ?>
+<?php endif; ?>

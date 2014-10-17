@@ -82,11 +82,11 @@ class datuakActions extends sfActions
 				break;
 			case 2:
 				$this->titulua = __('Sailaren arabera');
-				$this->goiburuak = array(__('Saila'), __('Irekiak'), __('Ebatziak'), __('Ebatzien egun batazbestekoa'));
+				$this->goiburuak = array(__('Saila'), __('Sortutakoak'), __('Ebatziak'), __('Ebatzien egun batazbestekoa'));
 				$this->argibideak = array
 				(
 					'',
-					__('Sail bakoitzeko irekita dauden gertakariak'),
+					__('Sail bakoitzeko sortu diren gertakariak'),
 					__('Sail bakoitzeko ebatziak dauden gertakariak'),
 					__('Sail bakoitzeko ebaztutako gertakarien egun batazbestekoa')
 				);
@@ -109,13 +109,13 @@ class datuakActions extends sfActions
 				break;
 			case 4:
 				$this->titulua = __('Jatorrizko sailaren arabera');
-				$this->goiburuak = array(__('Saila'), __('Irekiak'), __('Ebatziak'), __('Ebatzien egun batazbestekoa'));
+				$this->goiburuak = array(__('Jatorrizko Saila'), __('Sortutakoak'), __('Ebatziak'), __('Ebatzien egun batazbestekoa'));
 				$this->argibideak = array
 				(
 					'',
-					__('Sail bakoitzeko irekita dauden gertakariak'),
-					__('Sail bakoitzeko ebatziak dauden gertakariak'),
-					__('Sail bakoitzeko ebaztutako gertakarien egun batazbestekoa')
+					__('Jatorrizko sail bakoitzeko sortu diren gertakariak'),
+					__('Jatorrizko sail bakoitzeko ebatziak dauden gertakariak'),
+					__('Jatorrizko sail bakoitzeko ebaztutako gertakarien egun batazbestekoa')
 				);
 				$this->getDatuak();
 				break;

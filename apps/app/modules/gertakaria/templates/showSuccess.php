@@ -11,9 +11,9 @@
 	<li id="tabgertakaria" title="gertakaria"><?php echo __('Gertakaria'); ?></li>
 	<li id="tabhistorikoa" title="historikoa" class="<?php echo count($gertakaria->getIruzkinak()) > 0 ? '': 'ezgaituta'; ?>"><?php echo __('Historikoa'); ?></li>
 	<li id="tabiruzkina" title="iruzkina"><?php echo __('Iruzkina'); ?></li>
-	<li id="tabfitxategiak" title="fitxategiak"><?php echo __('Fitxategiak'); ?></li>
+	<li id="tabfitxategiak" title="fitxategiak"><?php echo __('Fitxategiak') . sprintf(' (%d)', count($gertakaria->getFitxategiak())); ?></li>
 	<li id="taberlazioak" title="erlazioak"><?php echo __('Bikoiztuak'); ?></li>
-	<li id="tabplanoa" title="planoa"><?php echo __('Planoa'); ?></li>
+	<li id="tabplanoa" title="planoa" class="<?php echo !sfConfig::get('app_google_offline') ? '': 'ezgaituta'; ?>"><?php echo __('Planoa'); ?></li>
 </ul>
 
 <div id="edukgertakaria">
@@ -242,7 +242,7 @@
 <?php if (in_array('deskribapena', $configEremuak)): ?>
 				<div class="field">
 					<label><?php echo __('Deskribapena'); ?>:</label>
-					<span class="luzea"><?php echo htmlspecialchars($gertakaria->getDeskribapena(), ENT_QUOTES, "utf-8"); ?></span>
+					<span class="luzea"><?php echo $gertakaria->getDeskribapena(); ?></span>
 				</div>
 <?php endif; ?>
 			</fieldset>
@@ -286,7 +286,7 @@
 			<fieldset>
 				<div class="field">
 					<label class="luzea"><?php echo __('Hurrengo gertakariaren bikoitza bezala baztertu'); ?>:</label>
-					<?php echo $form4['amaiera_id']->render(array('id' => '')); ?>
+					<?php echo $form4['amaiera_id']->render(array('id' => '', 'autofocus' => 'autofocus')); ?>
 				</div>
 			</fieldset>
 
@@ -350,7 +350,7 @@
 			</div>
 
 			<div class="field">
-				<?php echo $form['testua']->render(); ?>
+				<?php echo $form['testua']->render(array('autofocus' => 'autofocus')); ?>
 			</div>
 		</fieldset>
 
@@ -398,7 +398,7 @@
 			<fieldset>
 				<div class="field">
 					<label><?php echo __('Deskribapena'); ?>:</label>
-					<?php echo $form['deskribapena']->render(array('class' => 'luzea')); ?>
+					<?php echo $form['deskribapena']->render(array('class' => 'luzea', 'autofocus' => 'autofocus')); ?>
 				</div>
 			</fieldset>
 

@@ -65,7 +65,7 @@ class erlazioakActions extends sfActions
 					if ($gertakaria->getEgoeraId()<>'6')
 					{
 						$gertakaria->setEgoeraId(6);
-						$gertakaria->setIxteData($gertakaria->getUpdatedAt());
+						$gertakaria->setIxteData(date("Y-m-d H:i:s"));
 						$gertakaria->save();
 
 						//Egoera aldaketaren iruzkina
@@ -98,7 +98,7 @@ class erlazioakActions extends sfActions
 		}
 		else
 		{
-			$this->redirect('gertakaria/show?id=' . $this->parametroak['hasiera_id']);
+			$this->redirect('gertakaria/show?id=' . $this->parametroak['hasiera_id'] . '#erlazioak');
 		}
 	}
 
