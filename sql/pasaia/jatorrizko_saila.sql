@@ -40,7 +40,7 @@ INSERT INTO `jatorrizko_saila_translation` (`id`, `izena`, `lang`) VALUES
   (7, 'Servicios Sociales', 'es'),
   (7, 'Gizartekintza', 'eu'),
   (8, 'Urbanismo', 'es'),
-  (8, 'Hirigntza', 'eu'),
+  (8, 'Hirigintza', 'eu'),
   (9, 'Secretaría', 'es'),
   (9, 'Idazkaritza', 'eu'),
   (10, 'Informática', 'es'),
