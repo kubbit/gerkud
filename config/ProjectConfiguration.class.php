@@ -6,32 +6,29 @@ sfCoreAutoload::register();
 
 class ProjectConfiguration extends sfProjectConfiguration
 {
+	public function setup()
+	{
+		$this->enablePlugins('sfDoctrinePlugin');
+		$this->enablePlugins('sfDependentSelectPlugin');
+		$this->enablePlugins('sfDoctrineGuardPlugin');
+		$this->enablePlugins('sfProtoculousPlugin');
+		$this->enablePlugins('bhLDAPAuthPlugin');
+		$this->enablePlugins('sfTCPDFPlugin');
+	}
 
-  public function setup()
-  {
+	static protected $zendLoaded = false;
 
-    $this->enablePlugins('sfDoctrinePlugin');
-    $this->enablePlugins('sfDependentSelectPlugin');
-    $this->enablePlugins('sfDoctrineGuardPlugin');
-    $this->enablePlugins('sfProtoculousPlugin');
-    $this->enablePlugins('bhLDAPAuthPlugin');
-    $this->enablePlugins('sfTCPDFPlugin');
-  }
+	static public function registerZend()
+	{
+		if (self::$zendLoaded)
+			return;
 
-  static protected $zendLoaded = false;
+		set_include_path(get_include_path() . PATH_SEPARATOR. '../lib/');
 
-  static public function registerZend()
-  {
-    if (self::$zendLoaded)
-    {
-      return;
-    }
+		require_once '../lib/Zend/Loader/Autoloader.php';
 
-    set_include_path(get_include_path().PATH_SEPARATOR.'/data/gerkud/lib/');
-    set_include_path(get_include_path().PATH_SEPARATOR.'/data/gerkud/lib/Zend');
-    set_include_path(get_include_path().PATH_SEPARATOR.'../lib/');
-    require_once '../lib/Zend/Loader/Autoloader.php';
-    Zend_Loader_Autoloader::getInstance();
-    self::$zendLoaded = true;
-  }
+		Zend_Loader_Autoloader::getInstance();
+
+		self::$zendLoaded = true;
+	}
 }

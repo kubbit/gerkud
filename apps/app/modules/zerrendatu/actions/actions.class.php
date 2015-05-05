@@ -10,71 +10,6 @@
  */
 sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
 
-// PDFan data ezartzeko
-class ZerrendaPDF extends TCPDF
-{
-	public function Header()
-	{
-		$headerfont = $this->getHeaderFont();
-		$headerdata = $this->getHeaderData();
-		$this->y = $this->header_margin;
-		if ($this->rtl)
-			$this->x = $this->w - $this->original_rMargin;
-		else
-			$this->x = $this->original_lMargin;
-
-		if (($headerdata['logo']) AND ($headerdata['logo'] != K_BLANK_IMAGE))
-		{
-			$imgtype = $this->getImageFileType(K_PATH_IMAGES.$headerdata['logo']);
-			if (($imgtype == 'eps') OR ($imgtype == 'ai'))
-				$this->ImageEps(K_PATH_IMAGES.$headerdata['logo'], '', '', $headerdata['logo_width']);
-			elseif ($imgtype == 'svg')
-				$this->ImageSVG(K_PATH_IMAGES.$headerdata['logo'], '', '', $headerdata['logo_width']);
-			else
-				$this->Image(K_PATH_IMAGES.$headerdata['logo'], '', '', $headerdata['logo_width']);
-
-			$imgy = $this->getImageRBY();
-		}
-		else
-			$imgy = $this->y;
-
-		$cell_height = round(($this->cell_height_ratio * $headerfont[2]) / $this->k, 2);
-		// set starting margin for text data cell
-		if ($this->getRTL())
-			$header_x = $this->original_rMargin + ($headerdata['logo_width'] * 1.1);
-		else
-			$header_x = $this->original_lMargin + ($headerdata['logo_width'] * 1.1);
-
-		$cw = $this->w - $this->original_lMargin - $this->original_rMargin - ($headerdata['logo_width'] * 1.1);
-		$this->SetTextColor(0, 0, 0);
-		// header title
-		$this->SetFont($headerfont[0], 'B', $headerfont[2] + 1);
-		$this->SetX($header_x);
-		$this->Cell($cw, $cell_height, $headerdata['title'], 0, 1, '', 0, '', 0);
-		// header string
-		$this->SetFont($headerfont[0], $headerfont[1], $headerfont[2]);
-		$this->SetX($header_x);
-		$this->MultiCell($cw, $cell_height, $headerdata['string'], 0, '', 0, 1, '', '', true, 0, false, true, 0, 'T', false);
-		$this->SetFont($headerfont[0], '', $headerfont[2] + 1);
-		$this->Cell(0, 10, date("Y/m/d"), 0, false, 'R', 0, '', 0, false, 'T', 'M');
-		// print an ending header line
-		$this->SetLineStyle(array('width' => 0.85 / $this->k, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
-		$this->SetY((2.835 / $this->k) + max($imgy, $this->y));
-		if ($this->rtl)
-			$this->SetX($this->original_rMargin);
-		else
-			$this->SetX($this->original_lMargin);
-
-		$this->SetFont($headerfont[0], 'B', $headerfont[2] + 1);
-		$this->Cell(($this->w - $this->original_lMargin - $this->original_rMargin), 0, '', 'T', 0, 'C');
-	}
-
-	public function Footer()
-	{
-		$this->Cell(0, 10, sprintf('%s/%s', $this->getAliasNumPage(), $this->getAliasNbPages()), 0, false, 'R', 0, '', 0, false, 'T', 'M');
-	}
-}
-
 class zerrendatuActions extends sfActions
 {
 	const ZUTABE_ARTEKO_DISTANTZIA = 5;
@@ -109,7 +44,7 @@ class zerrendatuActions extends sfActions
 
 		$config = sfYaml::load(sfConfig::get("sf_app_config_dir") . '/pdf_configs.yml');
 		// 'L' = Landscape orientation
-		$pdf = new ZerrendaPDF('L');
+		$pdf = new GerkudPDF('L');
 		$pdf->SetFont('FreeSerif', '', 10);
 		$pdf->SetMargins(PDF_MARGIN_LEFT / 2, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT / 2);
 		$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -132,7 +67,7 @@ class zerrendatuActions extends sfActions
 		else
 			$erabiltzailea = ' u.username';
 
-		$sql = 'SELECT s.name AS saila, m.izena AS mota, g.id AS kodea, e.izena AS egoera, laburpena,'
+		$sql = 'SELECT g.lehentasuna_id AS lehentasuna, s.name AS saila, m.izena AS mota, g.id AS kodea, e.izena AS egoera, laburpena,'
 		 . ' b.izena AS barrutia, a.izena AS auzoa, er.izena AS eraikina, k.izena AS kalea, g.kale_zbkia AS zenbakia,'
 		 . $erabiltzailea . ' AS erabiltzailea, abisuanork, date(g.created_at) AS irekiera_data, date(ixte_data) AS ixte_data'
 		 . ' FROM gertakaria g'
@@ -416,11 +351,11 @@ class zerrendatuActions extends sfActions
 				// Como solucion, se añaden columnas separadoras vacias
 				$izenak = '<table>'
 				 . '<thead><tr style="text-decoration: underline">'
-				 . '<th width="30">' . __('Kodea') . '</th>'
+				 . '<th width="40">' . __('Kodea') . '</th>'
 				 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
 				 . '<th width="54">' . __('Egoera') . '</th>'
 				 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
-				 . '<th width="228">' . __('Laburpena') . '</th>';
+				 . '<th width="218">' . __('Laburpena') . '</th>';
 
 				if (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')) && in_array('auzoa',sfConfig::get('app_gerkud_eremuak')))
 				{
@@ -458,11 +393,25 @@ class zerrendatuActions extends sfActions
 
 			// nobr evita que unicamente parte de la fila pase a una nueva pagina
 			$html = '<tr nobr="true">';
+			$lehentasuna = "";
+			switch ($datuak['lehentasuna'])
+			{
+				case 1:
+					$lehentasuna = "";
+					break;
+				case 2:
+					$lehentasuna = "!";
+					break;
+				case 3:
+					$lehentasuna = "!!";
+					break;
+			}
+			$html .= sprintf('<td width="10">%s</td>', $lehentasuna);
 			$html .= sprintf('<td width="30">%s</td>', $datuak['kodea']);
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 			$html .= sprintf('<td width="54">%s</td>', $datuak['egoera']);
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
-			$html .= sprintf('<td width="228">%s</td>', $datuak['laburpena']);
+			$html .= sprintf('<td width="218">%s</td>', $datuak['laburpena']);
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 			if (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')) && in_array('auzoa',sfConfig::get('app_gerkud_eremuak')))
 			{

@@ -497,12 +497,12 @@ class gertakariaActions extends sfActions
 		$configEremuak = sfConfig::get('app_gerkud_eremuak');
 
 		$gertakaria = Doctrine::getTable('gertakaria')->find(array($request->getParameter('id')));
-		$config = sfTCPDFPluginConfigHandler::loadConfig();
-		$pdf = new TCPDF();
+		$config = sfYaml::load(sfConfig::get("sf_app_config_dir") . '/pdf_configs.yml');
+		$pdf = new GerkudPDF();
 		$pdf->SetFont("FreeSerif", "", 12);
 		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 		$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
+		$pdf->SetHeaderData($config['default']['PDF_HEADER_LOGO'], $config['default']['PDF_HEADER_LOGO_WIDTH'], utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
 		$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
