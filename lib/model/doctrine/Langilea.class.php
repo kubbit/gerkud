@@ -14,9 +14,12 @@ class Langilea extends BaseLangilea
 {
 	public function __toString()
 	{
-		if (!is_null($this->getId()))
-			return parent::__toString();
-		else
+ 		if (is_null($this->getId()))
 			return '';
+
+		if (sfConfig::get('app_gerkud_izena_eta_abizena'))
+			return trim($this->getFirstName().' '.$this->getLastName());
+		else
+			return $this->getUsername();
 	}
 }

@@ -1,4 +1,12 @@
 ================================================================================
+  Version 1.26
+  2015-06-09  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Posibilidad de editar campos de inicio y fin previsto por cualquiera
+* Limpieza del plugin sfDoctrineGuard
+* Correcciones menores
+
+================================================================================
   Version 1.24
   2015-05-05  Kubbit Information Technology (http://kubbit.com)
 ================================================================================

@@ -49,5 +49,6 @@ all:
     ixterakoan_lehentasuna_berrezarri: false
     hiritarrena_mota_id: 99
     hiritarrena_klasea_id: 99
+    aurreikusia_aldatu_edozein: false
   horkonpon:
     pasahitza:

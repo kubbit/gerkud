@@ -22,10 +22,7 @@ abstract class PluginsfGuardUser extends BasesfGuardUser
    */
   public function __toString()
   {
-	if (sfConfig::get('app_gerkud_izena_eta_abizena'))
-		return trim($this->getFirstName().' '.$this->getLastName());
-	else
-		return $this->getUsername();
+    return (string) $this->getName().' ('.$this->getUsername().')';
   }
 
   /**
@@ -245,7 +242,7 @@ abstract class PluginsfGuardUser extends BasesfGuardUser
   public function loadGroupsAndPermissions()
   {
     $this->getAllPermissions();
-
+    
     if (!$this->_permissions)
     {
       $permissions = $this->getPermissions();
@@ -254,7 +251,7 @@ abstract class PluginsfGuardUser extends BasesfGuardUser
         $this->_permissions[$permission->getName()] = $permission;
       }
     }
-
+    
     if (!$this->_groups)
     {
       $groups = $this->getGroups();

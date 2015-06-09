@@ -206,7 +206,13 @@
 <?php if (in_array('langilea', $configEremuak)): ?>
 				<div class="field">
 					<label><?php echo __('Erabiltzailea'); ?>:</label>
+<?php if (sfConfig::get('app_gerkud_izena_eta_abizena')): ?>
 					<span><?php echo $gertakaria->getLangilea(); ?></span>
+<?php elseif ($gertakaria->getLangilea() != ''): ?>
+					<span><?php echo sprintf('%s (%s %s)', $gertakaria->getLangilea(), $gertakaria->getLangilea()->getFirstName(), $gertakaria->getLangilea()->getLastName()); ?></span>
+<?php else: ?>
+					<span></span>
+<?php endif; ?>
 				</div>
 <?php endif; ?>
 <?php if (in_array('jatorrizkosaila', $configEremuak)): ?>

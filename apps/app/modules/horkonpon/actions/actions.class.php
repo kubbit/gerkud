@@ -106,8 +106,8 @@ class horkonponActions extends sfActions
 		$this->gertakaria->setAbisuaNork(implode(', ', $erabiltzaileDatuak));
 		if (array_key_exists('oharrak', $array))
 		{
-			$this->gertakaria->setLaburpena($array['oharrak']);
-			$this->gertakaria->setDeskribapena($this->gertakaria->getLaburpena());
+			$this->gertakaria->setLaburpena(substr($array['oharrak'], 0, 100));
+			$this->gertakaria->setDeskribapena($array['oharrak']);
 		}
 
 		$langilea = null;
@@ -206,8 +206,8 @@ class horkonponActions extends sfActions
 		$this->gertakaria->setAbisuaNork(implode(', ', $erabiltzaileDatuak));
 		if (array_key_exists('comments', $mezua))
 		{
-			$this->gertakaria->setLaburpena($mezua['comments']);
-			$this->gertakaria->setDeskribapena($this->gertakaria->getLaburpena());
+			$this->gertakaria->setLaburpena(substr($mezua['comments'], 0, 100));
+			$this->gertakaria->setDeskribapena($mezua['comments']);
 		}
 
 		$langilea = null;

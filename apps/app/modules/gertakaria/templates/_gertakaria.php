@@ -146,7 +146,7 @@
 <?php endif; ?>
 		</fieldset>
 
-<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
+<?php if (sfConfig::get('app_gerkud_aurreikusia_aldatu_edozein') || $sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
 		<fieldset>
 	<?php if (in_array('hasiera_aurreikusia', $configEremuak)): ?>
 			<div id="hasiera_aurreikusia" class="field">
