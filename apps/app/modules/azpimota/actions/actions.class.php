@@ -12,14 +12,14 @@ class azpimotaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->azpimotas = Doctrine::getTable('azpimota')
+		$this->azpimotas = Doctrine_Core::getTable('azpimota')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->azpimota = Doctrine::getTable('azpimota')->find(array($request->getParameter('id')));
+		$this->azpimota = Doctrine_Core::getTable('azpimota')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->azpimota);
 	}
 
@@ -41,14 +41,14 @@ class azpimotaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($azpimota = Doctrine::getTable('azpimota')->find(array($request->getParameter('id'))), sprintf('Object azpimota does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($azpimota = Doctrine_Core::getTable('azpimota')->find(array($request->getParameter('id'))), sprintf('Object azpimota does not exist (%s).', $request->getParameter('id')));
 		$this->form = new azpimotaForm($azpimota);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($azpimota = Doctrine::getTable('azpimota')->find(array($request->getParameter('id'))), sprintf('Object azpimota does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($azpimota = Doctrine_Core::getTable('azpimota')->find(array($request->getParameter('id'))), sprintf('Object azpimota does not exist (%s).', $request->getParameter('id')));
 		$this->form = new azpimotaForm($azpimota);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class azpimotaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($azpimota = Doctrine::getTable('azpimota')->find(array($request->getParameter('id'))), sprintf('Object azpimota does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($azpimota = Doctrine_Core::getTable('azpimota')->find(array($request->getParameter('id'))), sprintf('Object azpimota does not exist (%s).', $request->getParameter('id')));
 		$azpimota->delete();
 
 		$this->redirect('azpimota/index');

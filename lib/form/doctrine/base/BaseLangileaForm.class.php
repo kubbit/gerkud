@@ -8,13 +8,16 @@
  * @package    gerkud
  * @subpackage form
  * @author     Pasaiako Udala
- * @version    SVN: $Id: sfDoctrineFormGeneratedInheritanceTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
+ * @version    SVN: $Id$
  */
 abstract class BaseLangileaForm extends sfGuardUserForm
 {
   protected function setupInheritance()
   {
     parent::setupInheritance();
+
+    $this->widgetSchema   ['ohartaraztea_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Ohartaraztea'), 'add_empty' => true));
+    $this->validatorSchema['ohartaraztea_id'] = new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Ohartaraztea'), 'column' => 'id', 'required' => false));
 
     $this->widgetSchema->setNameFormat('langilea[%s]');
   }

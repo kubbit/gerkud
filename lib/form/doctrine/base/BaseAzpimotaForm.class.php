@@ -8,7 +8,7 @@
  * @package    gerkud
  * @subpackage form
  * @author     Pasaiako Udala
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
+ * @version    SVN: $Id$
  */
 abstract class BaseAzpimotaForm extends BaseFormDoctrine
 {
@@ -21,7 +21,7 @@ abstract class BaseAzpimotaForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'      => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'mota_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Mota'))),
+      'mota_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Mota'), 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('azpimota[%s]');

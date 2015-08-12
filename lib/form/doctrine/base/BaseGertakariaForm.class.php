@@ -8,7 +8,7 @@
  * @package    gerkud
  * @subpackage form
  * @author     Pasaiako Udala
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
+ * @version    SVN: $Id$
  */
 abstract class BaseGertakariaForm extends BaseFormDoctrine
 {
@@ -44,26 +44,26 @@ abstract class BaseGertakariaForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'laburpena'           => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'klasea_id'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Klasea'), 'required' => false)),
-      'mota_id'             => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Mota'), 'required' => false)),
-      'azpimota_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Azpimota'), 'required' => false)),
+      'klasea_id'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Klasea'), 'column' => 'id', 'required' => false)),
+      'mota_id'             => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Mota'), 'column' => 'id', 'required' => false)),
+      'azpimota_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Azpimota'), 'column' => 'id', 'required' => false)),
       'abisuaNork'          => new sfValidatorString(array('max_length' => 512, 'required' => false)),
-      'egoera_id'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Egoera'), 'required' => false)),
-      'saila_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Saila'), 'required' => false)),
-      'langilea_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Langilea'), 'required' => false)),
-      'barrutia_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Barrutia'), 'required' => false)),
-      'auzoa_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Auzoa'), 'required' => false)),
-      'kalea_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Kalea'), 'required' => false)),
+      'egoera_id'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Egoera'), 'column' => 'id', 'required' => false)),
+      'saila_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Saila'), 'column' => 'id', 'required' => false)),
+      'langilea_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Langilea'), 'column' => 'id', 'required' => false)),
+      'barrutia_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Barrutia'), 'column' => 'id', 'required' => false)),
+      'auzoa_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Auzoa'), 'column' => 'id', 'required' => false)),
+      'kalea_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Kalea'), 'column' => 'id', 'required' => false)),
       'kale_zbkia'          => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'deskribapena'        => new sfValidatorString(array('max_length' => 4000, 'required' => false)),
       'ixte_data'           => new sfValidatorDateTime(array('required' => false)),
       'hasiera_aurreikusia' => new sfValidatorDate(array('required' => false)),
       'amaiera_aurreikusia' => new sfValidatorDate(array('required' => false)),
-      'lehentasuna_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Lehentasuna'), 'required' => false)),
-      'jatorrizkoSaila_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('JatorrizkoSaila'), 'required' => false)),
-      'eraikina_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Eraikina'), 'required' => false)),
+      'lehentasuna_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Lehentasuna'), 'column' => 'id', 'required' => false)),
+      'jatorrizkoSaila_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('JatorrizkoSaila'), 'column' => 'id', 'required' => false)),
+      'eraikina_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Eraikina'), 'column' => 'id', 'required' => false)),
       'herritarrena'        => new sfValidatorBoolean(array('required' => false)),
-      'kontaktua_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Kontaktua'), 'required' => false)),
+      'kontaktua_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Kontaktua'), 'column' => 'id', 'required' => false)),
       'created_at'          => new sfValidatorDateTime(),
       'updated_at'          => new sfValidatorDateTime(),
     ));

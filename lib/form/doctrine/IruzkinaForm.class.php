@@ -22,7 +22,7 @@ class IruzkinaForm extends BaseIruzkinaForm
 		(
 			'model' => 'Saila',
 			'add_empty' => false,
-			'query' => Doctrine::getTable('Saila')->createQuery('s')
+			'query' => Doctrine_Core::getTable('Saila')->createQuery('s')
 				->select('s.id, t.name')
 				->leftJoin('s.Translation t WITH t.lang = ?', $culture)
 				->orderBy('t.name ASC')

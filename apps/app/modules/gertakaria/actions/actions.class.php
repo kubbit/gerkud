@@ -331,7 +331,7 @@ class gertakariaActions extends sfActions
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->gertakaria = Doctrine::getTable('gertakaria')->find(array($request->getParameter('id')));
+		$this->gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id')));
 
 		// langilea gertakariaren saila berekoa den ala ez adierazi
 		$saila = $this->gertakaria->getSaila();
@@ -378,13 +378,13 @@ class gertakariaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($gertakaria = Doctrine::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
 		$this->form = new gertakariaForm($gertakaria);
 	}
 
 	public function executeKopiatu(sfWebRequest $request)
 	{
-		$this->forward404Unless($gertakaria = Doctrine::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
 		$this->formZahar = new gertakariaForm($gertakaria);
 		$this->form = new gertakariaForm();
 	}
@@ -395,7 +395,7 @@ class gertakariaActions extends sfActions
 			$this->redirect('gertakaria/edit?id=' . $request->getParameter('id'));
 
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($gertakaria = Doctrine::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
 		$this->form = new gertakariaForm($gertakaria);
 
 		$this->processForm($request, $this->form);
@@ -410,7 +410,7 @@ class gertakariaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($gertakaria = Doctrine::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
 		$gertakaria->delete();
 
 		$this->redirect('gertakaria/index');
@@ -438,7 +438,7 @@ class gertakariaActions extends sfActions
 
 	public function executeEgoera(sfWebRequest $request)
 	{
-		$this->gertakaria = Doctrine::getTable('gertakaria')->find(array($request->getParameter('id')));
+		$this->gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->gertakaria);
 
 		$id = $request->getParameter('id');
@@ -450,7 +450,7 @@ class gertakariaActions extends sfActions
 
 	protected function aldatuEgoera($id, $egoera)
 	{
-		$this->gertakaria = Doctrine::getTable('gertakaria')->find(array($id));
+		$this->gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($id));
 		if (!$this->gertakaria)
 			return;
 
@@ -496,7 +496,7 @@ class gertakariaActions extends sfActions
 	{
 		$configEremuak = sfConfig::get('app_gerkud_eremuak');
 
-		$gertakaria = Doctrine::getTable('gertakaria')->find(array($request->getParameter('id')));
+		$gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id')));
 		$config = sfYaml::load(sfConfig::get("sf_app_config_dir") . '/pdf_configs.yml');
 		$pdf = new GerkudPDF();
 		$pdf->SetFont("FreeSerif", "", 12);

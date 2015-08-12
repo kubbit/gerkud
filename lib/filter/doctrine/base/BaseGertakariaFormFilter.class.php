@@ -6,7 +6,7 @@
  * @package    gerkud
  * @subpackage filter
  * @author     Pasaiako Udala
- * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 29570 2010-05-21 14:49:47Z Kris.Wallsmith $
+ * @version    SVN: $Id$
  */
 abstract class BaseGertakariaFormFilter extends BaseFormFilterDoctrine
 {

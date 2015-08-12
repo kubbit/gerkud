@@ -1,4 +1,11 @@
 ================================================================================
+  Version 2.00
+  2015-08-12  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Migración a LExpress/symfony1 ya que Symfony1 ya no está oficialmente soportado
+* Correcciones menores
+
+================================================================================
   Version 1.26
   2015-06-09  Kubbit Information Technology (http://kubbit.com)
 ================================================================================

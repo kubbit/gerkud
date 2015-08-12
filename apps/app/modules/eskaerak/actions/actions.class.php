@@ -128,6 +128,10 @@ class eskaerakActions extends sfActions
 					$zutabea->izena = __('Kalea') . ' / ' . __('Eraikina');
 					$zutabea->klasea = 'eraikinakalea';
 					break;
+				case 'egoerasaila':
+					$zutabea->izena = __('Egoera') . ' / ' . __('Saila');
+					$zutabea->klasea = 'egoerasaila';
+					break;
 			}
 			$this->zutabeak[$bakoitza] = $zutabea;
 		}

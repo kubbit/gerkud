@@ -12,14 +12,14 @@ class ekintzaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->ekintzas = Doctrine::getTable('ekintza')
+		$this->ekintzas = Doctrine_Core::getTable('ekintza')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id')));
+		$this->ekintza = Doctrine_Core::getTable('ekintza')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->ekintza);
 	}
 
@@ -41,14 +41,14 @@ class ekintzaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($ekintza = Doctrine_Core::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
 		$this->form = new ekintzaForm($ekintza);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($ekintza = Doctrine_Core::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
 		$this->form = new ekintzaForm($ekintza);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class ekintzaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($ekintza = Doctrine::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($ekintza = Doctrine_Core::getTable('ekintza')->find(array($request->getParameter('id'))), sprintf('Object ekintza does not exist (%s).', $request->getParameter('id')));
 		$ekintza->delete();
 
 		$this->redirect('ekintza/index');

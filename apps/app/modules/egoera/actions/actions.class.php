@@ -12,14 +12,14 @@ class egoeraActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->egoeras = Doctrine::getTable('egoera')
+		$this->egoeras = Doctrine_Core::getTable('egoera')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->egoera = Doctrine::getTable('egoera')->find(array($request->getParameter('id')));
+		$this->egoera = Doctrine_Core::getTable('egoera')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->egoera);
 	}
 
@@ -41,14 +41,14 @@ class egoeraActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($egoera = Doctrine::getTable('egoera')->find(array($request->getParameter('id'))), sprintf('Object egoera does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($egoera = Doctrine_Core::getTable('egoera')->find(array($request->getParameter('id'))), sprintf('Object egoera does not exist (%s).', $request->getParameter('id')));
 		$this->form = new egoeraForm($egoera);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($egoera = Doctrine::getTable('egoera')->find(array($request->getParameter('id'))), sprintf('Object egoera does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($egoera = Doctrine_Core::getTable('egoera')->find(array($request->getParameter('id'))), sprintf('Object egoera does not exist (%s).', $request->getParameter('id')));
 		$this->form = new egoeraForm($egoera);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class egoeraActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($egoera = Doctrine::getTable('egoera')->find(array($request->getParameter('id'))), sprintf('Object egoera does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($egoera = Doctrine_Core::getTable('egoera')->find(array($request->getParameter('id'))), sprintf('Object egoera does not exist (%s).', $request->getParameter('id')));
 		$egoera->delete();
 
 		$this->redirect('egoera/index');

@@ -12,7 +12,7 @@ class langileaActions extends sfActions
 {
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($langilea = Doctrine::getTable('langilea')->find(array($this->getUser()->getguardUser()->getId())), sprintf('Object langilea does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($langilea = Doctrine_Core::getTable('langilea')->find(array($this->getUser()->getguardUser()->getId())), sprintf('Object langilea does not exist (%s).', $request->getParameter('id')));
 
 		$this->form = new langileaForm($langilea);
 	}
@@ -20,7 +20,7 @@ class langileaActions extends sfActions
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($langilea = Doctrine::getTable('langilea')->find(array($request->getParameter('id'))), sprintf('Object langilea does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($langilea = Doctrine_Core::getTable('langilea')->find(array($request->getParameter('id'))), sprintf('Object langilea does not exist (%s).', $request->getParameter('id')));
 		$this->form = new langileaForm($langilea);
 
 		$this->processForm($request, $this->form);

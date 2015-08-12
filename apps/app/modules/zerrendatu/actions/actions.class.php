@@ -116,7 +116,7 @@ class zerrendatuActions extends sfActions
 			array_push($condiciones, 'g.klasea_id = :klasea');
 			$parametroak[':klasea'] = $this->formularioa['klasea'];
 
-			$strKlasea = Doctrine::getTable('Klasea')->find(array($this->formularioa['klasea']))->getIzena();
+			$strKlasea = Doctrine_Core::getTable('Klasea')->find(array($this->formularioa['klasea']))->getIzena();
 		}
 		$strSaila = '';
 		if ($this->formularioa['saila'])
@@ -124,7 +124,7 @@ class zerrendatuActions extends sfActions
 			array_push($condiciones, 'g.saila_id = :saila');
 			$parametroak[':saila'] = $this->formularioa['saila'];
 
-			$strSaila = Doctrine::getTable('Saila')->find(array($this->formularioa['saila']))->getName();
+			$strSaila = Doctrine_Core::getTable('Saila')->find(array($this->formularioa['saila']))->getName();
 		}
 		$strMota = '';
 		if ($this->formularioa['mota_id'])
@@ -132,7 +132,7 @@ class zerrendatuActions extends sfActions
 			array_push($condiciones, 'g.mota_id = :mota');
 			$parametroak[':mota'] = $this->formularioa['mota_id'];
 
-			$strMota = Doctrine::getTable('Mota')->find(array($this->formularioa['mota_id']))->getIzena();
+			$strMota = Doctrine_Core::getTable('Mota')->find(array($this->formularioa['mota_id']))->getIzena();
 		}
 		$strAzpiMota = '';
 		if ($this->formularioa['azpimota_id'])
@@ -140,7 +140,7 @@ class zerrendatuActions extends sfActions
 			array_push($condiciones, 'g.azpimota_id = :azpimota');
 			$parametroak[':azpimota'] = $this->formularioa['azpimota_id'];
 
-			$strAzpiMota = Doctrine::getTable('Azpimota')->find(array($this->formularioa['azpimota_id']))->getIzena();
+			$strAzpiMota = Doctrine_Core::getTable('Azpimota')->find(array($this->formularioa['azpimota_id']))->getIzena();
 		}
 		$strBarrutia = '';
 		if (in_array('barrutia', $configEremuak) && $this->formularioa['barrutia'])
@@ -148,7 +148,7 @@ class zerrendatuActions extends sfActions
 			array_push($condiciones, 'g.barrutia_id = :barrutia');
 			$parametroak[':barrutia'] = $this->formularioa['barrutia'];
 
-			$strBarrutia = Doctrine::getTable('Barrutia')->find(array($this->formularioa['barrutia']))->getIzena();
+			$strBarrutia = Doctrine_Core::getTable('Barrutia')->find(array($this->formularioa['barrutia']))->getIzena();
 		}
 		$strAuzoa = '';
 		if (in_array('auzoa', $configEremuak) && $this->formularioa['auzoa'])
@@ -156,7 +156,7 @@ class zerrendatuActions extends sfActions
 			array_push($condiciones, 'g.auzoa_id = :auzoa');
 			$parametroak[':auzoa'] = $this->formularioa['auzoa'];
 
-			$strAuzoa = Doctrine::getTable('Auzoa')->find(array($this->formularioa['auzoa']))->getIzena();
+			$strAuzoa = Doctrine_Core::getTable('Auzoa')->find(array($this->formularioa['auzoa']))->getIzena();
 		}
 		$strKalea = '';
 		if ($this->formularioa['kalea'])
@@ -164,7 +164,7 @@ class zerrendatuActions extends sfActions
 			array_push($condiciones, 'g.kalea_id = :kalea');
 			$parametroak[':kalea'] = $this->formularioa['kalea'];
 
-			$strKalea = Doctrine::getTable('Kalea')->find(array($this->formularioa['kalea']))->getIzena();
+			$strKalea = Doctrine_Core::getTable('Kalea')->find(array($this->formularioa['kalea']))->getIzena();
 		}
 		$strEraikina = '';
 		if ($this->formularioa['eraikina'])
@@ -172,7 +172,7 @@ class zerrendatuActions extends sfActions
 			array_push($condiciones, 'g.eraikina_id = :eraikina');
 			$parametroak[':eraikina'] = $this->formularioa['eraikina'];
 
-			$strEraikina = Doctrine::getTable('Eraikina')->find(array($this->formularioa['eraikina']))->getIzena();
+			$strEraikina = Doctrine_Core::getTable('Eraikina')->find(array($this->formularioa['eraikina']))->getIzena();
 		}
 		$strEgoera = '';
 		if ($this->formularioa['egoera'])
@@ -180,7 +180,7 @@ class zerrendatuActions extends sfActions
 			array_push($condiciones, 'g.egoera_id = :egoera');
 			$parametroak[':egoera'] = $this->formularioa['egoera'];
 
-			$strEgoera = Doctrine::getTable('Egoera')->find(array($this->formularioa['egoera']))->getIzena();
+			$strEgoera = Doctrine_Core::getTable('Egoera')->find(array($this->formularioa['egoera']))->getIzena();
 		}
 
 		$htmlIragazkiak = '<table>';

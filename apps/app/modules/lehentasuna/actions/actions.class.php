@@ -12,14 +12,14 @@ class lehentasunaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->lehentasunas = Doctrine::getTable('lehentasuna')
+		$this->lehentasunas = Doctrine_Core::getTable('lehentasuna')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->lehentasuna = Doctrine::getTable('lehentasuna')->find(array($request->getParameter('id')));
+		$this->lehentasuna = Doctrine_Core::getTable('lehentasuna')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->lehentasuna);
 	}
 
@@ -41,14 +41,14 @@ class lehentasunaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($lehentasuna = Doctrine::getTable('lehentasuna')->find(array($request->getParameter('id'))), sprintf('Object lehentasuna does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($lehentasuna = Doctrine_Core::getTable('lehentasuna')->find(array($request->getParameter('id'))), sprintf('Object lehentasuna does not exist (%s).', $request->getParameter('id')));
 		$this->form = new lehentasunaForm($lehentasuna);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($lehentasuna = Doctrine::getTable('lehentasuna')->find(array($request->getParameter('id'))), sprintf('Object lehentasuna does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($lehentasuna = Doctrine_Core::getTable('lehentasuna')->find(array($request->getParameter('id'))), sprintf('Object lehentasuna does not exist (%s).', $request->getParameter('id')));
 		$this->form = new lehentasunaForm($lehentasuna);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class lehentasunaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($lehentasuna = Doctrine::getTable('lehentasuna')->find(array($request->getParameter('id'))), sprintf('Object lehentasuna does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($lehentasuna = Doctrine_Core::getTable('lehentasuna')->find(array($request->getParameter('id'))), sprintf('Object lehentasuna does not exist (%s).', $request->getParameter('id')));
 		$lehentasuna->delete();
 
 		$this->redirect('lehentasuna/index');

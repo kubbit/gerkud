@@ -61,7 +61,7 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 			'model'     => 'Auzoa',
 			'add_empty' => '--',
 		));
-		
+
 		$this->widgetSchema['kalea_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model'     => 'Kalea',
@@ -82,7 +82,7 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 		(
 			'model'     => 'Mota',
 			'add_empty' => '--',
-			'query'     => Doctrine::getTable('Mota')->createQuery('m')->leftJoin('m.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
+			'query'     => Doctrine_Core::getTable('Mota')->createQuery('m')->leftJoin('m.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
 		));
 
 		$this->widgetSchema['azpimota_id'] = new sfWidgetFormDoctrineDependentSelect(array
@@ -98,21 +98,21 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 		(
 			'model'     => 'Klasea',
 			'add_empty' => '--',
-			'query'     => Doctrine::getTable('Klasea')->createQuery('k')->leftJoin('k.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
+			'query'     => Doctrine_Core::getTable('Klasea')->createQuery('k')->leftJoin('k.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
 		));
 
 		$this->widgetSchema['egoera_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model'     => 'Egoera',
 			'add_empty' => '--',
-			'query'     => Doctrine::getTable('Egoera')->createQuery('e')->leftJoin('e.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
+			'query'     => Doctrine_Core::getTable('Egoera')->createQuery('e')->leftJoin('e.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
 		));
 
 		$this->widgetSchema['saila_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model'     => 'Saila',
 			'add_empty' => '--',
-			'query'     => Doctrine::getTable('Saila')->createQuery('s')->leftJoin('s.Translation t WITH t.lang = ?', $culture)->orderBy('t.name ASC')
+			'query'     => Doctrine_Core::getTable('Saila')->createQuery('s')->leftJoin('s.Translation t WITH t.lang = ?', $culture)->orderBy('t.name ASC')
 		));
 
 		$this->widgetSchema['eraikina_id'] = new sfWidgetFormDoctrineChoice(array
@@ -126,7 +126,7 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 		(
 			'model'     => 'JatorrizkoSaila',
 			'add_empty' => '--',
-			'query'     => Doctrine::getTable('JatorrizkoSaila')->createQuery('j')->leftJoin('j.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
+			'query'     => Doctrine_Core::getTable('JatorrizkoSaila')->createQuery('j')->leftJoin('j.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
 		));
 	}
 }

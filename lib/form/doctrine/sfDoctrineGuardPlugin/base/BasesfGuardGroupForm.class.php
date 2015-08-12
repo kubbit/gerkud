@@ -8,7 +8,7 @@
  * @package    gerkud
  * @subpackage form
  * @author     Pasaiako Udala
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
+ * @version    SVN: $Id$
  */
 abstract class BasesfGuardGroupForm extends BaseFormDoctrine
 {
@@ -62,34 +62,30 @@ abstract class BasesfGuardGroupForm extends BaseFormDoctrine
 
   }
 
-  protected function doSave($con = null)
+  protected function doUpdateObject($values)
   {
-    $this->saveUsersList($con);
-    $this->savePermissionsList($con);
+    $this->updateUsersList($values);
+    $this->updatePermissionsList($values);
 
-    parent::doSave($con);
+    parent::doUpdateObject($values);
   }
 
-  public function saveUsersList($con = null)
+  public function updateUsersList($values)
   {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
     if (!isset($this->widgetSchema['users_list']))
     {
       // somebody has unset this widget
       return;
     }
 
-    if (null === $con)
+    if (!array_key_exists('users_list', $values))
     {
-      $con = $this->getConnection();
+      // no values for this widget
+      return;
     }
 
     $existing = $this->object->Users->getPrimaryKeys();
-    $values = $this->getValue('users_list');
+    $values = $values['users_list'];
     if (!is_array($values))
     {
       $values = array();
@@ -108,26 +104,22 @@ abstract class BasesfGuardGroupForm extends BaseFormDoctrine
     }
   }
 
-  public function savePermissionsList($con = null)
+  public function updatePermissionsList($values)
   {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
     if (!isset($this->widgetSchema['permissions_list']))
     {
       // somebody has unset this widget
       return;
     }
 
-    if (null === $con)
+    if (!array_key_exists('permissions_list', $values))
     {
-      $con = $this->getConnection();
+      // no values for this widget
+      return;
     }
 
     $existing = $this->object->Permissions->getPrimaryKeys();
-    $values = $this->getValue('permissions_list');
+    $values = $values['permissions_list'];
     if (!is_array($values))
     {
       $values = array();

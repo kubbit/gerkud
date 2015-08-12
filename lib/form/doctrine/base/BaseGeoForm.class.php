@@ -8,7 +8,7 @@
  * @package    gerkud
  * @subpackage form
  * @author     Pasaiako Udala
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
+ * @version    SVN: $Id$
  */
 abstract class BaseGeoForm extends BaseFormDoctrine
 {
@@ -26,12 +26,12 @@ abstract class BaseGeoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'            => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'gertakaria_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Gertakaria'))),
+      'gertakaria_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Gertakaria'), 'column' => 'id')),
       'longitudea'    => new sfValidatorPass(),
       'latitudea'     => new sfValidatorPass(),
       'zehaztasuna'   => new sfValidatorPass(array('required' => false)),
       'testua'        => new sfValidatorString(array('max_length' => 50, 'required' => false)),
-      'geometria_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Geometria'))),
+      'geometria_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Geometria'), 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('geo[%s]');

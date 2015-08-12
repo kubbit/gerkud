@@ -14,7 +14,7 @@ class fitxategiaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->fitxategias = Doctrine::getTable('fitxategia')
+		$this->fitxategias = Doctrine_Core::getTable('fitxategia')
 			->createQuery('a')
 			->execute();
 	}
@@ -38,7 +38,7 @@ class fitxategiaActions extends sfActions
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($fitxategia = Doctrine::getTable('fitxategia')->find(array($request->getParameter('id'))), sprintf('Object fitxategia does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($fitxategia = Doctrine_Core::getTable('fitxategia')->find(array($request->getParameter('id'))), sprintf('Object fitxategia does not exist (%s).', $request->getParameter('id')));
 		$this->form = new fitxategiaForm($fitxategia);
 
 		$this->processForm($request, $this->form);
@@ -49,7 +49,7 @@ class fitxategiaActions extends sfActions
 	public function executeDelete(sfWebRequest $request)
 	{
 		$request->checkCSRFProtection();
-		$this->forward404Unless($fitxategia = Doctrine::getTable('fitxategia')->find(array($request->getParameter('id'))), sprintf('Object fitxategia does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($fitxategia = Doctrine_Core::getTable('fitxategia')->find(array($request->getParameter('id'))), sprintf('Object fitxategia does not exist (%s).', $request->getParameter('id')));
 
 		$url = '/' . $fitxategia->getGertakariaId() . '/' . $fitxategia->getFitxategia();
 		$fitxategia->delete();
@@ -81,7 +81,7 @@ class fitxategiaActions extends sfActions
 			$iruzkina->save();
 
 			// gertakariaren eguneratze data berritu
-			$gertakaria = Doctrine::getTable('gertakaria')->find(array($fitxategia->getGertakariaId()));
+			$gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($fitxategia->getGertakariaId()));
 			$gertakaria->setUpdatedAt(null); // gertakaria gordetzea behartu
 			$gertakaria->save();
 

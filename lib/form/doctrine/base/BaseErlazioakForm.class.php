@@ -8,7 +8,7 @@
  * @package    gerkud
  * @subpackage form
  * @author     Pasaiako Udala
- * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
+ * @version    SVN: $Id$
  */
 abstract class BaseErlazioakForm extends BaseFormDoctrine
 {
@@ -23,9 +23,9 @@ abstract class BaseErlazioakForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'hasiera_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Gertakaria_3'))),
-      'amaiera_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Gertakaria'))),
-      'erlazio_mota_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ErlazioMota'), 'required' => false)),
+      'hasiera_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Gertakaria_3'), 'column' => 'id')),
+      'amaiera_id'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Gertakaria'), 'column' => 'id')),
+      'erlazio_mota_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ErlazioMota'), 'column' => 'id', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('erlazioak[%s]');

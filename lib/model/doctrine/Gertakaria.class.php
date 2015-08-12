@@ -129,7 +129,7 @@ class Gertakaria extends BaseGertakaria
 			if ($langilea && $langilea->getId() == $erab_id)
 				continue;
 
-			$erab = Doctrine::getTable('langilea')->find($erab_id);
+			$erab = Doctrine_Core::getTable('langilea')->find($erab_id);
 
 			$ohartarazi = true;
 			switch ($erab->getOhartarazteaId())
@@ -282,7 +282,7 @@ class Gertakaria extends BaseGertakaria
 
 		foreach ($bikoiztuenGertakariaId as $bakoitza)
 		{
-			$gertakaria = Doctrine::getTable('gertakaria')->find($bakoitza);
+			$gertakaria = Doctrine_Core::getTable('gertakaria')->find($bakoitza);
 			if ($gertakaria)
 				array_push($bikoiztuak, $gertakaria);
 		}

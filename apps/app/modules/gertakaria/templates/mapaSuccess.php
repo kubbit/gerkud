@@ -22,7 +22,7 @@
 
 			if ($gertakaria->getKalea_id())
 			{
-				$kale = Doctrine::getTable('Kalea')->find($gertakaria->getKaleaId());
+				$kale = Doctrine_Core::getTable('Kalea')->find($gertakaria->getKaleaId());
 
 				$helbidea = sprintf('%s, %s %s', $kale->getGoogle(), $gertakaria->getKale_zbkia(), $herria);
 

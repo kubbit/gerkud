@@ -3,7 +3,7 @@
 /* $Id: bhLDAPUserValidator.php 29730 2010-06-03 23:51:31Z Nathan.Vonnahme $ */
 /* $URL: http://svn.symfony-project.com/plugins/bhLDAPAuthPlugin/branches/1.4/lib/validator/bhLDAPUserValidator.php $ */
 
-sfProjectConfiguration::getActive()->loadHelpers(array('I18N')); 
+sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
 
 class bhLDAPUserValidator extends sfValidatorBase
 {
@@ -24,7 +24,7 @@ class bhLDAPUserValidator extends sfValidatorBase
 
     bhLDAP::debug ('######## User exists?');
 
-    $user = Doctrine::getTable('sfGuardUser')->findOneByUsername($username);
+    $user = Doctrine_Core::getTable('sfGuardUser')->findOneByUsername($username);
 
     bhLDAP::debugDump($user, "user:");
 
@@ -48,7 +48,7 @@ class bhLDAPUserValidator extends sfValidatorBase
       bhLDAP::debug ('######## Check Password successful...');
       if ($user->isNew()) {
 	$user->save();
-	$user = Doctrine::getTable('sfGuardUser')->retrieveByUsername($username);
+	$user = Doctrine_Core::getTable('sfGuardUser')->retrieveByUsername($username);
       }
       return array_merge($values, array('user' => $user));
     }
@@ -67,7 +67,7 @@ class bhLDAPUserValidator extends sfValidatorBase
 
   protected function getTable()
   {
-    return Doctrine::getTable('sfGuardUser');
+    return Doctrine_Core::getTable('sfGuardUser');
   }
 }
 

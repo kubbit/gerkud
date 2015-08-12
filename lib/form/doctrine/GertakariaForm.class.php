@@ -147,7 +147,7 @@ class GertakariaForm extends BaseGertakariaForm
 		(
 			'model' => 'Mota',
 			'add_empty' => '--',
-			'query' => Doctrine::getTable('Mota')->createQuery('m')
+			'query' => Doctrine_Core::getTable('Mota')->createQuery('m')
 				->select('m.id, t.izena')
 				->leftJoin('m.Translation t WITH t.lang = ?', $culture)
 				->orderBy('t.izena ASC'),
@@ -203,7 +203,7 @@ class GertakariaForm extends BaseGertakariaForm
 		(
 			'model' => 'JatorrizkoSaila',
 			'add_empty' => '--',
-			'query' => Doctrine::getTable('JatorrizkoSaila')
+			'query' => Doctrine_Core::getTable('JatorrizkoSaila')
 				->createQuery('j')
 				->leftJoin('j.Translation t WITH t.lang = ?', $culture)
 				->orderBy('t.izena ASC')
@@ -218,7 +218,7 @@ class GertakariaForm extends BaseGertakariaForm
 		(
 			'model' => 'Klasea',
 			'add_empty' => '--',
-			'query' => Doctrine::getTable('Klasea')
+			'query' => Doctrine_Core::getTable('Klasea')
 				->createQuery('k')
 				->leftJoin('k.Translation t WITH t.lang = ?', $culture)
 				->orderBy('t.izena ASC')
@@ -235,7 +235,7 @@ class GertakariaForm extends BaseGertakariaForm
 			(
 				'model' => 'Lehentasuna',
 				'add_empty' => false,
-				'query' => Doctrine::getTable('Lehentasuna')
+				'query' => Doctrine_Core::getTable('Lehentasuna')
 					->createQuery('k')
 					->leftJoin('k.Translation t WITH t.lang = ?', $culture)
 			));
@@ -251,7 +251,7 @@ class GertakariaForm extends BaseGertakariaForm
 			(
 				'model' => 'Lehentasuna',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Lehentasuna')
+				'query' => Doctrine_Core::getTable('Lehentasuna')
 					->createQuery('k')
 					->leftJoin('k.Translation t WITH t.lang = ?', $culture)
 			));
@@ -308,7 +308,7 @@ class GertakariaForm extends BaseGertakariaForm
 
 	public function postValidate($validator, $values)
 	{
-		// la variable 'created_at' del array '$values' sólo lo envía la fecha de creación no es automática
+		// la variable 'created_at' del array '$values' solo lo envia la fecha de creacion no es automatica
 		if (!array_key_exists('created_at', $values))
 		{
 			if ($this->getObject()->getCreatedAt() == null)

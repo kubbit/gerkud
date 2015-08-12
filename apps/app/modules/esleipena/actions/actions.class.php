@@ -12,14 +12,14 @@ class esleipenaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->esleipenas = Doctrine::getTable('esleipena')
+		$this->esleipenas = Doctrine_Core::getTable('esleipena')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id')));
+		$this->esleipena = Doctrine_Core::getTable('esleipena')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->esleipena);
 	}
 
@@ -41,14 +41,14 @@ class esleipenaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($esleipena = Doctrine_Core::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
 		$this->form = new esleipenaForm($esleipena);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($esleipena = Doctrine_Core::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
 		$this->form = new esleipenaForm($esleipena);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class esleipenaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($esleipena = Doctrine::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($esleipena = Doctrine_Core::getTable('esleipena')->find(array($request->getParameter('id'))), sprintf('Object esleipena does not exist (%s).', $request->getParameter('id')));
 		$esleipena->delete();
 
 		$this->redirect('esleipena/index');

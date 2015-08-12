@@ -12,14 +12,14 @@ class sailekolangileakActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->sailekolangileaks = Doctrine::getTable('sailekolangileak')
+		$this->sailekolangileaks = Doctrine_Core::getTable('sailekolangileak')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->sailekolangileak = Doctrine::getTable('sailekolangileak')->find(array($request->getParameter('id')));
+		$this->sailekolangileak = Doctrine_Core::getTable('sailekolangileak')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->sailekolangileak);
 	}
 
@@ -41,14 +41,14 @@ class sailekolangileakActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($sailekolangileak = Doctrine::getTable('sailekolangileak')->find(array($request->getParameter('id'))), sprintf('Object sailekolangileak does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($sailekolangileak = Doctrine_Core::getTable('sailekolangileak')->find(array($request->getParameter('id'))), sprintf('Object sailekolangileak does not exist (%s).', $request->getParameter('id')));
 		$this->form = new sailekolangileakForm($sailekolangileak);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($sailekolangileak = Doctrine::getTable('sailekolangileak')->find(array($request->getParameter('id'))), sprintf('Object sailekolangileak does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($sailekolangileak = Doctrine_Core::getTable('sailekolangileak')->find(array($request->getParameter('id'))), sprintf('Object sailekolangileak does not exist (%s).', $request->getParameter('id')));
 		$this->form = new sailekolangileakForm($sailekolangileak);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class sailekolangileakActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($sailekolangileak = Doctrine::getTable('sailekolangileak')->find(array($request->getParameter('id'))), sprintf('Object sailekolangileak does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($sailekolangileak = Doctrine_Core::getTable('sailekolangileak')->find(array($request->getParameter('id'))), sprintf('Object sailekolangileak does not exist (%s).', $request->getParameter('id')));
 		$sailekolangileak->delete();
 
 		$this->redirect('sailekolangileak/index');

@@ -12,14 +12,14 @@ class planifikazioaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->planifikazioas = Doctrine::getTable('planifikazioa')
+		$this->planifikazioas = Doctrine_Core::getTable('planifikazioa')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->planifikazioa = Doctrine::getTable('planifikazioa')->find(array($request->getParameter('id')));
+		$this->planifikazioa = Doctrine_Core::getTable('planifikazioa')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->planifikazioa);
 	}
 
@@ -41,14 +41,14 @@ class planifikazioaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($planifikazioa = Doctrine::getTable('planifikazioa')->find(array($request->getParameter('id'))), sprintf('Object planifikazioa does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($planifikazioa = Doctrine_Core::getTable('planifikazioa')->find(array($request->getParameter('id'))), sprintf('Object planifikazioa does not exist (%s).', $request->getParameter('id')));
 		$this->form = new planifikazioaForm($planifikazioa);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($planifikazioa = Doctrine::getTable('planifikazioa')->find(array($request->getParameter('id'))), sprintf('Object planifikazioa does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($planifikazioa = Doctrine_Core::getTable('planifikazioa')->find(array($request->getParameter('id'))), sprintf('Object planifikazioa does not exist (%s).', $request->getParameter('id')));
 		$this->form = new planifikazioaForm($planifikazioa);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class planifikazioaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($planifikazioa = Doctrine::getTable('planifikazioa')->find(array($request->getParameter('id'))), sprintf('Object planifikazioa does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($planifikazioa = Doctrine_Core::getTable('planifikazioa')->find(array($request->getParameter('id'))), sprintf('Object planifikazioa does not exist (%s).', $request->getParameter('id')));
 		$planifikazioa->delete();
 
 		$this->redirect('planifikazioa/index');

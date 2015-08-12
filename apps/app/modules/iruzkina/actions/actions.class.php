@@ -14,14 +14,14 @@ class iruzkinaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->iruzkinas = Doctrine::getTable('iruzkina')
+		$this->iruzkinas = Doctrine_Core::getTable('iruzkina')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->iruzkina = Doctrine::getTable('iruzkina')->find(array($request->getParameter('id')));
+		$this->iruzkina = Doctrine_Core::getTable('iruzkina')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->iruzkina);
 	}
 
@@ -49,14 +49,14 @@ class iruzkinaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($iruzkina = Doctrine::getTable('iruzkina')->find(array($request->getParameter('id'))), sprintf('Object iruzkina does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($iruzkina = Doctrine_Core::getTable('iruzkina')->find(array($request->getParameter('id'))), sprintf('Object iruzkina does not exist (%s).', $request->getParameter('id')));
 		$this->form = new iruzkinaForm($iruzkina);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($iruzkina = Doctrine::getTable('iruzkina')->find(array($request->getParameter('id'))), sprintf('Object iruzkina does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($iruzkina = Doctrine_Core::getTable('iruzkina')->find(array($request->getParameter('id'))), sprintf('Object iruzkina does not exist (%s).', $request->getParameter('id')));
 		$this->form = new iruzkinaForm($iruzkina);
 
 		$this->processForm($request, $this->form);
@@ -68,7 +68,7 @@ class iruzkinaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($iruzkina = Doctrine::getTable('iruzkina')->find(array($request->getParameter('id'))), sprintf('Object iruzkina does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($iruzkina = Doctrine_Core::getTable('iruzkina')->find(array($request->getParameter('id'))), sprintf('Object iruzkina does not exist (%s).', $request->getParameter('id')));
 		$iruzkina->delete();
 
 		$this->redirect('iruzkina/index');

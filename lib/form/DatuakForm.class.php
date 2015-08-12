@@ -38,7 +38,7 @@ class DatuakForm extends sfForm
 			(
 				'model' => 'Saila',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Saila')->createQuery('s')
+				'query' => Doctrine_Core::getTable('Saila')->createQuery('s')
 					->leftJoin('s.Translation t WITH t.lang = ?', $culture)
 					->orderBy('t.name ASC')
 			)),
@@ -46,7 +46,7 @@ class DatuakForm extends sfForm
 			(
 				'model' => 'JatorrizkoSaila',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('JatorrizkoSaila')->createQuery('s')
+				'query' => Doctrine_Core::getTable('JatorrizkoSaila')->createQuery('s')
 					->leftJoin('s.Translation t WITH t.lang = ?', $culture)
 					->orderBy('t.izena ASC')
 			))

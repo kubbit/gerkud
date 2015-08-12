@@ -12,14 +12,14 @@ class motaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->motas = Doctrine::getTable('mota')
+		$this->motas = Doctrine_Core::getTable('mota')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->mota = Doctrine::getTable('mota')->find(array($request->getParameter('id')));
+		$this->mota = Doctrine_Core::getTable('mota')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->mota);
 	}
 
@@ -41,14 +41,14 @@ class motaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($mota = Doctrine::getTable('mota')->find(array($request->getParameter('id'))), sprintf('Object mota does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($mota = Doctrine_Core::getTable('mota')->find(array($request->getParameter('id'))), sprintf('Object mota does not exist (%s).', $request->getParameter('id')));
 		$this->form = new motaForm($mota);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($mota = Doctrine::getTable('mota')->find(array($request->getParameter('id'))), sprintf('Object mota does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($mota = Doctrine_Core::getTable('mota')->find(array($request->getParameter('id'))), sprintf('Object mota does not exist (%s).', $request->getParameter('id')));
 		$this->form = new motaForm($mota);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class motaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($mota = Doctrine::getTable('mota')->find(array($request->getParameter('id'))), sprintf('Object mota does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($mota = Doctrine_Core::getTable('mota')->find(array($request->getParameter('id'))), sprintf('Object mota does not exist (%s).', $request->getParameter('id')));
 		$mota->delete();
 
 		$this->redirect('mota/index');

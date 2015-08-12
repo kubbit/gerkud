@@ -12,14 +12,14 @@ class kaleaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->kaleas = Doctrine::getTable('kalea')
+		$this->kaleas = Doctrine_Core::getTable('kalea')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->kalea = Doctrine::getTable('kalea')->find(array($request->getParameter('id')));
+		$this->kalea = Doctrine_Core::getTable('kalea')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->kalea);
 	}
 
@@ -41,14 +41,14 @@ class kaleaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($kalea = Doctrine::getTable('kalea')->find(array($request->getParameter('id'))), sprintf('Object kalea does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($kalea = Doctrine_Core::getTable('kalea')->find(array($request->getParameter('id'))), sprintf('Object kalea does not exist (%s).', $request->getParameter('id')));
 		$this->form = new kaleaForm($kalea);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($kalea = Doctrine::getTable('kalea')->find(array($request->getParameter('id'))), sprintf('Object kalea does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($kalea = Doctrine_Core::getTable('kalea')->find(array($request->getParameter('id'))), sprintf('Object kalea does not exist (%s).', $request->getParameter('id')));
 		$this->form = new kaleaForm($kalea);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class kaleaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($kalea = Doctrine::getTable('kalea')->find(array($request->getParameter('id'))), sprintf('Object kalea does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($kalea = Doctrine_Core::getTable('kalea')->find(array($request->getParameter('id'))), sprintf('Object kalea does not exist (%s).', $request->getParameter('id')));
 		$kalea->delete();
 
 		$this->redirect('kalea/index');

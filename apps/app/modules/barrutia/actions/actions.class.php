@@ -12,14 +12,14 @@ class barrutiaActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->barrutias = Doctrine::getTable('barrutia')
+		$this->barrutias = Doctrine_Core::getTable('barrutia')
 			->createQuery('a')
 			->execute();
 	}
 
 	public function executeShow(sfWebRequest $request)
 	{
-		$this->barrutia = Doctrine::getTable('barrutia')->find(array($request->getParameter('id')));
+		$this->barrutia = Doctrine_Core::getTable('barrutia')->find(array($request->getParameter('id')));
 		$this->forward404Unless($this->barrutia);
 	}
 
@@ -41,14 +41,14 @@ class barrutiaActions extends sfActions
 
 	public function executeEdit(sfWebRequest $request)
 	{
-		$this->forward404Unless($barrutia = Doctrine::getTable('barrutia')->find(array($request->getParameter('id'))), sprintf('Object barrutia does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($barrutia = Doctrine_Core::getTable('barrutia')->find(array($request->getParameter('id'))), sprintf('Object barrutia does not exist (%s).', $request->getParameter('id')));
 		$this->form = new barrutiaForm($barrutia);
 	}
 
 	public function executeUpdate(sfWebRequest $request)
 	{
 		$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-		$this->forward404Unless($barrutia = Doctrine::getTable('barrutia')->find(array($request->getParameter('id'))), sprintf('Object barrutia does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($barrutia = Doctrine_Core::getTable('barrutia')->find(array($request->getParameter('id'))), sprintf('Object barrutia does not exist (%s).', $request->getParameter('id')));
 		$this->form = new barrutiaForm($barrutia);
 
 		$this->processForm($request, $this->form);
@@ -60,7 +60,7 @@ class barrutiaActions extends sfActions
 	{
 		$request->checkCSRFProtection();
 
-		$this->forward404Unless($barrutia = Doctrine::getTable('barrutia')->find(array($request->getParameter('id'))), sprintf('Object barrutia does not exist (%s).', $request->getParameter('id')));
+		$this->forward404Unless($barrutia = Doctrine_Core::getTable('barrutia')->find(array($request->getParameter('id'))), sprintf('Object barrutia does not exist (%s).', $request->getParameter('id')));
 		$barrutia->delete();
 
 		$this->redirect('barrutia/index');

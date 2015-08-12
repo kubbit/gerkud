@@ -47,7 +47,7 @@ class ZerrendatuaForm extends sfForm
 			(
 				'model' => 'Klasea',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Klasea')->createQuery('k')
+				'query' => Doctrine_Core::getTable('Klasea')->createQuery('k')
 					->leftJoin('k.Translation t WITH t.lang = ?', $culture)
 					->orderBy('t.izena ASC')
 			)),
@@ -55,7 +55,7 @@ class ZerrendatuaForm extends sfForm
 			(
 				'model' => 'Saila',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Saila')->createQuery('s')
+				'query' => Doctrine_Core::getTable('Saila')->createQuery('s')
 					->leftJoin('s.Translation t WITH t.lang = ?', $culture)
 					->orderBy('t.name ASC')
 			)),
@@ -64,7 +64,7 @@ class ZerrendatuaForm extends sfForm
 			(
 				'model' => 'Mota',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Mota')->createQuery('m')
+				'query' => Doctrine_Core::getTable('Mota')->createQuery('m')
 					->leftJoin('m.Translation t WITH t.lang = ?', $culture)
 					->orderBy('t.izena ASC')
 			)),
@@ -80,35 +80,35 @@ class ZerrendatuaForm extends sfForm
 			(
 				'model' => 'Barrutia',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Barrutia')->createQuery('b')
+				'query' => Doctrine_Core::getTable('Barrutia')->createQuery('b')
 					->orderBy('b.izena ASC')
 			)),
 			'auzoa' => new sfWidgetFormDoctrineChoice(array
 			(
 				'model' => 'Auzoa',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Auzoa')->createQuery('a')
+				'query' => Doctrine_Core::getTable('Auzoa')->createQuery('a')
 					->orderBy('a.izena ASC')
 			)),
 			'kalea' => new sfWidgetFormDoctrineChoice(array
 			(
 				'model' => 'Kalea',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Kalea')->createQuery('k')
+				'query' => Doctrine_Core::getTable('Kalea')->createQuery('k')
 					->orderBy('k.izena ASC')
 			)),
 			'eraikina' => new sfWidgetFormDoctrineChoice(array
 			(
 				'model' => 'Eraikina',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Eraikina')->createQuery('e')
+				'query' => Doctrine_Core::getTable('Eraikina')->createQuery('e')
 					->orderBy('e.izena ASC')
 			)),
 			'egoera' => new sfWidgetFormDoctrineChoice(array
 			(
 				'model' => 'Egoera',
 				'add_empty' => '--',
-				'query' => Doctrine::getTable('Egoera')->createQuery('e')
+				'query' => Doctrine_Core::getTable('Egoera')->createQuery('e')
 					->leftJoin('e.Translation t WITH t.lang = ?', $culture)
 					->orderBy('e.id ASC')
 			)),

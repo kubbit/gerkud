@@ -20,7 +20,7 @@ class erlazioakActions extends sfActions
 	public function executeIndex(sfWebRequest $request)
 	{
 		//$this->forward('default', 'module');
-		$this->erlazioak = Doctrine::getTable('erlazioak')
+		$this->erlazioak = Doctrine_Core::getTable('erlazioak')
 		     ->createQuery('a')
 		     ->execute();
 	}
