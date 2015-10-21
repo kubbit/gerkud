@@ -588,7 +588,15 @@ class gertakariaActions extends sfActions
 
 		$html .= '<tr>';
 		if (in_array('langilea', $configEremuak))
-			$html .= '<td>' . $gertakaria->getLangilea() . '</td>';
+		{
+			$langilea = '';
+			if (sfConfig::get('app_gerkud_izena_eta_abizena'))
+				$langilea = $gertakaria->getLangilea();
+			elseif ($gertakaria->getLangilea() != '')
+				$langilea = sprintf('%s (%s %s)', $gertakaria->getLangilea(), $gertakaria->getLangilea()->getFirstName(), $gertakaria->getLangilea()->getLastName());
+
+			$html .= '<td>' . $langilea . '</td>';
+		}
 
 		if (in_array('abisuanork', $configEremuak))
 			$html .= '<td>' . $gertakaria->getAbisuaNork() . '</td>';

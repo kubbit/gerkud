@@ -140,7 +140,7 @@ class horkonponActions extends sfActions
 
 			if (array_key_exists('helbidea', $array))
 			{
-				$this->geo->setTestua($array['helbidea']);
+				$this->geo->setTestua(substr($array['helbidea'], 0, 50));
 
 				$kalea = Doctrine_Core::getTable('Kalea')->getKaleaGoogle($array['helbidea']);
 				if ($kalea)
@@ -225,7 +225,7 @@ class horkonponActions extends sfActions
 			$this->geo->setZehaztasuna($gps['accuracy']);
 
 			if (array_key_exists('address', $mezua) && array_key_exists('address', $mezua['address']))
-				$this->geo->setTestua(sprintf('HorKonpon: %s', $mezua['address']['address']));
+				$this->geo->setTestua(substr(sprintf('HorKonpon: %s', $mezua['address']['address']), 0, 50));
 			else
 				$this->geo->setTestua('HorKonpon');
 

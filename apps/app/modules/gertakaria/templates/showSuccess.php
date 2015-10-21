@@ -470,7 +470,7 @@
 		 . '</div>',
 		 __('ID'), $gertakaria->getId(),
 		 __('Laburpena'), $gertakaria->getLaburpena(),
-		 __('Deskribapena'), $gertakaria->getDeskribapena());
+		 __('Deskribapena'), str_replace(array("\r", "\n"), "", $gertakaria->getDeskribapena()));
 		$gMapMarker->setCustomProperty('infoEdukia', $infoHTML);
 		$gMapMarker->addHtmlInfoWindow($info_window);
 
