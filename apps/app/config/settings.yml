@@ -43,7 +43,7 @@ all:
   .actions:
     secure_module:          sfGuardAuth
     secure_action:          secure
-    login_module:           bhLDAPAuth
+    login_module:           login
     login_action:           signin
     error_400_module:       erroreak
     error_400_action:       error

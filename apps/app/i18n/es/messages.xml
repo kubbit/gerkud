@@ -796,6 +796,22 @@
         <source>Jatorrizko sail bakoitzeko ebaztutako gertakarien egun batazbestekoa</source>
 	<target>Promedio de dias de resolución de incidencias por cada departamento de origen</target>
       </trans-unit>
+      <trans-unit id="213">
+        <source>Erabiltzailea ala pasahitza ez da zuzena.</source>
+        <target>El usuario y/o la contraseña no son válidos</target>
+      </trans-unit>
+      <trans-unit id="214">
+        <source>Erabiltzaile izena</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit id="215">
+        <source>Gogoratu</source>
+        <target>Recordar</target>
+      </trans-unit>
+      <trans-unit id="216">
+        <source>Sartu</source>
+        <target>Entrar</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

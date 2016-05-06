@@ -1,28 +1,36 @@
 <?php use_helper('I18N') ?>
 <?php $LDAP_config = bhLDAP::getConfig(); ?>
+<div id="sf_admin_container">
 
-<form class="login" method="post" action="<?php echo url_for('@bh_ldap_signin'); ?>">
-<?php if (sfConfig::get('app_logotipoa')): ?>
-	<?php echo image_tag('logoa.png', array('alt' => 'Logo')); ?>
-<?php endif; ?>
+<div id="sf_guard_auth_form">
+<?php echo form_tag('@bh_ldap_signin') ?>
 
-	<fieldset>
-		<legend><?php echo __('Saioa hasi'); ?></legend>
+    <h1>Log In</h1>
 
-<?php if ($form->hasErrors() || $form->hasGlobalErrors()): ?>
-		<ul class="erroreak">
-			<li><?php echo $form['username']->getError(); ?></li>
-		</ul>
-<?php endif; ?>
+  <fieldset>
 
-		<div class="field">
-			<label for="signin_username"><?php echo __('Erabiltzaile izena'); ?>:</label>
-			<?php echo $form['username']->render(array('autofocus' => 'autofocus')); ?>
-		</div>
-		<div class="field">
-			<label for="signin_password"><?php echo __('Pasahitza'); ?>:</label>
-			<?php echo $form['password']->render(); ?>
-		</div>
-	</fieldset>
-	<input type="submit" class="botoia" value="<?php echo __('Sartu'); ?>" />
-</form>
+	<table>
+	  <tr>
+	    <th><label for="signin_username">Active Directory username</label></th>
+      <td>
+<?php echo $form['username']->renderError()  ?>
+<?php echo $form['username']->render() ?>
+	      <?php echo $LDAP_config['adLDAP']['account_suffix'] ;  ?></td>
+	      </tr>
+    <?php echo $form['password']->renderRow() ?>
+    <?php echo $form['remember']->renderRow() ?>
+
+	</table>
+
+  </fieldset>
+
+
+      <ul class="sf_admin_actions">
+	<li class="float-right">
+	  <input type="submit" value="<?php echo __('Log In') ?>" class="sf_admin_action_save" />
+	</li>
+      </ul>
+
+    </form>
+    </div>
+  </div>

@@ -21,21 +21,6 @@ class bhLDAPAuthActions extends BasesfGuardAuthActions
     bhLDAP::debug("########  hello bhLDAPAuthActions::executeSignin");
 
     $user = $this->getUser();
-
-	if (!$request->getParameter('sf_culture'))
-	{
-		if ($this->getUser()->isFirstRequest())
-		{
-			$culture = $request->getPreferredCulture(array('eu', 'es'));
-			$this->getUser()->setCulture($culture);
-			$this->getUser()->isFirstRequest(false);
-		}
-		else
-		{
-			$culture = $this->getUser()->getCulture();
-		}
-	}
-
     if ($user->isAuthenticated())
     {
       bhLDAP::debug("########  logged in!  redirectifying to homepage");
@@ -74,8 +59,8 @@ class bhLDAPAuthActions extends BasesfGuardAuthActions
       }
       else {
 	bhLDAP::debug("##### what??  signin form is NOT valid");
-      }
-
+      }	
+    
     }
     else
     {
