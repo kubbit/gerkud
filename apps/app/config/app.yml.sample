@@ -42,6 +42,7 @@ all:
     eskaerak: [created_at DESC]
     gertakariak: [lehentasuna_id DESC, created_at DESC]
   gerkud:
+    hizkuntzak: [eu, es]
     eremuak: [id, laburpena, klasea, mota, azpimota, abisuanork, egoera, saila, langilea, auzoa, kalea, kale_zbkia, deskribapena, ixte_data, hasiera_aurreikusia, amaiera_aurreikusia, lehentasuna, jatorrizkosaila, eraikina, created_at, updated_at]
     derrigorrezkoak: [id, created_at, laburpena, mota, lehentasuna]
     kopia_zehatza: true

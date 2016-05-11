@@ -51,13 +51,19 @@
 						<li><?php echo link_to(__('Nire datuak'), 'langilea') ?></li>
 	<?php endif; ?>
 						<li><a target="_blank" href="<?php echo sprintf('/doc/Eskuliburua_%s.pdf', $sf_user->getCulture()); ?>"><?php echo __('Eskuliburua'); ?></a></li>
+	<?php if (sfConfig::get('app_gerkud_hizkuntzak') == null || count(sfConfig::get('app_gerkud_hizkuntzak')) > 1): ?>
 						<li class="menua3">
 							<a><?php echo __('Hizkuntza'); ?></a>
 							<ul>
+		<?php if (sfConfig::get('app_gerkud_hizkuntzak') == null || in_array('eu', sfConfig::get('app_gerkud_hizkuntzak'))): ?>
 								<li><a href="?sf_culture=eu"><?php echo __('Euskera'); ?></a></li>
+		<?php endif; ?>
+		<?php if (sfConfig::get('app_gerkud_hizkuntzak') == null || in_array('es', sfConfig::get('app_gerkud_hizkuntzak'))): ?>
 								<li><a href="?sf_culture=es"><?php echo __('Gaztelera'); ?></a></li>
+		<?php endif; ?>
 							</ul>
 						</li>
+	<?php endif; ?>
 						<li><?php echo link_to(__('Saioa amaitu'), 'sf_guard_signout') ?></li>
 					</ul>
 				</li>
