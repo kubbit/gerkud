@@ -42,13 +42,13 @@ class zerrendatuActions extends sfActions
 	{
 		$configEremuak = sfConfig::get('app_gerkud_eremuak');
 
-		$config = sfYaml::load(sfConfig::get("sf_app_config_dir") . '/pdf_configs.yml');
+		$config = sfTCPDFPluginConfigHandler::loadConfig();
 		// 'L' = Landscape orientation
 		$pdf = new GerkudPDF('L');
 		$pdf->SetFont('FreeSerif', '', 10);
 		$pdf->SetMargins(PDF_MARGIN_LEFT / 2, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT / 2);
 		$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->SetHeaderData($config['default']['PDF_HEADER_LOGO'], $config['default']['PDF_HEADER_LOGO_WIDTH'], utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
 		$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
@@ -181,6 +181,19 @@ class zerrendatuActions extends sfActions
 			$parametroak[':egoera'] = $this->formularioa['egoera'];
 
 			$strEgoera = Doctrine_Core::getTable('Egoera')->find(array($this->formularioa['egoera']))->getIzena();
+		}
+
+		if (sfConfig::get('app_horkonpon_saila_bakarrik'))
+		{
+			$taldeak = sfContext::getInstance()->getUser()->getguardUser()->getGroups();
+			$taldeakId = Array();
+			foreach ($taldeak as $taldea)
+				array_push($taldeakId, $taldea->getId());
+
+			if (empty($taldeakId))
+				array_push($condiciones, '(g.herritarrena IS NULL OR g.saila_id IS NULL)');
+			else
+				array_push($condiciones, sprintf('(g.herritarrena IS NULL OR g.saila_id IS NOT NULL OR (g.herritarrena = 1 AND g.saila_id IN (%s)))', implode(',', $taldeakId)));
 		}
 
 		$htmlIragazkiak = '<table>';

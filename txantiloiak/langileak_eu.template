@@ -1,74 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Gerkud</title>
+		<title>[Gertakaria #[id]] [laburpena] ([ekintza])</title>
+
 		<style type="text/css">
-table
+.langilea
 {
-	border: 0;
+	font-weight: bold;
 }
-th
+.ekintza
 {
-	text-align: left;
+	display: block;
+	font-style: italic;
+	margin-bottom: 1em;
 }
 .aldaketa
 {
-	display: [css-aldaketa];
+	display: block;
+	margin: 0.5em;
+	white-space: pre-wrap;
+}
+.firma
+{
+	display: block;
+	margin-top: 1em;
 }
 		</style>
 	</head>
 	<body>
-		<table>
-			<tr>
-				<td colspan="2">
-					<img src="[logotipoa]" alt="logotipoa" />
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<hr />
-					<br />
-				</th>
-			</tr>
-			<tr>
-				<th>
-					<b>Gertakariaren kodea:</b>
-				</th>
-				<td>[id]</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<b>Gertakariaren deskribapena:</b>
-				</th>
-			</tr>
-			<tr>
-				<td colspan="2">[deskribapena]</td>
-			</tr>
-		</table>
+		<div class="ekintza">[ekintza] &lt;<span class="langilea">[langilea]&gt;</span>:</div>
 
-		<br />
+		<div class="aldaketa">[aldaketa]</div>
 
-		<p class="aldaketa">Gertakari honek ondorengo aldaketa izan du:</p>
-
-		<table>
-			<tr class="aldaketa">
-				<th>
-					<b>[ekintza]:</b>
-				</th>
-				<td>[aldaketa]</td>
-			</tr>
-			<tr>
-				<th>
-					<b>Nork egin du:</b>
-				</th>
-				<td>[langilea]</td>
-			</tr>
-		</table>
-
-		<br />
-		<br />
-		<hr />
-
-		<p>EZ ERANTZUN MEZU HONI. Mezu hau automatikoki bidali dizu GERKUD gertakarien kudeaketa aplikazioak zuk horrela konfiguratuta daukazulako. Ez baduzu horrelako mezurik jaso nahi, aldatu konfigurazioa "nire datuak" atalean</p>
+		<div class="firma" style="display: inline-block; border-left: 3px solid #c83b2b; padding: 0 1em;">
+			<span style="display: block;">Gertakarien Kudeaketa</span>
+		</div>
 	</body>
 </html>

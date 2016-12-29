@@ -103,6 +103,10 @@ class gertakariaActions extends sfActions
 					$zutabea->izena = __('Abisua nork');
 					$zutabea->klasea = 'abisuanork';
 					break;
+				case 'kontaktua':
+					$zutabea->izena = __('Abisua nork');
+					$zutabea->klasea = 'kontaktua';
+					break;
 				case 'egoera':
 					$zutabea->izena = __('Egoera');
 					$zutabea->klasea = 'egoera';
@@ -154,6 +158,10 @@ class gertakariaActions extends sfActions
 				case 'jatorrizkosaila':
 					$zutabea->izena = __('Jatorrizko Saila');
 					$zutabea->klasea = 'jatorrizkosaila';
+					break;
+				case 'espedientea':
+					$zutabea->izena = __('Espedientea');
+					$zutabea->klasea = 'espedientea';
 					break;
 				case 'eraikina':
 					$zutabea->izena = __('Eraikina');
@@ -223,6 +231,9 @@ class gertakariaActions extends sfActions
 					case 'abisuanork':
 						$balioa = $fila->getAbisuaNork();
 						break;
+					case 'kontaktua':
+						$balioa = sprintf('%s %s', $fila->getKontaktua()->getIzena(), $fila->getKontaktua()->getAbizenak());
+						break;
 					case 'egoera':
 						$balioa = $fila->getEgoera();
 						break;
@@ -275,6 +286,9 @@ class gertakariaActions extends sfActions
 						break;
 					case 'jatorrizkosaila':
 						$balioa = $fila->getJatorrizkoSaila();
+						break;
+					case 'espedientea':
+						$balioa = $fila->getEspedientea();
 						break;
 					case 'eraikina':
 						$balioa = $fila->getEraikina();
@@ -497,12 +511,12 @@ class gertakariaActions extends sfActions
 		$configEremuak = sfConfig::get('app_gerkud_eremuak');
 
 		$gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id')));
-		$config = sfYaml::load(sfConfig::get("sf_app_config_dir") . '/pdf_configs.yml');
+		$config = sfTCPDFPluginConfigHandler::loadConfig();
 		$pdf = new GerkudPDF();
 		$pdf->SetFont("FreeSerif", "", 12);
 		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 		$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->SetHeaderData($config['default']['PDF_HEADER_LOGO'], $config['default']['PDF_HEADER_LOGO_WIDTH'], utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
 		$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
@@ -582,8 +596,8 @@ class gertakariaActions extends sfActions
 			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Erabiltzailea') . ':</th>';
 		if (in_array('abisuanork', $configEremuak))
 			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Abisua nork') . ':</th>';
-		if (in_array('hasiera_aurreikusia', $configEremuak))
-			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Hasiera aurreikusia') . ':</th>';
+		if (in_array('espedientea', $configEremuak))
+			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Espedientea') . ':</th>';
 		$html .= '</tr>';
 
 		$html .= '<tr>';
@@ -601,23 +615,27 @@ class gertakariaActions extends sfActions
 		if (in_array('abisuanork', $configEremuak))
 			$html .= '<td>' . $gertakaria->getAbisuaNork() . '</td>';
 
-		if (in_array('hasiera_aurreikusia', $configEremuak))
-			$html .= '<td>' . $gertakaria->getHasieraAurreikusia() . '</td>';
+		if (in_array('espedientea', $configEremuak))
+			$html .= '<td>' . $gertakaria->getEspedientea() . '</td>';
 		$html .= '</tr>';
 
-		if (in_array('amaiera_aurreikusia', $configEremuak))
+		if (in_array('hasiera_aurreikusia', $configEremuak) || in_array('amaiera_aurreikusia', $configEremuak))
 		{
 			$html .= '<tr>';
-			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Amaiera aurreikusia') . ':</th>';
+			if (in_array('hasiera_aurreikusia', $configEremuak))
+				$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Hasiera aurreikusia') . ':</th>';
+			if (in_array('amaiera_aurreikusia', $configEremuak))
+				$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Amaiera aurreikusia') . ':</th>';
 			$html .= '<th style="background-color: #CCC;font-weight: bold;"></th><th style="background-color: #CCC;font-weight: bold;"></th>';
 			$html .= '</tr>';
-		}
 
-		if (in_array('amaiera_aurreikusia', $configEremuak))
-		{
 			$html .= '<tr>';
-			$html .= '<td>' . $gertakaria->getAmaieraAurreikusia() . '</td>';
-			$html .= '<td>&nbsp;</td><td>&nbsp;</td>';
+			if (in_array('hasiera_aurreikusia', $configEremuak))
+				$html .= '<td>' . $gertakaria->getHasieraAurreikusia() . '</td>';
+
+			if (in_array('amaiera_aurreikusia', $configEremuak))
+				$html .= '<td>' . $gertakaria->getAmaieraAurreikusia() . '</td>';
+			$html .= '<td>&nbsp;</td>';
 			$html .= '</tr>';
 		}
 

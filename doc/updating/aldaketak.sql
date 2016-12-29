@@ -187,3 +187,28 @@ ALTER TABLE `saila_mota` DROP FOREIGN KEY `saila_mota_mota_id_mota_id`;
 ALTER TABLE `saila_mota` ADD CONSTRAINT `saila_mota_mota_id_mota_id` FOREIGN KEY (`mota_id`) REFERENCES `mota`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 ALTER TABLE `saila_mota` DROP FOREIGN KEY `saila_mota_saila_id_sf_guard_group_id`;
 ALTER TABLE `saila_mota` ADD CONSTRAINT `saila_mota_saila_id_sf_guard_group_id` FOREIGN KEY (`saila_id`) REFERENCES `sf_guard_group`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+/* v2.08 */
+ALTER TABLE gertakaria ADD
+ espedientea VARCHAR(12) NULL DEFAULT NULL;
+
+CREATE TABLE IF NOT EXISTS kontaktua_ohartaraztea
+(
+	id bigint(20) NOT NULL AUTO_INCREMENT,
+	ordena bigint(20) DEFAULT NULL,
+	PRIMARY KEY (id)
+);
+CREATE TABLE IF NOT EXISTS kontaktua_ohartaraztea_translation
+(
+	id bigint(20) NOT NULL DEFAULT '0',
+	modua varchar(100) NOT NULL,
+	lang char(2) NOT NULL DEFAULT '',
+	PRIMARY KEY (id,lang),
+	CONSTRAINT kontaktua_ohartaraztea_translation_id_kontaktua_ohartaraztea_id FOREIGN KEY (id) REFERENCES kontaktua_ohartaraztea (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+ALTER TABLE kontaktua
+ ADD abizenak VARCHAR(255) NULL,
+ ADD nan VARCHAR(9) NULL,
+ CHANGE COLUMN ohartarazi ohartarazi BIGINT NULL DEFAULT NULL,
+ ADD CONSTRAINT kontaktua_ohartarazi_kontaktua_ohartaraztea_id FOREIGN KEY (ohartarazi) REFERENCES kontaktua_ohartaraztea (id);

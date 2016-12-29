@@ -42,6 +42,11 @@ class GertakariaTable extends Doctrine_Table
 
 	public function getBilaketaEmaitzak($query1)
 	{
+		$taldeak = sfContext::getInstance()->getUser()->getguardUser()->getGroups();
+		$taldeakId = Array();
+		foreach ($taldeak as $taldea)
+			array_push($taldeakId, $taldea->getId());
+
 		if (!empty($query1))
 		{
 			$query = $query1['librea']['text'];
@@ -51,6 +56,14 @@ class GertakariaTable extends Doctrine_Table
 				$q = $this->createQuery('j');
 				if ($query != '')
 					$q->where('j.laburpena LIKE :query OR j.deskribapena LIKE :query OR j.abisuaNork LIKE :query', array(':query' => '%' . $query . '%'));
+
+				if (sfConfig::get('app_horkonpon_saila_bakarrik'))
+				{
+					if (empty($taldeakId))
+						$q->andWhere('(j.herritarrena IS NULL OR j.saila_id IS NULL)');
+					else
+						$q->andWhere(sprintf('(j.herritarrena IS NULL OR j.saila_id IS NOT NULL OR (j.herritarrena = 1 AND j.saila_id IN (%s)))', implode(',', $taldeakId)));
+				}
 
 				if ($query1['egoera_id']) $q->andWhere('j.egoera_id = :egoera', array(':egoera' => $query1['egoera_id']));
 				if (array_key_exists('klasea_id', $query1) && $query1['klasea_id']) $q->andWhere('j.klasea_id = :klasea', array(':klasea' => $query1['klasea_id']));
@@ -62,6 +75,7 @@ class GertakariaTable extends Doctrine_Table
 				if (array_key_exists('kalea_id', $query1) && $query1['kalea_id']) $q->andWhere('j.kalea_id = :kalea', array(':kalea' => $query1['kalea_id']));
 				if (array_key_exists('kale_zbkia', $query1) && $query1['kale_zbkia']['text']) $q->andWhere('j.kale_zbkia = :zbkia', array(':zbkia' => $query1['kale_zbkia']['text']));
 				if (array_key_exists('jatorrizkoSaila_id', $query1) && $query1['jatorrizkoSaila_id']) $q->andWhere('j.jatorrizkosaila_id = :jatorrizkosaila', array(':jatorrizkosaila' => $query1['jatorrizkoSaila_id']));
+				if (array_key_exists('espedientea', $query1) && $query1['espedientea']['text']) $q->andWhere('j.espedientea = :espedientea', array(':espedientea' => $query1['espedientea']['text']));
 				if (array_key_exists('eraikina_id', $query1) && $query1['eraikina_id']) $q->andWhere('j.eraikina_id = :eraikina', array(':eraikina' => $query1['eraikina_id']));
 
 				if ($query1['created_at_noiztik'])
@@ -83,14 +97,16 @@ class GertakariaTable extends Doctrine_Table
 		else
 		{
 			$lang = sfContext::getInstance()->getUser()->getguardUser()->getId();
-			$taldeak = sfContext::getInstance()->getUser()->getguardUser()->getGroups();
-			$taldeakId = Array();
-			foreach ($taldeak as $taldea)
-			{
-				array_push($taldeakId, $taldea->getId());
-			}
 
 			$where = 'j.egoera_id NOT IN (5, 1, 6)';
+
+			if (sfConfig::get('app_horkonpon_saila_bakarrik'))
+			{
+				if (empty($taldeakId))
+					$where .= ' AND (j.herritarrena IS NULL OR j.saila_id IS NULL)';
+				else
+					$where .= sprintf(' AND (j.herritarrena IS NULL OR j.saila_id IS NOT NULL OR (j.herritarrena = 1 AND j.saila_id IN (%s)))', implode(',', $taldeakId));
+			}
 
 			if (sfContext::getInstance()->getUser()->hasCredential(array('admins', 'gerkud'), false))
 				/* no añadir mas filtros */;

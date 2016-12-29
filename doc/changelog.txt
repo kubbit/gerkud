@@ -1,4 +1,19 @@
 ================================================================================
+  Version 2.08
+  2016-12-29  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Posibilidad de usar nuevos campos para datos de contacto
+* Añadido campo para almacenar el código de expediente
+* Correcciones en el mapa para que funcione con código de licencia de Google
+* Rediseño de la plantilla de mensajes de correo
+* Posibilidad de establecer que nunca se quiere notificar al ciudadano
+* Posibilidad de ocultar incidencias de HorKonpon a los que no son del
+  departamento asignado
+* Asignación automática de técnico y tipo/subtipo para las incidencias
+  enviadas a través de HorKonpon
+* Correcciones menores
+
+================================================================================
   Version 2.06
   2016-05-11  Kubbit Information Technology (http://kubbit.com)
 ================================================================================

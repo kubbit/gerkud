@@ -229,6 +229,47 @@
 <?php endif; ?>
 			</fieldset>
 
+<?php if (in_array('kontaktua_izena', $configEremuak)): ?>
+<?php
+$kontaktua = $gertakaria->getKontaktua();
+?>
+			<fieldset>
+				<div class="field">
+					<label><?php echo __('Abisua nork'); ?>:</label>
+					<span><?php echo sprintf('%s %s', $kontaktua->getIzena(), $kontaktua->getAbizenak()); ?></span>
+<?php if (in_array('kontaktua_nan', $configEremuak)): ?>
+					<label><?php echo __('NAN'); ?>:</label>
+					<span><?php echo $kontaktua->getNAN(); ?></span>
+<?php endif; ?>
+				</div>
+				<div class="field">
+<?php if (in_array('kontaktua_posta', $configEremuak)): ?>
+					<label><?php echo __('Posta-e'); ?>:</label>
+					<span><?php echo $kontaktua->getPosta(); ?></span>
+<?php endif; ?>
+<?php if (in_array('kontaktua_telefonoa', $configEremuak)): ?>
+					<label><?php echo __('Telefonoa'); ?>:</label>
+					<span><?php echo $kontaktua->getTelefonoa(); ?></span>
+<?php endif; ?>
+				</div>
+<?php if (in_array('kontaktua_ohartarazi', $configEremuak)): ?>
+				<div class="field">
+					<label><?php echo __('Ohartarazi'); ?>:</label>
+					<span><?php echo $kontaktua->getKontaktuaOhartaraztea(); ?></span>
+				</div>
+<?php endif; ?>
+			</fieldset>
+<?php endif; ?>
+
+<?php if (in_array('espedientea', $configEremuak)): ?>
+			<fieldset>
+				<div class="field">
+					<label><?php echo __('Espedientea'); ?>:</label>
+					<span><?php echo $gertakaria->getEspedientea(); ?></span>
+				</div>
+			</fieldset>
+<?php endif; ?>
+
 			<fieldset>
 <?php if (in_array('hasiera_aurreikusia', $configEremuak)): ?>
 				<div class="field">

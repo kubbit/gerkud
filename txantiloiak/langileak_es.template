@@ -1,74 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Gerkud</title>
+		<title>[Incidencia #[id]] [laburpena] ([ekintza])</title>
+
 		<style type="text/css">
-table
+.langilea
 {
-	border: 0;
+	font-weight: bold;
 }
-th
+.ekintza
 {
-	text-align: left;
+	display: block;
+	font-style: italic;
+	margin-bottom: 1em;
 }
 .aldaketa
 {
-	display: [css-aldaketa];
+	display: block;
+	margin: 0.5em;
+	white-space: pre-wrap;
+}
+.firma
+{
+	display: block;
+	margin-top: 1em;
 }
 		</style>
 	</head>
 	<body>
-		<table>
-			<tr>
-				<td colspan="2">
-					<img src="[logotipoa]" alt="logotipoa" />
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<hr />
-					<br />
-				</th>
-			</tr>
-			<tr>
-				<th>
-					<b>Código de incidencia:</b>
-				</th>
-				<td>[id]</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<b>Descripción de incidencia:</b>
-				</th>
-			</tr>
-			<tr>
-				<td colspan="2">[deskribapena]</td>
-			</tr>
-		</table>
+		<div class="ekintza">[ekintza] &lt;<span class="langilea">[langilea]&gt;</span>:</div>
 
-		<br />
+		<div class="aldaketa">[aldaketa]</div>
 
-		<p class="aldaketa">La incidencia ha tenido el siguiente cambio:</p>
-
-		<table>
-			<tr class="aldaketa">
-				<th>
-					<b>[ekintza]:</b>
-				</th>
-				<td>[aldaketa]</td>
-			</tr>
-			<tr>
-				<th>
-					<b>Realizado por:</b>
-				</th>
-				<td>[langilea]</td>
-			</tr>
-		</table>
-
-		<br />
-		<br />
-		<hr />
-
-		<p>NO CONTESTE A ESTE CORREO. Este mensaje ha sido enviado automáticamente a través del gestor de incidencias GERKUD por que así consta en su configuración. Si no desea volver a recibir mensajes como este, cambie su configuración en el apartado "mis datos"</p>
+		<div class="firma" style="display: inline-block; border-left: 3px solid #6699cc; padding: 0 1em;">
+			<span style="display: block;">Gertakarien Kudeaketa</span>
+		</div>
 	</body>
 </html>

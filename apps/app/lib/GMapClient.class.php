@@ -30,7 +30,7 @@ class GMapClient
 
   //const API_URL = 'http://maps.google.com/maps/geo?';
   const API_URL = 'https://maps.googleapis.com/maps/api/geocode/%s?key=%s&address=%s&sensor=false';
-  const JS_URL  = 'https://maps.google.com/maps/api/js?sensor=false';
+  const JS_URL  = 'https://maps.google.com/maps/api/js?sensor=false&key=%s';
 
   /**
    *
@@ -268,7 +268,7 @@ class GMapClient
    */
   public function getGoogleJsUrl($auto_load = true)
   {
-    $js_url = self::JS_URL;
+    $js_url = sprintf(self::JS_URL, $this->getAPIKey());
 
     return $js_url;
   }

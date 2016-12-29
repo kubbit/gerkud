@@ -17,6 +17,9 @@ class horkonponActions extends sfActions
 	const API_ERANTZUNA_ERROREA = -1;
 	const API_AZKEN_BERTSIOA = 2;
 
+	const OHARTARAZI_EZ = 0;
+	const OHARTARAZI_POSTA = 1;
+
 	public function executeIndex(sfWebRequest $request)
 	{
 		$erantzuna = array();
@@ -172,6 +175,8 @@ class horkonponActions extends sfActions
 		if (array_key_exists('date', $mezua))
 			$this->gertakaria->setCreatedAt($mezua['date']);
 
+		$langilea = null;
+
 		$erabiltzaileDatuak = array();
 		if (array_key_exists('user', $mezua))
 		{
@@ -181,20 +186,35 @@ class horkonponActions extends sfActions
 			if (array_key_exists('phone', $user))
 				array_push($erabiltzaileDatuak, $user['phone']);
 			if (array_key_exists('mail', $user))
+			{
 				array_push($erabiltzaileDatuak, $user['mail']);
 
-			if (count($erabiltzaileDatuak) > 0)
+				$langilea = Doctrine_Core::getTable('Langilea')->findOneByEmailAddress($user['mail']);
+				if (!$langilea)
+					$langilea = null;
+			}
+
+			if (count($erabiltzaileDatuak) > 0 && $langilea === null)
 			{
 				$kontaktua = new Kontaktua();
 				if (array_key_exists('fullname', $user))
 					$kontaktua->setIzena($user['fullname']);
+				if (array_key_exists('surnames', $user))
+					$kontaktua->setAbizenak($user['surnames']);
 				if (array_key_exists('phone', $user))
 					$kontaktua->setTelefonoa($user['phone']);
 				if (array_key_exists('mail', $user))
 					$kontaktua->setPosta($user['mail']);
+				if (array_key_exists('nid', $user))
+					$kontaktua->setNAN($user['nid']);
 
 				if (array_key_exists('notify', $user))
-					$kontaktua->setOhartarazi($user['notify']);
+				{
+					if ($user['notify'])
+						$kontaktua->setOhartarazi(self::OHARTARAZI_POSTA);
+					else
+						$kontaktua->setOhartarazi(self::OHARTARAZI_EZ);
+				}
 
 				if (array_key_exists('language', $user))
 					$kontaktua->setHizkuntza($user['language']);
@@ -210,7 +230,6 @@ class horkonponActions extends sfActions
 			$this->gertakaria->setDeskribapena($mezua['comments']);
 		}
 
-		$langilea = null;
 		$this->gertakaria->setLangilea($langilea);
 
 		if (array_key_exists('gps', $mezua))
@@ -242,6 +261,21 @@ class horkonponActions extends sfActions
 					$this->gertakaria->setBarrutiaId($kalea->getBarrutiaId());
 				if ($kalea->getAuzoaId())
 					$this->gertakaria->setAuzoaId($kalea->getAuzoaId());
+			}
+		}
+
+		if (array_key_exists('subtype', $mezua))
+		{
+			$this->gertakaria->setAzpimotaId($mezua['subtype']);
+
+			$mota = $this->gertakaria->getAzpimota()->getMotaId();
+			$this->gertakaria->setMotaId($mota);
+
+			$sailaMota = Doctrine_Core::getTable('SailaMota')->findOneByMotaId($mota);
+			if ($sailaMota !== null && $sailaMota->getSailaId() !== null)
+			{
+				$this->gertakaria->setSailaId($sailaMota->getSailaId());
+				$this->gertakaria->setEgoeraId(2);
 			}
 		}
 

@@ -14,17 +14,21 @@ abstract class BaseKontaktuaFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'izena'      => new sfWidgetFormFilterInput(),
+      'abizenak'   => new sfWidgetFormFilterInput(),
+      'nan'        => new sfWidgetFormFilterInput(),
       'posta'      => new sfWidgetFormFilterInput(),
       'telefonoa'  => new sfWidgetFormFilterInput(),
-      'ohartarazi' => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'ohartarazi' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('KontaktuaOhartaraztea'), 'add_empty' => true)),
       'hizkuntza'  => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
       'izena'      => new sfValidatorPass(array('required' => false)),
+      'abizenak'   => new sfValidatorPass(array('required' => false)),
+      'nan'        => new sfValidatorPass(array('required' => false)),
       'posta'      => new sfValidatorPass(array('required' => false)),
       'telefonoa'  => new sfValidatorPass(array('required' => false)),
-      'ohartarazi' => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'ohartarazi' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('KontaktuaOhartaraztea'), 'column' => 'id')),
       'hizkuntza'  => new sfValidatorPass(array('required' => false)),
     ));
 
@@ -47,9 +51,11 @@ abstract class BaseKontaktuaFormFilter extends BaseFormFilterDoctrine
     return array(
       'id'         => 'Number',
       'izena'      => 'Text',
+      'abizenak'   => 'Text',
+      'nan'        => 'Text',
       'posta'      => 'Text',
       'telefonoa'  => 'Text',
-      'ohartarazi' => 'Boolean',
+      'ohartarazi' => 'ForeignKey',
       'hizkuntza'  => 'Text',
     );
   }

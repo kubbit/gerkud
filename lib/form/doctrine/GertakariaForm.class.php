@@ -102,6 +102,20 @@ class GertakariaForm extends BaseGertakariaForm
 				'required' => (in_array('kalea', $configDerrigorrezkoak)) ? true : false
 			));
 		}
+		else
+		{
+			$this->widgetSchema['kalea_id'] = new sfWidgetFormDoctrineChoice(array
+			(
+				'model' => 'Kalea',
+				'add_empty' => '--',
+				'order_by' => array('izena', 'ASC')
+			));
+			$this->validatorSchema['kalea_id'] = new sfValidatorDoctrineChoice(array
+			(
+				'model' => 'Kalea',
+				'required' => (in_array('kalea', $configDerrigorrezkoak)) ? true : false
+			));
+		}
 
 		if (in_array('barrutia', $configEremuak))
 		{
@@ -214,6 +228,12 @@ class GertakariaForm extends BaseGertakariaForm
 			'required' => (in_array('jatorrizkosaila', $configDerrigorrezkoak)) ? true : false
 		));
 
+		$this->validatorSchema['espedientea'] = new sfValidatorString(array
+		(
+			'required' => (in_array('espedientea', $configDerrigorrezkoak)) ? true : false,
+			'max_length' => 12
+		));
+
 		$this->widgetSchema['klasea_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model' => 'Klasea',
@@ -304,6 +324,8 @@ class GertakariaForm extends BaseGertakariaForm
 		(
 			new sfValidatorCallback(array('callback' => array($this, 'postValidate')))
 		);
+
+		$this->embedRelation('Kontaktua');
 	}
 
 	public function postValidate($validator, $values)

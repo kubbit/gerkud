@@ -37,6 +37,7 @@ abstract class BaseGertakariaForm extends BaseFormDoctrine
       'eraikina_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Eraikina'), 'add_empty' => true)),
       'herritarrena'        => new sfWidgetFormInputCheckbox(),
       'kontaktua_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Kontaktua'), 'add_empty' => true)),
+      'espedientea'         => new sfWidgetFormInputText(),
       'created_at'          => new sfWidgetFormDateTime(),
       'updated_at'          => new sfWidgetFormDateTime(),
     ));
@@ -64,6 +65,7 @@ abstract class BaseGertakariaForm extends BaseFormDoctrine
       'eraikina_id'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Eraikina'), 'column' => 'id', 'required' => false)),
       'herritarrena'        => new sfValidatorBoolean(array('required' => false)),
       'kontaktua_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Kontaktua'), 'column' => 'id', 'required' => false)),
+      'espedientea'         => new sfValidatorString(array('max_length' => 12, 'required' => false)),
       'created_at'          => new sfValidatorDateTime(),
       'updated_at'          => new sfValidatorDateTime(),
     ));

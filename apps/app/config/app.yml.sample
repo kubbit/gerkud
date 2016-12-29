@@ -33,8 +33,10 @@ all:
   #Aukeratu daitezkeen zutabeen zerrenda osoa:
   #  id, laburpena, klasea, mota, azpimota, abisuanork, egoera, saila, langilea, barrutia, kalea,
   #  kale_zbkia, deskribapena, ixte_data, hasiera_aurreikusia, amaiera_aurreikusia, lehentasuna,
-  #  jatorrizkosaila, eraikina, created_at, updated_at, eraikinakalea, klaseamota,
+  #  jatorrizkosaila, espedientea, eraikina, created_at, updated_at, eraikinakalea, klaseamota,
   #  barrutiaeraikinakalealaburpena, egoerasaila
+  #  kontaktua_izena, kontaktua_abizenak, kontaktua_nan, kontaktua_posta, kontaktua_telefonoa, kontaktua_ohartarazi,
+  #  kontaktua
   zutabeak:
     eskaerak: [lehentasuna, id, created_at, mota, auzoa, eraikinakalea, laburpena, abisuanork]
     gertakariak: [lehentasuna, id, created_at, saila, auzoa, eraikinakalea, laburpena, egoera, abisuanork, updated_at]
@@ -52,4 +54,6 @@ all:
     hiritarrena_klasea_id: 99
     aurreikusia_aldatu_edozein: false
   horkonpon:
+    ohartarazi_kontaktua: true
+    saila_bakarrik: false
     pasahitza:

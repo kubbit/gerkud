@@ -15,7 +15,13 @@
 	<?php endforeach; ?>
 
 	<?php foreach($form->getErrorSchema()->getErrors() as $name => $error): ?>
+		<?php if ($error instanceof sfValidatorErrorSchema): ?>
+			<?php foreach($error->getErrors() as $subform_name => $subform_error): ?>
+	<li title="<?php echo sprintf('%s_%s', $name, $subform_name); ?>"><?php echo __($subform_error); ?></li>
+			<?php endforeach; ?>
+		<?php else: ?>
 	<li title="<?php echo $name; ?>"><?php echo __($error); ?></li>
+		<?php endif; ?>
 	<?php endforeach; ?>
 </ul>
 <?php endif; ?>
@@ -138,10 +144,55 @@
 				<?php echo $form['jatorrizkoSaila_id']->render(); ?>
 			</div>
 <?php endif; ?>
-<?php if (in_array('abisuanork', $configEremuak)): ?>
+<?php if (in_array('espedientea', $configEremuak)): ?>
+			<div id="espedientea" class="field">
+				<label for="gertakaria_espedientea"><?php echo __('Espedientea') ?>:<?php echo (in_array('espedientea', $configDerrigorrezkoak))?'*':'' ?></label>
+				<?php echo $form['espedientea']->render(); ?>
+			</div>
+<?php endif; ?>
+<?php if (in_array('abisuanork', $configEremuak) && !in_array('kontaktua_izena', $configEremuak)): ?>
 			<div id="abisuaNork" class="field">
 				<label for="gertakaria_abisuaNork"><?php echo __('Nork eman du abisua') ?>:<?php echo (in_array('abisuanork', $configDerrigorrezkoak))?'*':'' ?></label>
 				<?php echo $form['abisuaNork']->render(array('class' => 'luzea', 'rows' => 1)); ?>
+			</div>
+<?php endif; ?>
+		</fieldset>
+
+		<fieldset>
+<?php if (in_array('kontaktua_izena', $configEremuak)): ?>
+			<div id="Kontaktua_izena" class="field">
+				<label for="gertakaria_Kontaktua_izena"><?php echo __('Izena') ?>:<?php echo (in_array('kontaktua_izena', $configDerrigorrezkoak))?'*':'' ?></label>
+				<?php echo $form['Kontaktua']['izena']->render(); ?>
+			</div>
+<?php endif; ?>
+<?php if (in_array('kontaktua_abizenak', $configEremuak)): ?>
+			<div id="Kontaktua_abizenak" class="field">
+				<label for="gertakaria_Kontaktua_abizenak"><?php echo __('Abizenak') ?>:<?php echo (in_array('kontaktua_abizenak', $configDerrigorrezkoak))?'*':'' ?></label>
+				<?php echo $form['Kontaktua']['abizenak']->render(array('class' => 'luzea', 'rows' => 1)); ?>
+			</div>
+<?php endif; ?>
+<?php if (in_array('kontaktua_nan', $configEremuak)): ?>
+			<div id="Kontaktua_nan" class="field">
+				<label for="gertakaria_Kontaktua_nan"><?php echo __('NAN') ?>:<?php echo (in_array('kontaktua_nan', $configDerrigorrezkoak))?'*':'' ?></label>
+				<?php echo $form['Kontaktua']['nan']->render(); ?>
+			</div>
+<?php endif; ?>
+<?php if (in_array('kontaktua_posta', $configEremuak)): ?>
+			<div id="Kontaktua_posta" class="field">
+				<label for="gertakaria_Kontaktua_posta"><?php echo __('Posta-e') ?>:<?php echo (in_array('kontaktua_posta', $configDerrigorrezkoak))?'*':'' ?></label>
+				<?php echo $form['Kontaktua']['posta']->render(); ?>
+			</div>
+<?php endif; ?>
+<?php if (in_array('kontaktua_telefonoa', $configEremuak)): ?>
+			<div id="Kontaktua_telefonoa" class="field">
+				<label for="gertakaria_Kontaktua_telefonoa"><?php echo __('Telefonoa') ?>:<?php echo (in_array('kontaktua_telefonoa', $configDerrigorrezkoak))?'*':'' ?></label>
+				<?php echo $form['Kontaktua']['telefonoa']->render(); ?>
+			</div>
+<?php endif; ?>
+<?php if (in_array('kontaktua_ohartarazi', $configEremuak)): ?>
+			<div id="Kontaktua_ohartarazi" class="field">
+				<label for="gertakaria_Kontaktua_ohartarazi"><?php echo __('Ohartarazi') ?>:<?php echo (in_array('kontaktua_ohartarazi', $configDerrigorrezkoak))?'*':'' ?></label>
+				<?php echo $form['Kontaktua']['ohartarazi']->render(); ?>
 			</div>
 <?php endif; ?>
 		</fieldset>

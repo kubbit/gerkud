@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2014-10-16T10:10:46Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2016-05-25T14:50:15Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -782,19 +782,19 @@
       </trans-unit>
       <trans-unit id="209">
         <source>Irekiak</source>
-	<target>Abiertas</target>
+        <target>Abiertas</target>
       </trans-unit>
       <trans-unit id="210">
         <source>Jatorrizko sail bakoitzeko sortu diren gertakariak</source>
-	<target>Incidencias creadas por cada departamento de origen</target>
+        <target>Incidencias creadas por cada departamento de origen</target>
       </trans-unit>
       <trans-unit id="211">
         <source>Jatorrizko sail bakoitzeko ebatziak dauden gertakariak</source>
-	<target>Incidencias resueltas por cada departamento de origen</target>
+        <target>Incidencias resueltas por cada departamento de origen</target>
       </trans-unit>
       <trans-unit id="212">
         <source>Jatorrizko sail bakoitzeko ebaztutako gertakarien egun batazbestekoa</source>
-	<target>Promedio de dias de resolución de incidencias por cada departamento de origen</target>
+        <target>Promedio de dias de resolución de incidencias por cada departamento de origen</target>
       </trans-unit>
       <trans-unit id="213">
         <source>Erabiltzailea ala pasahitza ez da zuzena.</source>
@@ -811,6 +811,34 @@
       <trans-unit id="216">
         <source>Sartu</source>
         <target>Entrar</target>
+      </trans-unit>
+      <trans-unit id="217">
+        <source>Espedientea</source>
+        <target>Expediente</target>
+      </trans-unit>
+      <trans-unit id="218">
+        <source>Abizenak</source>
+        <target>Apellidos</target>
+      </trans-unit>
+      <trans-unit id="219">
+        <source>NAN</source>
+        <target>NIF</target>
+      </trans-unit>
+      <trans-unit id="220">
+        <source>Posta-e</source>
+        <target>Correo-e</target>
+      </trans-unit>
+      <trans-unit id="221">
+        <source>Telefonoa</source>
+        <target>Teléfono</target>
+      </trans-unit>
+      <trans-unit id="222">
+        <source>NAN ez da zuzena</source>
+        <target>El NIF no es correcto</target>
+      </trans-unit>
+      <trans-unit id="223">
+        <source>Posta elektronikoa ez da zuena</source>
+        <target>La dirección de correo electrónico no es válida</target>
       </trans-unit>
     </body>
   </file>

@@ -23,6 +23,7 @@ Gertakaria:
     eraikina_id: { type: integer, notnull: false }
     herritarrena: { type: boolean, notnull: false }
     kontaktua_id: { type: integer, notnull: false }
+    espedientea: { type: string(12), notnull: false }
   relations:
     Klasea: { onDelete: RESTRICT, local: klasea_id, foreign: id }
     Mota: { onDelete: RESTRICT, local: mota_id, foreign: id }
@@ -262,7 +263,22 @@ Erlazioak:
 Kontaktua:
   columns:
     izena: { type: string(255), notnull: false }
+    abizenak: { type: string(255), notnull: false }
+    nan: { type: string(9), notnull: false }
     posta: { type: string(100), notnull: false }
     telefonoa: { type: string(30), notnull: false }
-    ohartarazi: { type: boolean, notnull: false }
+    ohartarazi: { type: integer, notnull: false }
     hizkuntza: { type: string(2), notnull: false }
+  relations:
+    KontaktuaOhartaraztea:
+      local: ohartarazi
+      foreign: id
+      type: one
+
+KontaktuaOhartaraztea:
+  actAs:
+    I18n:
+      fields: [modua]
+  columns:
+    ordena: { type: integer, notnull: false }
+    modua: { type: string(100), notnull: true }

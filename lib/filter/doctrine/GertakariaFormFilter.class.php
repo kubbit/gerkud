@@ -128,5 +128,10 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 			'add_empty' => '--',
 			'query'     => Doctrine_Core::getTable('JatorrizkoSaila')->createQuery('j')->leftJoin('j.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
 		));
+
+		$this->widgetSchema['espedientea'] = new sfWidgetFormFilterInput(array
+		(
+			'with_empty' => false,
+		));
 	}
 }

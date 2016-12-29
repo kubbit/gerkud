@@ -95,7 +95,7 @@ class Iruzkina extends BaseIruzkina
 		$langilea = $this->getLangilea();
 		$nori = $gertakaria->getAbisuaNori($langilea, $egoera_aldaketa);
 		$mezua = $gertakaria->mezuaSortu(Gertakaria::TXANTILOIA_FITXATEGIA_LANGILEAK, $langilea, $ekintza, $aldaketa);
-		$gaia = sprintf('%s %d: %s', $this->getEkintza(), $gertakaria->getId(), $gertakaria->getLaburpena());
+		$gaia = sprintf('[%s #%d] %s (%s)', __('Gertakaria'), $gertakaria->getId(), $gertakaria->getLaburpena(), $this->getEkintza());
 
 		$gertakaria->mezuaBidali($nori, $gaia, $mezua, true);
 	}

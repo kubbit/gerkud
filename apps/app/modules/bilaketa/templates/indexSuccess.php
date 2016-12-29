@@ -111,12 +111,20 @@
 	<?php endif; ?>
 		</fieldset>
 <?php endif; ?>
-<?php if (in_array('jatorrizkosaila', $configEremuak)): ?>
+<?php if (in_array('jatorrizkosaila', $configEremuak) || in_array('espedientea', $configEremuak)): ?>
 		<fieldset>
+<?php if (in_array('jatorrizkosaila', $configEremuak)): ?>
 			<div id="jatorrizkoSaila_id" class="field">
 				<label for="gertakaria_filters_jatorrizkoSaila_id"><?php echo __('Jatorrizko Saila') ?>:</label>
 				<?php echo $filter['jatorrizkoSaila_id']->render(); ?>
 			</div>
+<?php endif; ?>
+<?php if (in_array('espedientea', $configEremuak)): ?>
+			<div id="espedientea" class="field">
+				<label for="gertakaria_filters_espedientea"><?php echo __('Espedientea') ?>:</label>
+				<?php echo $filter['espedientea']->render(); ?>
+			</div>
+<?php endif; ?>
 		</fieldset>
 <?php endif; ?>
 		<fieldset>

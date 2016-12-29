@@ -10,7 +10,11 @@ class loginActions extends bhLDAPAuthActions
 		{
 			if ($this->getUser()->isFirstRequest())
 			{
-				$culture = $request->getPreferredCulture(sfConfig::get('app_gerkud_hizkuntzak'));
+				$cultures = sfConfig::get('app_gerkud_hizkuntzak');
+				if ($cultures === null)
+					$cultures = array('eu', 'es');
+
+				$culture = $request->getPreferredCulture($cultures);
 				$this->getUser()->setCulture($culture);
 				$this->getUser()->isFirstRequest(false);
 			}

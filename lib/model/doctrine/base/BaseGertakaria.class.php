@@ -26,6 +26,7 @@
  * @property integer $eraikina_id
  * @property boolean $herritarrena
  * @property integer $kontaktua_id
+ * @property string $espedientea
  * @property Klasea $Klasea
  * @property Mota $Mota
  * @property Azpimota $Azpimota
@@ -66,6 +67,7 @@
  * @method integer             getEraikinaId()          Returns the current record's "eraikina_id" value
  * @method boolean             getHerritarrena()        Returns the current record's "herritarrena" value
  * @method integer             getKontaktuaId()         Returns the current record's "kontaktua_id" value
+ * @method string              getEspedientea()         Returns the current record's "espedientea" value
  * @method Klasea              getKlasea()              Returns the current record's "Klasea" value
  * @method Mota                getMota()                Returns the current record's "Mota" value
  * @method Azpimota            getAzpimota()            Returns the current record's "Azpimota" value
@@ -105,6 +107,7 @@
  * @method Gertakaria          setEraikinaId()          Sets the current record's "eraikina_id" value
  * @method Gertakaria          setHerritarrena()        Sets the current record's "herritarrena" value
  * @method Gertakaria          setKontaktuaId()         Sets the current record's "kontaktua_id" value
+ * @method Gertakaria          setEspedientea()         Sets the current record's "espedientea" value
  * @method Gertakaria          setKlasea()              Sets the current record's "Klasea" value
  * @method Gertakaria          setMota()                Sets the current record's "Mota" value
  * @method Gertakaria          setAzpimota()            Sets the current record's "Azpimota" value
@@ -219,6 +222,11 @@ abstract class BaseGertakaria extends sfDoctrineRecord
         $this->hasColumn('kontaktua_id', 'integer', null, array(
              'type' => 'integer',
              'notnull' => false,
+             ));
+        $this->hasColumn('espedientea', 'string', 12, array(
+             'type' => 'string',
+             'notnull' => false,
+             'length' => 12,
              ));
     }
 

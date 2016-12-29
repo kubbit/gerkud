@@ -14,6 +14,8 @@
 		$gMap->setCenter($coord->getLat(), $coord->getLng());
 		$gMap->setHeight('100%');
 		$gMap->setWidth('100%');
+
+		$hasMarkers = false;
 		?>
 		<?php foreach ($pager->getResults() as $gertakaria): ?>
 <?php
@@ -47,11 +49,17 @@
 				$ikonoa = sprintf('\'https://chart.googleapis.com/chart?chst=%s&chld=%s|%s|%s\'', 'd_map_pin_letter_withshadow', $gertakaria->getId(), 'ff8888', '000000');
 				$gMapMarker = new GMapMarker($latitudea, $longitudea, array('title' => $test, 'icon ' => $ikonoa));
 				$gMap->addMarker($gMapMarker);
+
+				$hasMarkers = true;
 			}
 ?>
 		<?php endforeach; ?>
 
-		<?php $gMap->centerOnMarkers(); ?>
+<?php
+		if ($hasMarkers)
+			$gMap->centerOnMarkers();
+?>
+
 		<?php include_map($gMap); ?>
 
 		<!-- Javascript included at the bottom of the page -->

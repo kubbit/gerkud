@@ -20,6 +20,7 @@ class Gertakaria extends BaseGertakaria
 	const TXANTILOIA_LOGOTIPOA = '[logotipoa]';
 
 	const TXANTILOIA_DATUAK_ID = '[id]';
+	const TXANTILOIA_DATUAK_LABURPENA = '[laburpena]';
 	const TXANTILOIA_DATUAK_DESKRIBAPENA = '[deskribapena]';
 	const TXANTILOIA_DATUAK_EKINTZA = '[ekintza]';
 	const TXANTILOIA_DATUAK_ALDAKETA = '[aldaketa]';
@@ -157,12 +158,17 @@ class Gertakaria extends BaseGertakaria
 	{
 		$langilea = $this->getLangilea();
 		$nori = $this->getAbisuaNori($langilea, true);
-		$mezua = $this->mezuaSortu(self::TXANTILOIA_FITXATEGIA_LANGILEAK, $langilea, null, null);
-		$gaia = sprintf('%s %d: %s', __('Eskaera berria'), $this->getId(), $this->getLaburpena());
+		$ekintza = __('Eskaera berria');
+		$aldaketa = $this->getDeskribapena();
+		$mezua = $this->mezuaSortu(self::TXANTILOIA_FITXATEGIA_LANGILEAK, $langilea, $ekintza, $aldaketa);
+		$gaia = sprintf('[%s #%d] %s (%s)', __('Gertakaria'), $this->getId(), $this->getLaburpena(), $ekintza);
 		$this->mezuaBidali($nori, $gaia, $mezua, true);
 	}
 	public function ohartaraziKontaktua()
 	{
+		if (!sfConfig::get('app_ohartarazi_kontaktua'))
+			return;
+
 		$kontaktuak = array();
 
 		$kontaktua = $this->getKontaktua();
@@ -212,6 +218,7 @@ class Gertakaria extends BaseGertakaria
 		$mezua = file_get_contents(sprintf('%s/%s_%s.template', self::TXANTILOIAK_PATH, $fitxategia, $culture));
 
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_ID, $this->getId(), $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_LABURPENA, $this->getLaburpena(), $mezua);
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_DESKRIBAPENA, $this->getDeskribapena(), $mezua);
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_EKINTZA, $ekintza, $mezua);
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_ALDAKETA, $aldaketa, $mezua);
