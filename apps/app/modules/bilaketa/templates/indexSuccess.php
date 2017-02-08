@@ -1,5 +1,5 @@
 <?php use_javascripts_for_form($filter); ?>
-<?php $configEremuak = sfConfig::get('app_gerkud_eremuak'); ?>
+<?php $configEremuak = sfConfig::get('gerkud_eremuak_gaituak'); ?>
 
 <?php if($filter->hasErrors() || $filter->hasGlobalErrors()): ?>
 <ul id="erroreak">

@@ -5,7 +5,7 @@ prod:
   user:
     class: myUser
     param:
-      timeout: 600
+      timeout: %GERKUD_SESSION_TIMEOUT%
   logger:
     class:   sfNoLogger
     param:
@@ -21,11 +21,11 @@ prod:
       transport:
         class: Swift_SmtpTransport
         param:
-          host:       smtp.example.org
-          port:       25
-          encryption: ~
-          username:   ~
-          password:   ~
+          host:       %GERKUD_SMTP_HOST%
+          port:       %GERKUD_SMTP_PORT%
+          encryption: %GERKUD_SMTP_SSL%
+          username:   %GERKUD_SMTP_USER%
+          password:   %GERKUD_SMTP_PASS%
 
 
 test:
@@ -47,7 +47,7 @@ dev:
   user:
     class: myUser
     param:
-      timeout: 600
+      timeout: %GERKUD_SESSION_TIMEOUT%
 #  mailer:
 #    param:
 #      delivery_strategy: realtime
@@ -60,11 +60,11 @@ dev:
       transport:
         class: Swift_SmtpTransport
         param:
-          host:       smtp.example.org
-          port:       25
-          encryption: ~
-          username:   ~
-          password:   ~
+          host:       %GERKUD_SMTP_HOST%
+          port:       %GERKUD_SMTP_PORT%
+          encryption: %GERKUD_SMTP_SSL%
+          username:   %GERKUD_SMTP_USER%
+          password:   %GERKUD_SMTP_PASS%
 
 
 

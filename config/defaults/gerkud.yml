@@ -1,0 +1,163 @@
+all:
+  # Posta zerbitzaria oharrak bidaltzeko
+  smtp:
+    host: smtp
+    port: 25
+    ssl: ~
+    user: ~
+    pass: ~
+
+  # Internet-era konektatu ahal izateko proxy helbidea.
+  # Adb.:
+  # proxy: 127.0.0.1:3128
+  proxy: ~
+
+  # Erabiltzaile eta talde baimenak LDAP zerbitzari bidez
+  ldap: true
+
+  # Gertakarietan erantsitako fitxategiak gordeko diren lekua
+  upload_dir: %SF_WEB_DIR%/uploads
+
+  session:
+    # Sesioa automatikoki itxi segundu kantitate hau pasatzen denean aktibitaterik gabe
+    timeout: 3600
+
+  mapa:
+    # Google Maps erabili aplikazioan
+    aktibatuta: true
+    # Google Maps-ek erabiliko duen jatorria kaleen koordenadak aurkitzeko
+    helbidea: 20004, Donostia-San Sebastián
+    # Google Maps-en API lizentzi gakoa
+    api_key:
+      default: ~
+
+  # Arakatzailean azalduko den izenburua
+  izenburua: Gerkud - Gertakarien Kudeaketa
+  # PDF-ak inprimatzerakoan azalduko den erakundea
+  erakundea: Erakundearen Izena
+  # PDF-ak inprimatzerakoan azalduko den goiburua
+  pdf_goiburua: Gertakari Zerrenda
+  # Erakundearen logotipoa
+  logotipoa: logoa.png
+  # Oharrak bidaliko dituen jatorrizko posta helbidea
+  abisuak_nork: gerkud@example.org
+  # Gertakariak pantailak gehienez azalduko diren erregistro kopurua orriko
+  gertakariak_orriko: 30
+  # Aplikazioan zehar erabiliko den data formatoa
+  data_formatoa: Y-m-d
+  # Aplikazioan erabilgarri izango diren hizkuntzak
+  hizkuntzak:
+    gaituak:
+      - eu
+      - es
+
+  # Sortze data aldatzeko aukera, 'true' aukerarik ez bada utziko
+  sortze_data_automatikoa: true
+  # Gertakari bat kopiatzerakoan, datu guztiak kopiatu ala txantiloi bezala erabili soilik
+  kopia_zehatza: true
+  # Erabiltzailearen izen osoa ala erabiltzaile izena soilik erabili
+  izena_eta_abizena: false
+  # Gertakari bat ixten denean lehentasuna 'arrunta' bezala jarri
+  ixterakoan_lehentasuna_berrezarri: false
+
+  baimenak:
+    # Gertakaria editatu dezakeen edozeinek aurreikusia eremuak aldatzeko aukera izango duten ala ez
+    aurreikusia_aldatu_edozein: false
+
+  balidazioak:
+    # Aurreikuspen datak etorkizunean dauden eta bestela logikarik duten balidatu
+    aurreikuspen_datak: true
+
+  zerrendak:
+    # Aukeratutako iragazkiak erakutsi zerrenden lehen orrian
+    iragazkiak_erakutsi: true
+
+  eremuak:
+    gaituak:
+      - id
+      - laburpena
+      - deskribapena
+      - lehentasuna
+      - mota
+#      - klaseamota
+      - azpimota
+      - klasea
+      - egoera
+      - saila
+#      - egoerasaila
+      - langilea
+#      - barrutia
+      - auzoa
+      - kalea
+      - kale_zbkia
+      - eraikina
+#      - eraikinakalea
+#      - barrutiaeraikinakalealaburpena
+      - hasiera_aurreikusia
+      - amaiera_aurreikusia
+      - jatorrizkosaila
+      - abisuanork
+#      - kontaktua_izena
+#      - kontaktua_abizenak
+#      - kontaktua_nan
+#      - kontaktua_posta
+#      - kontaktua_telefonoa
+#      - kontaktua_ohartarazi
+#      - kontaktua
+#      - espedientea
+      - ixte_data
+      - created_at
+      - updated_at
+
+    # Gertakaria sortu edo editatzerakoan gutxienez bete beharrezko eremuak
+    derrigorrezkoak:
+      - id
+      - created_at
+      - laburpena
+      - mota
+      - lehentasuna
+
+    # Eskaerak pantailan ikusgai diren zutabe zerrenda
+    eskaerak:
+      - lehentasuna
+      - id
+      - created_at
+      - mota
+      - auzoa
+      - eraikinakalea
+      - laburpena
+      - abisuanork
+
+    # Gertakariak pantailan ikusgai diren zutabe zerrenda
+    gertakariak:
+      - lehentasuna
+      - id
+      - created_at
+      - saila
+      - auzoa
+      - eraikinakalea
+      - laburpena
+      - egoera
+      - abisuanork
+      - updated_at
+
+  # Pantaila ezberdinetako gertakari zerrenden ordenaketa
+  ordenaketa:
+    eskaerak:
+      - created_at DESC
+
+    gertakariak:
+      - lehentasuna_id DESC
+      - created_at DESC
+
+  api:
+    # Ixterakoan ohartarazi gertakaria sortu duen pertsona
+    ohartarazi_kontaktua: false
+    # Automatikoki mota hau esleitu API-aren bidez sortutako gertakariei
+    #mota_id: 99
+    # Automatikoki klase hau esleitu API-aren bidez sortutako gertakariei
+    #klasea_id: 99
+    # API-aren bidez sortutako gertakariak dagokion sailak bakarrik ikusteko aukera
+    saila_bakarrik: false
+    # Beste aplikazioak API-ra konektatzeko erabili beharko duten gakoa
+    pasahitza: ~

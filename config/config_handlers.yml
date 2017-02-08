@@ -1,0 +1,14 @@
+config/defaults/app.yml:
+  class:    sfDefineEnvironmentConfigHandler
+  param:
+    prefix: app_
+
+config/defaults/gerkud.yml:
+  class:    sfDefineEnvironmentConfigHandler
+  param:
+    prefix: gerkud_
+
+config/gerkud.yml:
+  class:    sfDefineEnvironmentConfigHandler
+  param:
+    prefix: gerkud_

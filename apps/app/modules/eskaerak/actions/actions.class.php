@@ -22,7 +22,7 @@ class eskaerakActions extends sfActions
 		$e = Doctrine_Core::getTable('Gertakaria')->getEskaerak();
 		$this->eskaerak = $e->execute();
 
-		$this->zutabeakConfig = sfConfig::get('app_zutabeak_eskaerak');
+		$this->zutabeakConfig = sfConfig::get('gerkud_eremuak_eskaerak');
 		$this->zutabeak = array();
 		$this->eskaerenZutabeakSortu();
 
@@ -206,7 +206,7 @@ class eskaerakActions extends sfActions
 						$balioa = $fila->getDeskribapena();
 						break;
 					case 'ixte_data':
-						$balioa = date(sfConfig::get('app_data_formatoa'), strtotime($fila->getIxteData()));
+						$balioa = date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getIxteData()));
 						break;
 					case 'hasiera_aurreikusia':
 						$balioa = $fila->getHasieraAurreikusia();
@@ -241,10 +241,10 @@ class eskaerakActions extends sfActions
 						$balioa = $fila->getEraikina();
 						break;
 					case 'created_at':
-						$balioa = date(sfConfig::get('app_data_formatoa'), strtotime($fila->getCreatedAt()));
+						$balioa = date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getCreatedAt()));
 						break;
 					case 'updated_at':
-						$balioa = date(sfConfig::get('app_data_formatoa'), strtotime($fila->getUpdatedAt()));
+						$balioa = date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getUpdatedAt()));
 						break;
 					case 'eraikinakalea':
 						if ($fila->getEraikinaId())

@@ -46,18 +46,18 @@ class horkonponActions extends sfActions
 				$pasahitza = $request->getParameter('pasahitza');
 			else if ($request->getParameter('key') !== NULL)
 				$pasahitza = $request->getParameter('key');
-			$confPasahitza = sfConfig::get('app_horkonpon_pasahitza');
+			$confPasahitza = sfConfig::get('gerkud_api_pasahitza');
 			if ($confPasahitza && $confPasahitza !== $pasahitza)
 				throw new Exception('Atzipena ukatuta');
 
 			$this->gertakaria = new Gertakaria();
 			$this->gertakaria->setHerritarrena(true);
 
-			$mota = sfConfig::get('app_gerkud_hiritarrena_mota_id');
+			$mota = sfConfig::get('gerkud_api_mota_id');
 			if ($mota !== NULL)
 				$this->gertakaria->setMotaId($mota);
 
-			$klasea = sfConfig::get('app_gerkud_hiritarrena_klasea_id');
+			$klasea = sfConfig::get('gerkud_api_klasea_id');
 			if ($klasea !== NULL)
 				$this->gertakaria->setKlaseaId($klasea);
 

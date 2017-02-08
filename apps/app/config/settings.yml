@@ -40,8 +40,11 @@ all:
 
     # Enable the database manager
     use_database:           true
+
+    upload_dir: %GERKUD_UPLOAD_DIR%
+
   .actions:
-    secure_module:          sfGuardAuth
+    secure_module:          login
     secure_action:          secure
     login_module:           login
     login_action:           signin

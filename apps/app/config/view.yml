@@ -3,9 +3,9 @@
 
 default:
   metas:
-    title:        Gerkud - Gertakarien Kudeaketa
+    title:        %GERKUD_IZENBURUA%
 
-  stylesheets:    [main.css, mobile.css]
+  stylesheets:    [main.css, mobile.css, font-awesome.min.css]
 
   javascripts: [jquery-latest.js, jquery.tablesorter.js, gerkud.js]
 

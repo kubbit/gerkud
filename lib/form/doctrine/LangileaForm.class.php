@@ -19,6 +19,8 @@ class LangileaForm extends BaseLangileaForm
 		$this->widgetSchema['updated_at'] = new sfWidgetFormInputHidden();
 		$this->widgetSchema['last_login'] = new sfWidgetFormInputHidden();
 
+		$this->widgetSchema['password'] = new sfWidgetFormInputPassword();
+
 		$this->widgetSchema['ohartaraztea_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model' => 'Ohartaraztea',

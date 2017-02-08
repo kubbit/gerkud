@@ -1,6 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../lib/vendor/symfony/lib/autoload/sfCoreAutoload.class.php';
+$rootDir = dirname(dirname(filter_input(INPUT_SERVER, 'SCRIPT_FILENAME')));
+
+require_once $rootDir . '/lib/vendor/symfony/lib/autoload/sfCoreAutoload.class.php';
 
 sfCoreAutoload::register();
 

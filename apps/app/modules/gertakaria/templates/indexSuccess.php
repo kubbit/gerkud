@@ -39,8 +39,8 @@
 	<?php echo pager_navigation($pager, 'gertakaria/index') ?>
 </div>
 
-<?php if (!sfConfig::get('app_google_offline')): ?>
+<?php if (sfConfig::get('gerkud_mapa_aktibatuta')): ?>
 	<?php slot('mapa'); ?>
-		<li id="mapa" onclick="<?php echo sprintf('window.open(\'%s\', \'%s\', \'%s\')', url_for('gertakaria/mapa?page=' . $pager->getPage()), 'Planoa', 'width=805,height=600'); ?>"><?php echo __('Mapa'); ?></li>
+		<li id="mapa" onclick="<?php echo sprintf('window.open(\'%s\', \'%s\', \'%s\')', url_for('gertakaria/mapa?page=' . $pager->getPage()), 'Planoa', 'width=805,height=600'); ?>"><a><?php echo image_tag('map.png', array('alt' => __('Mapa'))); ?><?php echo __('Mapa'); ?></a></li>
 	<?php end_slot(); ?>
 <?php endif; ?>

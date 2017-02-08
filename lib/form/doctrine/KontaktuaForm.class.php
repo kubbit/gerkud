@@ -12,7 +12,7 @@ class KontaktuaForm extends BaseKontaktuaForm
 {
 	public function configure()
 	{
-		$configDerrigorrezkoak = sfConfig::get('app_gerkud_derrigorrezkoak');
+		$configDerrigorrezkoak = sfConfig::get('gerkud_eremuak_derrigorrezkoak');
 		$culture = sfContext::getInstance()->getUser()->getCulture();
 
 		$this->validatorSchema['izena'] = new sfValidatorString(array

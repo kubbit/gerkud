@@ -20,53 +20,58 @@
 		<div id="navIreki"></div>
 		<div id="nav">
 			<ul>
-	<?php if (sfConfig::get('app_logotipoa')): ?>
-				<li id="logoa"><?php echo image_tag('logoa.png', array('alt' => 'Logo')); ?></li>
+	<?php if (sfConfig::get('gerkud_logotipoa')): ?>
+				<li id="logoa"><?php echo image_tag(sfConfig::get('gerkud_logotipoa'), array('alt' => 'Logo')); ?></li>
 	<?php endif; ?>
 
-	<?php if (has_slot('mapa')): ?>
+<?php if ($sf_user->hasCredential(array('admins', 'gerkud', 'zerbitzu', 'arrunta'), false)): ?>
+
+		<?php if (has_slot('mapa')): ?>
 				<?php include_slot('mapa'); ?>
-	<?php endif; ?>
+		<?php endif; ?>
 
-				<li id="bilatu"><?php echo link_to(image_tag('Bilatu.png', array('alt' => 'Bilatu')), 'bilaketa/index', array('id' => 'erakutsiBilaketa')) ?></li>
-	<?php if ($helbidea != "gertakaria/new" && $helbidea != "gertakaria/create"): ?>
-				<li id="sortu"><?php echo link_to(__('Gertakaria Sortu'), 'gertakaria/new') ?></li>
-	<?php endif; ?>
-				<li><?php echo link_to(__('Eskaerak (%eskaerak%)', array('%eskaerak%' => Doctrine_Core::getTable('Gertakaria')->getEskaeraKopurua())), 'eskaerak/index') ?></li>
-				<li><?php echo link_to(__('Gertakariak'), 'gertakaria/index') ?></li>
-	<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
-				<li><?php echo link_to(__('Zerrendak'), 'zerrendatu/index') ?></li>
-				<li><?php echo link_to(__('Erabilera datuak'), 'datuak/index') ?></li>
-				<!--li><?php echo link_to(__('Egoerak'), 'egoera/index') ?></li>
-				<li><?php echo link_to(__('Sailak'), 'saila/index') ?></li>
-				<li><?php echo link_to(__('Kaleak'), 'kalea/index') ?></li-->
-	<?php endif; ?>
+				<li id="bilatu"><?php echo link_to(image_tag('bilatu.png', array('alt' => __('Bilatu'))) . __('Bilatu'), 'bilaketa/index', array('id' => 'erakutsiBilaketa')); ?></li>
+		<?php if ($helbidea != "gertakaria/new" && $helbidea != "gertakaria/create"): ?>
+				<li id="sortu"><?php echo link_to(image_tag('sortu.png', array('alt' => __('Gertakaria Sortu'))) . __('Gertakaria Sortu'), 'gertakaria/new'); ?></li>
+		<?php endif; ?>
+				<li><?php echo link_to(image_tag('eskaerak.png', array('alt' => __('Eskaerak'))) . __('Eskaerak (%eskaerak%)', array('%eskaerak%' => Doctrine_Core::getTable('Gertakaria')->getEskaeraKopurua())), 'eskaerak/index'); ?></li>
+				<li><?php echo link_to(image_tag('gertakariak.png', array('alt' => __('Gertakariak'))) . __('Gertakariak'), 'gertakaria/index'); ?></li>
+		<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
+				<li><?php echo link_to(image_tag('zerrendak.png', array('alt' => __('Zerrendak'))) . __('Zerrendak'), 'zerrendatu/index'); ?></li>
+				<li><?php echo link_to(image_tag('estatistikak.png', array('alt' => __('Erabilera datuak'))) . __('Erabilera datuak'), 'datuak/index'); ?></li>
+				<!--li><?php echo link_to(__('Egoerak'), 'egoera/index'); ?></li>
+				<li><?php echo link_to(__('Sailak'), 'saila/index'); ?></li>
+				<li><?php echo link_to(__('Kaleak'), 'kalea/index'); ?></li-->
+		<?php endif; ?>
 				<li class="menuaIreki menua2">
-					<a><img src="/images/asc.gif" alt="<?php echo __('Gehiago'); ?>" /></a>
+					<a><i class="fa fa-bars fa-2x" title="<?php echo __('Gehiago'); ?>"></i></a>
 					<ul>
-	<?php if ($sf_user->hasCredential('admins')): ?>
-						<li><?php echo link_to(__('Erabiltzaileak'), 'erabiltzaileak/index') ?></li>
-	<?php endif; ?>
-	<?php if (!$sf_user->hasCredential('admins')): ?>
-						<li><?php echo link_to(__('Nire datuak'), 'langilea') ?></li>
-	<?php endif; ?>
-						<li><a target="_blank" href="<?php echo sprintf('/doc/Eskuliburua_%s.pdf', $sf_user->getCulture()); ?>"><?php echo __('Eskuliburua'); ?></a></li>
-	<?php if (sfConfig::get('app_gerkud_hizkuntzak') == null || count(sfConfig::get('app_gerkud_hizkuntzak')) > 1): ?>
+		<?php if ($sf_user->hasCredential('admins')): ?>
+						<li><?php echo link_to(image_tag('erabiltzaileak.png', array('alt' => __('Erabiltzaileak'))) . __('Erabiltzaileak'), 'erabiltzaileak/index'); ?></li>
+		<?php endif; ?>
+		<?php if (!$sf_user->hasCredential('admins')): ?>
+						<li><?php echo link_to(image_tag('ezarpenak.png', array('alt' => __('Nire datuak'))) . __('Nire datuak'), 'langilea'); ?></li>
+		<?php endif; ?>
+						<li><a target="_blank" href="<?php echo sprintf('/doc/Eskuliburua_%s.pdf', $sf_user->getCulture()); ?>"><?php echo image_tag('eskuliburua.png', array('alt' => __('Eskuliburua'))) . __('Eskuliburua'); ?></a></li>
+		<?php if (sfConfig::get('gerkud_hizkuntzak_gaituak') == null || count(sfConfig::get('gerkud_hizkuntzak_gaituak')) > 1): ?>
 						<li class="menua3">
-							<a><?php echo __('Hizkuntza'); ?></a>
+							<a><?php echo image_tag('hizkuntza.png', array('alt' => __('Hizkuntza'))) . __('Hizkuntza'); ?></a>
 							<ul>
-		<?php if (sfConfig::get('app_gerkud_hizkuntzak') == null || in_array('eu', sfConfig::get('app_gerkud_hizkuntzak'))): ?>
+			<?php if (sfConfig::get('gerkud_hizkuntzak_gaituak') == null || in_array('eu', sfConfig::get('gerkud_hizkuntzak_gaituak'))): ?>
 								<li><a href="?sf_culture=eu"><?php echo __('Euskera'); ?></a></li>
-		<?php endif; ?>
-		<?php if (sfConfig::get('app_gerkud_hizkuntzak') == null || in_array('es', sfConfig::get('app_gerkud_hizkuntzak'))): ?>
+			<?php endif; ?>
+			<?php if (sfConfig::get('gerkud_hizkuntzak_gaituak') == null || in_array('es', sfConfig::get('gerkud_hizkuntzak_gaituak'))): ?>
 								<li><a href="?sf_culture=es"><?php echo __('Gaztelera'); ?></a></li>
-		<?php endif; ?>
+			<?php endif; ?>
 							</ul>
 						</li>
+		<?php endif; ?>
 	<?php endif; ?>
-						<li><?php echo link_to(__('Saioa amaitu'), 'sf_guard_signout') ?></li>
+						<li><?php echo link_to(image_tag('saioa-itxi.png', array('alt' => __('Saioa amaitu'))) . __('Saioa amaitu'), 'sf_guard_signout'); ?></li>
+	<?php if ($sf_user->hasCredential(array('admins', 'gerkud', 'zerbitzu', 'arrunta'), false)): ?>
 					</ul>
 				</li>
+	<?php endif; ?>
 			</ul>
 		</div>
 <?php endif; ?>

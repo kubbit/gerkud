@@ -1,8 +1,8 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-<?php $configEremuak = sfConfig::get('app_gerkud_eremuak'); ?>
-<?php $configDerrigorrezkoak = sfConfig::get('app_gerkud_derrigorrezkoak'); ?>
+<?php $configEremuak = sfConfig::get('gerkud_eremuak_gaituak'); ?>
+<?php $configDerrigorrezkoak = sfConfig::get('gerkud_eremuak_derrigorrezkoak'); ?>
 
 <?php
 	$formularioa_url = sprintf('gertakaria/%s%s', ($form->getObject()->isNew() ? 'create' : 'update'), (!$form->getObject()->isNew() ? '?id=' . $form->getObject()->getId() : ''));
@@ -46,15 +46,15 @@
 				<span class="motza"><?php echo $form->getObject()->getId(); ?></span>
 			</div>
 			<div id="created_at" class="field">
-	<?php if (sfConfig::get('app_sortze_data_automatikoa')): ?>
+	<?php if (sfConfig::get('gerkud_sortze_data_automatikoa')): ?>
 				<label><?php echo __('Irekiera data') ?>:<?php echo (in_array('created_at', $configDerrigorrezkoak))?'*':'' ?></label>
-				<?php echo date(sfConfig::get('app_data_formatoa'), strtotime($form->getObject()->getCreatedAt())); ?>
+				<?php echo date(sfConfig::get('gerkud_data_formatoa'), strtotime($form->getObject()->getCreatedAt())); ?>
 	<?php else: ?>
 				<label for="gertakaria_created_at"><?php echo __('Irekiera data') ?>:<?php echo (in_array('created_at', $configDerrigorrezkoak))?'*':'' ?></label>
 				<?php echo $form['created_at']->render(); ?>
 	<?php endif; ?>
 			</div>
-<?php elseif (!sfConfig::get('app_sortze_data_automatikoa')): ?>
+<?php elseif (!sfConfig::get('gerkud_sortze_data_automatikoa')): ?>
 			<div id="created_at" class="field">
 				<label for="gertakaria_created_at"><?php echo __('Irekiera data') ?>:<?php echo (in_array('created_at', $configDerrigorrezkoak))?'*':'' ?></label>
 				<?php echo $form['created_at']->render(); ?>
@@ -197,7 +197,7 @@
 <?php endif; ?>
 		</fieldset>
 
-<?php if (sfConfig::get('app_gerkud_aurreikusia_aldatu_edozein') || $sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
+<?php if (sfConfig::get('gerkud_baimenak_aurreikusia_aldatu_edozein') || $sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
 		<fieldset>
 	<?php if (in_array('hasiera_aurreikusia', $configEremuak)): ?>
 			<div id="hasiera_aurreikusia" class="field">

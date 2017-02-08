@@ -5,15 +5,15 @@
 
 <?php log_message('Gertakaria....', 'info') ?>
 
-<?php $configEremuak = sfConfig::get('app_gerkud_eremuak'); ?>
+<?php $configEremuak = sfConfig::get('gerkud_eremuak_gaituak'); ?>
 
 <ul id="orriak" class="orriak">
-	<li id="tabgertakaria" title="gertakaria"><?php echo __('Gertakaria'); ?></li>
-	<li id="tabhistorikoa" title="historikoa" class="<?php echo count($gertakaria->getIruzkinak()) > 0 ? '': 'ezgaituta'; ?>"><?php echo __('Historikoa'); ?></li>
-	<li id="tabiruzkina" title="iruzkina"><?php echo __('Iruzkina'); ?></li>
-	<li id="tabfitxategiak" title="fitxategiak"><?php echo __('Fitxategiak') . sprintf(' (%d)', count($gertakaria->getFitxategiak())); ?></li>
-	<li id="taberlazioak" title="erlazioak"><?php echo __('Bikoiztuak'); ?></li>
-	<li id="tabplanoa" title="planoa" class="<?php echo !sfConfig::get('app_google_offline') ? '': 'ezgaituta'; ?>"><?php echo __('Planoa'); ?></li>
+	<li id="tabgertakaria" title="gertakaria"><i class="fa fa-id-card-o"></i><span><?php echo __('Gertakaria'); ?></span></li>
+	<li id="tabhistorikoa" title="historikoa" class="<?php echo count($gertakaria->getIruzkinak()) > 0 ? '': 'ezgaituta'; ?>"><i class="fa fa-history"></i><span><?php echo __('Historikoa'); ?></span></li>
+	<li id="tabiruzkina" title="iruzkina"><i class="fa fa-comment-o"></i><span><?php echo __('Iruzkina'); ?></span></li>
+	<li id="tabfitxategiak" title="fitxategiak"><i class="fa fa-paperclip"></i><span><?php echo __('Fitxategiak') . sprintf(' (%d)', count($gertakaria->getFitxategiak())); ?></span></li>
+	<li id="taberlazioak" title="erlazioak"><i class="fa fa-chain"></i><span><?php echo __('Bikoiztuak'); ?></span></li>
+	<li id="tabplanoa" title="planoa" class="<?php echo sfConfig::get('gerkud_mapa_aktibatuta') ? '': 'ezgaituta'; ?>"><i class="fa fa-map-marker"></i><span><?php echo __('Planoa'); ?></span></li>
 </ul>
 
 <div id="edukgertakaria">
@@ -25,14 +25,14 @@
 			<!-- Baztertu -->
 			<a class="botoia" href="<?php echo url_for('gertakaria/egoera?id=' . $gertakaria->getId() . '&eg_id=6') ?>"
 			 onclick="return confirm('<?php echo __('Gertakaria baztertu nahi duzu?') ?>');">
-				<?php echo __('Baztertu') ?>
+				<i class="fa fa-remove"></i><?php echo __('Baztertu'); ?>
 			</a>
 
 		<?php log_message('Panela....', 'info'); ?>
 
 			<!-- Editatu -->
 			<a class="botoia" href="<?php echo url_for('gertakaria/edit?id=' . $gertakaria->getId()) ?>">
-				<?php echo __('Editatu') ?>
+				<i class="fa fa-pencil"></i><?php echo __('Editatu'); ?>
 			</a>
 	<?php endif; ?>
 <?php endif; ?>
@@ -55,21 +55,21 @@
 				</div>
 				<?php if ($gertakaria->getSailaId()) $form2->setDefault('saila_id', $gertakaria->getSailaId()); ?>
 				<?php echo $form2['saila_id']->render(); ?>
-				<input class="botoia" type="submit" value="<?php echo ($gertakaria->getEgoeraId() == 1) ? __('Gertakaria esleitu') : __('Berriz esleitu')?>" />
+				<button class="botoia" type="submit"><i class="fa fa-hand-o-right"></i><?php echo ($gertakaria->getEgoeraId() == 1) ? __('Gertakaria esleitu') : __('Berriz esleitu'); ?></button>
 			</form>
 	<?php endif; ?>
 <?php endif; ?>
 
 			<!-- Imprimatu -->
 			<a class="botoia" target="_blank" href="<?php echo url_for('gertakaria/inprimatu?id=' . $gertakaria->getId()) ?>">
-				<?php echo __('Inprimatu') ?>
+				<i class="fa fa-print"></i><?php echo __('Inprimatu'); ?>
 			</a>
 
 <?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false) || $sailakoa): ?>
 			<!-- Prozesuan jarri -->
 	<?php if ($gertakaria->getEgoeraId() == 2 || $gertakaria->getEgoeraId() == 3): ?>
 			<a class="botoia" href="<?php echo url_for('gertakaria/egoera?id=' . $gertakaria->getId() . '&eg_id=4') ?>">
-				<?php echo __('Prozesuan jarri') ?>
+				<i class="fa fa-wrench"></i><?php echo __('Prozesuan jarri'); ?>
 			</a>
 	<?php endif; ?>
 
@@ -77,7 +77,7 @@
 	<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false) || $sailakoa): ?>
 		<?php if ($gertakaria->getEgoeraId() == 4): ?>
 			<a class="botoia" href="<?php echo url_for('gertakaria/egoera?id=' . $gertakaria->getId() . '&eg_id=5') ?>">
-				<?php echo __('Itxi') ?>
+				<i class="fa fa-check-square-o"></i><?php echo __('Itxi'); ?>
 			</a>
 		<?php endif; ?>
 	<?php endif; ?>
@@ -102,14 +102,14 @@
 				</div>
 				<?php echo $form3['testua']->render(array('cols' => 18, 'rows' => 3)); ?>
 
-				<input type="submit" class="botoia" value="<?php echo __('Gertakaria berrireki') ?>" />
+				<button type="submit" class="botoia"><i class="fa fa-repeat"></i><?php echo __('Gertakaria berrireki'); ?></button>
 			</form>
 	<?php endif; ?>
 <?php endif; ?>
 
 			<!-- Gertakaria kopiatu -->
 			<a class="botoia" href="<?php echo url_for('gertakaria/kopiatu?id=' . $gertakaria->getId()) ?>">
-				<?php echo __('Kopiatu') ?>
+				<i class="fa fa-copy"></i><?php echo __('Kopiatu'); ?>
 			</a>
 		</div>
 	</div>
@@ -123,12 +123,12 @@
 				</div>
 				<div class="field">
 					<label><?php echo __('Irekiera data'); ?>:</label>
-					<span><?php echo date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getCreatedAt())); ?></span>
+					<span><?php echo date(sfConfig::get('gerkud_data_formatoa'), strtotime($gertakaria->getCreatedAt())); ?></span>
 				</div>
 <?php if (($gertakaria->getEgoeraId() == 5) || ($gertakaria->getEgoeraId() == 6)): ?>
 				<div class="field">
 					<label><?php echo __('Ixte data'); ?>:</label>
-					<span><?php echo date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getIxteData())); ?></span>
+					<span><?php echo date(sfConfig::get('gerkud_data_formatoa'), strtotime($gertakaria->getIxteData())); ?></span>
 				</div>
 <?php endif; ?>
 			</fieldset>
@@ -206,7 +206,7 @@
 <?php if (in_array('langilea', $configEremuak)): ?>
 				<div class="field">
 					<label><?php echo __('Erabiltzailea'); ?>:</label>
-<?php if (sfConfig::get('app_gerkud_izena_eta_abizena')): ?>
+<?php if (sfConfig::get('gerkud_izena_eta_abizena')): ?>
 					<span><?php echo $gertakaria->getLangilea(); ?></span>
 <?php elseif ($gertakaria->getLangilea() != ''): ?>
 					<span><?php echo sprintf('%s (%s %s)', $gertakaria->getLangilea(), $gertakaria->getLangilea()->getFirstName(), $gertakaria->getLangilea()->getLastName()); ?></span>
@@ -362,7 +362,7 @@ $kontaktua = $gertakaria->getKontaktua();
 		<tbody>
 	<?php foreach ($gertakaria->getIruzkinak() as $i => $iruzkina): ?>
 			<tr>
-				<td title="<?php echo __('Data'); ?>"><?php echo date(sfConfig::get('app_data_formatoa'), strtotime($iruzkina->getCreated_at())); ?></td>
+				<td title="<?php echo __('Data'); ?>"><?php echo date(sfConfig::get('gerkud_data_formatoa'), strtotime($iruzkina->getCreated_at())); ?></td>
 				<td title="<?php echo __('Nork'); ?>"><?php echo $iruzkina->getLangilea(); ?></td>
 				<td title="<?php echo __('Ekintza'); ?>"><?php echo $iruzkina->getEkintza(); ?></td>
 				<td title="<?php echo __('Iruzkina'); ?>"><?php echo $iruzkina->getTestua(); ?></td>
@@ -416,7 +416,7 @@ $kontaktua = $gertakaria->getKontaktua();
 		<ul>
 	<?php foreach ($gertakaria->getFitxategiak() as $i => $fitxategia): ?>
 			<li>
-				<a href="<?php echo sprintf('/uploads/FILES/%s/%s', $gertakaria->getId(), rawurlencode($fitxategia->getFitxategia())); ?>" target="_blank">
+				<a href="<?php echo sprintf('/%s/FILES/%s/%s', sfConfig::get('sf_upload_dir_name'), $gertakaria->getId(), rawurlencode($fitxategia->getFitxategia())); ?>" target="_blank">
 					<?php echo $fitxategia->getDeskribapena() . " (" . $fitxategia->getFitxategia() . ")"; ?>
 				</a>
 			</li>
@@ -458,11 +458,11 @@ $kontaktua = $gertakaria->getKontaktua();
 
 <!-- Planoak: -->
 <div id="edukplanoa">
-<?php if (!sfConfig::get('app_google_offline')): ?>
+<?php if (sfConfig::get('gerkud_mapa_aktibatuta')): ?>
 	<?php log_message('Planoak....', 'info'); ?>
 	<div class="mapa">
 <?php
-	$herria = sfConfig::get('app_google_helbidea');
+	$herria = sfConfig::get('gerkud_mapa_helbidea');
 
 	$gMap = new GMap();
 	$gMap->setParameter('onload_method', 'none');

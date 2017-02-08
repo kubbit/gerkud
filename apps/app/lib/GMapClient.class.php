@@ -29,8 +29,8 @@ class GMapClient
   protected $api_keys = null;
 
   //const API_URL = 'http://maps.google.com/maps/geo?';
-  const API_URL = 'https://maps.googleapis.com/maps/api/geocode/%s?key=%s&address=%s&sensor=false';
-  const JS_URL  = 'https://maps.google.com/maps/api/js?sensor=false&key=%s';
+  const API_URL = 'https://maps.googleapis.com/maps/api/geocode/%s?key=%s&address=%s';
+  const JS_URL  = 'https://maps.google.com/maps/api/js?key=%s';
 
   /**
    *
@@ -149,7 +149,7 @@ class GMapClient
   {
     if (is_null($api_keys) && class_exists('sfConfig'))
     {
-      $api_keys = sfConfig::get('app_google_maps_api_keys');
+      $api_keys = sfConfig::get('gerkud_mapa_api_key');
     }
 
     if (is_array($api_keys) && array_key_exists($domain, $api_keys))
@@ -197,11 +197,11 @@ class GMapClient
     //$apiURL = self::API_URL.'&output='.$format./*'&key='.$this->getAPIKey().*/'&q='.urlencode($address);
     $apiURL = sprintf(self::API_URL, $format, $this->getAPIKey(), urlencode($address));
 
-    if (sfConfig::get('app_proxy'))
+    if (sfConfig::get('gerkud_proxy'))
     {
         $aContext = array(
     	    'http' => array(
-    	        'proxy' => 'tcp://' . sfConfig::get('app_proxy'),
+    	        'proxy' => 'tcp://' . sfConfig::get('gerkud_proxy'),
     	        'request_fulluri' => true,
         		),
     	);

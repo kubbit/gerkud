@@ -166,7 +166,7 @@ class Gertakaria extends BaseGertakaria
 	}
 	public function ohartaraziKontaktua()
 	{
-		if (!sfConfig::get('app_ohartarazi_kontaktua'))
+		if (!sfConfig::get('gerkud_api_ohartarazi_kontaktua'))
 			return;
 
 		$kontaktuak = array();
@@ -222,7 +222,7 @@ class Gertakaria extends BaseGertakaria
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_DESKRIBAPENA, $this->getDeskribapena(), $mezua);
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_EKINTZA, $ekintza, $mezua);
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_ALDAKETA, $aldaketa, $mezua);
-		$mezua = str_replace(self::TXANTILOIA_DATUAK_SORTZE_DATA, date(sfConfig::get('app_data_formatoa'), strtotime($this->getCreatedAt())), $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_SORTZE_DATA, date(sfConfig::get('gerkud_data_formatoa'), strtotime($this->getCreatedAt())), $mezua);
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_LANGILEA , $langilea ? $langilea->getName() : '', $mezua);
 
 		if (!empty($ekintza))
@@ -246,7 +246,7 @@ class Gertakaria extends BaseGertakaria
 		else
 			$mezua->setTo($nori);
 
-		$mezua->setFrom(sfConfig::get('app_abisuak_nork'));
+		$mezua->setFrom(sfConfig::get('gerkud_abisuak_nork'));
 		$mezua->setSubject($gaia);
 
 		// Mezuaren gorputzan logotipoa ezarri bada, fitxategia erantsi

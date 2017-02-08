@@ -17,7 +17,7 @@ class Langilea extends BaseLangilea
  		if (is_null($this->getId()))
 			return '';
 
-		if (sfConfig::get('app_gerkud_izena_eta_abizena'))
+		if (sfConfig::get('gerkud_izena_eta_abizena'))
 			return trim($this->getFirstName().' '.$this->getLastName());
 		else
 			return $this->getUsername();

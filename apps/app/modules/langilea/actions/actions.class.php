@@ -35,7 +35,7 @@ class langileaActions extends sfActions
 		{
 			$langilea = $form->save();
 
-			$this->redirect('langilea/edit?id='.$langilea->getId());
+			$this->redirect('gertakaria/index');
 		}
 	}
 }

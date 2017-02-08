@@ -7,7 +7,9 @@
 //  die('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 //}
 
-require_once(dirname(__FILE__).'/../config/ProjectConfiguration.class.php');
+$rootDir = dirname(dirname(filter_input(INPUT_SERVER, 'SCRIPT_FILENAME')));
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('app', 'dev', true);
+require_once($rootDir . '/config/ProjectConfiguration.class.php');
+
+$configuration = ProjectConfiguration::getApplicationConfiguration('app', 'dev', true, $rootDir);
 sfContext::createInstance($configuration)->dispatch();

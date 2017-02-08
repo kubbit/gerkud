@@ -3,9 +3,9 @@
 
 <div id="planoOsoa">
 	<div class="mapa">
-<?php if (!sfConfig::get('app_google_offline')): ?>
+<?php if (sfConfig::get('gerkud_mapa_aktibatuta')): ?>
 		<?php
-		$herria = sfConfig::get('app_google_helbidea');
+		$herria = sfConfig::get('gerkud_mapa_helbidea');
 
 		$gMap = new GMap();
 		$gMap->setScroll('false');

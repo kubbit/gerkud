@@ -16,7 +16,7 @@ class GertakariaTable extends Doctrine_Table
 
 	public function getEskaerak()
 	{
-		$ordenaketa = sfConfig::get('app_ordenaketa_eskaerak');
+		$ordenaketa = sfConfig::get('gerkud_ordenaketa_eskaerak');
 		$q = Doctrine_Query::create()
 			->from('gertakaria j')
 			->where('j.egoera_id = ?', 1);
@@ -57,7 +57,7 @@ class GertakariaTable extends Doctrine_Table
 				if ($query != '')
 					$q->where('j.laburpena LIKE :query OR j.deskribapena LIKE :query OR j.abisuaNork LIKE :query', array(':query' => '%' . $query . '%'));
 
-				if (sfConfig::get('app_horkonpon_saila_bakarrik'))
+				if (sfConfig::get('gerkud_api_saila_bakarrik'))
 				{
 					if (empty($taldeakId))
 						$q->andWhere('(j.herritarrena IS NULL OR j.saila_id IS NULL)');
@@ -100,7 +100,7 @@ class GertakariaTable extends Doctrine_Table
 
 			$where = 'j.egoera_id NOT IN (5, 1, 6)';
 
-			if (sfConfig::get('app_horkonpon_saila_bakarrik'))
+			if (sfConfig::get('gerkud_api_saila_bakarrik'))
 			{
 				if (empty($taldeakId))
 					$where .= ' AND (j.herritarrena IS NULL OR j.saila_id IS NULL)';
@@ -122,7 +122,7 @@ class GertakariaTable extends Doctrine_Table
 			 ));
 		}
 
-		$ordenaketa = sfConfig::get('app_ordenaketa_gertakariak');
+		$ordenaketa = sfConfig::get('gerkud_ordenaketa_gertakariak');
 		if ($ordenaketa && count($ordenaketa) > 0)
 		{
 			$q->orderBy(implode(', ', $ordenaketa));

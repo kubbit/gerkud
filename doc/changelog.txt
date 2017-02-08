@@ -1,4 +1,16 @@
 ================================================================================
+  Version 2.10
+  2017-02-08  Kubbit Information Technology (http://kubbit.com)
+================================================================================
+* Simplificación de la configuración con nuevo fichero genérico
+  config/defaults/gerkud.yml y config/gerkud.yml para cambios locales
+* Posibilidad de usar autentificación propia de la aplicación sin necesidad de 
+  usar servidor LDAP
+* Añadidos iconos contextuales en menús y pantalla de visualización
+  (librerías Tango y Font Awesome)
+* Correcciones menores
+
+================================================================================
   Version 2.08
   2016-12-29  Kubbit Information Technology (http://kubbit.com)
 ================================================================================

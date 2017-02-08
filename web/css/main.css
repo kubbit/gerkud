@@ -18,6 +18,11 @@ a
 	color: inherit;
 }
 
+i
+{
+	margin-right: 0.25em;
+}
+
 img
 {
 	border: none;
@@ -54,40 +59,66 @@ textarea:focus,
 	position: fixed;
 	top: 0;
 	width: 100%;
-	font-size: larger;
+	font-size: x-small;
 	color: white;
 	background-color: #6699cc;
 	z-index: 999;
 	opacity: 0.9;
 	box-shadow: 0 10px 5px grey;
 }
+#nav i
+{
+	line-height: 2.5em;
+}
+#nav a img
+{
+	display: block;
+	margin: auto;
+	width: 32px;
+	height: 32px;
+}
 #nav .menua2 ul,
 #nav .menua3 ul
 {
 	display: none;
 	cursor: pointer;
+	font-size: medium;
 	color: white;
 	background-color: #6699cc;
 	box-shadow: 0 10px 5px grey;
 	position: absolute;
 	right: 0;
 	text-align: left;
-	width: 8em;
 }
-#nav .menua2 ul > li,
-#nav .menua3 ul > li
+#nav .menua2 img
+{
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+	margin-right: 0.5em;
+	vertical-align: middle;
+}
+#nav ul ul > li
 {
 	position: relative;
 	display: block;
+	height: inherit;
 }
 #nav .menua3 ul
 {
 	top: 0;
-	left: -8em;
+	left: -10em;
+	width: 10em;
 }
 #nav li:hover > ul
 {
 	display: inherit;
+}
+#nav ul ul a
+{
+	width: auto;
+	height: 2em;
+	text-align: left;
 }
 
 #nav ul
@@ -100,29 +131,35 @@ textarea:focus,
 #nav li
 {
 	display: inline-block;
-	vertical-align: top;
-	line-height: 2em;
+	vertical-align: middle;
+	text-align: center;
+	font-weight: bold;
 }
 #nav li:hover > a
 {
 	color: #ccc;
 	background-color: #5588bb;
+	box-shadow: inset -1px -1px 1px black;
 }
 
 #nav #logoa
 {
 	float: left;
-	margin-left: 1em;
+	margin-left: 2em;
+	margin-top: 2px;
 }
 #nav #logoa img
 {
-	max-height: 28px;
-	max-width: 28px;
+	max-height: 4em;
+	max-width: 4em;
+	background-color: white;
+	box-shadow: inset 0 0 3px #606060;
+	padding: 3px;
+	border-radius: 3px;
 }
 #nav #mapa
 {
 	float: left;
-	margin-left: 1em;
 	cursor: pointer;
 }
 #nav a
@@ -130,10 +167,12 @@ textarea:focus,
 	display: block;
 	text-decoration: none;
 	padding: 0 0.5em;
+	line-height: 2em;
+	height: 5em;
+	width: 9em;
 }
 #nav img
 {
-	vertical-align: middle;
 	margin: 0;
 	padding: 0;
 	border: none;
@@ -141,7 +180,7 @@ textarea:focus,
 
 #edukia
 {
-	margin: 5em 2em 1em;
+	margin: 7em 2em 1em;
 	text-align: center;
 	position: relative;
 	top: 0;
@@ -167,6 +206,7 @@ textarea:focus,
 	display: inline-block;
 	width: 16.6%;
 	margin: 0 -2px;
+	padding: 0.25em;
 	font-variant: small-caps;
 	font-size: larger;
 	box-sizing: border-box;
@@ -216,6 +256,10 @@ form.login img
 	max-height: 50px;
 	max-width: 50px;
 	position: absolute;
+	background-color: white;
+	box-shadow: inset 0 0 10px #606060;
+	padding: 5px;
+	border-radius: 3px;
 }
 form.login fieldset
 {

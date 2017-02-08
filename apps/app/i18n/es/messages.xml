@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2016-05-25T14:50:15Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2017-01-27T12:55:23Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -530,7 +530,7 @@
       </trans-unit>
       <trans-unit id="143">
         <source>Erabilera datuak</source>
-        <target>Datos estadísticos</target>
+        <target>Estadísticas</target>
       </trans-unit>
       <trans-unit id="144">
         <source>Hasiera data ezin da irekierakoa baino lehenagokoa izan</source>
@@ -797,7 +797,7 @@
         <target>Promedio de dias de resolución de incidencias por cada departamento de origen</target>
       </trans-unit>
       <trans-unit id="213">
-        <source>Erabiltzailea ala pasahitza ez da zuzena.</source>
+        <source>The username and/or password is invalid.</source>
         <target>El usuario y/o la contraseña no son válidos</target>
       </trans-unit>
       <trans-unit id="214">
@@ -839,6 +839,10 @@
       <trans-unit id="223">
         <source>Posta elektronikoa ez da zuena</source>
         <target>La dirección de correo electrónico no es válida</target>
+      </trans-unit>
+      <trans-unit id="224">
+        <source>Zure erabiltzaileak ez du aplikazioa erabiltzeko baimenik.</source>
+        <target>Tu usuario no tiene permisos para usar la aplicación.</target>
       </trans-unit>
     </body>
   </file>

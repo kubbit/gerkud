@@ -1,5 +1,5 @@
 <?php use_javascripts_for_form($zerrendatuaForm) ?>
-<?php $configEremuak = sfConfig::get('app_gerkud_eremuak'); ?>
+<?php $configEremuak = sfConfig::get('gerkud_eremuak_gaituak'); ?>
 
 <?php if($zerrendatuaForm->hasErrors() || $zerrendatuaForm->hasGlobalErrors()): ?>
 <ul id="erroreak">

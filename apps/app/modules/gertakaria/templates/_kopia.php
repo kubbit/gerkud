@@ -1,8 +1,8 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-<?php $configEremuak = sfConfig::get('app_gerkud_eremuak'); ?>
-<?php $configDerrigorrezkoak = sfConfig::get('app_gerkud_derrigorrezkoak'); ?>
+<?php $configEremuak = sfConfig::get('gerkud_eremuak_gaituak'); ?>
+<?php $configDerrigorrezkoak = sfConfig::get('gerkud_eremuak_derrigorrezkoak'); ?>
 
 <?php if($form->hasErrors() || $form->hasGlobalErrors()): ?>
 <ul id="erroreak">
@@ -39,7 +39,7 @@ $form->setDefault('lehentasuna_id', $formZ->getObject()->getLehentasunaId());
 $form->setDefault('jatorrizkoSaila_id', $formZ->getObject()->getJatorrizkosailaId());
 $form->setDefault('eraikina_id', $formZ->getObject()->getEraikinaId());
 // Gertakariaren eremu guztiak kopiatzeko
-if (sfConfig::get('app_gerkud_kopia_zehatza'))
+if (sfConfig::get('gerkud_kopia_zehatza'))
 {
 	$form->setDefault('created_at', $formZ->getObject()->getCreatedAt());
 	$form->setDefault('abisuaNork', $formZ->getObject()->getAbisuanork());
@@ -48,7 +48,7 @@ if (sfConfig::get('app_gerkud_kopia_zehatza'))
 }
 ?>
 
-<?php if (!sfConfig::get('app_sortze_data_automatikoa')): ?>
+<?php if (!sfConfig::get('gerkud_sortze_data_automatikoa')): ?>
 		<fieldset>
 			<div id="created_at" class="field">
 				<label for="gertakaria_created_at"><?php echo __('Irekiera data') ?>:<?php echo (in_array('created_at', $configDerrigorrezkoak))?'*':''?></label>

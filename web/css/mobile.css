@@ -19,6 +19,25 @@
 	{
 		box-shadow: 0 1px 1px grey;
 	}
+	#nav a
+	{
+		overflow: hidden;
+		height: 24px;
+	}
+	#nav #logoa
+	{
+		margin: 0 1em;
+	}
+	#nav i
+	{
+		line-height: inherit;
+	}
+	#nav img,
+	#nav #logoa img
+	{
+		max-height: 22px;
+		max-width: 22px;
+	}
 
 	#edukia
 	{
@@ -28,6 +47,10 @@
 	#orriak
 	{
 		margin-top: 0;
+	}
+	#orriak li
+	{
+		padding: 0;
 	}
 
 	#planoa
@@ -71,10 +94,27 @@
 	#nav
 	{
 		position: relative;
-		font-size: inherit;
-		font-weight: bold;
 	}
-
+	#nav li
+	{
+		margin: 1px 0;
+		display: inline-block;
+	}
+	#nav ul ul > a
+	{
+		width: 10em;
+	}
+	#nav a
+	{
+		height: available;
+		line-height: inherit;
+		width: 5em;
+	}
+	#nav a img
+	{
+		width: 24px;
+		height: 24px;
+	}
 	#edukia
 	{
 		margin-left: 1em;
@@ -157,7 +197,7 @@
 	#nav
 	{
 		display: none;
-		top: 3em;
+		top: 5em;
 		position: fixed;
 		padding-top: 1em;
 		box-shadow: 0 1px 5px grey;
@@ -167,6 +207,20 @@
 		display: block;
 		font-size: large;
 		text-align: center;
+	}
+	#nav a
+	{
+		width: auto;
+		height: 2em;
+		text-align: left;
+	}
+	#nav a img
+	{
+		width: 24px;
+		height: 24px;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 0.5em;
 	}
 	#nav #logoa
 	{
@@ -192,9 +246,13 @@
 		background-color: #6699cc;
 		box-shadow: 0 1px 5px grey;
 	}
-	#nav .menuaIreki img
+	#nav .menuaIreki a
 	{
 		display: none;
+	}
+	#nav .menuaIreki ul a
+	{
+		display: inherit;
 	}
 	#nav .menua2,
 	#nav .menua2 ul
@@ -213,9 +271,14 @@
 		margin-top: 5em;
 	}
 
-	#orriak li
+	#orriak li i
 	{
-		font-size: smaller;
+		margin: 0.5em;
+	}
+
+	#orriak li span
+	{
+		display: none;
 	}
 
 	form.login img

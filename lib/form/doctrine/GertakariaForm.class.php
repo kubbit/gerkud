@@ -12,8 +12,8 @@ class GertakariaForm extends BaseGertakariaForm
 {
 	public function configure()
 	{
-		$configEremuak = sfConfig::get('app_gerkud_eremuak');
-		$configDerrigorrezkoak = sfConfig::get('app_gerkud_derrigorrezkoak');
+		$configEremuak = sfConfig::get('gerkud_eremuak_gaituak');
+		$configDerrigorrezkoak = sfConfig::get('gerkud_eremuak_derrigorrezkoak');
 		$culture = sfContext::getInstance()->getUser()->getCulture();
 
 		$this->widgetSchema['saila_id'] = new sfWidgetFormInputHidden();
@@ -298,7 +298,7 @@ class GertakariaForm extends BaseGertakariaForm
 			'required' => (in_array('amaiera_aurreikusia', $configDerrigorrezkoak)) ? true : false
 		));
 
-		if (sfConfig::get('app_sortze_data_automatikoa'))
+		if (sfConfig::get('gerkud_sortze_data_automatikoa'))
 		{
 			unset($this['created_at']);
 		}
@@ -341,7 +341,7 @@ class GertakariaForm extends BaseGertakariaForm
 		else
 			$sortze_data = strftime("%Y-%m-%d", strtotime($values["created_at"]));
 
-		if (sfConfig::get('app_balidatu_aurreikuspen_datak'))
+		if (sfConfig::get('gerkud_balidazioak_aurreikuspen_datak'))
 		{
 			if ($values["hasiera_aurreikusia"] != null && strtotime($values["hasiera_aurreikusia"]) < strtotime($sortze_data))
 			{

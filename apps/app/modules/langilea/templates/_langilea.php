@@ -14,6 +14,14 @@
 				<label><?php echo __('Erabiltzailea') ?>:</label>
 				<?php echo $form['username']->render(array('readonly' => 'readonly', 'size' => 30)); ?>
 			</div>
+			<div class="field">
+				<label><?php echo __('Pasahitza') ?>:</label>
+<?php if (sfConfig::get('gerkud_ldap')) : ?>
+				<?php echo $form['password']->render(array('readonly' => 'readonly')); ?>
+<?php else: ?>
+				<?php echo $form['password']->render(); ?>
+<?php endif; ?>
+			</div>
 		</fieldset>
 		<fieldset>
 			<div class="field">
@@ -49,7 +57,6 @@
 		<?php echo $form['username']->render(array('id' => '')) ?>
 		<?php echo $form['algorithm']->render() ?>
 		<?php echo $form['salt']->render() ?>
-		<?php echo $form['password']->render(); ?>
 		<?php echo $form['is_active']->render() ?>
 		<?php echo $form['is_super_admin']->render() ?>
 		<?php echo $form['last_login']->render() ?>
@@ -57,5 +64,6 @@
 		<?php echo $form['updated_at']->render(); ?>
 
 		<?php echo $form['groups_list']->render() ?>
+		<?php echo $form['permissions_list']->render() ?>
 	</div>
 </form>

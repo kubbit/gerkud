@@ -40,7 +40,7 @@ class zerrendatuActions extends sfActions
 	}
 	public function inprimatu()
 	{
-		$configEremuak = sfConfig::get('app_gerkud_eremuak');
+		$configEremuak = sfConfig::get('gerkud_eremuak_gaituak');
 
 		$config = sfTCPDFPluginConfigHandler::loadConfig();
 		// 'L' = Landscape orientation
@@ -48,7 +48,7 @@ class zerrendatuActions extends sfActions
 		$pdf->SetFont('FreeSerif', '', 10);
 		$pdf->SetMargins(PDF_MARGIN_LEFT / 2, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT / 2);
 		$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('gerkud_erakundea')), utf8_encode(__(sfConfig::get('gerkud_pdf_goiburua'))));
 		$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
@@ -62,7 +62,7 @@ class zerrendatuActions extends sfActions
 
 		$pdf->writeHTML('<html><head></head><body>', false, false, true, false, '');
 
-		if (sfConfig::get('app_gerkud_izena_eta_abizena'))
+		if (sfConfig::get('gerkud_izena_eta_abizena'))
 			$erabiltzailea = ' concat(u.first_name, " ", coalesce(u.last_name, ""))';
 		else
 			$erabiltzailea = ' u.username';
@@ -183,7 +183,7 @@ class zerrendatuActions extends sfActions
 			$strEgoera = Doctrine_Core::getTable('Egoera')->find(array($this->formularioa['egoera']))->getIzena();
 		}
 
-		if (sfConfig::get('app_horkonpon_saila_bakarrik'))
+		if (sfConfig::get('gerkud_api_saila_bakarrik'))
 		{
 			$taldeak = sfContext::getInstance()->getUser()->getguardUser()->getGroups();
 			$taldeakId = Array();
@@ -292,7 +292,7 @@ class zerrendatuActions extends sfActions
 		$html .= $htmlIragazkiak;
 		$html .= '</div>';
 
-		if (sfConfig::get('app_zerrendatua_iragazkiak_erakutsi'))
+		if (sfConfig::get('gerkud_zerrendak_iragazkiak_erakutsi'))
 			$pdf->writeHTML($html, false, false, true, false, '');
 
 		$cn = Doctrine_Manager::getInstance()->connection();
@@ -370,14 +370,14 @@ class zerrendatuActions extends sfActions
 				 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
 				 . '<th width="218">' . __('Laburpena') . '</th>';
 
-				if (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')) && in_array('auzoa',sfConfig::get('app_gerkud_eremuak')))
+				if (in_array('barrutia',sfConfig::get('gerkud_eremuak_gaituak')) && in_array('auzoa',sfConfig::get('gerkud_eremuak_gaituak')))
 				{
 					$izenak .= sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
 					 . '<th width="54">' . __('Barrutia') . '</th>'
 					 . sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
 					 . '<th width="54">' . __('Auzoa') . '</th>';
 				}
-				elseif (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')))
+				elseif (in_array('barrutia',sfConfig::get('gerkud_eremuak_gaituak')))
 				{
 					$izenak .= sprintf('<th width="%d"></th>', self::ZUTABE_ARTEKO_DISTANTZIA)
 					 . '<th width="54">' . __('Barrutia') . '</th>';
@@ -426,12 +426,12 @@ class zerrendatuActions extends sfActions
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 			$html .= sprintf('<td width="218">%s</td>', $datuak['laburpena']);
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
-			if (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')) && in_array('auzoa',sfConfig::get('app_gerkud_eremuak')))
+			if (in_array('barrutia',sfConfig::get('gerkud_eremuak_gaituak')) && in_array('auzoa',sfConfig::get('gerkud_eremuak_gaituak')))
 			{
 				$html .= sprintf('<td width="54">%s</td>', $datuak['barrutia']);
 				$html .= sprintf('<td width="54">%s</td>', $datuak['auzoa']);
 			}
-			elseif (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')))
+			elseif (in_array('barrutia',sfConfig::get('gerkud_eremuak_gaituak')))
 				$html .= sprintf('<td width="54">%s</td>', $datuak['barrutia']);
 			else
 				$html .= sprintf('<td width="54">%s</td>', $datuak['auzoa']);

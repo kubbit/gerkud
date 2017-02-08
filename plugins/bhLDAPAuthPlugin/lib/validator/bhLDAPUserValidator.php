@@ -3,8 +3,6 @@
 /* $Id: bhLDAPUserValidator.php 29730 2010-06-03 23:51:31Z Nathan.Vonnahme $ */
 /* $URL: http://svn.symfony-project.com/plugins/bhLDAPAuthPlugin/branches/1.4/lib/validator/bhLDAPUserValidator.php $ */
 
-sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
-
 class bhLDAPUserValidator extends sfValidatorBase
 {
   public function configure($options = array(), $messages = array())
@@ -13,7 +11,7 @@ class bhLDAPUserValidator extends sfValidatorBase
     $this->addOption('password_field', 'password');
     $this->addOption('throw_global_error', false);
 
-    $this->setMessage('invalid', __('Erabiltzailea ala pasahitza ez da zuzena.'));
+    $this->setMessage('invalid', 'The username and/or password is invalid.');
   }
 
   protected function doClean($values)
@@ -25,33 +23,29 @@ class bhLDAPUserValidator extends sfValidatorBase
     bhLDAP::debug ('######## User exists?');
 
     $user = Doctrine_Core::getTable('sfGuardUser')->findOneByUsername($username);
-
+    
     bhLDAP::debugDump($user, "user:");
 
-
-    if (! $user)
-    {
+    if (! $user) 
+    { 
       // pretend the user exists, then check AD password
       bhLDAP::debug ('######## User does not exist. Creating dummy user.');
       $user = new sfGuardUser;
       $user->setUsername($username);
       $user->setSalt('unused');
       $user->setPassword('unused');
-
-	  bhLDAP::fillUserInfo($user);
     }
+
     // password is ok?
     bhLDAP::debug ('######## Checking Password...');
-//    echo "<br>if-a baino lehen...";
-//    if ($user->checkPassword($password))      {
-    if (bhLDAP::checkPassword($username,$password))      {
+    if ($user->checkPassword($password))      {
       bhLDAP::debug ('######## Check Password successful...');
       if ($user->isNew()) {
 	$user->save();
 	$user = Doctrine_Core::getTable('sfGuardUser')->retrieveByUsername($username);
       }
       return array_merge($values, array('user' => $user));
-    }
+    } 
     else {
       bhLDAP::debug ('######## Check Password failed...');
     }

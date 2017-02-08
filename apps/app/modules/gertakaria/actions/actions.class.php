@@ -37,14 +37,14 @@ class gertakariaActions extends sfActions
 			$this->gertakarias = $q->execute();
 			$this->getUser()->setAttribute('parametroak', Array());
 		}
-		$this->pager = new sfDoctrinePager('gertakaria', sfConfig::get('app_gertakariak_orriko'));
+		$this->pager = new sfDoctrinePager('gertakaria', sfConfig::get('gerkud_gertakariak_orriko'));
 		$this->pager->setQuery($q);
 		$this->pager->setPage($request->getParameter('page', 1));
 		$this->pager->init();
 
 		$this->bilaketa = $request->getParameter('bilaketa');
 
-		$this->zutabeakConfig = sfConfig::get('app_zutabeak_gertakariak');
+		$this->zutabeakConfig = sfConfig::get('gerkud_eremuak_gertakariak');
 		$this->zutabeak = array();
 		$this->gertakarienZutabeakSortu();
 		$this->datuak = $this->gertakarienDatuakSortu($this->pager->getResults());
@@ -259,7 +259,7 @@ class gertakariaActions extends sfActions
 						$balioa = $fila->getDeskribapena();
 						break;
 					case 'ixte_data':
-						$balioa = date(sfConfig::get('app_data_formatoa'), strtotime($fila->getIxteData()));
+						$balioa = date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getIxteData()));
 						break;
 					case 'hasiera_aurreikusia':
 						$balioa = $fila->getHasieraAurreikusia();
@@ -294,10 +294,10 @@ class gertakariaActions extends sfActions
 						$balioa = $fila->getEraikina();
 						break;
 					case 'created_at':
-						$balioa = date(sfConfig::get('app_data_formatoa'), strtotime($fila->getCreatedAt()));
+						$balioa = date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getCreatedAt()));
 						break;
 					case 'updated_at':
-						$balioa = date(sfConfig::get('app_data_formatoa'), strtotime($fila->getUpdatedAt()));
+						$balioa = date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getUpdatedAt()));
 						break;
 					case 'eraikinakalea':
 						if ($fila->getEraikinaId())
@@ -382,7 +382,7 @@ class gertakariaActions extends sfActions
 		$this->gertakarias = $q->execute();
 		$this->getUser()->setAttribute('parametroak', $parametroak);
 
-		$this->pager = new sfDoctrinePager('gertakaria', sfConfig::get('app_gertakariak_orriko'));
+		$this->pager = new sfDoctrinePager('gertakaria', sfConfig::get('gerkud_gertakariak_orriko'));
 		$this->pager->setQuery($q);
 		$this->pager->setPage($request->getParameter('page', 1));
 		$this->pager->init();
@@ -496,7 +496,7 @@ class gertakariaActions extends sfActions
 		if ($egoera == 5 OR $egoera == 6)
 		{
 			$this->gertakaria->setIxteData(date("Y-m-d H:i:s"));
-			if (sfConfig::get('app_gerkud_ixterakoan_lehentasuna_berrezarri'))
+			if (sfConfig::get('gerkud_ixterakoan_lehentasuna_berrezarri'))
 				$this->gertakaria->setLehentasunaId(1);
 		}
 		$this->gertakaria->setEgoeraId($egoera);
@@ -508,7 +508,7 @@ class gertakariaActions extends sfActions
 
 	public function executeInprimatu(sfWebRequest $request)
 	{
-		$configEremuak = sfConfig::get('app_gerkud_eremuak');
+		$configEremuak = sfConfig::get('gerkud_eremuak_gaituak');
 
 		$gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id')));
 		$config = sfTCPDFPluginConfigHandler::loadConfig();
@@ -516,7 +516,7 @@ class gertakariaActions extends sfActions
 		$pdf->SetFont("FreeSerif", "", 12);
 		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 		$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('app_erakundea')), utf8_encode(__(sfConfig::get('app_pdf_goiburua'))));
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, utf8_encode(sfConfig::get('gerkud_erakundea')), utf8_encode(__(sfConfig::get('gerkud_pdf_goiburua'))));
 		$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
@@ -575,11 +575,11 @@ class gertakariaActions extends sfActions
 		$html .= '</tr>';
 
 		$html .= '<tr>';
-		$html .= '<td>' . date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getCreatedAt()));
+		$html .= '<td>' . date(sfConfig::get('gerkud_data_formatoa'), strtotime($gertakaria->getCreatedAt()));
 		if (in_array('ixte_data', $configEremuak))
 		{
 			if (($gertakaria->getEgoeraId() == 5) || ($gertakaria->getEgoeraId() == 6))
-				$html .= '<br>' . date(sfConfig::get('app_data_formatoa'), strtotime($gertakaria->getIxteData()));
+				$html .= '<br>' . date(sfConfig::get('gerkud_data_formatoa'), strtotime($gertakaria->getIxteData()));
 		}
 		$html .= '</td>';
 		if (in_array('egoera', $configEremuak))
@@ -604,7 +604,7 @@ class gertakariaActions extends sfActions
 		if (in_array('langilea', $configEremuak))
 		{
 			$langilea = '';
-			if (sfConfig::get('app_gerkud_izena_eta_abizena'))
+			if (sfConfig::get('gerkud_izena_eta_abizena'))
 				$langilea = $gertakaria->getLangilea();
 			elseif ($gertakaria->getLangilea() != '')
 				$langilea = sprintf('%s (%s %s)', $gertakaria->getLangilea(), $gertakaria->getLangilea()->getFirstName(), $gertakaria->getLangilea()->getLastName());

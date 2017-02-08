@@ -16,9 +16,9 @@ class ZerrendatuaForm extends sfForm
 	{
 		$culture = sfContext::getInstance()->getUser()->getCulture();
 
-		if (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')) && in_array('auzoa',sfConfig::get('app_gerkud_eremuak')))
+		if (in_array('barrutia',sfConfig::get('gerkud_eremuak_gaituak')) && in_array('auzoa',sfConfig::get('gerkud_eremuak_gaituak')))
 			$sailkapen = array(-1 => '--', 1 => 'Saila', 2 => 'Barrutia', 3 => 'Auzoa', 4 => 'Mota');
-		elseif (in_array('barrutia',sfConfig::get('app_gerkud_eremuak')))
+		elseif (in_array('barrutia',sfConfig::get('gerkud_eremuak_gaituak')))
 			$sailkapen = array(-1 => '--', 1 => 'Saila', 2 => 'Barrutia', 3 => 'Mota');
 		else
 			$sailkapen = array(-1 => '--', 1 => 'Saila', 2 => 'Auzoa', 3 => 'Mota');

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="en_EN" target-language="eu" datatype="plaintext" original="messages" date="2013-02-25T13:01:24Z" product-name="messages">
+  <file source-language="en_EN" target-language="eu" datatype="plaintext" original="messages" date="2017-01-28T15:46:14Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -11,6 +11,10 @@
       <trans-unit id="2">
         <source>Invalid.</source>
         <target>Ez da zuzena</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>The username and/or password is invalid.</source>
+        <target>Erabiltzailea ala pasahitza ez da zuzena.</target>
       </trans-unit>
     </body>
   </file>

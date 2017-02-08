@@ -23,9 +23,6 @@ cp -a web/images/$GERKUD_HERRIA/* web/images/
 if [ ! -d cache ]; then
 	mkdir -p cache
 fi
-if [ ! -d data ]; then
-	mkdir -p data
-fi
 if [ ! -d log ]; then
 	mkdir -p log
 fi
@@ -34,5 +31,4 @@ if [ ! -d web/uploads/FILES ]; then
 fi
 
 # Permisos para usuario www
-chown -R www:www .
-chmod 775 . 
+chmod 1777 cache log web/uploads/FILES 
