@@ -40,11 +40,11 @@ class GerkudPDF extends TCPDF
 		// header title
 		$this->SetFont($headerfont[0], 'B', $headerfont[2] + 1);
 		$this->SetX($header_x);
-		$this->Cell($cw, $cell_height, $headerdata['title'], 0, 1, '', 0, '', 0);
+		$this->Cell($cw, $cell_height * 2, $headerdata['title'], 0, 1, '', 0, '', 0, '', '',  'B');
 		// header string
 		$this->SetFont($headerfont[0], $headerfont[1], $headerfont[2]);
 		$this->SetX($header_x);
-		$this->MultiCell($cw, $cell_height, $headerdata['string'], 0, '', 0, 1, '', '', true, 0, false, true, 0, 'T', false);
+		$this->MultiCell($cw, $cell_height, $headerdata['string'], 0, '', 0, 0, '', '', true, 0, false, true, $cell_height, 'T', false);
 		$this->SetFont($headerfont[0], '', $headerfont[2] + 1);
 		$this->Cell(0, 10, date("Y/m/d"), 0, false, 'R', 0, '', 0, false, 'T', 'M');
 		// print an ending header line
