@@ -17,6 +17,7 @@ all:
 
   # Gertakarietan erantsitako fitxategiak gordeko diren lekua
   upload_dir: %SF_WEB_DIR%/uploads
+  i18n_dir: %SF_APP_DIR%/i18n
 
   session:
     # Sesioa automatikoki itxi segundu kantitate hau pasatzen denean aktibitaterik gabe
@@ -31,10 +32,10 @@ all:
     api_key:
       default: ~
 
-  # Arakatzailean azalduko den izenburua
-  izenburua: Gerkud - Gertakarien Kudeaketa
-  # PDF-ak inprimatzerakoan azalduko den erakundea
-  erakundea: Erakundearen Izena
+  # Arakatzailean eta mezuetako sinaduran azalduko den izenburua
+  izenburua: Gerkud
+  # PDF-ak inprimatzerakoan eta mezuak bidaltzerakoan azalduko den erakundea (adibidez 'Donostiako Udala')
+  erakundea: Gertakarien Kudeaketa
   # PDF-ak inprimatzerakoan azalduko den goiburua
   pdf_goiburua: Gertakari Zerrenda
   # Erakundearen logotipoa
@@ -149,6 +150,54 @@ all:
     gertakariak:
       - lehentasuna_id DESC
       - created_at DESC
+
+  ezarpenak:
+    # Menu nagusiaren botoiak
+    menua:
+      - mapa
+      - bilatu
+      - sortu
+      - eskaerak
+      - gertakariak
+      - zerrendak
+      - estatistikak
+#      - egoerak
+#      - sailak
+#      - kaleak
+      - erabiltzaileak
+      - ezarpenak
+      - eskuliburua
+      - hizkuntza
+      - itxi
+
+    # Gertakari bakoitzean gaitutako ekintzak
+    ekintzak:
+      - editatu
+      - esleitu
+      - prozesuan
+      - kopiatu
+      - inprimatu
+      - itxi
+      - baztertu
+      - berrireki
+      - gertakaria
+      - historikoa
+      - iruzkina
+      - fitxategiak
+      - bikoiztuak
+      - planoa
+
+  # Gertakariak pantailan talde bakoitzak defektuz ikusgai izango dituen gertakariak
+  gertakariak_erakutsi:
+    admins:
+      - denak
+    gerkud:
+      - denak
+    zerbitzu:
+      - nereak
+      - sailekoak
+    arrunta:
+      - nereak
 
   api:
     # Ixterakoan ohartarazi gertakaria sortu duen pertsona

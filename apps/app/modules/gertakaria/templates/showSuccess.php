@@ -6,40 +6,47 @@
 <?php log_message('Gertakaria....', 'info') ?>
 
 <?php $configEremuak = sfConfig::get('gerkud_eremuak_gaituak'); ?>
+<?php $ekintzak = sfConfig::get('gerkud_ezarpenak_ekintzak', array()); ?>
 
 <ul id="orriak" class="orriak">
-	<li id="tabgertakaria" title="gertakaria"><i class="fa fa-id-card-o"></i><span><?php echo __('Gertakaria'); ?></span></li>
-	<li id="tabhistorikoa" title="historikoa" class="<?php echo count($gertakaria->getIruzkinak()) > 0 ? '': 'ezgaituta'; ?>"><i class="fa fa-history"></i><span><?php echo __('Historikoa'); ?></span></li>
-	<li id="tabiruzkina" title="iruzkina"><i class="fa fa-comment-o"></i><span><?php echo __('Iruzkina'); ?></span></li>
-	<li id="tabfitxategiak" title="fitxategiak"><i class="fa fa-paperclip"></i><span><?php echo __('Fitxategiak') . sprintf(' (%d)', count($gertakaria->getFitxategiak())); ?></span></li>
-	<li id="taberlazioak" title="erlazioak"><i class="fa fa-chain"></i><span><?php echo __('Bikoiztuak'); ?></span></li>
-	<li id="tabplanoa" title="planoa" class="<?php echo sfConfig::get('gerkud_mapa_aktibatuta') ? '': 'ezgaituta'; ?>"><i class="fa fa-map-marker"></i><span><?php echo __('Planoa'); ?></span></li>
+	<li id="tabgertakaria" title="gertakaria" class="<?php echo in_array(gertakariaActions::EKINTZA_GERTAKARIA, $ekintzak) ? '' : 'ezgaituta'; ?>"><i class="fa fa-id-card-o"></i><span><?php echo __('Gertakaria'); ?></span></li>
+	<li id="tabhistorikoa" title="historikoa" class="<?php echo count($gertakaria->getIruzkinak()) > 0 && in_array(gertakariaActions::EKINTZA_HISTORIKOA, $ekintzak) ? '': 'ezgaituta'; ?>"><i class="fa fa-history"></i><span><?php echo __('Historikoa'); ?></span></li>
+	<li id="tabiruzkina" title="iruzkina" class="<?php echo in_array(gertakariaActions::EKINTZA_IRUZKINA, $ekintzak) ? '' : 'ezgaituta'; ?>"><i class="fa fa-comment-o"></i><span><?php echo __('Iruzkina'); ?></span></li>
+	<li id="tabfitxategiak" title="fitxategiak" class="<?php echo in_array(gertakariaActions::EKINTZA_FITXATEGIAK, $ekintzak) ? '' : 'ezgaituta'; ?>"><i class="fa fa-paperclip"></i><span><?php echo __('Fitxategiak') . sprintf(' (%d)', count($gertakaria->getFitxategiak())); ?></span></li>
+	<li id="taberlazioak" title="erlazioak" class="<?php echo in_array(gertakariaActions::EKINTZA_BIKOIZTUAK, $ekintzak) ? '' : 'ezgaituta'; ?>"><i class="fa fa-chain"></i><span><?php echo __('Bikoiztuak'); ?></span></li>
+	<li id="tabplanoa" title="planoa" class="<?php echo sfConfig::get('gerkud_mapa_aktibatuta') && in_array(gertakariaActions::EKINTZA_PLANOA, $ekintzak) ? '': 'ezgaituta'; ?>"><i class="fa fa-map-marker"></i><span><?php echo __('Planoa'); ?></span></li>
 </ul>
 
 <div id="edukgertakaria">
+<?php if (in_array(gertakariaActions::EKINTZA_GERTAKARIA, $ekintzak)): ?>
 	<div id="ekintzakIreki"></div>
 	<div id="ekintzak">
 		<div>
 <?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false)): ?>
 	<?php if (($gertakaria->getEgoeraId() != 5) && ($gertakaria->getEgoeraId() != 6)): ?>
 			<!-- Baztertu -->
+		<?php if (in_array(gertakariaActions::EKINTZA_BAZTERTU, $ekintzak)): ?>
 			<a class="botoia" href="<?php echo url_for('gertakaria/egoera?id=' . $gertakaria->getId() . '&eg_id=6') ?>"
 			 onclick="return confirm('<?php echo __('Gertakaria baztertu nahi duzu?') ?>');">
 				<i class="fa fa-remove"></i><?php echo __('Baztertu'); ?>
 			</a>
+		<?php endif; ?>
 
 		<?php log_message('Panela....', 'info'); ?>
 
 			<!-- Editatu -->
+		<?php if (in_array(gertakariaActions::EKINTZA_EDITATU, $ekintzak)): ?>
 			<a class="botoia" href="<?php echo url_for('gertakaria/edit?id=' . $gertakaria->getId()) ?>">
 				<i class="fa fa-pencil"></i><?php echo __('Editatu'); ?>
 			</a>
+		<?php endif; ?>
 	<?php endif; ?>
 <?php endif; ?>
 
 			<!-- Esleitu -->
-<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false) || $sailakoa || ($sf_user->hasCredential('zerbitzu') && $gertakaria->getSaila() == "")): ?>
-	<?php if (($gertakaria->getEgoeraId() != 5) && ($gertakaria->getEgoeraId() != 6)): ?>
+<?php if (in_array(gertakariaActions::EKINTZA_ESLEITU, $ekintzak)): ?>
+	<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false) || $sailakoa || ($sf_user->hasCredential('zerbitzu') && $gertakaria->getSaila() == "")): ?>
+		<?php if (($gertakaria->getEgoeraId() != 5) && ($gertakaria->getEgoeraId() != 6)): ?>
 			<?php $form2 = new IruzkinaForm(); ?>
 			<?php $form2->setDefault('gertakaria_id', $gertakaria->getId()); ?>
 			<?php $form2->setDefault('ekintza_id', 2); ?>
@@ -57,24 +64,29 @@
 				<?php echo $form2['saila_id']->render(); ?>
 				<button class="botoia" type="submit"><i class="fa fa-hand-o-right"></i><?php echo ($gertakaria->getEgoeraId() == 1) ? __('Gertakaria esleitu') : __('Berriz esleitu'); ?></button>
 			</form>
+		<?php endif; ?>
 	<?php endif; ?>
 <?php endif; ?>
 
 			<!-- Imprimatu -->
+<?php if (in_array(gertakariaActions::EKINTZA_INPRIMATU, $ekintzak)): ?>
 			<a class="botoia" target="_blank" href="<?php echo url_for('gertakaria/inprimatu?id=' . $gertakaria->getId()) ?>">
 				<i class="fa fa-print"></i><?php echo __('Inprimatu'); ?>
 			</a>
+<?php endif; ?>
 
 <?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false) || $sailakoa): ?>
 			<!-- Prozesuan jarri -->
-	<?php if ($gertakaria->getEgoeraId() == 2 || $gertakaria->getEgoeraId() == 3): ?>
+	<?php if (in_array(gertakariaActions::EKINTZA_PROZESUAN_JARRI, $ekintzak)): ?>
+		<?php if ($gertakaria->getEgoeraId() == 2 || $gertakaria->getEgoeraId() == 3): ?>
 			<a class="botoia" href="<?php echo url_for('gertakaria/egoera?id=' . $gertakaria->getId() . '&eg_id=4') ?>">
 				<i class="fa fa-wrench"></i><?php echo __('Prozesuan jarri'); ?>
 			</a>
+		<?php endif; ?>
 	<?php endif; ?>
 
 			<!-- Itxi -->
-	<?php if ($sf_user->hasCredential(array('admins', 'gerkud'), false) || $sailakoa): ?>
+	<?php if (in_array(gertakariaActions::EKINTZA_ITXI, $ekintzak)): ?>
 		<?php if ($gertakaria->getEgoeraId() == 4): ?>
 			<a class="botoia" href="<?php echo url_for('gertakaria/egoera?id=' . $gertakaria->getId() . '&eg_id=5') ?>">
 				<i class="fa fa-check-square-o"></i><?php echo __('Itxi'); ?>
@@ -85,7 +97,8 @@
 
 			<!-- Gertakaria berrireki -->
 <?php if ($sf_user->hasCredential(array('admins', 'gerkud', 'zerbitzu', 'arrunta'), false)): ?>
-	<?php if (($gertakaria->getEgoeraId() == 5) || ($gertakaria->getEgoeraId() == 6)): ?>
+	<?php if (in_array(gertakariaActions::EKINTZA_BERRIREKI, $ekintzak)): ?>
+		<?php if (($gertakaria->getEgoeraId() == 5) || ($gertakaria->getEgoeraId() == 6)): ?>
 			<?php $form3 = new IruzkinaForm(); ?>
 			<?php $form3->setDefault('gertakaria_id', $gertakaria->getId()); ?>
 			<?php $form3->setDefault('ekintza_id', 3); ?>
@@ -96,21 +109,24 @@
 					<?php echo $form3['ekintza_id']->render(array('id' => '')); ?>
 					<?php echo $form3['langilea_id']->render(array('id' => '')); ?>
 
-		<?php if ($form3->isCSRFProtected()) : ?>
+			<?php if ($form3->isCSRFProtected()) : ?>
 					<?php echo $form3['_csrf_token']->render(); ?>
-		<?php endif; ?>
+			<?php endif; ?>
 				</div>
 				<?php echo $form3['testua']->render(array('cols' => 18, 'rows' => 3)); ?>
 
 				<button type="submit" class="botoia"><i class="fa fa-repeat"></i><?php echo __('Gertakaria berrireki'); ?></button>
 			</form>
+		<?php endif; ?>
 	<?php endif; ?>
 <?php endif; ?>
 
 			<!-- Gertakaria kopiatu -->
+<?php if (in_array(gertakariaActions::EKINTZA_KOPIATU, $ekintzak)): ?>
 			<a class="botoia" href="<?php echo url_for('gertakaria/kopiatu?id=' . $gertakaria->getId()) ?>">
 				<i class="fa fa-copy"></i><?php echo __('Kopiatu'); ?>
 			</a>
+<?php endif; ?>
 		</div>
 	</div>
 
@@ -295,24 +311,26 @@ $kontaktua = $gertakaria->getKontaktua();
 			</fieldset>
 		</fieldset>
 	</div>
+<?php endif; ?>
 </div>
 
 
 
 <!-- Erlazioak -->
 <?php log_message('Erlazioak....', 'info'); ?>
-<div id="edukerlazioak" class="panela">
+<div id="edukerlazioak" class="<?php echo in_array(gertakariaActions::EKINTZA_BIKOIZTUAK, $ekintzak) ? 'panela' : ''; ?>">
+<?php if (in_array(gertakariaActions::EKINTZA_BIKOIZTUAK, $ekintzak)): ?>
 	<fieldset>
 		<legend><?php echo __('Bikoiztuak'); ?></legend>
-<?php if (count($erlazioak) > 0): ?>
+	<?php if (count($erlazioak) > 0): ?>
 		<ul>
-	<?php foreach ($erlazioak as $bakoitza): ?>
+		<?php foreach ($erlazioak as $bakoitza): ?>
 			<li><a href="<?php echo url_for('gertakaria/show?id=' . $bakoitza) ?>"><?php echo $bakoitza ?></a></li>
-	<?php endforeach; ?>
+		<?php endforeach; ?>
 		</ul>
-<?php endif; ?>
+	<?php endif; ?>
 
-<?php if ($sf_user->hasCredential(array('admins', 'gerkud', 'zerbitzu'), false) && $gertakaria->getEgoeraId() <> "6"): ?>
+	<?php if ($sf_user->hasCredential(array('admins', 'gerkud', 'zerbitzu'), false) && $gertakaria->getEgoeraId() <> "6"): ?>
 		<?php
 			$form4 = new ErlazioakForm();
 			$form4->setDefault('hasiera_id', $gertakaria->getId());
@@ -325,9 +343,9 @@ $kontaktua = $gertakaria->getKontaktua();
 				<?php echo $form4['hasiera_id']->render(array('id' => '')); ?>
 				<?php echo $form4['erlazio_mota_id']->render(array('id' => '')); ?>
 				<?php echo $form4['ekintza_id']->render(array('id' => '')); ?>
-	<?php if ($form4->isCSRFProtected()): ?>
+		<?php if ($form4->isCSRFProtected()): ?>
 				<?php echo $form4['_csrf_token']->render(); ?>
-	<?php endif; ?>
+		<?php endif; ?>
 			</div>
 
 			<fieldset>
@@ -339,8 +357,9 @@ $kontaktua = $gertakaria->getKontaktua();
 
 			<input type="submit" class="botoia" value="<?php echo __('Baztertu'); ?>" />
 		</form>
-<?php endif; ?>
+	<?php endif; ?>
 	</fieldset>
+<?php endif; ?>
 </div>
 
 
@@ -348,7 +367,7 @@ $kontaktua = $gertakaria->getKontaktua();
 <!-- Historikoa  -->
 <?php log_message('Historikoa....', 'info') ?>
 <div id="edukhistorikoa">
-<?php if (count($gertakaria->getIruzkinak()) > 0): ?>
+<?php if (count($gertakaria->getIruzkinak()) > 0 && in_array(gertakariaActions::EKINTZA_HISTORIKOA, $ekintzak)): ?>
 	<table>
 		<caption><?php echo __('Aldaketen historikoa') ?></caption>
 		<thead>
@@ -375,7 +394,9 @@ $kontaktua = $gertakaria->getKontaktua();
 
 
 
+<!-- Iruzkina -->
 <div id="edukiruzkina">
+<?php if (in_array(gertakariaActions::EKINTZA_IRUZKINA, $ekintzak)): ?>
 <?php
 	$form = new IruzkinaForm();
 	$form->setDefault('gertakaria_id', $gertakaria->getId());
@@ -391,9 +412,9 @@ $kontaktua = $gertakaria->getKontaktua();
 				<?php echo $form['ekintza_id']->render(array('id' => '')); ?>
 				<?php echo $form['langilea_id']->render(array('id' => '')); ?>
 
-<?php if ($form->isCSRFProtected()): ?>
+	<?php if ($form->isCSRFProtected()): ?>
 				<?php echo $form['_csrf_token']->render(); ?>
-<?php endif; ?>
+	<?php endif; ?>
 			</div>
 
 			<div class="field">
@@ -403,26 +424,28 @@ $kontaktua = $gertakaria->getKontaktua();
 
 		<input type="submit" class="botoia" value="<?php echo __('Gehitu') ?>" />
 	</form>
+<?php endif; ?>
 </div>
 
 
 
 <!-- Fitxategiak:  -->
 <?php log_message('Fitxategiak....', 'info'); ?>
-<div id="edukfitxategiak" class="panela">
+<div id="edukfitxategiak" class="<?php echo in_array(gertakariaActions::EKINTZA_FITXATEGIAK, $ekintzak) ? 'panela' : ''; ?>">
+<?php if (in_array(gertakariaActions::EKINTZA_FITXATEGIAK, $ekintzak)): ?>
 	<fieldset>
 		<legend><?php echo __('Fitxategiak'); ?></legend>
-<?php if (count($gertakaria->getFitxategiak()) > 0): ?>
+	<?php if (count($gertakaria->getFitxategiak()) > 0): ?>
 		<ul>
-	<?php foreach ($gertakaria->getFitxategiak() as $i => $fitxategia): ?>
+		<?php foreach ($gertakaria->getFitxategiak() as $i => $fitxategia): ?>
 			<li>
 				<a href="<?php echo sprintf('/%s/FILES/%s/%s', sfConfig::get('sf_upload_dir_name'), $gertakaria->getId(), rawurlencode($fitxategia->getFitxategia())); ?>" target="_blank">
 					<?php echo $fitxategia->getDeskribapena() . " (" . $fitxategia->getFitxategia() . ")"; ?>
 				</a>
 			</li>
-	<?php endforeach; ?>
+		<?php endforeach; ?>
 		</ul>
-<?php endif; ?>
+	<?php endif; ?>
 
 		<?php $form = new FitxategiaForm(); ?>
 		<?php $form->setDefault('gertakaria_id', $gertakaria->getId()); ?>
@@ -431,9 +454,9 @@ $kontaktua = $gertakaria->getKontaktua();
 			<div class="izkutua">
 				<?php echo $form['gertakaria_id']->render(array('id' => '')); ?>
 				<?php echo $form['langilea_id']->render(array('id' => '')); ?>
-<?php if ($form->isCSRFProtected()): ?>
+	<?php if ($form->isCSRFProtected()): ?>
 				<?php echo $form['_csrf_token']->render(); ?>
-<?php endif; ?>
+	<?php endif; ?>
 			</div>
 
 			<fieldset>
@@ -452,13 +475,14 @@ $kontaktua = $gertakaria->getKontaktua();
 			<input type="submit" class="botoia" value="<?php echo __('Gehitu'); ?>" />
 		</form>
 	</fieldset>
+<?php endif; ?>
 </div>
 
 
 
 <!-- Planoak: -->
 <div id="edukplanoa">
-<?php if (sfConfig::get('gerkud_mapa_aktibatuta')): ?>
+<?php if (sfConfig::get('gerkud_mapa_aktibatuta') && in_array(gertakariaActions::EKINTZA_BIKOIZTUAK, $ekintzak)): ?>
 	<?php log_message('Planoak....', 'info'); ?>
 	<div class="mapa">
 <?php

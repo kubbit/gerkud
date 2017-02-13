@@ -1,6 +1,19 @@
 ================================================================================
+  Version 2.12
+  2017-02-13  Kubbit (https://kubbit.com)
+================================================================================
+* Corrección al obtener información de usuarios de LDAP
+* Correcciones en formato de cabecera de PDF
+* Posibilidad de desactivar botones del menú y acciones en las incidencias
+* Posibilidad de especificar incidencias visibles por defecto para cada grupo de permisos
+* Posibilidad de especificar directorio de traducciones
+* Uso de la entidad en la firma de correo
+* Nuevo logotipo del Ayuntamiento de Pasaia
+* Otras correcciones y mejoras menores
+
+================================================================================
   Version 2.10
-  2017-02-08  Kubbit Information Technology (http://kubbit.com)
+  2017-02-08  Kubbit (https://kubbit.com)
 ================================================================================
 * Simplificación de la configuración con nuevo fichero genérico
   config/defaults/gerkud.yml y config/gerkud.yml para cambios locales
@@ -12,7 +25,7 @@
 
 ================================================================================
   Version 2.08
-  2016-12-29  Kubbit Information Technology (http://kubbit.com)
+  2016-12-29  Kubbit (https://kubbit.com)
 ================================================================================
 * Posibilidad de usar nuevos campos para datos de contacto
 * Añadido campo para almacenar el código de expediente
@@ -27,32 +40,32 @@
 
 ================================================================================
   Version 2.06
-  2016-05-11  Kubbit Information Technology (http://kubbit.com)
+  2016-05-11  Kubbit (https://kubbit.com)
 ================================================================================
 * Posibilidad de deshabilitar idiomas o forzar el uso de un idioma específico
 
 ================================================================================
   Version 2.04
-  2016-05-06  Kubbit Information Technology (http://kubbit.com)
+  2016-05-06  Kubbit (https://kubbit.com)
 ================================================================================
 * Nuevo módulo de autentificación y limpieza del plugin bhLDAPAuth
 
 ================================================================================
   Version 2.02
-  2015-10-21  Kubbit Information Technology (http://kubbit.com)
+  2015-10-21  Kubbit (https://kubbit.com)
 ================================================================================
 * Correcciones menores
 
 ================================================================================
   Version 2.00
-  2015-08-12  Kubbit Information Technology (http://kubbit.com)
+  2015-08-12  Kubbit (https://kubbit.com)
 ================================================================================
 * Migración a LExpress/symfony1 ya que Symfony1 ya no está oficialmente soportado
 * Correcciones menores
 
 ================================================================================
   Version 1.26
-  2015-06-09  Kubbit Information Technology (http://kubbit.com)
+  2015-06-09  Kubbit (https://kubbit.com)
 ================================================================================
 * Posibilidad de editar campos de inicio y fin previsto por cualquiera
 * Limpieza del plugin sfDoctrineGuard
@@ -60,7 +73,7 @@
 
 ================================================================================
   Version 1.24
-  2015-05-05  Kubbit Information Technology (http://kubbit.com)
+  2015-05-05  Kubbit (https://kubbit.com)
 ================================================================================
 * Añadida nueva clase como base para generar documentos PDF
 * Añadida prioridad de incidencias a los listados

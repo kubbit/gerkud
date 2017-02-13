@@ -23,17 +23,19 @@ class bhLDAPUserValidator extends sfValidatorBase
     bhLDAP::debug ('######## User exists?');
 
     $user = Doctrine_Core::getTable('sfGuardUser')->findOneByUsername($username);
-    
+
     bhLDAP::debugDump($user, "user:");
 
-    if (! $user) 
-    { 
+    if (! $user)
+    {
       // pretend the user exists, then check AD password
       bhLDAP::debug ('######## User does not exist. Creating dummy user.');
       $user = new sfGuardUser;
       $user->setUsername($username);
       $user->setSalt('unused');
       $user->setPassword('unused');
+
+      bhLDAP::fillUserInfo($user);
     }
 
     // password is ok?
@@ -45,7 +47,7 @@ class bhLDAPUserValidator extends sfValidatorBase
 	$user = Doctrine_Core::getTable('sfGuardUser')->retrieveByUsername($username);
       }
       return array_merge($values, array('user' => $user));
-    } 
+    }
     else {
       bhLDAP::debug ('######## Check Password failed...');
     }

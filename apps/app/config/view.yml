@@ -3,7 +3,7 @@
 
 default:
   metas:
-    title:        %GERKUD_IZENBURUA%
+    title:        %GERKUD_IZENBURUA% - %GERKUD_ERAKUNDEA%
 
   stylesheets:    [main.css, mobile.css, font-awesome.min.css]
 

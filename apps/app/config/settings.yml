@@ -42,6 +42,7 @@ all:
     use_database:           true
 
     upload_dir: %GERKUD_UPLOAD_DIR%
+    app_i18n_dir: %GERKUD_I18N_DIR%
 
   .actions:
     secure_module:          login

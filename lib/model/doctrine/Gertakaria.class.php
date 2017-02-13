@@ -26,6 +26,8 @@ class Gertakaria extends BaseGertakaria
 	const TXANTILOIA_DATUAK_ALDAKETA = '[aldaketa]';
 	const TXANTILOIA_DATUAK_LANGILEA = '[langilea]';
 	const TXANTILOIA_DATUAK_SORTZE_DATA = '[sortze_data]';
+	const TXANTILOIA_DATUAK_IZENBURUA = '[izenburua]';
+	const TXANTILOIA_DATUAK_ERAKUNDEA = '[erakundea]';
 
 	const TXANTILOIA_CSS_ALDAKETA = '[css-aldaketa]';
 
@@ -224,6 +226,8 @@ class Gertakaria extends BaseGertakaria
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_ALDAKETA, $aldaketa, $mezua);
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_SORTZE_DATA, date(sfConfig::get('gerkud_data_formatoa'), strtotime($this->getCreatedAt())), $mezua);
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_LANGILEA , $langilea ? $langilea->getName() : '', $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_IZENBURUA , sfConfig::get('gerkud_izenburua'), $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_ERAKUNDEA , sfConfig::get('gerkud_erakundea'), $mezua);
 
 		if (!empty($ekintza))
 			$mezua = str_replace(self::TXANTILOIA_CSS_ALDAKETA, 'inherit', $mezua);

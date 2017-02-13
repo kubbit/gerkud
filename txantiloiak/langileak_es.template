@@ -33,7 +33,8 @@
 		<div class="aldaketa">[aldaketa]</div>
 
 		<div class="firma" style="display: inline-block; border-left: 3px solid #6699cc; padding: 0 1em;">
-			<span style="display: block;">Gertakarien Kudeaketa</span>
+			<span style="font-style: italic; display: block;">[izenburua]</span>
+			<span style="font-weight: bold; margin-right: 0.5em;">[erakundea]</span>
 		</div>
 	</body>
 </html>

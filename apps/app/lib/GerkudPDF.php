@@ -26,7 +26,10 @@ class GerkudPDF extends TCPDF
 			$imgy = $this->getImageRBY();
 		}
 		else
+		{
 			$imgy = $this->y;
+			$headerdata['logo_width'] = 0;
+		}
 
 		$cell_height = round(($this->cell_height_ratio * $headerfont[2]) / $this->k, 2);
 		// set starting margin for text data cell
@@ -45,8 +48,9 @@ class GerkudPDF extends TCPDF
 		$this->SetFont($headerfont[0], $headerfont[1], $headerfont[2]);
 		$this->SetX($header_x);
 		$this->MultiCell($cw, $cell_height, $headerdata['string'], 0, '', 0, 0, '', '', true, 0, false, true, $cell_height, 'T', false);
+		// date
 		$this->SetFont($headerfont[0], '', $headerfont[2] + 1);
-		$this->Cell(0, 10, date("Y/m/d"), 0, false, 'R', 0, '', 0, false, 'T', 'M');
+		$this->Cell(0, $cell_height, date("Y/m/d"), 0, 1, 'R', 0, '', 0, false, 'T', 'B');
 		// print an ending header line
 		$this->SetLineStyle(array('width' => 0.85 / $this->k, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0)));
 		$this->SetY((2.835 / $this->k) + max($imgy, $this->y));

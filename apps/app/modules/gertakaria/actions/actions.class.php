@@ -12,6 +12,21 @@ sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
 
 class gertakariaActions extends sfActions
 {
+	const EKINTZA_EDITATU = 'editatu';
+	const EKINTZA_ESLEITU = 'esleitu';
+	const EKINTZA_PROZESUAN_JARRI = 'prozesuan';
+	const EKINTZA_KOPIATU = 'kopiatu';
+	const EKINTZA_INPRIMATU = 'inprimatu';
+	const EKINTZA_ITXI = 'itxi';
+	const EKINTZA_BAZTERTU = 'baztertu';
+	const EKINTZA_BERRIREKI = 'berrireki';
+	const EKINTZA_GERTAKARIA = 'gertakaria';
+	const EKINTZA_HISTORIKOA = 'historikoa';
+	const EKINTZA_IRUZKINA = 'iruzkina';
+	const EKINTZA_FITXATEGIAK = 'fitxategiak';
+	const EKINTZA_BIKOIZTUAK = 'bikoiztuak';
+	const EKINTZA_PLANOA = 'planoa';
+
 	public function executeIndex(sfWebRequest $request)
 	{
 		if ($request->isMethod('post'))

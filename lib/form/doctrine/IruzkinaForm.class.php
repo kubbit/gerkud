@@ -21,7 +21,7 @@ class IruzkinaForm extends BaseIruzkinaForm
 		$this->widgetSchema['saila_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model' => 'Saila',
-			'add_empty' => false,
+			'add_empty' => '--',
 			'query' => Doctrine_Core::getTable('Saila')->createQuery('s')
 				->select('s.id, t.name')
 				->leftJoin('s.Translation t WITH t.lang = ?', $culture)
@@ -54,6 +54,12 @@ class IruzkinaForm extends BaseIruzkinaForm
 	public function postValidate($validator, $values)
 	{
 		if ($values['ekintza_id'] == 1 AND empty($values['testua']))
+		{
+			$error = new sfValidatorError($validator, 'Required.');
+			throw new sfValidatorErrorSchema($validator, array('testua' => $error));
+		}
+
+		if ($values['ekintza_id'] == 2 AND empty($values['saila_id']))
 		{
 			$error = new sfValidatorError($validator, 'Required.');
 			throw new sfValidatorErrorSchema($validator, array('testua' => $error));
