@@ -85,7 +85,7 @@ class adLDAP {
 	var $_bind;
 
 	// default constructor
-	function adLDAP($options=array()){
+	function __construct($options=array()){
 		//you can specifically overide any of the default configuration options setup above
 		if (count($options)>0){
 			if (array_key_exists("account_prefix",$options)){ $this->_account_prefix=$options["account_prefix"]; }

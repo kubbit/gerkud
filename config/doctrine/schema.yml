@@ -131,11 +131,19 @@ Kalea:
     Barrutia: { onDelete: RESTRICT, local: barrutia_id, foreign: id }
     Auzoa: { onDelete: RESTRICT, local: auzoa_id, foreign: id }
 
+sfGuardGroup:
+  actAs:
+    I18n:
+      fields: [name]
+
 Saila:
   connection: doctrine
   inheritance:
     extends: sfGuardGroup
     type: simple
+  actAs:
+    I18n:
+      fields: [name]
 
 SailaMota:
   columns:

@@ -22,9 +22,13 @@ abstract class BasesfGuardGroupTranslationForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'   => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'name' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'name' => new sfValidatorString(array('max_length' => 255)),
       'lang' => new sfValidatorChoice(array('choices' => array($this->getObject()->get('lang')), 'empty_value' => $this->getObject()->get('lang'), 'required' => false)),
     ));
+
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'sfGuardGroupTranslation', 'column' => array('name')))
+    );
 
     $this->widgetSchema->setNameFormat('sf_guard_group_translation[%s]');
 

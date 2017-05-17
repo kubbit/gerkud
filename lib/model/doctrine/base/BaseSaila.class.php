@@ -32,5 +32,13 @@ abstract class BaseSaila extends sfGuardGroup
         $this->hasMany('SailaMota', array(
              'local' => 'id',
              'foreign' => 'saila_id'));
+
+        $i18n0 = new Doctrine_Template_I18n(array(
+             'fields' => 
+             array(
+              0 => 'name',
+             ),
+             ));
+        $this->actAs($i18n0);
     }
 }

@@ -37,6 +37,8 @@ abstract class BasesfGuardGroup extends sfDoctrineRecord
         $this->setTableName('sf_guard_group');
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
+             'unique' => true,
+             'notnull' => true,
              'length' => 255,
              ));
         $this->hasColumn('description', 'string', 1000, array(
@@ -66,7 +68,8 @@ abstract class BasesfGuardGroup extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'group_id'));
 
-        $timestampable0 = new Doctrine_Template_Timestampable();
+        $timestampable0 = new Doctrine_Template_Timestampable(array(
+             ));
         $i18n0 = new Doctrine_Template_I18n(array(
              'fields' => 
              array(

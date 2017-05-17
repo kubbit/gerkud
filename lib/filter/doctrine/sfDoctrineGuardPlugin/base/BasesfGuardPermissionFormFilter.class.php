@@ -13,7 +13,7 @@ abstract class BasesfGuardPermissionFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'name'        => new sfWidgetFormFilterInput(),
+      'name'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'description' => new sfWidgetFormFilterInput(),
       'created_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),

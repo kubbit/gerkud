@@ -206,7 +206,7 @@ class eskaerakActions extends sfActions
 						$balioa = $fila->getDeskribapena();
 						break;
 					case 'ixte_data':
-						$balioa = date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getIxteData()));
+						$balioa = ($fila->getIxteData() ? date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getIxteData())) : $fila->getIxteData());
 						break;
 					case 'hasiera_aurreikusia':
 						$balioa = $fila->getHasieraAurreikusia();
@@ -241,10 +241,10 @@ class eskaerakActions extends sfActions
 						$balioa = $fila->getEraikina();
 						break;
 					case 'created_at':
-						$balioa = date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getCreatedAt()));
+						$balioa = ($fila->getCreatedAt() ? date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getCreatedAt())) : $fila->getCreatedAt());
 						break;
 					case 'updated_at':
-						$balioa = date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getUpdatedAt()));
+						$balioa = ($fila->getUpdatedAt() ? date(sfConfig::get('gerkud_data_formatoa'), strtotime($fila->getUpdatedAt())) : $fila->getUpdatedAt());
 						break;
 					case 'eraikinakalea':
 						if ($fila->getEraikinaId())
