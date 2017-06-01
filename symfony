@@ -10,5 +10,5 @@
  */
 
 chdir(dirname(__FILE__));
-require_once(dirname(__FILE__) . '/apps/ProjectConfiguration.class.php');
+require_once(dirname(__FILE__) . '/config/ProjectConfiguration.class.php');
 include(sfCoreAutoload::getInstance()->getBaseDir() . '/command/cli.php');

@@ -136,6 +136,14 @@ class eskaerakActions extends sfActions
 					$zutabea->izena = __('Kalea') . ' / ' . __('Eraikina');
 					$zutabea->klasea = 'eraikinakalea';
 					break;
+				case 'klaseamota':
+					$zutabea->izena = __('Klasea') . ' / ' . __('Mota');
+					$zutabea->klasea = 'klaseamota';
+					break;
+				case 'barrutiaeraikinakalealaburpena':
+					$zutabea->izena = __('Laburpena');
+					$zutabea->klasea = 'barrutiaeraikinakalealaburpena';
+					break;
 				case 'egoerasaila':
 					$zutabea->izena = __('Egoera') . ' / ' . __('Saila');
 					$zutabea->klasea = 'egoerasaila';
@@ -152,7 +160,9 @@ class eskaerakActions extends sfActions
 		foreach ($cursor as $fila)
 		{
 			$ilara = new stdClass();
+			$ilara->lehentasuna = $fila->getLehentasunaId();
 			$ilara->estekaId = $fila->getId();
+			$ilara->egoeraId = $fila->getEgoera()->getId();
 			$ilara->datuak = array();
 
 			foreach ($this->zutabeakConfig as $bakoitza)
@@ -259,6 +269,28 @@ class eskaerakActions extends sfActions
 						{
 							$balioa = '';
 						}
+						break;
+					case 'klaseamota':
+						$balioa = '';
+						if ($fila->getKlaseaId())
+							$balioa = $fila->getKlasea();
+						if ($fila->getMotaId())
+							$balioa = $balioa . '###' . $fila->getMota();
+						break;
+					case 'barrutiaeraikinakalealaburpena':
+						$balioa = '';
+						if ($fila->getBarrutiaId())
+							$balioa = $fila->getBarrutia();
+						if ($fila->getEraikinaId())
+							$balioa = $balioa . '/' . $fila->getEraikina();
+						else if ($fila->getKaleaId())
+							$balioa = $balioa . '/' . $fila->getKalea() . ', ' . $fila->getKaleZbkia();
+						$balioa = $balioa . '###' . $fila->getLaburpena();
+						break;
+					case 'egoerasaila':
+						$balioa = $fila->getEgoera();
+						if ($fila->getSailaId())
+							$balioa = $balioa . '###' . $fila->getSaila();
 						break;
 				}
 				$ilara->datuak[$bakoitza] = $balioa;

@@ -199,7 +199,7 @@ class gertakariaActions extends sfActions
 					$zutabea->klasea = 'klaseamota';
 					break;
 				case 'barrutiaeraikinakalealaburpena':
-					$zutabea->izena = __('Laburpena') ;
+					$zutabea->izena = __('Laburpena');
 					$zutabea->klasea = 'barrutiaeraikinakalealaburpena';
 					break;
 				case 'egoerasaila':
