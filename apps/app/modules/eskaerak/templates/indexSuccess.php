@@ -16,7 +16,7 @@
 		<?php elseif ($klabea === 'lehentasuna') : ?>
 			<td class="lehentasuna" title="<?php echo $zutabeak[$klabea]->izena; ?>"><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>"><?php echo $datua ?></a></td>
 		<?php else : ?>
-			<td title="<?php echo $zutabeak[$klabea]->izena; ?>"><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>"><?php echo $datua ?></a></td>
+			<td title="<?php echo $zutabeak[$klabea]->izena; ?>"><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId) ?>"><?php echo str_replace('###', '<br />', $datua); ?></a></td>
 		<?php endif; ?>
 	<?php endforeach; ?>
 		</tr>
