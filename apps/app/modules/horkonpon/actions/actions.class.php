@@ -52,6 +52,7 @@ class horkonponActions extends sfActions
 
 			$this->gertakaria = new Gertakaria();
 			$this->gertakaria->setHerritarrena(true);
+			$this->gertakaria->save();
 
 			$mota = sfConfig::get('gerkud_api_mota_id');
 			if ($mota !== NULL)
