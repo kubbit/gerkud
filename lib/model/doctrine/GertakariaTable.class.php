@@ -112,14 +112,18 @@ class GertakariaTable extends Doctrine_Table
 					$where .= sprintf(' AND (j.herritarrena IS NULL OR j.saila_id IS NOT NULL OR (j.herritarrena = 1 AND j.saila_id IN (%s)))', implode(',', $taldeakId));
 			}
 
+			$eskubideak = Array();
 			if (sfContext::getInstance()->getUser()->hasCredential('admins'))
-				$where .= $this->getIragazkiak(sfConfig::get('gerkud_gertakariak_erakutsi_admins'), $taldeakId);
-			else if (sfContext::getInstance()->getUser()->hasCredential('gerkud'))
-				$where .= $this->getIragazkiak(sfConfig::get('gerkud_gertakariak_erakutsi_gerkud'), $taldeakId);
-			else if (sfContext::getInstance()->getUser()->hasCredential('zerbitzu'))
-				$where .= $this->getIragazkiak(sfConfig::get('gerkud_gertakariak_erakutsi_zerbitzu'), $taldeakId);
-			else if (sfContext::getInstance()->getUser()->hasCredential('arrunta'))
-				$where .= $this->getIragazkiak(sfConfig::get('gerkud_gertakariak_erakutsi_arrunta'), $taldeakId);
+				$eskubideak = array_merge($eskubideak, sfConfig::get('gerkud_gertakariak_erakutsi_admins'));
+			if (sfContext::getInstance()->getUser()->hasCredential('gerkud'))
+				$eskubideak = array_merge($eskubideak, sfConfig::get('gerkud_gertakariak_erakutsi_gerkud'));
+			if (sfContext::getInstance()->getUser()->hasCredential('zerbitzu'))
+				$eskubideak = array_merge($eskubideak, sfConfig::get('gerkud_gertakariak_erakutsi_zerbitzu'));
+			if (sfContext::getInstance()->getUser()->hasCredential('arrunta'))
+				$eskubideak = array_merge($eskubideak, sfConfig::get('gerkud_gertakariak_erakutsi_arrunta'));
+
+			if (!empty($eskubideak))
+				$where .= $this->getIragazkiak($eskubideak, $taldeakId, false);
 
 			$q = Doctrine_Query::create()
 			 ->from('gertakaria j')
@@ -148,14 +152,18 @@ class GertakariaTable extends Doctrine_Table
 			return $where;
 
 		if (in_array(self::ERAKUTSI_SAILEKOAK, $ezarpenak) && !(empty($taldeakId)))
-			$where .= ' AND j.saila_id IN ( ' . implode(',', $taldeakId) . ' )';
+			$where .= 'j.saila_id IN ( ' . implode(',', $taldeakId) . ' )';
 
 		if (in_array(self::ERAKUTSI_NEREAK, $ezarpenak) && !(empty($taldeakId)))
-			$where .= ' AND j.langilea_id = :lang';
+		{
+			if ($where !== '')
+				$where .= ' OR ';
+			$where .= 'j.langilea_id = :lang';
+		}
 
 		if ($where === '')
-			$where .= ' AND j.id IS NULL';
+			$where .= ' j.id IS NULL';
 
-		return $where;
+		return ' AND (' . $where . ')';
 	}
 }
