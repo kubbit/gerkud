@@ -106,6 +106,10 @@ class gertakariaActions extends sfActions
 					$zutabea->izena = __('Klasea');
 					$zutabea->klasea = 'klasea';
 					break;
+				case 'arloa':
+					$zutabea->izena = __('Arloa');
+					$zutabea->klasea = 'arloa';
+					break;
 				case 'mota':
 					$zutabea->izena = __('Mota');
 					$zutabea->klasea = 'mota';
@@ -236,6 +240,9 @@ class gertakariaActions extends sfActions
 						break;
 					case 'klasea':
 						$balioa = $fila->getKlasea();
+						break;
+					case 'arloa':
+						$balioa = $fila->getArloa();
 						break;
 					case 'mota':
 						$balioa = $fila->getMota();

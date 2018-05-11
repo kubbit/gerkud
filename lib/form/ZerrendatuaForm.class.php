@@ -51,6 +51,14 @@ class ZerrendatuaForm extends sfForm
 					->leftJoin('k.Translation t WITH t.lang = ?', $culture)
 					->orderBy('t.izena ASC')
 			)),
+			'arloa' => new sfWidgetFormDoctrineChoice(array
+			(
+				'model' => 'Arloa',
+				'add_empty' => '--',
+				'query' => Doctrine_Core::getTable('Arloa')->createQuery('a')
+					->leftJoin('a.Translation t WITH t.lang = ?', $culture)
+					->orderBy('t.izena ASC')
+			)),
 			'saila' => new sfWidgetFormDoctrineChoice(array
 			(
 				'model' => 'Saila',
@@ -122,6 +130,7 @@ class ZerrendatuaForm extends sfForm
 		$this->validatorSchema['ixte_noiztik'] = new sfValidatorDataOrdua(array('required' => false));
 		$this->validatorSchema['ixte_nora'] = new sfValidatorDataOrdua(array('required' => false));
 		$this->validatorSchema['klasea'] = new sfValidatorString(array('required' => false));
+		$this->validatorSchema['arloa'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['saila'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['mota_id'] = new sfValidatorString(array('required' => false));
 		$this->validatorSchema['azpimota_id'] = new sfValidatorString(array('required' => false));

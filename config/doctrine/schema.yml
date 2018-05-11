@@ -4,6 +4,7 @@ Gertakaria:
   columns:
     laburpena: { type: string(255) }
     klasea_id: { type: integer, notnull: false }
+    arloa_id: { type: integer, notnull: false }
     mota_id: { type: integer, notnull: false }
     azpimota_id:  { type: integer, notnull: false }
     abisuaNork: { type: string(512) }
@@ -26,6 +27,7 @@ Gertakaria:
     espedientea: { type: string(12), notnull: false }
   relations:
     Klasea: { onDelete: RESTRICT, local: klasea_id, foreign: id }
+    Arloa: { onDelete: RESTRICT, local: arloa_id, foreign: id }
     Mota: { onDelete: RESTRICT, local: mota_id, foreign: id }
     Azpimota: { onDelete: RESTRICT, local: azpimota_id, foreign: id }
     Barrutia: { onDelete: RESTRICT, local: barrutia_id, foreign: id }
@@ -201,6 +203,13 @@ Geometria:
     mota: { type: string(50) }
 
 Klasea:
+  actAs:
+    I18n:
+      fields: [izena]
+  columns:
+    izena: { type: string(255), notnull: true }
+
+Arloa:
   actAs:
     I18n:
       fields: [izena]

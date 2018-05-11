@@ -237,3 +237,23 @@ ALTER TABLE kontaktua
  ADD nan VARCHAR(9) NULL,
  CHANGE COLUMN ohartarazi ohartarazi BIGINT NULL DEFAULT NULL,
  ADD CONSTRAINT kontaktua_ohartarazi_kontaktua_ohartaraztea_id FOREIGN KEY (ohartarazi) REFERENCES kontaktua_ohartaraztea (id);
+
+
+/* v2.16 */
+CREATE TABLE IF NOT EXISTS arloa
+(
+	id BIGINT(20) NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (id)
+);
+CREATE TABLE IF NOT EXISTS arloa_translation
+(
+	id BIGINT(20) NOT NULL,
+	izena VARCHAR(255) NOT NULL,
+	lang CHAR(2) NOT NULL,
+	PRIMARY KEY (id, lang),
+	CONSTRAINT arloa_translation_id_arloa_id FOREIGN KEY (id) REFERENCES arloa (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+ALTER TABLE gertakaria
+ ADD arloa_id BIGINT(20) NULL DEFAULT NULL,
+ ADD INDEX arloa_id_idx (arloa_id),
+ ADD CONSTRAINT gertakaria_arloa_id_arloa_id FOREIGN KEY (arloa_id) REFERENCES arloa (id) ON DELETE RESTRICT ON UPDATE RESTRICT;

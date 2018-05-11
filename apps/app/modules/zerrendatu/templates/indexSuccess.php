@@ -75,6 +75,12 @@
 				<?php echo $zerrendatuaForm['klasea']->render(); ?>
 			</div>
 <?php endif; ?>
+<?php if (in_array('arloa', $configEremuak)): ?>
+			<div id="arloa" class="field">
+				<label for="zerrendatu_arloa"><?php echo __('Arloa'); ?></label>
+				<?php echo $zerrendatuaForm['arloa']->render(); ?>
+			</div>
+<?php endif; ?>
 		</fieldset>
 <?php if (count(array_intersect($configEremuak, array('barrutia', 'auzoa', 'kalea', 'eraikina'))) > 0): ?>
 		<fieldset class="azpiSailkapena">

@@ -249,6 +249,21 @@ class GertakariaForm extends BaseGertakariaForm
 			'required' => (in_array('klasea', $configDerrigorrezkoak)) ? true : false
 		));
 
+		$this->widgetSchema['arloa_id'] = new sfWidgetFormDoctrineChoice(array
+		(
+			'model' => 'Arloa',
+			'add_empty' => '--',
+			'query' => Doctrine_Core::getTable('Arloa')
+				->createQuery('a')
+				->leftJoin('a.Translation t WITH t.lang = ?', $culture)
+				->orderBy('t.izena ASC')
+		));
+		$this->validatorSchema['arloa_id'] = new sfValidatorDoctrineChoice(array
+		(
+			'model' => 'Arloa',
+			'required' => (in_array('arloa', $configDerrigorrezkoak)) ? true : false
+		));
+
 		if (in_array('lehentasuna', $configDerrigorrezkoak))
 		{
 			$this->widgetSchema['lehentasuna_id'] = new sfWidgetFormDoctrineChoice(array

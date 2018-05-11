@@ -76,6 +76,14 @@
 			</div>
 		</fieldset>
 <?php endif; ?>
+<?php if (in_array('arloa', $configEremuak)): ?>
+		<fieldset>
+			<div id="arloa_id" class="field">
+				<label for="gertakaria_filters_arloa_id"><?php echo __('Arloa') ?>:</label>
+				<?php echo $filter['arloa_id']->render(); ?>
+			</div>
+		</fieldset>
+<?php endif; ?>
 <?php if(count(array_intersect($configEremuak, array('barrutia', 'auzoa', 'kalea', 'kale_zbkia'))) > 0): ?>
 		<fieldset class="azpiSailkapena">
 			<label class="title"><?php echo __('Helbidea') ?>:</label>

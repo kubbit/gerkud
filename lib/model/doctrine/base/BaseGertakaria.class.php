@@ -7,6 +7,7 @@
  * 
  * @property string $laburpena
  * @property integer $klasea_id
+ * @property integer $arloa_id
  * @property integer $mota_id
  * @property integer $azpimota_id
  * @property string $abisuaNork
@@ -28,6 +29,7 @@
  * @property integer $kontaktua_id
  * @property string $espedientea
  * @property Klasea $Klasea
+ * @property Arloa $Arloa
  * @property Mota $Mota
  * @property Azpimota $Azpimota
  * @property Barrutia $Barrutia
@@ -48,6 +50,7 @@
  * 
  * @method string              getLaburpena()           Returns the current record's "laburpena" value
  * @method integer             getKlaseaId()            Returns the current record's "klasea_id" value
+ * @method integer             getArloaId()             Returns the current record's "arloa_id" value
  * @method integer             getMotaId()              Returns the current record's "mota_id" value
  * @method integer             getAzpimotaId()          Returns the current record's "azpimota_id" value
  * @method string              getAbisuaNork()          Returns the current record's "abisuaNork" value
@@ -69,6 +72,7 @@
  * @method integer             getKontaktuaId()         Returns the current record's "kontaktua_id" value
  * @method string              getEspedientea()         Returns the current record's "espedientea" value
  * @method Klasea              getKlasea()              Returns the current record's "Klasea" value
+ * @method Arloa               getArloa()               Returns the current record's "Arloa" value
  * @method Mota                getMota()                Returns the current record's "Mota" value
  * @method Azpimota            getAzpimota()            Returns the current record's "Azpimota" value
  * @method Barrutia            getBarrutia()            Returns the current record's "Barrutia" value
@@ -88,6 +92,7 @@
  * @method Doctrine_Collection getErlazioak()           Returns the current record's "Erlazioak" collection
  * @method Gertakaria          setLaburpena()           Sets the current record's "laburpena" value
  * @method Gertakaria          setKlaseaId()            Sets the current record's "klasea_id" value
+ * @method Gertakaria          setArloaId()             Sets the current record's "arloa_id" value
  * @method Gertakaria          setMotaId()              Sets the current record's "mota_id" value
  * @method Gertakaria          setAzpimotaId()          Sets the current record's "azpimota_id" value
  * @method Gertakaria          setAbisuaNork()          Sets the current record's "abisuaNork" value
@@ -109,6 +114,7 @@
  * @method Gertakaria          setKontaktuaId()         Sets the current record's "kontaktua_id" value
  * @method Gertakaria          setEspedientea()         Sets the current record's "espedientea" value
  * @method Gertakaria          setKlasea()              Sets the current record's "Klasea" value
+ * @method Gertakaria          setArloa()               Sets the current record's "Arloa" value
  * @method Gertakaria          setMota()                Sets the current record's "Mota" value
  * @method Gertakaria          setAzpimota()            Sets the current record's "Azpimota" value
  * @method Gertakaria          setBarrutia()            Sets the current record's "Barrutia" value
@@ -142,6 +148,10 @@ abstract class BaseGertakaria extends sfDoctrineRecord
              'length' => 255,
              ));
         $this->hasColumn('klasea_id', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => false,
+             ));
+        $this->hasColumn('arloa_id', 'integer', null, array(
              'type' => 'integer',
              'notnull' => false,
              ));
@@ -235,6 +245,11 @@ abstract class BaseGertakaria extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Klasea', array(
              'local' => 'klasea_id',
+             'foreign' => 'id',
+             'onDelete' => 'RESTRICT'));
+
+        $this->hasOne('Arloa', array(
+             'local' => 'arloa_id',
              'foreign' => 'id',
              'onDelete' => 'RESTRICT'));
 

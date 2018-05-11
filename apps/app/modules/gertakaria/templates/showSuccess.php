@@ -181,6 +181,12 @@
 					<span><?php echo $gertakaria->getKlasea(); ?></span>
 				</div>
 <?php endif; ?>
+<?php if (in_array('arloa', $configEremuak)): ?>
+				<div class="field">
+					<label><?php echo __('Arloa'); ?>:</label>
+					<span><?php echo $gertakaria->getArloa(); ?></span>
+				</div>
+<?php endif; ?>
 			</fieldset>
 
 			<fieldset>

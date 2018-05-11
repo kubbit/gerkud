@@ -118,6 +118,14 @@ class zerrendatuActions extends sfActions
 
 			$strKlasea = Doctrine_Core::getTable('Klasea')->find(array($this->formularioa['klasea']))->getIzena();
 		}
+		$strArloa = '';
+		if ($this->formularioa['arloa'])
+		{
+			array_push($condiciones, 'g.arloa_id = :arloa');
+			$parametroak[':arloa'] = $this->formularioa['arloa'];
+
+			$strArloa = Doctrine_Core::getTable('Arloa')->find(array($this->formularioa['arloa']))->getIzena();
+		}
 		$strSaila = '';
 		if ($this->formularioa['saila'])
 		{
@@ -216,6 +224,8 @@ class zerrendatuActions extends sfActions
 		$htmlIragazkiak .= sprintf('<tr><td></td><td></td><td></td><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Ixte data'), $ixte_noiztik, !empty($ixte_noiztik) && !empty($ixte_nora) ? ' - ' : '', $ixte_nora);
 		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s</td><td></td>', __('Mota'), $strMota, empty($strAzpiMota) ? '' : ' / ' . $strAzpiMota);
 		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Egoera'), $strEgoera);
+		if (in_array('arloa',$configEremuak))
+			$htmlIragazkiak .= sprintf('<tr><td width="50"></td><td width="85">%s:</td><td width="150" style="border-bottom: 0.25px solid black;">%s</td><td width="180"></td></tr>', __('Arloa'), $strArloa);
 		$htmlIragazkiak .= '</table>';
 
 		if (count($condiciones) > 0)

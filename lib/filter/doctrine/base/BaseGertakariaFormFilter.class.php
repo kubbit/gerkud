@@ -15,6 +15,7 @@ abstract class BaseGertakariaFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'laburpena'           => new sfWidgetFormFilterInput(),
       'klasea_id'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Klasea'), 'add_empty' => true)),
+      'arloa_id'            => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Arloa'), 'add_empty' => true)),
       'mota_id'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Mota'), 'add_empty' => true)),
       'azpimota_id'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Azpimota'), 'add_empty' => true)),
       'abisuaNork'          => new sfWidgetFormFilterInput(),
@@ -42,6 +43,7 @@ abstract class BaseGertakariaFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'laburpena'           => new sfValidatorPass(array('required' => false)),
       'klasea_id'           => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Klasea'), 'column' => 'id')),
+      'arloa_id'            => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Arloa'), 'column' => 'id')),
       'mota_id'             => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Mota'), 'column' => 'id')),
       'azpimota_id'         => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Azpimota'), 'column' => 'id')),
       'abisuaNork'          => new sfValidatorPass(array('required' => false)),
@@ -86,6 +88,7 @@ abstract class BaseGertakariaFormFilter extends BaseFormFilterDoctrine
       'id'                  => 'Number',
       'laburpena'           => 'Text',
       'klasea_id'           => 'ForeignKey',
+      'arloa_id'            => 'ForeignKey',
       'mota_id'             => 'ForeignKey',
       'azpimota_id'         => 'ForeignKey',
       'abisuaNork'          => 'Text',

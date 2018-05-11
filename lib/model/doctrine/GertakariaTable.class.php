@@ -71,6 +71,7 @@ class GertakariaTable extends Doctrine_Table
 
 				if ($query1['egoera_id']) $q->andWhere('j.egoera_id = :egoera', array(':egoera' => $query1['egoera_id']));
 				if (array_key_exists('klasea_id', $query1) && $query1['klasea_id']) $q->andWhere('j.klasea_id = :klasea', array(':klasea' => $query1['klasea_id']));
+				if (array_key_exists('arloa_id', $query1) && $query1['arloa_id']) $q->andWhere('j.arloa_id = :arloa', array(':arloa' => $query1['arloa_id']));
 				if (array_key_exists('mota_id', $query1) && $query1['mota_id']) $q->andWhere('j.mota_id = :mota', array(':mota' => $query1['mota_id']));
 				if (array_key_exists('azpimota_id', $query1) && $query1['azpimota_id']) $q->andWhere('j.azpimota_id = :azpimota', array(':azpimota' => $query1['azpimota_id']));
 				if ($query1['saila_id']) $q->andWhere('j.saila_id = :saila', array(':saila' => $query1['saila_id']));

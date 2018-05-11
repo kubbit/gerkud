@@ -28,6 +28,7 @@
 // Gertakari originalaren datuak kopiatu
 $form->setDefault('laburpena', $formZ->getObject()->getLaburpena());
 $form->setDefault('klasea_id', $formZ->getObject()->getKlaseaId());
+$form->setDefault('arloa_id', $formZ->getObject()->getArloaId());
 $form->setDefault('mota_id', $formZ->getObject()->getMotaId());
 $form->setDefault('azpimota_id', $formZ->getObject()->getAzpimotaId());
 $form->setDefault('barrutia_id', $formZ->getObject()->getBarrutiaId());
@@ -82,6 +83,12 @@ if (sfConfig::get('gerkud_kopia_zehatza'))
 			<div id="klasea_id" class="field">
 				<label for="gertakaria_klasea_id"><?php echo __('Klasea') ?>:<?php echo (in_array('klasea', $configDerrigorrezkoak))?'*':''?></label>
 				<?php echo $form['klasea_id']->render(); ?>
+			</div>
+<?php endif; ?>
+<?php if (in_array('arloa', $configEremuak)): ?>
+			<div id="arloa_id" class="field">
+				<label for="gertakaria_arloa_id"><?php echo __('Arloa') ?>:<?php echo (in_array('arloa', $configDerrigorrezkoak))?'*':''?></label>
+				<?php echo $form['arloa_id']->render(); ?>
 			</div>
 <?php endif; ?>
 		</fieldset>

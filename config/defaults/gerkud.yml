@@ -83,6 +83,7 @@ all:
 #      - klaseamota
       - azpimota
       - klasea
+#      - arloa
       - egoera
       - saila
 #      - egoerasaila

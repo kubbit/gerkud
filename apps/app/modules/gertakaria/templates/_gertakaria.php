@@ -90,6 +90,12 @@
 				<?php echo $form['klasea_id']->render(); ?>
 			</div>
 <?php endif; ?>
+<?php if (in_array('arloa', $configEremuak)): ?>
+			<div id="arloa_id" class="field">
+				<label for="gertakaria_arloa_id"><?php echo __('Arloa') ?>:<?php echo (in_array('arloa', $configDerrigorrezkoak))?'*':'' ?></label>
+				<?php echo $form['arloa_id']->render(); ?>
+			</div>
+<?php endif; ?>
 		</fieldset>
 
 <?php if (in_array('lehentasuna', $configEremuak)): ?>

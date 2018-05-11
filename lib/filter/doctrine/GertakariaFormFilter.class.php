@@ -101,6 +101,13 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 			'query'     => Doctrine_Core::getTable('Klasea')->createQuery('k')->leftJoin('k.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
 		));
 
+		$this->widgetSchema['arloa_id'] = new sfWidgetFormDoctrineChoice(array
+		(
+			'model'     => 'Arloa',
+			'add_empty' => '--',
+			'query'     => Doctrine_Core::getTable('Arloa')->createQuery('a')->leftJoin('a.Translation t WITH t.lang = ?', $culture)->orderBy('t.izena ASC')
+		));
+
 		$this->widgetSchema['egoera_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model'     => 'Egoera',

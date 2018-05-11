@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2017-01-27T12:55:23Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2018-05-08T13:03:48Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -843,6 +843,14 @@
       <trans-unit id="224">
         <source>Zure erabiltzaileak ez du aplikazioa erabiltzeko baimenik.</source>
         <target>Tu usuario no tiene permisos para usar la aplicación.</target>
+      </trans-unit>
+      <trans-unit id="225">
+        <source>Eskaerak</source>
+        <target>Peticiones</target>
+      </trans-unit>
+      <trans-unit id="226">
+        <source>Arloa</source>
+        <target>Área</target>
       </trans-unit>
     </body>
   </file>
