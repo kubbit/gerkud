@@ -19,6 +19,8 @@ class horkonponActions extends sfActions
 
 	const OHARTARAZI_EZ = 0;
 	const OHARTARAZI_POSTA = 1;
+	
+	private $erabiltzailea;
 
 	public function executeIndex(sfWebRequest $request)
 	{
@@ -42,12 +44,7 @@ class horkonponActions extends sfActions
 			if ($array === NULL)
 				throw new Exception(sprintf('Mezua ez da zuzena: %s', $json));
 
-			if ($request->getParameter('pasahitza') !== NULL)
-				$pasahitza = $request->getParameter('pasahitza');
-			else if ($request->getParameter('key') !== NULL)
-				$pasahitza = $request->getParameter('key');
-			$confPasahitza = sfConfig::get('gerkud_api_pasahitza');
-			if ($confPasahitza && $confPasahitza !== $pasahitza)
+			if (!$this->checkAuth($request))
 				throw new Exception('Atzipena ukatuta');
 
 			$this->gertakaria = new Gertakaria();
@@ -96,6 +93,33 @@ class horkonponActions extends sfActions
 
 		return;
 	}
+
+	private function checkAuth($request)
+	{
+		$this->erabiltzailea = NULL;
+		$pasahitza = NULL;
+
+		if (array_key_exists('PHP_AUTH_USER', $_SERVER))
+		{
+			$this->erabiltzailea = $_SERVER['PHP_AUTH_USER'];
+			if (array_key_exists('PHP_AUTH_PW', $_SERVER))
+				$pasahitza = $_SERVER['PHP_AUTH_PW'];
+		}
+		else if ($request->getParameter('pasahitza') !== NULL)
+			$pasahitza = $request->getParameter('pasahitza');
+		else if ($request->getParameter('key') !== NULL)
+			$pasahitza = $request->getParameter('key');
+
+		$confPasahitza = sfConfig::get('gerkud_api_pasahitza');
+		if ($confPasahitza && $confPasahitza !== $pasahitza)
+		{
+			$this->erabiltzailea = NULL;
+			return false;
+		}
+
+		return true;
+	}
+
 
 	private function APIv1(sfWebRequest $request, $array)
 	{
@@ -177,6 +201,12 @@ class horkonponActions extends sfActions
 			$this->gertakaria->setCreatedAt($mezua['date']);
 
 		$langilea = null;
+		if ($this->erabiltzailea !== null)
+		{
+			$langilea = Doctrine_Core::getTable('Langilea')->findOneByEmailAddress($this->erabiltzailea);
+			if (!$langilea)
+				$langilea = null;
+		}
 
 		$erabiltzaileDatuak = array();
 		if (array_key_exists('user', $mezua))
@@ -190,9 +220,12 @@ class horkonponActions extends sfActions
 			{
 				array_push($erabiltzaileDatuak, $user['mail']);
 
-				$langilea = Doctrine_Core::getTable('Langilea')->findOneByEmailAddress($user['mail']);
-				if (!$langilea)
-					$langilea = null;
+				if ($langilea === null)
+				{
+					$langilea = Doctrine_Core::getTable('Langilea')->findOneByEmailAddress($user['mail']);
+					if (!$langilea)
+						$langilea = null;
+				}
 			}
 
 			if (count($erabiltzaileDatuak) > 0 && $langilea === null)
