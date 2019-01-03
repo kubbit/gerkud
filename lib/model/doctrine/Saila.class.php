@@ -40,4 +40,16 @@ class Saila extends BaseSaila
 
 		return $erabiltzaileak;
 	}
+
+	public function __toString()
+	{
+		// Fix PHP 7
+		if ($this->getTable()->hasRelation('Translation'))
+			$this->loadReference('Translation');
+
+		if (!is_null($this->getId()))
+			return $this->getName();
+		else
+			return '';
+	}
 }

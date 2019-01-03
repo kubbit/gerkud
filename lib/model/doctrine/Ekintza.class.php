@@ -14,6 +14,10 @@ class Ekintza extends BaseEkintza
 {
 	public function __toString()
 	{
+		// Fix PHP 7
+		if ($this->getTable()->hasRelation('Translation'))
+			$this->loadReference('Translation');
+
 		return $this->getMota();
 	}
 }
