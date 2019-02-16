@@ -26,6 +26,8 @@ class LangileaForm extends BaseLangileaForm
 			'model' => 'Ohartaraztea',
 		));
 
+		$this->widgetSchema['groups_list'] = new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Saila'));
+
 		parent::configure();
 	}
 }

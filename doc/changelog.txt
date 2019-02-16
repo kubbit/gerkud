@@ -3,6 +3,7 @@
   2019-01-03  Kubbit (https://kubbit.com)
 ================================================================================
 * Soporte para PHP v7.2
+* Diferenciación entre usuario que notifica y autor de la incidencia en el API
 
 ================================================================================
   Version 2.16

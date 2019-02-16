@@ -14,6 +14,10 @@ class Ohartaraztea extends BaseOhartaraztea
 {
 	public function __toString()
 	{
+		// Fix PHP 7
+		if ($this->getTable()->hasRelation('Translation'))
+			$this->loadReference('Translation');
+
 		return $this->getMota();
 	}
 }
