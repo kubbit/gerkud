@@ -28,6 +28,8 @@ class LangileaForm extends BaseLangileaForm
 
 		$this->widgetSchema['groups_list'] = new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Saila'));
 
+		$this->setValidator('username', new sfValidatorRegex(array('pattern' => '/^[a-z0-9-_]+$/i')));
+
 		parent::configure();
 	}
 }

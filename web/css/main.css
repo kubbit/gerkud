@@ -605,6 +605,7 @@ table th.headerSortDown
 	text-align: center;
 }
 .errorea > input,
+.panela .errorea > input[readonly=readonly],
 .errorea > select,
 .errorea > textarea
 {
