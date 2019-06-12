@@ -429,48 +429,48 @@ class zerrendatuActions extends sfActions
 					$lehentasuna = "!!";
 					break;
 			}
-			$html .= sprintf('<td width="10">%s</td>', $lehentasuna);
-			$html .= sprintf('<td width="30">%s</td>', $datuak['kodea']);
+			$html .= sprintf('<td width="10">%s</td>', htmlentities($lehentasuna));
+			$html .= sprintf('<td width="30">%s</td>', htmlentities($datuak['kodea']));
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
-			$html .= sprintf('<td width="54">%s</td>', $datuak['egoera']);
+			$html .= sprintf('<td width="54">%s</td>', htmlentities($datuak['egoera']));
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
-			$html .= sprintf('<td width="218">%s</td>', $datuak['laburpena']);
+			$html .= sprintf('<td width="218">%s</td>', htmlentities($datuak['laburpena']));
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 			if (in_array('barrutia',sfConfig::get('gerkud_eremuak_gaituak')) && in_array('auzoa',sfConfig::get('gerkud_eremuak_gaituak')))
 			{
-				$html .= sprintf('<td width="54">%s</td>', $datuak['barrutia']);
-				$html .= sprintf('<td width="54">%s</td>', $datuak['auzoa']);
+				$html .= sprintf('<td width="54">%s</td>', htmlentities($datuak['barrutia']));
+				$html .= sprintf('<td width="54">%s</td>', htmlentities($datuak['auzoa']));
 			}
 			elseif (in_array('barrutia',sfConfig::get('gerkud_eremuak_gaituak')))
-				$html .= sprintf('<td width="54">%s</td>', $datuak['barrutia']);
+				$html .= sprintf('<td width="54">%s</td>', htmlentities($datuak['barrutia']));
 			else
-				$html .= sprintf('<td width="54">%s</td>', $datuak['auzoa']);
+				$html .= sprintf('<td width="54">%s</td>', htmlentities($datuak['auzoa']));
 
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 			if ($datuak['eraikina'] != null)
-				$html .= sprintf('<td width="150">%s</td>', $datuak['eraikina']);
+				$html .= sprintf('<td width="150">%s</td>', htmlentities($datuak['eraikina']));
 			else if ($datuak['zenbakia'] != null)
-				$html .= sprintf('<td width="150">%s, %s</td>', $datuak['kalea'], $datuak['zenbakia']);
+				$html .= sprintf('<td width="150">%s, %s</td>', htmlentities($datuak['kalea']), htmlentities($datuak['zenbakia']));
 			else
-				$html .= sprintf('<td width="150">%s</td>', $datuak['kalea']);
+				$html .= sprintf('<td width="150">%s</td>', htmlentities($datuak['kalea']));
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
-			$html .= sprintf('<td width="80">%s</td>', $datuak['abisuanork']);
+			$html .= sprintf('<td width="80">%s</td>', htmlentities($datuak['abisuanork']));
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
-			$html .= sprintf('<td width="54">%s</td>', $datuak['erabiltzailea']);
+			$html .= sprintf('<td width="54">%s</td>', htmlentities($datuak['erabiltzailea']));
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 
 			// no mostrar fechas sin valor
 			if ($datuak['irekiera_data'] == 0)
 				$html .= '<td width="54">-</td>';
 			else
-				$html .= sprintf('<td width="54">%s</td>', $datuak['irekiera_data']);
+				$html .= sprintf('<td width="54">%s</td>', htmlentities($datuak['irekiera_data']));
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 
 			// no mostrar fechas sin valor
 			if ($datuak['ixte_data'] == 0)
 				$html .= '<td width="54">-</td>';
 			else
-				$html .= sprintf('<td width="54">%s</td>', $datuak['ixte_data']);
+				$html .= sprintf('<td width="54">%s</td>', htmlentities($datuak['ixte_data']));
 			$html .= '</tr>';
 
 			$orria = $pdf->getPage();
@@ -483,7 +483,7 @@ class zerrendatuActions extends sfActions
 				$pdf->rollbackTransaction(true);
 				//$pdf->AddPage();
 				$pdf->startTransaction();
-				$pdf->writeHTML('<table>' . $goiburua1 . $goiburua2 . $goiburua3 . '</table>', false, false, true, false, '');
+				$pdf->writeHTML('<table>' . htmlentities($goiburua1 . $goiburua2 . $goiburua3) . '</table>', false, false, true, false, '');
 				$pdf->writeHTML($izenak, false, false, true, false, '');
 				$pdf->writeHTML($html, false, false, true, false, '');
 			}
