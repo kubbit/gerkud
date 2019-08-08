@@ -99,6 +99,17 @@ class Gertakaria extends BaseGertakaria
 		return $q->execute();
 	}
 
+	public function getIruzkinakCount()
+	{
+		$count = 0;
+
+		foreach ($this->getIruzkinak() as $iruzkina)
+			if ($iruzkina->getEkintzaId() == 1)
+				$count++;
+
+		return $count;
+	}
+
 	/*
 	 * Gertakariaren oharra jaso behar duten langile guztien e-mailak itzuli
 	 */

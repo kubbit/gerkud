@@ -1,4 +1,12 @@
 ================================================================================
+  Version 2.20
+  2019-08-08  Kubbit (https://kubbit.com)
+================================================================================
+* Añadidos indicadores de número de comentarios en las incidencias
+* Errores de validación en formularios de edición de usuarios
+* Varias correcciones
+
+================================================================================
   Version 2.18
   2019-01-03  Kubbit (https://kubbit.com)
 ================================================================================

@@ -510,7 +510,8 @@ table tr.esteka:hover
 {
 	cursor: pointer;
 }
-table tr td.lehentasuna
+table tr td.lehentasuna,
+table tr td.iruzkinak_bai
 {
 	text-align: center;
 	color: #990000;

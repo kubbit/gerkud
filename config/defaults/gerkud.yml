@@ -110,6 +110,7 @@ all:
       - ixte_data
       - created_at
       - updated_at
+#      - iruzkinak_bai
 
     # Gertakaria sortu edo editatzerakoan gutxienez bete beharrezko eremuak
     derrigorrezkoak:

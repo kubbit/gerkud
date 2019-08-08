@@ -483,7 +483,7 @@ class zerrendatuActions extends sfActions
 				$pdf->rollbackTransaction(true);
 				//$pdf->AddPage();
 				$pdf->startTransaction();
-				$pdf->writeHTML('<table>' . htmlentities($goiburua1 . $goiburua2 . $goiburua3) . '</table>', false, false, true, false, '');
+				$pdf->writeHTML('<table>' . $goiburua1 . $goiburua2 . $goiburua3 . '</table>', false, false, true, false, '');
 				$pdf->writeHTML($izenak, false, false, true, false, '');
 				$pdf->writeHTML($html, false, false, true, false, '');
 			}

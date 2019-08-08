@@ -22,8 +22,8 @@
 	<?php foreach ($eskaera->datuak as $klabea => $datua): ?>
 		<?php if (!$datua): ?>
 			<td title="<?php echo $zutabeak[$klabea]->izena; ?>"><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId); ?>">&nbsp;</a></td>
-		<?php elseif ($klabea === 'lehentasuna'): ?>
-			<td class="lehentasuna" title="<?php echo $zutabeak[$klabea]->izena; ?>"><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId); ?>"><?php echo $datua; ?></a></td>
+		<?php elseif ($klabea === 'lehentasuna' || $klabea === 'iruzkinak_bai'): ?>
+			<td class="<?php echo $klabea; ?>" title="<?php echo $zutabeak[$klabea]->izena; ?>"><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId); ?>"><?php echo $datua; ?></a></td>
 		<?php elseif ($klabea === 'created_at'): ?>
 			<td title="<?php echo $zutabeak[$klabea]->izena; ?>"><a href="<?php echo url_for('gertakaria/show?id=' . $eskaera->estekaId); ?>"><?php echo date('Y-m-d',strtotime($datua)); ?></a></td>
 		<?php else: ?>

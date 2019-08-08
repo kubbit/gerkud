@@ -11,7 +11,7 @@
 <ul id="orriak" class="orriak">
 	<li id="tabgertakaria" title="gertakaria" class="<?php echo in_array(gertakariaActions::EKINTZA_GERTAKARIA, $ekintzak) ? '' : 'ezgaituta'; ?>"><i class="fa fa-id-card-o"></i><span><?php echo __('Gertakaria'); ?></span></li>
 	<li id="tabhistorikoa" title="historikoa" class="<?php echo count($gertakaria->getIruzkinak()) > 0 && in_array(gertakariaActions::EKINTZA_HISTORIKOA, $ekintzak) ? '': 'ezgaituta'; ?>"><i class="fa fa-history"></i><span><?php echo __('Historikoa'); ?></span></li>
-	<li id="tabiruzkina" title="iruzkina" class="<?php echo in_array(gertakariaActions::EKINTZA_IRUZKINA, $ekintzak) ? '' : 'ezgaituta'; ?>"><i class="fa fa-comment-o"></i><span><?php echo __('Iruzkina'); ?></span></li>
+	<li id="tabiruzkina" title="iruzkina" class="<?php echo in_array(gertakariaActions::EKINTZA_IRUZKINA, $ekintzak) ? '' : 'ezgaituta'; ?>"><i class="fa fa-comment-o"></i><span><?php echo __('Iruzkina') . sprintf(' (%d)', $gertakaria->getIruzkinakCount()); ?></span></li>
 	<li id="tabfitxategiak" title="fitxategiak" class="<?php echo in_array(gertakariaActions::EKINTZA_FITXATEGIAK, $ekintzak) ? '' : 'ezgaituta'; ?>"><i class="fa fa-paperclip"></i><span><?php echo __('Fitxategiak') . sprintf(' (%d)', count($gertakaria->getFitxategiak())); ?></span></li>
 	<li id="taberlazioak" title="erlazioak" class="<?php echo in_array(gertakariaActions::EKINTZA_BIKOIZTUAK, $ekintzak) ? '' : 'ezgaituta'; ?>"><i class="fa fa-chain"></i><span><?php echo __('Bikoiztuak'); ?></span></li>
 	<li id="tabplanoa" title="planoa" class="<?php echo sfConfig::get('gerkud_mapa_aktibatuta') && in_array(gertakariaActions::EKINTZA_PLANOA, $ekintzak) ? '': 'ezgaituta'; ?>"><i class="fa fa-map-marker"></i><span><?php echo __('Planoa'); ?></span></li>

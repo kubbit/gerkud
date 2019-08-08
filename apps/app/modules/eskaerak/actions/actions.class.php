@@ -152,6 +152,10 @@ class eskaerakActions extends sfActions
 					$zutabea->izena = __('Egoera') . ' / ' . __('Saila');
 					$zutabea->klasea = 'egoerasaila';
 					break;
+				case 'iruzkinak_bai':
+					$zutabea->izena = __(' ');
+					$zutabea->klasea = 'iruzkinak_bai';
+					break;
 			}
 			$this->zutabeak[$bakoitza] = $zutabea;
 		}
@@ -298,6 +302,9 @@ class eskaerakActions extends sfActions
 						$balioa = $fila->getEgoera();
 						if ($fila->getSailaId())
 							$balioa = $balioa . '###' . $fila->getSaila();
+						break;
+					case 'iruzkinak_bai':
+						$balioa = $fila->getIruzkinakCount() > 0 ? '*' : ' ';
 						break;
 				}
 				$ilara->datuak[$bakoitza] = $balioa;
