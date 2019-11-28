@@ -57,7 +57,7 @@ class Gertakaria extends BaseGertakaria
 
 	public function getAbisuaNork()
 	{
-		if (!is_null($this->getKontaktua()->getId()))
+		if ($this->getKontaktua()->has_data())
 			return $this->getKontaktua();
 		else
 			return $this->data['abisuaNork'];

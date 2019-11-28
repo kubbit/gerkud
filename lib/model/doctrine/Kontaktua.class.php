@@ -25,4 +25,27 @@ class Kontaktua extends BaseKontaktua
 
 		return '';
 	}
+
+	public function has_data()
+	{
+		if (is_null($this->getId()))
+			return false;
+
+		if (!empty($this->getIzena()))
+			return true;
+
+		if (!empty($this->getAbizenak()))
+			return true;
+
+		if (!empty($this->getTelefonoa()))
+			return true;
+
+		if (!empty($this->getPosta()))
+			return true;
+
+		if (!empty($this->getNan()))
+			return true;
+
+		return false;
+	}
 }

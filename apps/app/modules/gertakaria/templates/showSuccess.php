@@ -258,7 +258,11 @@ $kontaktua = $gertakaria->getKontaktua();
 			<fieldset>
 				<div class="field">
 					<label><?php echo __('Abisua nork'); ?>:</label>
+<?php if ($kontaktua->has_data()): ?>
 					<span><?php echo sprintf('%s %s', $kontaktua->getIzena(), $kontaktua->getAbizenak()); ?></span>
+<?php else: ?>
+					<span><?php echo $gertakaria->getAbisuaNork(); ?></span>
+<?php endif; ?>
 <?php if (in_array('kontaktua_nan', $configEremuak)): ?>
 					<label><?php echo __('NAN'); ?>:</label>
 					<span><?php echo $kontaktua->getNAN(); ?></span>
