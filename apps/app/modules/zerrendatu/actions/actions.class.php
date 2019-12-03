@@ -70,7 +70,7 @@ class zerrendatuActions extends sfActions
 		$sql = 'SELECT g.lehentasuna_id AS lehentasuna, s.name AS saila, m.izena AS mota, g.id AS kodea, e.izena AS egoera, laburpena,'
 		 . ' b.izena AS barrutia, a.izena AS auzoa, er.izena AS eraikina, k.izena AS kalea, g.kale_zbkia AS zenbakia,'
 		 . $erabiltzailea . ' AS erabiltzailea, abisuanork, date(g.created_at) AS irekiera_data, date(ixte_data) AS ixte_data,'
-		 . ' coalesce(ko.telefonoa, ko.posta, ko.izena, ko.abizenak, ko.nan) AS kontaktua'
+		 . ' ko.izena AS kontaktua_izena, ko.abizenak AS kontaktua_abizenak, ko.telefonoa AS kontaktua_telefonoa, ko.posta AS kontaktua_posta, ko.nan AS kontaktua_nan'
 		 . ' FROM gertakaria g'
 		 . '  LEFT JOIN sf_guard_user u ON u.id = g.langilea_id'
 		 . '  LEFT JOIN sf_guard_group_translation s ON s.id = g.saila_id AND s.lang = :hizkuntza'
@@ -456,11 +456,11 @@ class zerrendatuActions extends sfActions
 			else
 				$html .= sprintf('<td width="150">%s</td>', htmlentities($datuak['kalea']));
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
-			$abisuaNork = '';
-			if ($datuak['kontaktua'] != null)
-				$abisuaNork = $datuak['kontaktua'];
-			else
+
+			$abisuaNork = $this->getKontaktua($datuak);
+			if (empty($abisuaNork))
 				$abisuaNork = $datuak['abisuanork'];
+
 			$html .= sprintf('<td width="80">%s</td>', htmlentities($abisuaNork));
 			$html .= sprintf('<td width="%d"></td>', self::ZUTABE_ARTEKO_DISTANTZIA);
 			$html .= sprintf('<td width="54">%s</td>', htmlentities($datuak['erabiltzailea']));
@@ -507,5 +507,28 @@ class zerrendatuActions extends sfActions
 
 		// Stop symfony process
 		throw new sfStopException();
+	}
+
+	function getKontaktua($datuak)
+	{
+		$izena = array();
+		$kontaktua = array();
+
+		if (!empty($datuak['kontaktua_izena']))
+			$izena[] = $datuak['kontaktua_izena'];
+		if (!empty($datuak['kontaktua_abizenak']))
+			$izena[] = $datuak['kontaktua_abizenak'];
+
+		if (sizeof($izena) > 0)
+			$kontaktua[] = implode(' ', $izena);
+
+		if (!empty($datuak['kontaktua_telefonoa']))
+			$kontaktua[] = $datuak['kontaktua_telefonoa'];
+		if (!empty($datuak['kontaktua_posta']))
+			$kontaktua[] = $datuak['kontaktua_posta'];
+		if (!empty($datuak['kontaktua_nan']))
+			$kontaktua[] = $datuak['kontaktua_nan'];
+
+		return implode('; ', $kontaktua);
 	}
 }

@@ -422,6 +422,10 @@ class gertakariaActions extends sfActions
 	public function executeEdit(sfWebRequest $request)
 	{
 		$this->forward404Unless($gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
+
+		if ($gertakaria->getKontaktua()->getIzena() == null && $gertakaria->getRealAbisuaNork() != null)
+			$gertakaria->getKontaktua()->setIzena($gertakaria->getRealAbisuaNork());
+
 		$this->form = new gertakariaForm($gertakaria);
 	}
 
@@ -623,7 +627,7 @@ class gertakariaActions extends sfActions
 		$html .= '<tr>';
 		if (in_array('langilea', $configEremuak))
 			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Erabiltzailea') . ':</th>';
-		if (in_array('abisuanork', $configEremuak))
+		if (in_array('abisuanork', $configEremuak) || in_array('kontaktua_izena', $configEremuak))
 			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Abisua nork') . ':</th>';
 		if (in_array('espedientea', $configEremuak))
 			$html .= '<th style="background-color: #CCC;font-weight: bold;">' . __('Espedientea') . ':</th>';
@@ -641,7 +645,7 @@ class gertakariaActions extends sfActions
 			$html .= '<td>' . $langilea . '</td>';
 		}
 
-		if (in_array('abisuanork', $configEremuak))
+		if (in_array('abisuanork', $configEremuak) || in_array('kontaktua_izena', $configEremuak))
 			$html .= '<td>' . $gertakaria->getAbisuaNork() . '</td>';
 
 		if (in_array('espedientea', $configEremuak))

@@ -14,16 +14,25 @@ class Kontaktua extends BaseKontaktua
 {
 	public function __toString()
 	{
-		if ($this->getIzena() != null && $this->getAbizenak() != null)
-			return sprintf('%s %s', $this->getIzena(), $this->getAbizenak());
-		else if ($this->getIzena() != null)
-			return $this->getIzena();
-		else if ($this->getTelefonoa() != null)
-			return $this->getTelefonoa();
-		else if ($this->getPosta() != null)
-			return $this->getPosta();
+		$izena = array();
+		$datuak = array();
 
-		return '';
+		if (!empty($this->getIzena()))
+			$izena[] = $this->getIzena();
+		if (!empty($this->getAbizenak()))
+			$izena[] = $this->getAbizenak();
+
+		if (sizeof($izena) > 0)
+			$datuak[] = implode(' ', $izena);
+
+		if (!empty($this->getTelefonoa()))
+			$datuak[] = $this->getTelefonoa();
+		if (!empty($this->getPosta()))
+			$datuak[] = $this->getPosta();
+		if (!empty($this->getNan()))
+			$datuak[] = $this->getNan();
+
+		return implode('; ', $datuak);
 	}
 
 	public function has_data()

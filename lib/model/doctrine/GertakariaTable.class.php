@@ -57,9 +57,10 @@ class GertakariaTable extends Doctrine_Table
 			$kodea = $query1['id']['text'];
 			if ($kodea == '')
 			{
-				$q = $this->createQuery('j');
+				$q = $this->createQuery('j')
+					->leftJoin('j.Kontaktua k');
 				if ($query != '')
-					$q->where('j.laburpena LIKE :query OR j.deskribapena LIKE :query OR j.abisuaNork LIKE :query', array(':query' => '%' . $query . '%'));
+					$q->where('j.laburpena LIKE :query OR j.deskribapena LIKE :query OR j.abisuaNork LIKE :query OR concat(k.izena, k.abizenak, k.telefonoa, k.posta, k.nan) LIKE :query', array(':query' => '%' . $query . '%'));
 
 				if (sfConfig::get('gerkud_api_saila_bakarrik'))
 				{

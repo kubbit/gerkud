@@ -63,6 +63,11 @@ class Gertakaria extends BaseGertakaria
 			return $this->data['abisuaNork'];
 	}
 
+	public function getRealAbisuaNork()
+	{
+		return $this->data['abisuaNork'];
+	}
+
 	public function getFitxategiak()
 	{
 		$q = Doctrine_Query::create()
@@ -209,7 +214,8 @@ class Gertakaria extends BaseGertakaria
 			// cambiar temporalmente el idioma de usuario para poder enviar
 			// la notificacion al ciudadano en el idioma correcto
 			$culture = sfContext::getInstance()->getUser()->getCulture();
-			sfContext::getInstance()->getUser()->setCulture($kontaktua->getHizkuntza());
+			if (!empty($kontaktua->getHizkuntza()))
+				sfContext::getInstance()->getUser()->setCulture($kontaktua->getHizkuntza());
 
 			$gaia = __('HorKonpon: ohartarazpena');
 			$mezua = $this->mezuaSortu(self::TXANTILOIA_FITXATEGIA_HORKONPON, null, null, null);
@@ -221,20 +227,9 @@ class Gertakaria extends BaseGertakaria
 			$this->mezuaBidali($nori, $gaia, $mezua, false);
 		}
 	}
-	public function mezuaSortu($mezuMota, $langilea, $ekintza, $aldaketa)
+	public function mezuaSortu($fitxategia, $langilea, $ekintza, $aldaketa)
 	{
 		$culture = sfContext::getInstance()->getUser()->getCulture();
-
-		$fitxategia = '';
-		switch ($mezuMota)
-		{
-			case self::TXANTILOIA_FITXATEGIA_LANGILEAK:
-				$fitxategia = 'langileak';
-				break;
-			case self::TXANTILOIA_FITXATEGIA_HORKONPON:
-				$fitxategia = 'horkonpon';
-				break;
-		}
 
 		$mezua = file_get_contents(sprintf('%s/%s_%s.template', self::TXANTILOIAK_PATH, $fitxategia, $culture));
 
@@ -287,6 +282,13 @@ class Gertakaria extends BaseGertakaria
 		try
 		{
 			$mailer->send($mezua);
+		}
+		catch (Swift_TransportException $e)
+		{
+			sfContext::getInstance()->getLogger()->crit('Errorea mezua bidaltzerakoan:');
+			sfContext::getInstance()->getLogger()->crit($e);
+
+			echo '<script>alert("Errorea abisua bidaltzean")</script>';
 		}
 		catch (Exception $e)
 		{
