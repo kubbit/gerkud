@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>HorKonpon</title>
+		<title>Ohartarazpena</title>
 	</head>
 	<body>
-		<p>HorKonpon aplikazioaren bidez [sortze_data]an bidalitako gertakaria zuzendutzat eman da.</p>
+		<p>[sortze_data]an bidalitako gertakaria zuzendutzat eman da.</p>
 	</body>
 </html>

@@ -203,7 +203,7 @@ class zerrendatuActions extends sfActions
 			if (empty($taldeakId))
 				array_push($condiciones, '(g.herritarrena IS NULL OR g.saila_id IS NULL)');
 			else
-				array_push($condiciones, sprintf('(g.herritarrena IS NULL OR g.saila_id IS NOT NULL OR (g.herritarrena = 1 AND g.saila_id IN (%s)))', implode(',', $taldeakId)));
+				array_push($condiciones, sprintf('(g.herritarrena IS NULL OR g.saila_id IS NOT NULL OR (g.herritarrena IS NOT NULL AND g.saila_id IN (%s)))', implode(',', $taldeakId)));
 		}
 
 		$htmlIragazkiak = '<table>';

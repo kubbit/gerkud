@@ -390,7 +390,7 @@ $kontaktua = $gertakaria->getKontaktua();
 		</thead>
 		<tbody>
 	<?php foreach ($gertakaria->getIruzkinak() as $i => $iruzkina): ?>
-			<tr>
+			<tr<?php echo $iruzkina->getPublikoa() ? ' class="publikoa"' : '' ?>>
 				<td title="<?php echo __('Data'); ?>"><?php echo date(sfConfig::get('gerkud_data_formatoa'), strtotime($iruzkina->getCreated_at())); ?></td>
 				<td title="<?php echo __('Nork'); ?>"><?php echo $iruzkina->getLangilea(); ?></td>
 				<td title="<?php echo __('Ekintza'); ?>"><?php echo $iruzkina->getEkintza(); ?></td>
@@ -399,6 +399,11 @@ $kontaktua = $gertakaria->getKontaktua();
 	<?php endforeach; ?>
 		</tbody>
 	</table>
+
+	<?php if ($gertakaria->herritarrena > 0): ?>
+	<label><span class="publikoa">&nbsp;</span> <?php echo __('Herritarrari bidalitakoak'); ?></label>
+	<?php endif; ?>
+
 <?php endif; ?>
 </div>
 
@@ -430,6 +435,14 @@ $kontaktua = $gertakaria->getKontaktua();
 			<div class="field">
 				<?php echo $form['testua']->render(array('autofocus' => 'autofocus')); ?>
 			</div>
+
+	<?php if ($gertakaria->herritarrena >= 3): ?>
+			<div class="field">
+				<?php echo $form['publikoa']->render(); ?>
+				<label for="iruzkina_publikoa"><?php echo __('Herritarrari bidali'); ?></label>
+			</div>
+	<?php endif; ?>
+
 		</fieldset>
 
 		<input type="submit" class="botoia" value="<?php echo __('Gehitu') ?>" />

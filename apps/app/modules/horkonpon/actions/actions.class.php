@@ -10,6 +10,24 @@
  */
 sfProjectConfiguration::getActive()->loadHelpers(array('I18N'));
 
+include('v3.php');
+
+abstract class HttpErrors
+{
+	const BAD_REQUEST = 400;
+	const INVALID_CREDENTIALS = 401;
+	const FORBIDDEN = 403;
+	const NOT_FOUND = 404;
+	const METHOD_NOT_ALLOWED = 405;
+}
+
+abstract class APIVersion
+{
+	const V1 = 1;
+	const v2 = 2;
+	const V3 = 3;
+}
+
 class horkonponActions extends sfActions
 {
 	const GEOMETRIA_PUNTUA = 1;
@@ -19,7 +37,7 @@ class horkonponActions extends sfActions
 
 	const OHARTARAZI_EZ = 0;
 	const OHARTARAZI_POSTA = 1;
-	
+
 	private $erabiltzailea;
 
 	public function executeIndex(sfWebRequest $request)
@@ -48,7 +66,6 @@ class horkonponActions extends sfActions
 				throw new Exception('Atzipena ukatuta');
 
 			$this->gertakaria = new Gertakaria();
-			$this->gertakaria->setHerritarrena(true);
 			$this->gertakaria->save();
 
 			$mota = sfConfig::get('gerkud_api_mota_id');
@@ -123,6 +140,8 @@ class horkonponActions extends sfActions
 
 	private function APIv1(sfWebRequest $request, $array)
 	{
+		$this->gertakaria->setHerritarrena(APIVersion::V1);
+
 		$erabiltzaileDatuak = array();
 		if (array_key_exists('izena', $array))
 			array_push($erabiltzaileDatuak, $array['izena']);
@@ -197,6 +216,8 @@ class horkonponActions extends sfActions
 
 	private function APIv2(sfWebRequest $request, $mezua)
 	{
+		$this->gertakaria->setHerritarrena(APIVersion::V2);
+
 		if (array_key_exists('date', $mezua))
 			$this->gertakaria->setCreatedAt($mezua['date']);
 
@@ -324,5 +345,34 @@ class horkonponActions extends sfActions
 			$this->fitxategia->setLangilea($langilea);
 			$this->fitxategia->save();
 		}
+	}
+
+	public function executeV3(sfWebRequest $request)
+	{
+		$result = array();
+
+		$this->getResponse()->setContentType('application/json');
+
+		try
+		{
+			$v3 = new v3();
+
+			$v3->parseRequest($request, $this->getResponse(), $result);
+
+			$result = json_encode($result, JSON_PRETTY_PRINT);
+		}
+		catch (Exception $e)
+		{
+			$this->getResponse()->setStatusCode(HttpErrors::BAD_REQUEST);
+
+			if ($e->getCode() === HttpErrors::INVALID_CREDENTIALS)
+				$this->getResponse()->setHttpHeader('WWW-Authenticate', 'Basic realm="API key"');
+
+			$this->getResponse()->setStatusCode($e->getCode(), $e->getMessage());
+
+			$result = null;
+		}
+
+		return $this->renderText($result);
 	}
 }

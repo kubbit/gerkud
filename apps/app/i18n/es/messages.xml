@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2018-05-08T13:03:48Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2019-08-23T11:09:51Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -713,8 +713,8 @@
         <target>Descartar incidencia por ser duplicada de</target>
       </trans-unit>
       <trans-unit id="192">
-        <source>HorKonpon: ohartarazpena</source>
-        <target>HorKonpon: notificación</target>
+        <source>Ohartarazpena</source>
+        <target>Notificación</target>
       </trans-unit>
       <trans-unit id="193">
         <source>Ezin da erlazio hau ezabatu</source>
@@ -851,6 +851,14 @@
       <trans-unit id="226">
         <source>Arloa</source>
         <target>Área</target>
+      </trans-unit>
+      <trans-unit id="227">
+        <source>Herritarrari bidali</source>
+        <target>Enviar al ciudadano</target>
+      </trans-unit>
+      <trans-unit id="228">
+        <source>Herritarrari bidalitakoak</source>
+        <target>Enviados al ciudadano</target>
       </trans-unit>
     </body>
   </file>

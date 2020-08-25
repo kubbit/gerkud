@@ -67,7 +67,7 @@ class GertakariaTable extends Doctrine_Table
 					if (empty($taldeakId))
 						$q->andWhere('(j.herritarrena IS NULL OR j.saila_id IS NULL)');
 					else
-						$q->andWhere(sprintf('(j.herritarrena IS NULL OR j.saila_id IS NOT NULL OR (j.herritarrena = 1 AND j.saila_id IN (%s)))', implode(',', $taldeakId)));
+						$q->andWhere(sprintf('(j.herritarrena IS NULL OR j.saila_id IS NOT NULL OR (j.herritarrena IS NOT NULL AND j.saila_id IN (%s)))', implode(',', $taldeakId)));
 				}
 
 				if ($query1['egoera_id']) $q->andWhere('j.egoera_id = :egoera', array(':egoera' => $query1['egoera_id']));
@@ -111,7 +111,7 @@ class GertakariaTable extends Doctrine_Table
 				if (empty($taldeakId))
 					$where .= ' AND (j.herritarrena IS NULL OR j.saila_id IS NULL)';
 				else
-					$where .= sprintf(' AND (j.herritarrena IS NULL OR j.saila_id IS NOT NULL OR (j.herritarrena = 1 AND j.saila_id IN (%s)))', implode(',', $taldeakId));
+					$where .= sprintf(' AND (j.herritarrena IS NULL OR j.saila_id IS NOT NULL OR (j.herritarrena IS NOT NULL AND j.saila_id IN (%s)))', implode(',', $taldeakId));
 			}
 
 			$eskubideak = Array();

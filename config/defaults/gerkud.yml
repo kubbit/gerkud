@@ -202,6 +202,8 @@ all:
       - nereak
 
   api:
+    # Instalazio honetan API-aren bidez erregistratutako erabiltzaileek izango duten identifikadorearen atzizkia
+    realm: gerkud.example.org
     # Ixterakoan ohartarazi gertakaria sortu duen pertsona
     ohartarazi_kontaktua: false
     # Automatikoki mota hau esleitu API-aren bidez sortutako gertakariei

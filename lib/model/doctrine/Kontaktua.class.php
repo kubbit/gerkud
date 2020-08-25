@@ -57,4 +57,29 @@ class Kontaktua extends BaseKontaktua
 
 		return false;
 	}
+
+	public static function checkKontaktuaPassword($id, $pass)
+	{
+		$kontaktua = Doctrine_Core::getTable('Kontaktua')->findOneBy('id', $id);
+		if (!$kontaktua)
+			return false;
+
+		return $kontaktua->checkPassword($pass);
+	}
+
+	public function checkPassword($pass)
+	{
+		if ($this->pasahitza === NULL)
+			return false;
+
+		return password_verify($pass, $this->pasahitza);
+	}
+
+	public function setPassword($value)
+	{
+		if ($value === NULL || strlen($value) === 0)
+			throw new Exception('Password cannot be empty.');
+
+		$this->setPasahitza(password_hash($value, PASSWORD_BCRYPT));
+	}
 }

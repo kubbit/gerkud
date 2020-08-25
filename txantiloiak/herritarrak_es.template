@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>HorKonpon</title>
+		<title>Notificación</title>
 	</head>
 	<body>
-		<p>La notificación realizada a través de la aplicación HorKonpon con fecha [sortze_data] se ha dado por resuelta.</p>
+		<p>La notificación realizada con fecha [sortze_data] se ha dado por resuelta.</p>
 	</body>
 </html>

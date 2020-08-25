@@ -20,6 +20,7 @@ abstract class BaseIruzkinaForm extends BaseFormDoctrine
       'langilea_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Langilea'), 'add_empty' => true)),
       'ekintza_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Ekintza'), 'add_empty' => true)),
       'testua'        => new sfWidgetFormTextarea(),
+      'publikoa'      => new sfWidgetFormInputCheckbox(),
       'created_at'    => new sfWidgetFormDateTime(),
       'updated_at'    => new sfWidgetFormDateTime(),
     ));
@@ -30,6 +31,7 @@ abstract class BaseIruzkinaForm extends BaseFormDoctrine
       'langilea_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Langilea'), 'column' => 'id', 'required' => false)),
       'ekintza_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Ekintza'), 'column' => 'id', 'required' => false)),
       'testua'        => new sfValidatorString(array('max_length' => 4000, 'required' => false)),
+      'publikoa'      => new sfValidatorBoolean(array('required' => false)),
       'created_at'    => new sfValidatorDateTime(),
       'updated_at'    => new sfValidatorDateTime(),
     ));

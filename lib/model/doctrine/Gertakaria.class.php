@@ -57,7 +57,7 @@ class Gertakaria extends BaseGertakaria
 
 	public function getAbisuaNork()
 	{
-		if ($this->getKontaktua()->has_data())
+		if ($this->getKontaktua() != null && $this->getKontaktua()->has_data())
 			return $this->getKontaktua();
 		else
 			return $this->data['abisuaNork'];
@@ -198,14 +198,14 @@ class Gertakaria extends BaseGertakaria
 		$kontaktuak = array();
 
 		$kontaktua = $this->getKontaktua();
-		if ($kontaktua && $kontaktua->getPosta() !== null)
+		if ($kontaktua && !empty($kontaktua->getPosta()))
 			$kontaktuak[] = $kontaktua;
 
 		$bikoiztuak = $this->getBikoiztuak();
 		foreach ($bikoiztuak as $gertakaria)
 		{
 			$kontaktua = $gertakaria->getKontaktua();
-			if ($kontaktua && $kontaktua->getPosta() !== null)
+			if ($kontaktua && !empty($kontaktua->getPosta()))
 				$kontaktuak[] = $kontaktua;
 		}
 
@@ -217,7 +217,7 @@ class Gertakaria extends BaseGertakaria
 			if (!empty($kontaktua->getHizkuntza()))
 				sfContext::getInstance()->getUser()->setCulture($kontaktua->getHizkuntza());
 
-			$gaia = __('HorKonpon: ohartarazpena');
+			$gaia = __('Ohartarazpena');
 			$mezua = $this->mezuaSortu(self::TXANTILOIA_FITXATEGIA_HORKONPON, null, null, null);
 
 			sfContext::getInstance()->getUser()->setCulture($culture);

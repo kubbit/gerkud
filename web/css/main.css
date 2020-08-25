@@ -415,6 +415,22 @@ form.login fieldset .field input
 	margin: 1em auto;
 }
 
+#edukhistorikoa .publikoa
+{
+	background-color: #ffebce;
+}
+#edukhistorikoa
+{
+	text-align: left;
+}
+#edukhistorikoa span.publikoa
+{
+	display: inline-block;
+	border: 1px solid #ccc;
+	width: 1em;
+	height: 1em;
+}
+
 .iruzkinak
 {
 	width: 710px;
@@ -426,16 +442,26 @@ form.login fieldset .field input
 	border: none;
 	padding: 0;
 }
-.iruzkinak .field,
-.iruzkinak .field textarea
+.iruzkinak .field
 {
 	width: 100%;
-	height: 10em;
 	display: block;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
-
+.iruzkinak .field
+{
+	text-align: left;
+}
+.iruzkinak .field textarea
+{
+	width: 100%;
+	height: 10em;
+}
+.iruzkinak input[type=submit]
+{
+	margin-top: 2em;
+}
 table
 {
 	box-shadow: 0 0 3px #606060;

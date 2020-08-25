@@ -22,7 +22,7 @@ Gertakaria:
     lehentasuna_id: { type: integer, notnull: false}
     jatorrizkoSaila_id: { type: integer, notnull: false }
     eraikina_id: { type: integer, notnull: false }
-    herritarrena: { type: boolean, notnull: false }
+    herritarrena: { type: integer, notnull: false }
     kontaktua_id: { type: integer, notnull: false }
     espedientea: { type: string(12), notnull: false }
   relations:
@@ -72,6 +72,7 @@ Iruzkina:
     langilea_id: { type: integer, notnull: false }
     ekintza_id: { type: integer, notnull: false }
     testua: { type: string(4000) }
+    publikoa: { type: boolean, notnull: false }
   relations:
     Gertakaria: { onDelete: RESTRICT, local: gertakaria_id, foreign: id }
     Langilea: { onDelete: RESTRICT, local: langilea_id, foreign: id }
@@ -286,6 +287,7 @@ Kontaktua:
     telefonoa: { type: string(30), notnull: false }
     ohartarazi: { type: integer, notnull: false }
     hizkuntza: { type: string(2), notnull: false }
+    pasahitza: { type: string(255), notnull: false }
   relations:
     KontaktuaOhartaraztea:
       local: ohartarazi

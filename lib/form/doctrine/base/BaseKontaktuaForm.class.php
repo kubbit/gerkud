@@ -23,6 +23,7 @@ abstract class BaseKontaktuaForm extends BaseFormDoctrine
       'telefonoa'  => new sfWidgetFormInputText(),
       'ohartarazi' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('KontaktuaOhartaraztea'), 'add_empty' => true)),
       'hizkuntza'  => new sfWidgetFormInputText(),
+      'pasahitza'  => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -34,6 +35,7 @@ abstract class BaseKontaktuaForm extends BaseFormDoctrine
       'telefonoa'  => new sfValidatorString(array('max_length' => 30, 'required' => false)),
       'ohartarazi' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('KontaktuaOhartaraztea'), 'column' => 'id', 'required' => false)),
       'hizkuntza'  => new sfValidatorString(array('max_length' => 2, 'required' => false)),
+      'pasahitza'  => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('kontaktua[%s]');

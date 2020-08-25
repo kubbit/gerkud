@@ -257,3 +257,14 @@ ALTER TABLE gertakaria
  ADD arloa_id BIGINT(20) NULL DEFAULT NULL,
  ADD INDEX arloa_id_idx (arloa_id),
  ADD CONSTRAINT gertakaria_arloa_id_arloa_id FOREIGN KEY (arloa_id) REFERENCES arloa (id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+/* v2.22 */
+ALTER TABLE kontaktua
+ ADD pasahitza VARCHAR(255) NULL;
+
+ALTER TABLE iruzkina
+ ADD publikoa TINYINT DEFAULT NULL;
+
+ALTER TABLE gertakaria
+ CHANGE COLUMN herritarrena herritarrena BIGINT DEFAULT NULL;

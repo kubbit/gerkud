@@ -20,6 +20,7 @@ abstract class BaseKontaktuaFormFilter extends BaseFormFilterDoctrine
       'telefonoa'  => new sfWidgetFormFilterInput(),
       'ohartarazi' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('KontaktuaOhartaraztea'), 'add_empty' => true)),
       'hizkuntza'  => new sfWidgetFormFilterInput(),
+      'pasahitza'  => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -30,6 +31,7 @@ abstract class BaseKontaktuaFormFilter extends BaseFormFilterDoctrine
       'telefonoa'  => new sfValidatorPass(array('required' => false)),
       'ohartarazi' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('KontaktuaOhartaraztea'), 'column' => 'id')),
       'hizkuntza'  => new sfValidatorPass(array('required' => false)),
+      'pasahitza'  => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('kontaktua_filters[%s]');
@@ -57,6 +59,7 @@ abstract class BaseKontaktuaFormFilter extends BaseFormFilterDoctrine
       'telefonoa'  => 'Text',
       'ohartarazi' => 'ForeignKey',
       'hizkuntza'  => 'Text',
+      'pasahitza'  => 'Text',
     );
   }
 }
