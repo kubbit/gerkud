@@ -24,7 +24,7 @@ abstract class HttpErrors
 abstract class APIVersion
 {
 	const V1 = 1;
-	const v2 = 2;
+	const V2 = 2;
 	const V3 = 3;
 }
 
