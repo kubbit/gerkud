@@ -246,7 +246,7 @@
 <?php if (in_array('abisuanork', $configEremuak)): ?>
 				<div class="field">
 					<label><?php echo __('Abisua nork'); ?>:</label>
-					<span class="luzea"><?php echo $gertakaria->getAbisuaNork(); ?></span>
+					<span class="luzea"><?php echo $gertakaria->getMergedAbisuaNork(); ?></span>
 				</div>
 <?php endif; ?>
 			</fieldset>
@@ -261,7 +261,7 @@ $kontaktua = $gertakaria->getKontaktua();
 <?php if ($kontaktua->has_data()): ?>
 					<span><?php echo sprintf('%s %s', $kontaktua->getIzena(), $kontaktua->getAbizenak()); ?></span>
 <?php else: ?>
-					<span><?php echo $gertakaria->getAbisuaNork(); ?></span>
+					<span><?php echo $gertakaria->getMergedAbisuaNork(); ?></span>
 <?php endif; ?>
 <?php if (in_array('kontaktua_nan', $configEremuak)): ?>
 					<label><?php echo __('NAN'); ?>:</label>

@@ -255,7 +255,7 @@ class gertakariaActions extends sfActions
 						$balioa = $fila->getAzpimota();
 						break;
 					case 'abisuanork':
-						$balioa = $fila->getAbisuaNork();
+						$balioa = $fila->getMergedAbisuaNork();
 						break;
 					case 'kontaktua':
 						$balioa = sprintf('%s %s', $fila->getKontaktua()->getIzena(), $fila->getKontaktua()->getAbizenak());
@@ -423,8 +423,10 @@ class gertakariaActions extends sfActions
 	{
 		$this->forward404Unless($gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
 
-		if ($gertakaria->getKontaktua()->getIzena() == null && $gertakaria->getRealAbisuaNork() != null)
-			$gertakaria->getKontaktua()->setIzena($gertakaria->getRealAbisuaNork());
+		if ($gertakaria->getKontaktua()->getIzena() == null && $gertakaria->getAbisuaNork() != null)
+			$gertakaria->getKontaktua()->setIzena($gertakaria->getAbisuaNork());
+
+		$gertakaria->setAbisuaNork($gertakaria->getMergedAbisuaNork());
 
 		$this->form = new gertakariaForm($gertakaria);
 	}
@@ -432,6 +434,12 @@ class gertakariaActions extends sfActions
 	public function executeKopiatu(sfWebRequest $request)
 	{
 		$this->forward404Unless($gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($request->getParameter('id'))), sprintf('Object gertakaria does not exist (%s).', $request->getParameter('id')));
+
+		if ($gertakaria->getKontaktua()->getIzena() == null && $gertakaria->getAbisuaNork() != null)
+			$gertakaria->getKontaktua()->setIzena($gertakaria->getAbisuaNork());
+
+		$gertakaria->setAbisuaNork($gertakaria->getMergedAbisuaNork());
+
 		$this->formZahar = new gertakariaForm($gertakaria);
 		$this->form = new gertakariaForm();
 	}
@@ -646,7 +654,7 @@ class gertakariaActions extends sfActions
 		}
 
 		if (in_array('abisuanork', $configEremuak) || in_array('kontaktua_izena', $configEremuak))
-			$html .= '<td>' . $gertakaria->getAbisuaNork() . '</td>';
+			$html .= '<td>' . $gertakaria->getMergedAbisuaNork() . '</td>';
 
 		if (in_array('espedientea', $configEremuak))
 			$html .= '<td>' . $gertakaria->getEspedientea() . '</td>';

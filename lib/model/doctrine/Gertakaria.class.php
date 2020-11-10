@@ -55,17 +55,14 @@ class Gertakaria extends BaseGertakaria
 		}
 	}
 
-	public function getAbisuaNork()
+	public function getMergedAbisuaNork()
 	{
-		if ($this->getKontaktua() != null && $this->getKontaktua()->has_data())
-			return $this->getKontaktua();
+		if (!empty($this->getAbisuaNork()) && in_array('abisuanork', sfConfig::get('gerkud_eremuak_gaituak')))
+			return $this->getAbisuaNork();
+		else if ($this->getKontaktua() != null && $this->getKontaktua()->has_data())
+			return $this->getKontaktua()->__toString();
 		else
-			return $this->data['abisuaNork'];
-	}
-
-	public function getRealAbisuaNork()
-	{
-		return $this->data['abisuaNork'];
+			return $this->getAbisuaNork();
 	}
 
 	public function getFitxategiak()

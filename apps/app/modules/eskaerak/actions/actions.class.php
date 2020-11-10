@@ -197,7 +197,7 @@ class eskaerakActions extends sfActions
 						$balioa = $fila->getAzpimota();
 						break;
 					case 'abisuanork':
-						$balioa = $fila->getAbisuaNork();
+						$balioa = $fila->getMergedAbisuaNork();
 						break;
 					case 'kontaktua':
 						$balioa = sprintf('%s %s', $fila->getKontaktua()->getIzena(), $fila->getKontaktua()->getAbizenak());

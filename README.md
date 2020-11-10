@@ -35,9 +35,9 @@ Posteriormente la empresa [Kubbit][6] se hizo cargo del proyecto para su adaptac
 La aplicación ha sido publicada bajo la Licencia Pública General de GNU en su versión 2 (GPLv2).
 
 [1]: https://gerkud.kubbit.com
-[2]: https://kubbit.com/horkonpon/
+[2]: https://horkonpon.com
 [3]: https://github.com/kubbit/horkonpon.android
 [4]: https://github.com/kubbit/horkonpon.ios
-[5]: http://www.pasaia.eus
+[5]: https://www.pasaia.eus
 [6]: https://kubbit.com
-[7]: http://www.errenteria.eus
+[7]: https://www.errenteria.eus
