@@ -12,6 +12,7 @@ class KontaktuaForm extends BaseKontaktuaForm
 {
 	public function configure()
 	{
+		$configEremuak = sfConfig::get('gerkud_eremuak_gaituak');
 		$configDerrigorrezkoak = sfConfig::get('gerkud_eremuak_derrigorrezkoak');
 		$culture = sfContext::getInstance()->getUser()->getCulture();
 
@@ -56,17 +57,30 @@ class KontaktuaForm extends BaseKontaktuaForm
 		(
 			new sfValidatorCallback(array('callback' => array($this, 'postValidate')))
 		);
+
+		if (!in_array('kontaktua_izena', $configEremuak))
+			unset($this['izena']);
+		if (!in_array('kontaktua_abizenak', $configEremuak))
+			unset($this['abizenak']);
+		if (!in_array('kontaktua_nan', $configEremuak))
+			unset($this['nan']);
+		if (!in_array('kontaktua_posta', $configEremuak))
+			unset($this['posta']);
+		if (!in_array('kontaktua_telefonoa', $configEremuak))
+			unset($this['telefonoa']);
+		if (!in_array('kontaktua_ohartarazi', $configEremuak))
+			unset($this['ohartarazi']);
 	}
 
 	public function postValidate($validator, $values)
 	{
-		if ($values["nan"] != null && !$this->balidatuNAN($values["nan"]))
+		if (isset($values["nan"]) && $values["nan"] != null && !$this->balidatuNAN($values["nan"]))
 		{
 			$error = new sfValidatorError($validator, "NAN ez da zuzena");
 			throw new sfValidatorErrorSchema($validator, array('nan' => $error));
 		}
 
-		if ($values["posta"] != null && !$this->balidatuPosta($values["posta"]))
+		if (isset($values["posta"]) && $values["posta"] != null && !$this->balidatuPosta($values["posta"]))
 		{
 			$error = new sfValidatorError($validator, "Posta elektronikoa ez da zuena");
 			throw new sfValidatorErrorSchema($validator, array('posta' => $error));

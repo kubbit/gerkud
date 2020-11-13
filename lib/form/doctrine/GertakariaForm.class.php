@@ -328,6 +328,9 @@ class GertakariaForm extends BaseGertakariaForm
 			$this->validatorSchema['created_at'] = new sfValidatorDataOrdua(array('required' => true));
 		}
 
+		if (!in_array('abisuanork', $configEremuak))
+			unset($this['abisuaNork']);
+
 		unset
 		(
 			$this['updated_at'],
