@@ -54,6 +54,10 @@ class v3
 				$this->parseUsers($result);
 				break;
 
+			case 'ping':
+				$this->ping();
+				break;
+
 			default:
 				throw new Exception('Resource not found', HttpErrors::NOT_FOUND);
 		}
@@ -261,6 +265,14 @@ class v3
 
 		$gertakaria->setCreatedAt($this->dateConvert($data['date']));
 
+		$mota = sfConfig::get('gerkud_api_mota_id');
+		if ($mota !== NULL)
+			$gertakaria->setMotaId($mota);
+
+		$klasea = sfConfig::get('gerkud_api_klasea_id');
+		if ($klasea !== NULL)
+			$gertakaria->setKlaseaId($klasea);
+
 		$gertakaria->save();
 
 		$gertakaria->setLangilea(NULL);
@@ -438,6 +450,14 @@ class v3
 
 		if (count($erabiltzaileDatuak) > 0)
 			$gertakaria->setAbisuaNork(implode(', ', $erabiltzaileDatuak));
+	}
+
+	private function ping()
+	{
+		$this->response->setContentType('text/plain');
+		$this->response->setHttpHeader('Cache-Control', 'no-cache');
+		$this->response->setContent('pong');
+		$this->response->send();
 	}
 
 	private function parseIssueMessages($data, &$gertakaria)
@@ -692,6 +712,9 @@ class v3
 		if (!$gertakaria)
 			throw new Exception('Issue not found', HttpErrors::NOT_FOUND);
 
+		if ($gertakaria->getHerritarrena() != APIVersion::V3)
+			throw new Exception('Unauthorized', HttpErrors::FORBIDDEN);
+
 		$updateDate = new DateTime($gertakaria->getUpdatedAt());
 		$updateDate->setTimezone(new DateTimeZone('GMT'));
 		$this->response->setHttpHeader('Last-Modified', $updateDate->format('D, d M Y H:i:s') . ' GMT');
@@ -720,11 +743,13 @@ class v3
 			$users[] = $this->getUser($gertakaria->getLangilea()->getUsername());
 			$issue->user = end($users)->id;
 		}
+/*
 		else if ($gertakaria->getKontaktuaId() !== NULL)
 		{
 			$users[] = $this->getUser($gertakaria->getKontaktua()->getId());
 			$issue->user = end($users)->id;
 		}
+*/
 		else
 			$issue->user = self::ANONYMOUS_USER_ID;
 
