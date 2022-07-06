@@ -130,7 +130,7 @@ class GertakariaTable extends Doctrine_Table
 			$q = Doctrine_Query::create()
 			 ->from('gertakaria j')
 			 ->where($where, array(
-			 ':lang' => $lang
+//			 ':lang' => $lang
 			 ));
 		}
 

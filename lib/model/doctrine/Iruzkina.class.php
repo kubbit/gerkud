@@ -38,10 +38,13 @@ class Iruzkina extends BaseIruzkina
 		$conn->beginTransaction();
 		try
 		{
+			$aldaketak = $this->state() !== Doctrine_Record::STATE_CLEAN;
+
 			$ret = parent::save($conn);
 			$conn->commit();
 
-			$this->ohartarazi();
+			if ($aldaketak)
+				$this->ohartarazi();
 
 			return $ret;
 		}

@@ -2,19 +2,16 @@
 //============================================================+
 // File name   : example_063.php
 // Begin       : 2010-09-29
-// Last Update : 2010-10-05
+// Last Update : 2013-05-14
 //
 // Description : Example 063 for TCPDF class
-//               Text stretching and spacing (tracking/kerning)
+//               Text stretching and spacing (tracking)
 //
 // Author: Nicola Asuni
 //
 // (c) Copyright:
 //               Nicola Asuni
-//               Tecnick.com s.r.l.
-//               Via Della Pace, 11
-//               09044 Quartucciu (CA)
-//               ITALY
+//               Tecnick.com LTD
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
@@ -22,60 +19,63 @@
 /**
  * Creates an example PDF TEST document using TCPDF
  * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: Text stretching and spacing (tracking/kerning)
+ * @abstract TCPDF - Example: Text stretching and spacing (tracking)
  * @author Nicola Asuni
  * @since 2010-09-29
  */
 
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+// Include the main TCPDF library (search for installation path).
+require_once('tcpdf_include.php');
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle('TCPDF Example 063');
-$pdf->SetSubject('TCPDF Tutorial');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+$pdf->setCreator(PDF_CREATOR);
+$pdf->setAuthor('Nicola Asuni');
+$pdf->setTitle('TCPDF Example 063');
+$pdf->setSubject('TCPDF Tutorial');
+$pdf->setKeywords('TCPDF, PDF, example, test, guide');
 
 // set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 063', PDF_HEADER_STRING);
+$pdf->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 063', PDF_HEADER_STRING);
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
 $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 // set default monospaced font
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+$pdf->setDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
-//set margins
-$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+// set margins
+$pdf->setMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->setHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->setFooterMargin(PDF_MARGIN_FOOTER);
 
-//set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+// set auto page breaks
+$pdf->setAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
-//set image scale factor
+// set image scale factor
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-//set some language-dependent strings
-$pdf->setLanguageArray($l);
+// set some language-dependent strings (optional)
+if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+	require_once(dirname(__FILE__).'/lang/eng.php');
+	$pdf->setLanguageArray($l);
+}
 
 // ---------------------------------------------------------
 
 // set font
-$pdf->SetFont('helvetica', 'B', 16);
+$pdf->setFont('helvetica', 'B', 16);
 
 // add a page
 $pdf->AddPage();
 
-$pdf->Write(0, 'Example of Text Stretching and Spacing (tracking/kerning)', '', 0, 'L', true, 0, false, false, 0);
+$pdf->Write(0, 'Example of Text Stretching and Spacing (tracking)', '', 0, 'L', true, 0, false, false, 0);
 $pdf->Ln(5);
 
-// create several cells to display all cases of stretching and kerning combinations.
+// create several cells to display all cases of stretching and spacing combinations.
 
 $fonts = array('times', 'dejavuserif');
 $alignments = array('L' => 'LEFT', 'C' => 'CENTER', 'R' => 'RIGHT', 'J' => 'JUSTIFY');
@@ -83,7 +83,7 @@ $alignments = array('L' => 'LEFT', 'C' => 'CENTER', 'R' => 'RIGHT', 'J' => 'JUST
 
 // Test all cases using direct stretching/spacing methods
 foreach ($fonts as $fkey => $font) {
-	$pdf->SetFont($font, '', 14);
+	$pdf->setFont($font, '', 14);
 	foreach ($alignments as $align_mode => $align_name) {
 		for ($stretching = 90; $stretching <= 110; $stretching += 10) {
 			for ($spacing = -0.254; $spacing <= 0.254; $spacing += 0.254) {
@@ -100,7 +100,7 @@ foreach ($fonts as $fkey => $font) {
 
 // Test all cases using CSS stretching/spacing properties
 foreach ($fonts as $fkey => $font) {
-	$pdf->SetFont($font, '', 11);
+	$pdf->setFont($font, '', 11);
 	foreach ($alignments as $align_mode => $align_name) {
 		for ($stretching = 90; $stretching <= 110; $stretching += 10) {
 			for ($spacing = -0.254; $spacing <= 0.254; $spacing += 0.254) {

@@ -82,8 +82,7 @@ class fitxategiaActions extends sfActions
 
 			// gertakariaren eguneratze data berritu
 			$gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($fitxategia->getGertakariaId()));
-			$gertakaria->setUpdatedAt(null); // gertakaria gordetzea behartu
-			$gertakaria->save();
+			$gertakaria->forceSave();
 
 			$this->redirect(sprintf('gertakaria/show?id=%d#fitxategiak', $fitxategia->getGertakariaId()));
 		}

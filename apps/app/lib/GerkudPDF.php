@@ -15,7 +15,7 @@ class GerkudPDF extends TCPDF
 
 		if (($headerdata['logo']) AND ($headerdata['logo'] != K_BLANK_IMAGE))
 		{
-			$imgtype = $this->getImageFileType(K_PATH_IMAGES.$headerdata['logo']);
+			$imgtype = TCPDF_IMAGES::getImageFileType(K_PATH_IMAGES.$headerdata['logo']);
 			if (($imgtype == 'eps') OR ($imgtype == 'ai'))
 				$this->ImageEps(K_PATH_IMAGES.$headerdata['logo'], '', '', $headerdata['logo_width']);
 			elseif ($imgtype == 'svg')

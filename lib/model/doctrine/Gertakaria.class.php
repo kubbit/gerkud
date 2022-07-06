@@ -55,6 +55,27 @@ class Gertakaria extends BaseGertakaria
 		}
 	}
 
+	// gordetzera behartu, nahiz eta aldaketarik ez egon (updated_at eguneratzeko)
+	public function forceSave()
+	{
+		$this->table->updatedAt = 'INVALID'; // oker dagoen barne balio bat ezarri
+		$this->setUpdatedAt(date('Y-m-d H:i:s')); // momentuko data ezarri
+		$this->save();
+	}
+
+	public function getUpdatedAt()
+	{
+		$eguneraketa = $this->table->updatedAt;
+
+		foreach ($this->getIruzkina() as $iruzkina)
+		{
+			if ($iruzkina->getUpdatedAt() > $eguneraketa)
+				$eguneraketa = $iruzkina->getUpdatedAt();
+		}
+
+		return $eguneraketa;
+	}
+
 	public function getMergedAbisuaNork()
 	{
 		if (!empty($this->getAbisuaNork()) && in_array('abisuanork', sfConfig::get('gerkud_eremuak_gaituak')))

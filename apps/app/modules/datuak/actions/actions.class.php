@@ -57,11 +57,11 @@ class datuakActions extends sfActions
 		$this->datuakForm->setDefault('saila', $this->saila);
 		$this->datuakForm->setDefault('jatorrizkosaila', $this->jatorrizkosaila);
 
-		if ($this->tartea == 0)
+		if ($this->tartea == 0 || empty($this->tartea))
 			$this->tartea = null;
-		if ($this->saila == 0)
+		if ($this->saila == 0 || empty($this->saila))
 			$this->saila = null;
-		if ($this->jatorrizkosaila == 0)
+		if ($this->jatorrizkosaila == 0 || empty($this->jatorrizkosaila))
 			$this->jatorrizkosaila = null;
 
 		switch ($this->taula)

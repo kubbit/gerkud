@@ -2,27 +2,27 @@
 /*
 	PHP LDAP CLASS FOR MANIPULATING ACTIVE DIRECTORY
 	Version 2.1
-	
+
 	Written by Scott Barnett
 	email: scott@wiggumworld.com
 	http://adldap.sourceforge.net/
-	
+
 	Copyright (C) 2006-2007 Scott Barnett
-	
+
 	I'd appreciate any improvements or additions to be submitted back
 	to benefit the entire community :)
-	
+
 	Works with PHP 5, should be fine with PHP 4, let me know if/where it doesn't :)
-	
+
 	Please visit the project website for a full list of the functions and
 	documentation on using them.
 	http://adldap.sourceforge.net/documentation.php
-	
+
 	This library is free software; you can redistribute it and/or
 	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
 	version 2.1 of the License, or (at your option) any later version.
-	
+
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -52,34 +52,34 @@ class adLDAP {
 	// You can set your default variables here, or when you invoke the class
 	var $_account_prefix="";
 	var $_account_suffix="@mydomain.local";
-	var $_base_dn = "DC=mydomain,DC=local"; 
-	
-	// An array of domain controllers. Specify multiple controllers if you 
+	var $_base_dn = "DC=mydomain,DC=local";
+
+	// An array of domain controllers. Specify multiple controllers if you
 	// would like the class to balance the LDAP queries amongst multiple servers
 	var $_domain_controllers = array ("dc01.mydomain.local");
-	
+
 	// optional account with higher privileges for searching
 	// not really that optional because you can't query much as a user
 	var $_ad_username=NULL;
 	var $_ad_password=NULL;
-	
+
 	// AD does not return the primary group. http://support.microsoft.com/?kbid=321360
-	// This tweak will resolve the real primary group, but may be resource intensive. 
+	// This tweak will resolve the real primary group, but may be resource intensive.
 	// Setting to false will fudge "Domain Users" and is much faster. Keep in mind though that if
 	// someone's primary group is NOT domain users, this is obviously going to bollocks the results
 	var $_real_primarygroup=true;
-	
+
 	// Use SSL, your server needs to be setup, please see - http://adldap.sourceforge.net/ldap_ssl.php
 	var $_use_ssl=false;
-	
+
 	// When querying group memberships, do it recursively
 	// eg. User Fred is a member of Group A, which is a member of Group B, which is a member of Group C
 	// user_ingroup("Fred","C") will returns true with this option turned on, false if turned off
 	var $_recursive_groups=true;
-	
+
 	// You should not need to edit anything below this line
 	//******************************************************************************************
-	
+
 	//other variables
 	var $_conn;
 	var $_bind;
@@ -98,7 +98,7 @@ class adLDAP {
 			if (array_key_exists("use_ssl",$options)){ $this->_use_ssl=$options["use_ssl"]; }
 			if (array_key_exists("recursive_groups",$options)){ $this->_recursive_groups=$options["recursive_groups"]; }
 		}
-	
+
 		//connect to the LDAP server as the username/password
 		$dc=$this->random_controller();
 		if ($this->_use_ssl){
@@ -106,11 +106,11 @@ class adLDAP {
 		} else {
 			$this->_conn = ldap_connect($dc);
 		}
-		
+
 		//set some ldap options for talking to AD
 		ldap_set_option($this->_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
 		ldap_set_option($this->_conn, LDAP_OPT_REFERRALS, 0);
-		
+
 		//bind as a domain admin if they've set it up
 		if ($this->_ad_username!=NULL && $this->_ad_password!=NULL){
 			$this->_bind = @ldap_bind($this->_conn,$this->_ad_username.$this->_account_suffix,$this->_ad_password);
@@ -123,7 +123,7 @@ class adLDAP {
 				}
 			}
 		}
-		
+
 		return (true);
 	}
 
@@ -133,17 +133,17 @@ class adLDAP {
 	//validate a users login credentials
 	function authenticate($username,$password,$prevent_rebind=false){
 		if ($username==NULL || $password==NULL){ return (false); } //prevent null binding
-		
-		//bind as the user		
+
+		//bind as the user
 		$this->_bind = @ldap_bind($this->_conn,$this->_account_prefix.$username.$this->_account_suffix,$password);
 		if (!$this->_bind){ return (false); }
-		
+
 		//once we've checked their details, kick back into admin mode if we have it
 		if ($this->_ad_username!=NULL && !$prevent_rebind){
 			$this->_bind = @ldap_bind($this->_conn,$this->_ad_username.$this->_account_suffix,$this->_ad_password);
 			if (!$this->_bind){ echo ("FATAL: AD rebind failed."); exit(); } //this should never happen in theory
 		}
-		
+
 		return (true);
 	}
 
@@ -157,38 +157,38 @@ class adLDAP {
 		$parent_group=$this->group_info($parent,array("cn"));
 		if ($parent_group[0]["dn"]==NULL){ return (false); }
 		$parent_dn=$parent_group[0]["dn"];
-		
+
 		//find the child group's dn
 		$child_group=$this->group_info($child,array("cn"));
 		if ($child_group[0]["dn"]==NULL){ return (false); }
 		$child_dn=$child_group[0]["dn"];
-				
+
 		$add=array();
 		$add["member"] = $child_dn;
-		
+
 		$result=@ldap_mod_add($this->_conn,$parent_dn,$add);
 		if ($result==false){ return (false); }
 		return (true);
 	}
-	
+
 	// Add a user to a group
 	function group_add_user($group,$user){
 		//adding a user is a bit fiddly, we need to get the full DN of the user
 		//and add it using the full DN of the group
-		
+
 		//find the user's dn
 		$user_info=$this->user_info($user,array("cn"));
 		if ($user_info[0]["dn"]==NULL){ return (false); }
 		$user_dn=$user_info[0]["dn"];
-		
+
 		//find the group's dn
 		$group_info=$this->group_info($group,array("cn"));
 		if ($group_info[0]["dn"]==NULL){ return (false); }
 		$group_dn=$group_info[0]["dn"];
-		
+
 		$add=array();
 		$add["member"] = $user_dn;
-		
+
 		$result=@ldap_mod_add($this->_conn,$group_dn,$add);
 		if ($result==false){ return (false); }
 		return (true);
@@ -206,7 +206,7 @@ class adLDAP {
 		//$member_array = array();
 		//$member_array[0] = "cn=user1,cn=Users,dc=yourdomain,dc=com";
 		//$member_array[1] = "cn=administrator,cn=Users,dc=yourdomain,dc=com";
-		
+
 		$add=array();
 		$add["cn"] = $attributes["group_name"];
 		$add["samaccountname"] = $attributes["group_name"];
@@ -217,39 +217,39 @@ class adLDAP {
 		$container="OU=".implode(",OU=",$attributes["container"]);
 		$result=ldap_add($this->_conn,"CN=".$add["cn"].", ".$container.",".$this->_base_dn,$add);
 		if ($result!=true){ return (false); }
-		
+
 		return (true);
 	}
 
 	// Remove a group from a group
 	function group_del_group($parent,$child){
-	
+
 		//find the parent dn
 		$parent_group=$this->group_info($parent,array("cn"));
 		if ($parent_group[0]["dn"]==NULL){ return (false); }
 		$parent_dn=$parent_group[0]["dn"];
-		
+
 		//find the child dn
 		$child_group=$this->group_info($child,array("cn"));
 		if ($child_group[0]["dn"]==NULL){ return (false); }
 		$child_dn=$child_group[0]["dn"];
-		
+
 		$del=array();
 		$del["member"] = $child_dn;
-		
+
 		$result=@ldap_mod_del($this->_conn,$parent_dn,$del);
 		if ($result==false){ return (false); }
 		return (true);
 	}
-	
+
 	// Remove a user from a group
 	function group_del_user($group,$user){
-	
+
 		//find the parent dn
 		$group_info=$this->group_info($group,array("cn"));
 		if ($group_info[0]["dn"]==NULL){ return (false); }
 		$group_dn=$group_info[0]["dn"];
-		
+
 		//find the child dn
 		$user_info=$this->user_info($user,array("cn"));
 		if ($user_info[0]["dn"]==NULL){ return (false); }
@@ -257,17 +257,17 @@ class adLDAP {
 
 		$del=array();
 		$del["member"] = $user_dn;
-		
+
 		$result=@ldap_mod_del($this->_conn,$group_dn,$del);
 		if ($result==false){ return (false); }
 		return (true);
 	}
-	
+
 	// Returns an array of information for a specified group
 	function group_info($group_name,$fields=NULL){
 		if ($group_name==NULL){ return (false); }
 		if (!$this->_bind){ return (false); }
-		
+
 		$filter="(&(objectCategory=group)(name=".$this->ldap_slashes($group_name)."))";
 		//echo ($filter."!!!<br>");
 		if ($fields==NULL){ $fields=array("member","memberof","cn","description","distinguishedname","objectcategory","samaccountname"); }
@@ -276,8 +276,8 @@ class adLDAP {
 		//print_r($entries);
 		return ($entries);
 	}
-	
-	// Retun a complete list of "groups in groups"	
+
+	// Retun a complete list of "groups in groups"
 
 	// this version hacked by ben
 
@@ -328,7 +328,7 @@ class adLDAP {
 
 		//translate the schema
 		$add=$this->adldap_schema($attributes);
-		
+
 		//additional stuff only used for adding accounts
 		$add["cn"][0]=$attributes["display_name"];
 		$add["samaccountname"][0]=$attributes["username"];
@@ -351,7 +351,7 @@ class adLDAP {
 		//add the entry
 		$result=@ldap_add($this->_conn, "CN=".$add["cn"][0].", ".$container.",".$this->_base_dn, $add);
 		if ($result!=true){ return (false); }
-		
+
 		return (true);
 	}
 
@@ -361,7 +361,7 @@ class adLDAP {
 		if ($username==NULL){ return (false); }
 		if ($recursive==NULL){ $recursive=$this->_recursive_groups; } //use the default option if they haven't set it
 		if (!$this->_bind){ return (false); }
-		
+
 		//search the directory for their information
 		$info=@$this->user_info($username,array("memberof","primarygroupid"));
 		$groups=$this->nice_names($info[0]["memberof"]); //presuming the entry returned is our guy (unique usernames)
@@ -372,7 +372,7 @@ class adLDAP {
 				$groups=array_unique(array_merge($groups,$extra_groups));
 			}
 		}
-		
+
 		return ($groups);
 	}
 
@@ -385,34 +385,34 @@ class adLDAP {
 		if ($fields==NULL){ $fields=array("samaccountname","mail","memberof","department","displayname","telephonenumber","primarygroupid"); }
 		$sr=ldap_search($this->_conn,$this->_base_dn,$filter,$fields);
 		$entries = ldap_get_entries($this->_conn, $sr);
-		
+
 		// AD does not return the primary group in the ldap query, we may need to fudge it
 		if ($this->_real_primarygroup){
 			$entries[0]["memberof"][]=$this->group_cn($entries[0]["primarygroupid"][0]);
 		} else {
 			$entries[0]["memberof"][]="CN=Domain Users,CN=Users,".$this->_base_dn;
 		}
-		
+
 		$entries[0]["memberof"]["count"]++;
 		return ($entries);
 	}
-	
+
 	// Returns true if the user is a member of the group
 	function user_ingroup($username,$group,$recursive=NULL){
 		if ($username==NULL){ return (false); }
 		if ($group==NULL){ return (false); }
 		if (!$this->_bind){ return (false); }
 		if ($recursive==NULL){ $recursive=$this->_recursive_groups; } //use the default option if they haven't set it
-		
+
 		//get a list of the groups
 		$groups=$this->user_groups($username,array("memberof"),$recursive);
-		
+
 		//return true if the specified group is in the group list
 		if (in_array($group,$groups)){ return (true); }
 
 		return (false);
 	}
-	
+
 	//modify a user
 	function user_modify($username,$attributes){
 		if ($username==NULL){ return ("Missing compulsory field [username]"); }
@@ -427,10 +427,10 @@ class adLDAP {
 		if ($user[0]["dn"]==NULL){ return (false); }
 		$user_dn=$user[0]["dn"];
 
-		//translate the update to the LDAP schema				
+		//translate the update to the LDAP schema
 		$mod=$this->adldap_schema($attributes);
 		if (!$mod){ return (false); }
-		
+
 		//set the account control attribute (only if specified)
 		if (array_key_exists("enabled",$attributes)){
 			if ($attributes["enabled"]){ $control_options=array("NORMAL_ACCOUNT"); }
@@ -441,33 +441,33 @@ class adLDAP {
 		//do the update
 		$result=ldap_modify($this->_conn,$user_dn,$mod);
 		if ($result==false){ return (false); }
-		
+
 		return (true);
 	}
-		
+
 	// Set the password of a user
 	function user_password($username,$password){
 		if ($username==NULL){ return (false); }
 		if ($password==NULL){ return (false); }
 		if (!$this->_bind){ return (false); }
 		if (!$this->_use_ssl){ echo ("FATAL: SSL must be configured on your webserver and enabled in the class to set passwords."); exit(); }
-		
+
 		$user=$this->user_info($username,array("cn"));
 		if ($user[0]["dn"]==NULL){ return (false); }
 		$user_dn=$user[0]["dn"];
-				
+
 		$add=array();
 		$add["unicodePwd"][0]=$this->encode_password($password);
-		
+
 		$result=ldap_mod_replace($this->_conn,$user_dn,$add);
 		if ($result==false){ return (false); }
-		
+
 		return (true);
 	}
 
 	//*****************************************************************************************************************
 	// COMPUTER FUNCTIONS
-	
+
 	// Returns an array of information for a specific computer
 	function computer_info($computer_name,$fields=NULL){
 		if ($computer_name==NULL){ return (false); }
@@ -477,14 +477,14 @@ class adLDAP {
 		if ($fields==NULL){ $fields=array("memberof","cn","displayname","dnshostname","distinguishedname","objectcategory","operatingsystem","operatingsystemservicepack","operatingsystemversion"); }
 		$sr=ldap_search($this->_conn,$this->_base_dn,$filter,$fields);
 		$entries = ldap_get_entries($this->_conn, $sr);
-		
+
 		return ($entries);
 	}
 
 	// Returns all AD users
 	function all_users($include_desc = false, $search = "*", $sorted = true){
 		if (!$this->_bind){ return (false); }
-		
+
 		//perform the search and grab all their details
 		$filter = "(&(objectClass=user)(samaccounttype=". ADLDAP_NORMAL_ACCOUNT .")(objectCategory=person)(cn=".$search."))";
 		$fields=array("samaccountname","displayname");
@@ -504,18 +504,18 @@ class adLDAP {
 		if ($sorted){ asort($users_array); }
 		return ($users_array);
 	}
-	
+
 	// Returns a complete list of the groups in AD
 	function all_groups($include_desc = false, $search = "*", $sorted = true){
 		if (!$this->_bind){ return (false); }
-		
+
 		//perform the search and grab all their details
 		$filter = "(&(objectCategory=group)(samaccounttype=". ADLDAP_SECURITY_GLOBAL_GROUP .")(cn=".$search."))";
 		$fields=array("samaccountname","description");
 		$sr=ldap_search($this->_conn,$this->_base_dn,$filter,$fields);
 		$entries = ldap_get_entries($this->_conn, $sr);
 
-		$groups_array = array();		
+		$groups_array = array();
 		for ($i=0; $i<$entries["count"]; $i++){
 			if ($include_desc && strlen($entries[$i]["description"][0]) > 0 ){
 				$groups_array[ $entries[$i]["samaccountname"][0] ] = $entries[$i]["description"][0];
@@ -533,7 +533,7 @@ class adLDAP {
 	// UTILITY FUNCTIONS (not intended to be called directly but I spose you could?)
 
 	function adldap_schema($attributes){
-	
+
 		//ldap doesn't like NULL attributes, only set them if they have values
 		// I'd like to know how to set an LDAP attribute to NULL though, at the moment I set it to a space
 		$mod=array();
@@ -587,15 +587,15 @@ class adLDAP {
 		// for some reason it's not possible to search on primarygrouptoken=XXX
 		// if someone can show otherwise, I'd like to know about it :)
 		// this way is resource intensive and generally a pain in the @#%^
-		
+
 		if ($gid==NULL){ return (false); }
 		$r=false;
-		
+
 		$filter="(&(objectCategory=group)(samaccounttype=". ADLDAP_SECURITY_GLOBAL_GROUP ."))";
 		$fields=array("primarygrouptoken","samaccountname","distinguishedname");
 		$sr=ldap_search($this->_conn,$this->_base_dn,$filter,$fields);
 		$entries = ldap_get_entries($this->_conn, $sr);
-		
+
 		for ($i=0; $i<$entries["count"]; $i++){
 			if ($entries[$i]["primarygrouptoken"][0]==$gid){
 				$r=$entries[$i]["distinguishedname"][0];
@@ -610,30 +610,30 @@ class adLDAP {
 	function encode_password($password){
 		$password="\"".$password."\"";
 		$encoded="";
-		for ($i=0; $i <strlen($password); $i++){ $encoded.="{$password{$i}}\000"; }
+		for ($i=0; $i <strlen($password); $i++){ $encoded.="{$password[$i]}\000"; }
 		return ($encoded);
 	}
-	
+
 	// Escape bad characters
 	// DEVELOPERS SHOULD BE DOING PROPER FILTERING IF THEY'RE ACCEPTING USER INPUT
 	// this is just a list of characters with known problems and I'm trying not to strip out other languages
 	function ldap_slashes($str){
 		$illegal=array("(",")","#"); // the + character has problems too, but it's an illegal character
-		
+
 		$legal=array();
 		foreach ($illegal as $id => $char){ $legal[$id]="\\".$char; } //make up the array of legal chars
-		
+
 		$str=str_replace($illegal,$legal,$str); //replace them
 		return ($str);
 	}
-	
+
 	// Return a random controller
 	function random_controller(){
 		//select a random domain controller
 		mt_srand(doubleval(microtime()) * 100000000); // for older php versions
 		return ($this->_domain_controllers[array_rand($this->_domain_controllers)]);
 	}
-	
+
 	function account_control($options){
 		$val=0;
 
@@ -657,21 +657,21 @@ class adLDAP {
 			if (in_array("TRUSTED_FOR_DELEGATION",$options)){ $val=$val+524288; }
 			if (in_array("NOT_DELEGATED",$options)){ $val=$val+1048576; }
 			if (in_array("USE_DES_KEY_ONLY",$options)){ $val=$val+2097152; }
-			if (in_array("DONT_REQ_PREAUTH",$options)){ $val=$val+4194304; } 
+			if (in_array("DONT_REQ_PREAUTH",$options)){ $val=$val+4194304; }
 			if (in_array("PASSWORD_EXPIRED",$options)){ $val=$val+8388608; }
 			if (in_array("TRUSTED_TO_AUTH_FOR_DELEGATION",$options)){ $val=$val+16777216; }
 		}
 		return ($val);
 	}
-	
+
 	// Take an ldap query and return the nice names, without all the LDAP prefixes (eg. CN, DN)
 	function nice_names($groups){
 
 		$group_array=array();
 		for ($i=0; $i<$groups["count"]; $i++){ //for each group
 			$line=$groups[$i];
-			
-			if (strlen($line)>0){ 
+
+			if (strlen($line)>0){
 				//more presumptions, they're all prefixed with CN=
 				//so we ditch the first three characters and the group
 				//name goes up to the first comma
@@ -679,9 +679,9 @@ class adLDAP {
 				$group_array[]=substr($bits[0],3,(strlen($bits[0])-3));
 			}
 		}
-		return ($group_array);	
+		return ($group_array);
 	}
-	
+
 } // End class
 
 ?>

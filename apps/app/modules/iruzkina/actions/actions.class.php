@@ -140,8 +140,7 @@ class iruzkinaActions extends sfActions
 			}
 
 			// eguneratze data berritu
-			$gertakaria->setUpdatedAt(null); // gertakaria gordetzea behartu
-			$gertakaria->save();
+			$gertakaria->forceSave();
 		}
 		elseif ($form['ekintza_id']->getValue() == 1)
 		{

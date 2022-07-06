@@ -52,7 +52,6 @@ class zerrendatuActions extends sfActions
 		$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-		$pdf->AliasNbPages();
 		$pdf->AddPage();
 
 		// set color for background

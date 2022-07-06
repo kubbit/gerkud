@@ -64,8 +64,7 @@ class geoActions extends sfActions
 
 		// gertakariaren eguneratze data berritu
 		$gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($geo->getGertakariaId()));
-		$gertakaria->setUpdatedAt(null); // gertakaria gordetzea behartu
-		$gertakaria->save();
+		$gertakaria->forceSave();
 
 		$geo->delete();
 
@@ -81,8 +80,7 @@ class geoActions extends sfActions
 
 			// gertakariaren eguneratze data berritu
 			$gertakaria = Doctrine_Core::getTable('gertakaria')->find(array($geo->getGertakariaId()));
-			$gertakaria->setUpdatedAt(null); // gertakaria gordetzea behartu
-			$gertakaria->save();
+			$gertakaria->forceSave();
 
 			$this->redirect(sprintf('gertakaria/show?id=%d#planoa', $geo->getGertakariaId()));
 		}
