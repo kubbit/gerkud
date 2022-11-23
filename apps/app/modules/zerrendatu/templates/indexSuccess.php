@@ -119,5 +119,6 @@
 		</fieldset>
 	</fieldset>
 
-	<input id="zerrendatu_onartu" type="submit" class="botoia" value="<?php echo __('Onartu')?>" />
+	<input id="zerrendatu_pdf" type="submit" class="botoia" name="submit" value="PDF" />
+	<input id="zerrendatu_csv" type="submit" class="botoia" name="submit" value="CSV" />
 </form>
