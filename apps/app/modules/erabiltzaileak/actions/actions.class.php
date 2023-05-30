@@ -14,6 +14,7 @@ class erabiltzaileakActions extends sfActions
 	{
 		$this->erabiltzaileak = Doctrine_Core::getTable('langilea')
 			->createQuery('a')
+			->orderBy('is_active DESC')
 			->execute();
 	}
 

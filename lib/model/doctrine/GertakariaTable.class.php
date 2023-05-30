@@ -93,6 +93,16 @@ class GertakariaTable extends Doctrine_Table
 					$q->andWhere('j.ixte_data >= :ixte_data1', array(':ixte_data1' => $query1['ixte_data_noiztik']));
 				if ($query1['ixte_data_nora'])
 					$q->andWhere('j.ixte_data <= :ixte_data2', array(':ixte_data2' => $query1['ixte_data_nora']));
+
+				if ($query1['hasiera_aurreikusia_noiztik'])
+					$q->andWhere('j.hasiera_aurreikusia >= :hasiera_aurreikusia1', array(':hasiera_aurreikusia1' => $query1['hasiera_aurreikusia_noiztik']));
+				if ($query1['hasiera_aurreikusia_nora'])
+					$q->andWhere('j.hasiera_aurreikusia <= :hasiera_aurreikusia2', array(':hasiera_aurreikusia2' => $query1['hasiera_aurreikusia_nora']));
+
+				if ($query1['amaiera_aurreikusia_noiztik'])
+					$q->andWhere('j.amaiera_aurreikusia >= :amaiera_aurreikusia1', array(':amaiera_aurreikusia1' => $query1['amaiera_aurreikusia_noiztik']));
+				if ($query1['amaiera_aurreikusia_nora'])
+					$q->andWhere('j.amaiera_aurreikusia <= :amaiera_aurreikusia2', array(':amaiera_aurreikusia2' => $query1['amaiera_aurreikusia_nora']));
 			}
 			else
 			{

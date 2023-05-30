@@ -51,6 +51,26 @@
 			</div>
 		</fieldset>
 		<fieldset>
+			<div id="hasiera_noiztik" class="field">
+				<label for="zerrendatu_hasiera_aurreikusia_noiztik"><?php echo __('Hasiera aurreikusia (noiztik)'); ?></label>
+				<?php echo $zerrendatuaForm['hasiera_aurreikusia_noiztik']->render(); ?>
+			</div>
+			<div id="hasiera_nora" class="field">
+				<label for="zerrendatu_hasiera_aurreikusia_nora"><?php echo __('(nora)'); ?></label>
+				<?php echo $zerrendatuaForm['hasiera_aurreikusia_nora']->render(); ?>
+			</div>
+		</fieldset>
+		<fieldset>
+			<div id="amaiera_noiztik" class="field">
+				<label for="zerrendatu_amaiera_aurreikusia_noiztik"><?php echo __('Amaiera aurreikusia (noiztik)'); ?></label>
+				<?php echo $zerrendatuaForm['amaiera_aurreikusia_noiztik']->render(); ?>
+			</div>
+			<div id="amaiera_nora" class="field">
+				<label for="zerrendatu_amaiera_aurreikusia_nora"><?php echo __('(nora)'); ?></label>
+				<?php echo $zerrendatuaForm['amaiera_aurreikusia_nora']->render(); ?>
+			</div>
+		</fieldset>
+		<fieldset>
 <?php if (in_array('mota', $configEremuak)): ?>
 			<div id="mota" class="field">
 				<label for="zerrendatu_mota_id"><?php echo __('Mota'); ?></label>

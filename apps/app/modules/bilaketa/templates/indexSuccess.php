@@ -46,6 +46,24 @@
 				<?php echo $filter['ixte_data_nora']->render(); ?>
 			</div>
 		</fieldset>
+		<fieldset>
+			<div id="hasiera_aurreikusia_noiztik" class="field">
+				<label for="gertakaria_filters_hasiera_aurreikusia_noiztik"><?php echo __('Hasiera aurreikusia (noiztik)') ?>:</label>
+				<?php echo $filter['hasiera_aurreikusia_noiztik']->render(); ?>
+			</div>
+			<div id="hasiera_aurreikusia_nora" class="field">
+				<label for="gertakaria_filters_hasiera_aurreikusia_nora"><?php echo __('(nora)') ?>:</label>
+				<?php echo $filter['hasiera_aurreikusia_nora']->render(); ?>
+			</div>
+			<div id="amaiera_aurreikusia_noiztik" class="field">
+				<label for="gertakaria_filters_amaiera_aurreikusia_noiztik"><?php echo __('Amaiera aurreikusia (noiztik)') ?>:</label>
+				<?php echo $filter['amaiera_aurreikusia_noiztik']->render(); ?>
+			</div>
+			<div id="amaiera_aurreikusia_nora" class="field">
+				<label for="gertakaria_filters_amaiera_aurreikusia_nora"><?php echo __('(nora)') ?>:</label>
+				<?php echo $filter['amaiera_aurreikusia_nora']->render(); ?>
+			</div>
+		</fieldset>
 <?php if (in_array('mota', $configEremuak)): ?>
 		<fieldset>
 			<div id="mota_id" class="field">

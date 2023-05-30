@@ -31,18 +31,20 @@ class zerrendatuActions extends sfActions
 
 		$this->LIST_FIELDS = array
 		(
-//			array(FIELD,		HEADER,					COL. WIDTH)
-			array('lehentasuna', 	'',					10),
-			array('kodea',		__('Kodea'),				30),
-			array('egoera',		__('Egoera'),				54),
-			array('laburpena',	__('Laburpena'),			218),
-			array('barrutia',	__('Barrutia'),				54),
-			array('auzoa',		__('Auzoa'),				54),
-			array('kalea',		__('Kalea') . ' / ' . __('Eraikina'),	150),
-			array('abisuanork',	__('Eskatzailea'),			80),
-			array('erabiltzailea',	__('Erabiltzailea'),			54),
-			array('irekiera_data',	__('Irekiera data'),			54),
-			array('ixte_data',	__('Ixte data'),			54)
+//			array(FIELD,			HEADER,					COL. WIDTH)
+			array('lehentasuna', 		'',					10),
+			array('kodea',			__('Kodea'),				30),
+			array('egoera',			__('Egoera'),				44),
+			array('hasiera_aurreikusia',	__('Hasiera'),				48),
+			array('amaiera_aurreikusia',	__('Amaiera'),				48),
+			array('laburpena',		__('Laburpena'),			190),
+			array('barrutia',		__('Barrutia'),				54),
+			array('auzoa',			__('Auzoa'),				54),
+			array('kalea',			__('Kalea') . ' / ' . __('Eraikina'),	150),
+			array('abisuanork',		__('Eskatzailea'),			80),
+//			array('erabiltzailea',		__('Erabiltzailea'),			54),
+			array('irekiera_data',		__('Irekita'),				48),
+			array('ixte_data',		__('Itxita'),				48)
 		);
 
 		// ezabatu aktibo ez dauden eremuak
@@ -124,6 +126,30 @@ class zerrendatuActions extends sfActions
 		{
 			array_push($condiciones, 'date(g.ixte_data) <= date(:ixte_nora)');
 			$parametroak[':ixte_nora'] = $this->iragazkiak->ixte_nora;
+		}
+		$this->iragazkiak->hasiera_aurreikusia_noiztik = $this->formGetValue('hasiera_aurreikusia_noiztik');
+		if ($this->iragazkiak->hasiera_aurreikusia_noiztik)
+		{
+			array_push($condiciones, 'date(g.hasiera_aurreikusia) >= date(:hasiera_aurreikusia_noiztik)');
+			$parametroak[':hasiera_aurreikusia_noiztik'] = $this->iragazkiak->hasiera_aurreikusia_noiztik;
+		}
+		$this->iragazkiak->hasiera_aurreikusia_nora = $this->formGetValue('hasiera_aurreikusia_nora');
+		if ($this->iragazkiak->hasiera_aurreikusia_nora)
+		{
+			array_push($condiciones, 'date(g.hasiera_aurreikusia) <= date(:hasiera_aurreikusia_nora)');
+			$parametroak[':hasiera_aurreikusia_nora'] = $this->iragazkiak->hasiera_aurreikusia_nora;
+		}
+		$this->iragazkiak->amaiera_aurreikusia_noiztik = $this->formGetValue('amaiera_aurreikusia_noiztik');
+		if ($this->iragazkiak->amaiera_aurreikusia_noiztik)
+		{
+			array_push($condiciones, 'date(g.amaiera_aurreikusia) >= date(:amaiera_aurreikusia_noiztik)');
+			$parametroak[':amaiera_aurreikusia_noiztik'] = $this->iragazkiak->amaiera_aurreikusia_noiztik;
+		}
+		$this->iragazkiak->amaiera_aurreikusia_nora = $this->formGetValue('amaiera_aurreikusia_nora');
+		if ($this->iragazkiak->amaiera_aurreikusia_nora)
+		{
+			array_push($condiciones, 'date(g.amaiera_aurreikusia) <= date(:amaiera_aurreikusia_nora)');
+			$parametroak[':amaiera_aurreikusia_nora'] = $this->iragazkiak->amaiera_aurreikusia_nora;
 		}
 		$this->iragazkiak->klasea = '';
 		if ($this->formGetValue('klasea'))
@@ -287,6 +313,7 @@ class zerrendatuActions extends sfActions
 		 . '   WHEN 3 THEN "!!"'
 		 . '   ELSE NULL'
 		 . '  END AS lehentasuna,'
+		 . '  g.hasiera_aurreikusia, g.amaiera_aurreikusia,'
 		 . '  s.name AS saila, m.izena AS mota, g.id AS kodea, e.izena AS egoera, laburpena,'
 		 . '  b.izena AS barrutia, a.izena AS auzoa, coalesce(er.izena, concat_ws(", ", k.izena, g.kale_zbkia)) AS kalea,'
 		 . '  ' . $erabiltzailea . ' AS erabiltzailea, abisuanork, coalesce(date(g.created_at), "-") AS irekiera_data, coalesce(date(ixte_data), "-") AS ixte_data,'
@@ -392,7 +419,9 @@ class zerrendatuActions extends sfActions
 		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Irekiera data'), $this->iragazkiak->irekiera_noiztik, !empty($this->iragazkiak->irekiera_noiztik) && !empty($this->iragazkiak->irekiera_nora) ? ' - ' : '', $this->iragazkiak->irekiera_nora);
 		$htmlIragazkiak .= sprintf('<tr><td></td><td></td><td></td><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Ixte data'), $this->iragazkiak->ixte_noiztik, !empty($this->iragazkiak->ixte_noiztik) && !empty($this->iragazkiak->ixte_nora) ? ' - ' : '', $this->iragazkiak->ixte_nora);
 		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s</td><td></td>', __('Mota'), $this->iragazkiak->mota, empty($this->iragazkiak->azpiMota) ? '' : ' / ' . $this->iragazkiak->azpiMota);
-		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td></tr>', __('Egoera'), $this->iragazkiak->egoera);
+		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Hasiera aurreikusia'), $this->iragazkiak->hasiera_aurreikusia_noiztik, !empty($this->iragazkiak->hasiera_aurreikusia_noiztik) && !empty($this->iragazkiak->hasiera_aurreikusia_nora) ? ' - ' : '', $this->iragazkiak->hasiera_aurreikusia_nora);
+		$htmlIragazkiak .= sprintf('<tr><td></td><td>%s:</td><td style="border-bottom: 0.25px solid black;">%s</td><td></td>', __('Egoera'), $this->iragazkiak->egoera);
+		$htmlIragazkiak .= sprintf('<td>%s:</td><td style="border-bottom: 0.25px solid black;">%s%s%s</td></tr>', __('Amaiera aurreikusia'), $this->iragazkiak->amaiera_aurreikusia_noiztik, !empty($this->iragazkiak->amaiera_aurreikusia_noiztik) && !empty($this->iragazkiak->amaiera_aurreikusia_nora) ? ' - ' : '', $this->iragazkiak->amaiera_aurreikusia_nora);
 		if (in_array('arloa',$this->configEremuak))
 			$htmlIragazkiak .= sprintf('<tr><td width="50"></td><td width="85">%s:</td><td width="150" style="border-bottom: 0.25px solid black;">%s</td><td width="180"></td></tr>', __('Arloa'), $this->iragazkiak->arloa);
 		$htmlIragazkiak .= '</table>';

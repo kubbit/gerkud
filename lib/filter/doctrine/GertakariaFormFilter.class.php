@@ -50,6 +50,26 @@ class GertakariaFormFilter extends BaseGertakariaFormFilter
 		));
 		$this->validatorSchema['ixte_data_nora'] = new sfValidatorDataOrdua(array('required' => false));
 
+		$this->widgetSchema['hasiera_aurreikusia_noiztik'] = new sfWidgetFormData(array
+		(
+		));
+		$this->validatorSchema['hasiera_aurreikusia_noiztik'] = new sfValidatorDataOrdua(array('required' => false));
+
+		$this->widgetSchema['hasiera_aurreikusia_nora'] = new sfWidgetFormData(array
+		(
+		));
+		$this->validatorSchema['hasiera_aurreikusia_nora'] = new sfValidatorDataOrdua(array('required' => false));
+
+		$this->widgetSchema['amaiera_aurreikusia_noiztik'] = new sfWidgetFormData(array
+		(
+		));
+		$this->validatorSchema['amaiera_aurreikusia_noiztik'] = new sfValidatorDataOrdua(array('required' => false));
+
+		$this->widgetSchema['amaiera_aurreikusia_nora'] = new sfWidgetFormData(array
+		(
+		));
+		$this->validatorSchema['amaiera_aurreikusia_nora'] = new sfValidatorDataOrdua(array('required' => false));
+
 		$this->widgetSchema['barrutia_id'] = new sfWidgetFormDoctrineChoice(array
 		(
 			'model'     => 'Barrutia',

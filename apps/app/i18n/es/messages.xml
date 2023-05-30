@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
 <xliff version="1.0">
-  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2019-08-23T11:09:51Z" product-name="messages">
+  <file source-language="eu_ES" target-language="es" datatype="plaintext" original="messages" date="2023-05-26T12:39:07Z" product-name="messages">
     <header/>
     <body>
       <trans-unit id="1">
@@ -859,6 +859,22 @@
       <trans-unit id="228">
         <source>Herritarrari bidalitakoak</source>
         <target>Enviados al ciudadano</target>
+      </trans-unit>
+      <trans-unit id="229">
+        <source> </source>
+        <target> </target>
+      </trans-unit>
+      <trans-unit id="230">
+        <source>Irekita</source>
+        <target>Abierta</target>
+      </trans-unit>
+      <trans-unit id="231">
+        <source>Hasiera aurreikusia (noiztik)</source>
+        <target>Inicio previsto (desde)</target>
+      </trans-unit>
+      <trans-unit id="232">
+        <source>Amaiera aurreikusia (noiztik)</source>
+        <target>Fin previsto (desde)</target>
       </trans-unit>
     </body>
   </file>

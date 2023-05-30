@@ -296,7 +296,7 @@ form.login fieldset .field input
 {
 	display: inline-block;
 	margin: auto auto 2em;
-	width: 710px;
+	width: 810px;
 	max-width: 100%;
 	box-sizing: border-box;
 	border-radius: 3px;
@@ -346,7 +346,7 @@ form.login fieldset .field input
 }
 .panela label
 {
-	width: 140px;
+	width: 190px;
 	display: inline-block;
 	text-align: right;
 	vertical-align: top;
@@ -378,7 +378,7 @@ form.login fieldset .field input
 .panela .azpiSailkapena
 {
 	position: relative;
-	padding-left: 145px;
+	padding-left: 195px;
 }
 .panela .azpiSailkapena label.title
 {
@@ -399,7 +399,7 @@ form.login fieldset .field input
 }
 .panela .field .luzea
 {
-	width: 550px;
+	width: 600px;
 }
 .panela .field .motza
 {
