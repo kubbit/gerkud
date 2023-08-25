@@ -76,7 +76,7 @@ class GMapGeocodedAddress
    */
   public function geocodeXml($gmap_client)
   {
-    $raw_data = utf8_encode($gmap_client->getGeocodingInfo($this->getRawAddress(),'xml'));
+    $raw_data = $gmap_client->getGeocodingInfo($this->getRawAddress(),'xml');
 /*
     $p = xml_parser_create('UTF-8');
     xml_parse_into_struct($p, $raw_data, $vals, $index);

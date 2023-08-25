@@ -252,14 +252,14 @@ class Gertakaria extends BaseGertakaria
 		$mezua = file_get_contents(sprintf('%s/%s_%s.template', self::TXANTILOIAK_PATH, $fitxategia, $culture));
 
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_ID, $this->getId(), $mezua);
-		$mezua = str_replace(self::TXANTILOIA_DATUAK_LABURPENA, $this->getLaburpena(), $mezua);
-		$mezua = str_replace(self::TXANTILOIA_DATUAK_DESKRIBAPENA, $this->getDeskribapena(), $mezua);
-		$mezua = str_replace(self::TXANTILOIA_DATUAK_EKINTZA, $ekintza, $mezua);
-		$mezua = str_replace(self::TXANTILOIA_DATUAK_ALDAKETA, $aldaketa, $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_LABURPENA, $this->getLaburpena() ?? '', $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_DESKRIBAPENA, $this->getDeskribapena() ?? '', $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_EKINTZA, $ekintza ?? '', $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_ALDAKETA, $aldaketa ?? '', $mezua);
 		$mezua = str_replace(self::TXANTILOIA_DATUAK_SORTZE_DATA, date(sfConfig::get('gerkud_data_formatoa'), strtotime($this->getCreatedAt())), $mezua);
-		$mezua = str_replace(self::TXANTILOIA_DATUAK_LANGILEA , $langilea ? $langilea->getName() : '', $mezua);
-		$mezua = str_replace(self::TXANTILOIA_DATUAK_IZENBURUA , sfConfig::get('gerkud_izenburua'), $mezua);
-		$mezua = str_replace(self::TXANTILOIA_DATUAK_ERAKUNDEA , sfConfig::get('gerkud_erakundea'), $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_LANGILEA, $langilea ? $langilea->getName() : '', $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_IZENBURUA, sfConfig::get('gerkud_izenburua') ?? '', $mezua);
+		$mezua = str_replace(self::TXANTILOIA_DATUAK_ERAKUNDEA, sfConfig::get('gerkud_erakundea') ?? '', $mezua);
 
 		if (!empty($ekintza))
 			$mezua = str_replace(self::TXANTILOIA_CSS_ALDAKETA, 'inherit', $mezua);

@@ -264,6 +264,10 @@ class bhLDAP
 	 if (is_array($value) && $levels_to_recurse > 0) {
 	   self::debugDump($value, "$label>$key", $levels_to_recurse - 1);
 	 }
+	 else if (is_object($value)) {
+	   if ($value instanceof Serializable)
+	     self::debug("$label:    $key => $value\n");
+	 }
 	 else {
 	   self::debug("$label:    $key => $value\n");
 	 }

@@ -20,6 +20,7 @@ class v3
 	const USER_TYPE_GUEST = 2;
 
 	private $request;
+	private $response;
 	private $path;
 
 	private $userType;
@@ -183,11 +184,11 @@ class v3
 
 	private function getNextPath()
 	{
-		$next = urldecode(array_shift($this->path));
+		$next = array_shift($this->path);
 		if (empty($next))
 			return NULL;
 
-		return $next;
+		return urldecode($next);
 	}
 
 	private function dateConvert($date)
